@@ -7531,11 +7531,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\porte\\source\\repos\\test\\test\\test.csproj",
+      "projectUniqueName": "C:\\Users\\porte\\Source\\Repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
       "projectName": "test",
-      "projectPath": "C:\\Users\\porte\\source\\repos\\test\\test\\test.csproj",
+      "projectPath": "C:\\Users\\porte\\Source\\Repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
       "packagesPath": "C:\\Users\\porte\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\porte\\source\\repos\\test\\test\\obj\\",
+      "outputPath": "C:\\Users\\porte\\Source\\Repos\\shadowartist201\\TKA-PC-Port\\test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\porte\\AppData\\Roaming\\NuGet\\NuGet.Config",

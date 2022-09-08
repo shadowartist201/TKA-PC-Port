@@ -228,18 +228,18 @@ namespace Helicopter
 			switch (Camera.effectIndex)
 			{
 			case 0:
-				Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
+				//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
 				break;
 			case 2:
-				Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
+				//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
 				break;
 			case 3:
-				Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
-				Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+				//Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
+				//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
 				break;
 			case 4:
-				Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-				Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
+				//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+				//Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
 				break;
 			}
 			graphicsDevice.SetRenderTarget(null);
