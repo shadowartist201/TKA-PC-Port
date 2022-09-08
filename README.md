@@ -11,4 +11,7 @@ In 2017, the Xbox Live Indie Games platform was shut down.
 
 This is a project to bring TKA to PC using its Microsoft XNA framework as a base.
 
+
 As of 11/24/2021, the game will launch as a Visual Studio project but with major graphical issues and sound effects not playing. However, the core gameplay is functional.
+
+Requires the MonoGame extension for Visual Studio.
