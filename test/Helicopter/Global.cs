@@ -211,19 +211,19 @@ namespace Helicopter
 
 		public static void PlayCatSound()
 		{
-			switch (Global.Random.Next(0, 4))
+            switch (Global.Random.Next(0, 4))
 			{
 			case 0:
-				//Global.soundBank.PlayCue("cat_01");
+				Global.soundBank.PlayCue("cat_01");
 				break;
 			case 1:
-				//Global.soundBank.PlayCue("cat_02");
+				Global.soundBank.PlayCue("cat_02");
 				break;
 			case 2:
-				//Global.soundBank.PlayCue("cat_03");
+				Global.soundBank.PlayCue("cat_03");
 				break;
 			case 3:
-				//Global.soundBank.PlayCue("cat_04");
+				Global.soundBank.PlayCue("cat_04");
 				break;
 			}
 		}

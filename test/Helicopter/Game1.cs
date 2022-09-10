@@ -200,9 +200,9 @@ namespace Helicopter
 		{
 			//MediaPlayer.IsVisualizationEnabled = true;
 			this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
-			//Global.audioEngine = new AudioEngine("Content/Music//newXactProject.xgs");
-			//Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music//Wave Bank.xwb");
-			//Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music//Sound Bank.xsb");
+			Global.audioEngine = new AudioEngine("Content/Music//newXactProject.xgs");
+			Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music//Wave Bank.xwb");
+			Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music//Sound Bank.xsb");
 			Global.itemSelectedEffect = new ItemSelectedEffect();
 			base.Initialize();
 		}
@@ -218,7 +218,7 @@ namespace Helicopter
 			this.LoadEventInfo(0);
 			MediaPlayer.Play(this.songManager.CurrentSong);
 			MediaPlayer.IsRepeating = true;
-			MediaPlayer.Volume = 1f;
+			MediaPlayer.Volume = 0.10f;
 			base.LoadContent();
 		}
 
