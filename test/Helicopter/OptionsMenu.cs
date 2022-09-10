@@ -108,7 +108,7 @@ namespace Helicopter
 		{
 			if (this.musicOn)
 			{
-				MediaPlayer.Volume = 1f;
+				MediaPlayer.Volume = 0.1f;
 			}
 			else
 			{
