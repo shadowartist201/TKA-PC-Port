@@ -116,11 +116,11 @@ namespace Helicopter
 			}
 			if (this.sfxOn)
 			{
-				//Global.audioEngine.GetCategory("Default").SetVolume(1f);
+				Global.audioEngine.GetCategory("Default").SetVolume(1f);
 			}
 			else
 			{
-				//Global.audioEngine.GetCategory("Default").SetVolume(0f);
+				Global.audioEngine.GetCategory("Default").SetVolume(0f);
 			}
 			if (this.vibrationOn)
 			{
