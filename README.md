@@ -7,3 +7,5 @@ This is a project to bring TKA to PC using the Xbox 360 version and the Microsof
 **Current status:** The game will launch as a Visual Studio project but with major graphical issues. However, the core gameplay is functional.
 
 Requires the MonoGame extension for Visual Studio.
+
+In final release, it will require .NET 6.0.
