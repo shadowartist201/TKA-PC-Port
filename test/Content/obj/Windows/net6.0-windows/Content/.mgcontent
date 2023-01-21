@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Background/cloudBGXbox.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Background/lavaBGXbox.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Background/meatBGXbox.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Background/ronBGXbox.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Background/SeaBGXbox.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/BackgroundSprites/backgroundSpritesXbox.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/BackgroundSprites/hugeRainbow.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/BackgroundSprites/MeatBackgroundSprites.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/BackgroundSprites/rainbow3.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/BackgroundSprites/RonBackgroundSprites.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/cats.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/Butterflies.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/danceFull.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/EqualizerBar.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/explosion.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/FeelWantTouch.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/fluctuationShape.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/hearts.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/lightShape1.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/lightShape2.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/lightShape3.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/meatsToMouth.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/mouth.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/reachingHand.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/SearchingEyes.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Effects/SpreadLaser.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/hand.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/light2.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Credits/credits_bgMenu.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/KittenSelect/selectCat_bgMenu.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Leaderboards/leaderboards_bgMenu.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Main/main_bgMenu.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Main/main_cat.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Main/main_circle.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Main/main_pressStart.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Main/main_star.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Main/main_title.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Options/options_bgMenu.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Pause/pause_bgMenu.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Splash/splash_bgMenu.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/StageSelect/selectStage_bgMenu.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Trial/trial_bgMenu.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/noise.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/rainbow2.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Score/high.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Score/numbers.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Score/score.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/bigstar.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/star1.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/star2.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/star3.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/star4.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/star5.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/star6.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/star7.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Symbols/hugeAtom.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Symbols/hugeButterfly.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Symbols/hugeCat.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Symbols/hugeCrown.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Symbols/hugeheart.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Symbols/hugeMoon.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Symbols/hugeRabit.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Symbols/hugestar.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Tunnel/star.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/xboxControllerButtonA.png</File>
+    <File>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/xboxControllerButtonY.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
