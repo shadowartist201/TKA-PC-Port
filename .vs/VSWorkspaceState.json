@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\test",
+    "\\test\\Helicopter"
   ],
-  "SelectedNode": "\\test.sln",
+  "SelectedNode": "\\test\\Helicopter\\TunnelEffect.cs",
   "PreviewInSolutionExplorer": false
 }

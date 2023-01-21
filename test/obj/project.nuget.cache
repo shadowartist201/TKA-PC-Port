@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aJd1w+IpgCi8IJD46rDQf2Ygb6P97VTjv0ro3z4oEb7xM1SkJo2N//xhRfLMfMMZ/ycPfrjxRvljg5FeGjqSyw==",
+  "dgSpecHash": "WifNDO8iXiGvyieAvCBDvrNQ/99rmq1IFcz9Enuqeu5ynH8q0SB3NvdIPbpmgG5i4J/k9UrikCOTCHZD22cEaQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
+  "projectFilePath": "C:\\Users\\porte\\Source\\Repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\porte\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\porte\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",
