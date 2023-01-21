@@ -9,3 +9,8 @@ This is a project to bring TKA to PC using the Xbox 360 version and the Microsof
 Requires the MonoGame extension for Visual Studio.
 
 In final release, it will require .NET 6.0.
+
+Controls as of 1/20/23:
+- S (start)
+- Spacebar (A)
+- B (B)
