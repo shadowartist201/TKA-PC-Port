@@ -1895,7 +1895,7 @@ namespace Helicopter
 					break;
 				case 10:
 					this.meatToMouth.TurnOff();
-					this.equalizer.TurnOn(rainbowed: true);
+					this.equalizer.TurnOn(rainbowed: true, isVisualizationA: true);
 					Camera.DoRotating(0.333333343f);
 					Camera.DoFlipping(0.333333343f);
 					break;
@@ -1914,7 +1914,7 @@ namespace Helicopter
 					this.meatToMouth.TurnOn();
 					break;
 				case 18:
-					this.equalizer.TurnOn(rainbowed: false);
+					this.equalizer.TurnOn(rainbowed: false, isVisualizationA: false);
 					break;
 				case 19:
 					this.bSpriteManager.SetSausageRainbowSmall();
@@ -1931,8 +1931,8 @@ namespace Helicopter
 					Camera.DoShakes(4, 0.333333343f, 2f, 0.16666f);
 					break;
 				case 23:
-					this.equalizer.TurnOn(rainbowed: true);
-					Camera.GoCrazy(0.333333343f);
+                    equalizer.ChangeRainbow(rainbowed: true);
+                    Camera.GoCrazy(0.333333343f);
 					break;
 				case 24:
 					this.ResetChoreography(1, alternating: false, meat: true);

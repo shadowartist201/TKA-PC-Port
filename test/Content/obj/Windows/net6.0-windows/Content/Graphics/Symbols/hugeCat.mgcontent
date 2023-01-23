@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Symbols/hugeCat.png</SourceFile>
-  <SourceTime>2023-01-20T23:46:24.7903571-06:00</SourceTime>
+  <SourceTime>2023-01-23T02:42:14.527658-06:00</SourceTime>
   <DestFile>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/bin/Windows/Content/Graphics/Symbols/hugeCat.xnb</DestFile>
-  <DestTime>2023-01-21T00:20:11.9892303-06:00</DestTime>
+  <DestTime>2023-01-23T02:44:23.2662564-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T06:44:56-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
