@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\porte\\Source\\Repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj": {}
+    "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\porte\\Source\\Repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj": {
+    "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\porte\\Source\\Repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
+        "projectUniqueName": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
         "projectName": "test",
-        "projectPath": "C:\\Users\\porte\\Source\\Repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
+        "projectPath": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
         "packagesPath": "C:\\Users\\porte\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\porte\\Source\\Repos\\shadowartist201\\TKA-PC-Port\\test\\obj\\",
+        "outputPath": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

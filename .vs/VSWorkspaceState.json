@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\test",
-    "\\test\\Helicopter"
+    "\\test\\Content",
+    "\\test\\Helicopter",
+    "\\TKA iOS Assets"
   ],
-  "SelectedNode": "\\test\\Helicopter\\Helicopter.cs",
+  "SelectedNode": "\\test\\Helicopter\\Background.cs",
   "PreviewInSolutionExplorer": false
 }

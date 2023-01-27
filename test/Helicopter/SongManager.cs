@@ -47,6 +47,10 @@ namespace Helicopter
 				this.song = this.Content.Load<Song>("IntergalacticalHigh");
 				Global.BPM = 0.3448276f;
 				break;
+			case 5:
+				this.song = this.Content.Load<Song>("MyRainbow");
+				Global.BPM = 0.3f;
+				break;
 			}
 		}
 	}

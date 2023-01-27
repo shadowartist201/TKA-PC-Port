@@ -10,14 +10,15 @@ namespace Helicopter
 
 		private int currentCat;
 
-		private int[] numCats_ = new int[5] { 5, 4, 4, 4, 3 };
+		private int[] numCats_ = new int[6] { 5, 4, 4, 4, 3, 3 };
 
-		private int[] startCatIndex_ = new int[5] { 0, 5, 9, 13, 17 };
+		private int[] startCatIndex_ = new int[6] { 0, 5, 9, 13, 17, 21 };
 
-		private string[] catNames_ = new string[20]
+		private string[] catNames_ = new string[24]
 		{
 			"JetPack Kitteh", "Byarf Kitteh", "Butterfly Kitteh", "Dream Kitteh", "Mermaid Kitteh", "Baby Kitteh", "Love Kitteh", "Angel Kitteh", "Death Kitteh", "Bat Kitteh",
-			"Fire Kitteh", "Rock Kitteh", "Dragon Kitteh", "Steak Kitteh", "Bacon Kitteh", "HotDog Kitteh", "Burger Kitteh", "Alien Kitteh", "Grin Kitteh", "MC Kitteh"
+			"Fire Kitteh", "Rock Kitteh", "Dragon Kitteh", "Steak Kitteh", "Bacon Kitteh", "HotDog Kitteh", "Burger Kitteh", "Alien Kitteh", "Grin Kitteh", "MC Kitteh",
+			"", "Nyan Cat", "Tac Nyan", "Gameboy Cat"
 		};
 
 		private string[] lockedNames_ = new string[4] { "Unlocked in\n Full Mode", "Unlocked at\n  40,000 P", "Unlocked at\n  60,000 P", "Unlocked at\n  80,000 P" };
@@ -71,6 +72,12 @@ namespace Helicopter
 							return;
 						}
 						break;
+					case 5:
+						if (!scoreSystem.nyanFortyUnlocked)
+						{
+							return;
+						}
+						break;
 					}
 					break;
 				case 2:
@@ -106,7 +113,13 @@ namespace Helicopter
 							return;
 						}
 						break;
-					}
+                     case 5:
+                         if (!scoreSystem.nyanSixtyUnlocked)
+                         {
+                             return;
+                         }
+						break;
+                    }
 					break;
 				case 3:
 					switch (currentLevel)
@@ -141,8 +154,14 @@ namespace Helicopter
 							return;
 						}
 						break;
-					}
-					break;
+                    case 5:
+                        if (!scoreSystem.nyanEightyUnlocked)
+                        {
+                            return;
+                        }
+                        break;
+                    }
+                    break;
 				case 4:
 					if (!scoreSystem.seaEightyUnlocked)
 					{
@@ -227,6 +246,9 @@ namespace Helicopter
 					case 4:
 						flag = !scoreSystem.ronFortyUnlocked;
 						break;
+					case 5:
+						flag = !scoreSystem.nyanFortyUnlocked;
+						break;
 					}
 				}
 				if ((i == 3 && this.numCats_[currentLevel] == 5) || (i == 2 && this.numCats_[currentLevel] == 4) || (i == 2 && this.numCats_[currentLevel] == 3))
@@ -248,8 +270,11 @@ namespace Helicopter
 					case 4:
 						flag = !scoreSystem.ronSixtyUnlocked;
 						break;
-					}
-				}
+                    case 5:
+                        flag = !scoreSystem.nyanSixtyUnlocked;
+                        break;
+                    }
+                }
 				if ((i == 4 && this.numCats_[currentLevel] == 5) || (i == 3 && this.numCats_[currentLevel] == 4) || (i == 3 && this.numCats_[currentLevel] == 3))
 				{
 					switch (currentLevel)
@@ -269,8 +294,11 @@ namespace Helicopter
 					case 4:
 						flag = !scoreSystem.ronEightyUnlocked;
 						break;
-					}
-				}
+                    case 5:
+                        flag = !scoreSystem.nyanEightyUnlocked;
+                        break;
+                    }
+                }
 				if (flag)
 				{
 					spriteBatch.Draw(Global.selectCatTex, new Vector2(((float)i + 0.5f) * (1280f / (float)this.numCats_[currentLevel]), 240f), (Rectangle?)new Rectangle(0, 1682, 240, 240), Color.White, 0f, new Vector2(120f, 120f), 1f, SpriteEffects.None, 0f);

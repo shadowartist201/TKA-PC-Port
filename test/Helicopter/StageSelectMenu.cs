@@ -12,19 +12,20 @@ namespace Helicopter
 
 		private int startingIndex = 0;
 
-		private int maxIndex = 4;
+		private int maxIndex = 5;
 
 		private float arrowOffsetX = 0f;
 
 		private float arrowOffsetRateX = 100f;
 
-		private Rectangle[] itemRects = new Rectangle[5]
+		private Rectangle[] itemRects = new Rectangle[6]
 		{
 			new Rectangle(0, 722, 328, 327),
 			new Rectangle(1280, 1095, 328, 327),
 			new Rectangle(1280, 722, 328, 327),
 			new Rectangle(660, 722, 328, 327),
-			new Rectangle(330, 722, 328, 327)
+			new Rectangle(330, 722, 328, 327),
+			new Rectangle(486, 1115, 328, 327)
 		};
 
 		private Vector2[] itemPositions = new Vector2[3]
@@ -34,16 +35,17 @@ namespace Helicopter
 			new Vector2(970f, 280f)
 		};
 
-		private Rectangle[] nameRects = new Rectangle[5]
+		private Rectangle[] nameRects = new Rectangle[6]
 		{
 			new Rectangle(297, 1051, 197, 19),
 			new Rectangle(0, 0, 0, 0),
 			new Rectangle(297, 1080, 177, 19),
 			new Rectangle(695, 1051, 177, 19),
-			new Rectangle(496, 1051, 197, 19)
+			new Rectangle(496, 1051, 197, 19),
+			new Rectangle(515, 1080, 179, 19)
 		};
 
-		private string[] stageNames = new string[5] { "Dream Pack", "Popaganda Pack", "Meat Pack", "Lava Pack", "Cloud Pack" };
+		private string[] stageNames = new string[6] { "Dream Pack", "Popaganda Pack", "Meat Pack", "Lava Pack", "Cloud Pack", "Nyan Pack" };
 
 		private Vector2[] namePositions = new Vector2[3]
 		{
@@ -115,6 +117,9 @@ namespace Helicopter
 					break;
 				case 4:
 					this.currentLevel = 1;
+					break;
+				case 5:
+					this.currentLevel = 5;
 					break;
 				}
 				this.ResetMenu();

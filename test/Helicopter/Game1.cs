@@ -521,6 +521,8 @@ namespace Helicopter
 			Global.hugeCrown = base.Content.Load<Texture2D>("Graphics//Symbols//hugeCrown");
 			Global.hugeMoon = base.Content.Load<Texture2D>("Graphics//Symbols//hugeMoon");
 			Global.hugeRabbit = base.Content.Load<Texture2D>("Graphics//Symbols//hugeRabit");
+			Global.nyanHands = base.Content.Load<Texture2D>("Graphics//Effects//nyanHands");
+			Global.nyanLetters = base.Content.Load<Texture2D>("Graphics//Effects//nyanLetters");
 			Global.cats = base.Content.Load<Texture2D>("Graphics//cats");
 			Global.AButtonTexture = base.Content.Load<Texture2D>("Graphics//xboxControllerButtonA");
 			Global.YButtonTexture = base.Content.Load<Texture2D>("Graphics//xboxControllerButtonY");
@@ -608,6 +610,9 @@ namespace Helicopter
 				break;
 			case 4:
 				this.LoadEventInfoIntergalacticalHigh();
+				break;
+			case 5:
+				this.LoadEventInfoMyRainbow();
 				break;
 			}
 		}
@@ -872,6 +877,11 @@ namespace Helicopter
 			this.eventTimes[18] = 232553f;
 		}
 
+		private void LoadEventInfoMyRainbow()
+		{
+
+		}
+
 		private void UpdateBackground(float dt)
 		{
 			this.background.Update(dt);
@@ -1119,6 +1129,9 @@ namespace Helicopter
 				break;
 			case 4:
 				this.UpdateChoreographyRon(dt, elapsedMilliseconds);
+				break;
+			case 5:
+				this.UpdateChoreographyNyan(dt, elapsedMilliseconds);
 				break;
 			}
 		}
@@ -2029,6 +2042,11 @@ namespace Helicopter
 					this.currEvent = 0;
 				}
 			}
+		}
+
+		public void UpdateChoreographyNyan(float dt, float elapsedMilliseconds)
+		{
+
 		}
 
 		private void DoStationaryLights()

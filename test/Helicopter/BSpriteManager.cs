@@ -229,7 +229,22 @@ namespace Helicopter
 				this.bSpriteAs[7].SetToPlane();
 				this.bSpriteAs[8].SetToTongue();
 				break;
-			}
+			case 5:
+                this.isSkullHead = false;
+				Global.backgroundSpritesTexture = this.Content.Load<Texture2D>("nyanBackgroundSprites");
+				this.midBSpriteAs[0].SetToMoon();
+				this.midBSpriteAs[1].SetToInactive();
+				this.bSpriteAs[0].SetToToaster();
+				this.bSpriteAs[1].SetToBee();
+				this.bSpriteAs[2].SetToStar();
+				this.bSpriteAs[3].SetToSatelite();
+				this.bSpriteAs[4].SetToNyanHeart();
+				this.bSpriteAs[5].SetToNyanUFO();
+				this.bSpriteAs[6].SetToBurger();
+				this.bSpriteAs[7].SetToPizza();
+			    this.bSpriteAs[8].SetToBee();
+				break;
+            }
 		}
 	}
 }

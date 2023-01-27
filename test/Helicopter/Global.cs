@@ -89,6 +89,10 @@ namespace Helicopter
 
 		public static Texture2D meatsToMouth;
 
+		public static Texture2D nyanLetters;
+
+		public static Texture2D nyanHands;
+
 		public static Texture2D pelvicTex;
 
 		public static Texture2D explosionTex;

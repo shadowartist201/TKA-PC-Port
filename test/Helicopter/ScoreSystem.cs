@@ -57,7 +57,13 @@ namespace Helicopter
 
 		public bool ronEightyUnlocked => this.scoreInfo.ronEightyUnlocked;
 
-		public int CurrScore
+        public bool nyanFortyUnlocked => this.scoreInfo.nyanFortyUnlocked;
+
+        public bool nyanSixtyUnlocked => this.scoreInfo.nyanSixtyUnlocked;
+
+        public bool nyanEightyUnlocked => this.scoreInfo.nyanEightyUnlocked;
+
+        public int CurrScore
 		{
 			get
 			{

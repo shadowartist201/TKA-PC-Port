@@ -138,3 +138,9 @@ C:\Users\porte\Source\Repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-wi
 C:\Users\porte\Source\Repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-windows\Content\Graphics\Tunnel\star.xnb
 C:\Users\porte\Source\Repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-windows\Content\Graphics\xboxControllerButtonA.xnb
 C:\Users\porte\Source\Repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-windows\Content\Graphics\xboxControllerButtonY.xnb
+C:\Users\porte\source\repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-windows\Content\Graphics\BackgroundSprites\nyanBackgroundSprites.xnb
+C:\Users\porte\source\repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-windows\Content\Graphics\Background\nyanBGios.xnb
+C:\Users\porte\source\repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-windows\Content\Graphics\Effects\nyanHands.xnb
+C:\Users\porte\source\repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-windows\Content\Graphics\Effects\nyanLetters.xnb
+C:\Users\porte\source\repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-windows\Content\Music\MyRainbow.wma
+C:\Users\porte\source\repos\shadowartist201\TKA-PC-Port\test\bin\Debug\net6.0-windows\Content\Music\MyRainbow.xnb

@@ -21,6 +21,8 @@ namespace Helicopter
 
 		public int ronHigh_;
 
+		public int nyanHigh_;
+
 		public int[] stageIndexes_;
 
 		public int[] catIndexes_;
@@ -59,7 +61,13 @@ namespace Helicopter
 
 		public bool ronEightyUnlocked => this.ronHigh_ >= 80000;
 
-		public ScoreInfo(int someInt)
+        public bool nyanFortyUnlocked => this.nyanHigh_ >= 40000;
+
+        public bool nyanSixtyUnlocked => this.nyanHigh_ >= 60000;
+
+        public bool nyanEightyUnlocked => this.nyanHigh_ >= 80000;
+
+        public ScoreInfo(int someInt)
 		{
 			this.stageIndexes_ = new int[10];
 			this.catIndexes_ = new int[10];
@@ -70,6 +78,7 @@ namespace Helicopter
 			this.lavaHigh_ = 0;
 			this.meatHigh_ = 0;
 			this.ronHigh_ = 0;
+			this.nyanHigh_ = 0;
 			this.stageIndexes_[0] = 0;
 			this.stageIndexes_[1] = 0;
 			this.stageIndexes_[2] = 1;
@@ -134,6 +143,12 @@ namespace Helicopter
 				if (score > this.ronHigh_)
 				{
 					this.ronHigh_ = score;
+				}
+				break;
+			case 5:
+				if (score > this.nyanHigh_)
+				{ 
+					this.nyanHigh_ = score;
 				}
 				break;
 			}
@@ -213,11 +228,11 @@ namespace Helicopter
 
 		public void DrawAllScores(SpriteBatch spriteBatch)
 		{
-			string[] array = new string[5] { "Dream", "Cloud", "Lava", "Meat", "Popaganda" };
-			string[] array2 = new string[20]
+			string[] array = new string[6] { "Dream", "Cloud", "Lava", "Meat", "Popaganda", "Nyan" };
+			string[] array2 = new string[23]
 			{
 				"Jet Pack", "Byarf", "Butterfly", "Dream", "Mermaid", "Baby", "Love", "Angel", "Death", "Bat",
-				"Fire", "Rock", "Dragon", "Steak", "Bacon", "HotDog", "Burger", "Alien", "Grin", "MC"
+				"Fire", "Rock", "Dragon", "Steak", "Bacon", "HotDog", "Burger", "Alien", "Grin", "MC", "Nyan", "Tac Nyan", "Gameboy"
 			};
 			float num = 148f;
 			float num2 = 51f;

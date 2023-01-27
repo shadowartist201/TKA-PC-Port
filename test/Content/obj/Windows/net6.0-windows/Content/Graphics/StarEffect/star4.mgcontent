@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/star4.png</SourceFile>
+  <SourceFile>C:/Users/porte/source/repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/StarEffect/star4.png</SourceFile>
   <SourceTime>2023-01-26T12:32:39.8447813-06:00</SourceTime>
-  <DestFile>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/bin/Windows/Content/Graphics/StarEffect/star4.xnb</DestFile>
-  <DestTime>2023-01-26T12:33:38.5966246-06:00</DestTime>
+  <DestFile>C:/Users/porte/source/repos/shadowartist201/TKA-PC-Port/test/Content/bin/Windows/Content/Graphics/StarEffect/star4.xnb</DestFile>
+  <DestTime>2023-01-27T00:04:54.2343536-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T06:44:56-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
