@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/Graphics/Menu/Main/main_bgMenu.png</SourceFile>
-  <SourceTime>2023-01-23T02:42:14.4507292-06:00</SourceTime>
+  <SourceTime>2023-01-26T12:32:39.7757811-06:00</SourceTime>
   <DestFile>C:/Users/porte/Source/Repos/shadowartist201/TKA-PC-Port/test/Content/bin/Windows/Content/Graphics/Menu/Main/main_bgMenu.xnb</DestFile>
-  <DestTime>2023-01-23T02:44:19.9586836-06:00</DestTime>
+  <DestTime>2023-01-26T12:33:35.57205-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T06:44:56-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

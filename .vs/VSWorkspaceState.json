@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\test",
+    "\\test\\Helicopter"
   ],
+  "SelectedNode": "\\test\\Helicopter\\Helicopter.cs",
   "PreviewInSolutionExplorer": false
 }
