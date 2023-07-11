@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj": {}
+    "C:\\Users\\porterke\\Source\\Repos\\TKA-PC-Port\\test\\test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj": {
+    "C:\\Users\\porterke\\Source\\Repos\\TKA-PC-Port\\test\\test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
+        "projectUniqueName": "C:\\Users\\porterke\\Source\\Repos\\TKA-PC-Port\\test\\test.csproj",
         "projectName": "test",
-        "projectPath": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\test.csproj",
-        "packagesPath": "C:\\Users\\porte\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\test\\obj\\",
+        "projectPath": "C:\\Users\\porterke\\Source\\Repos\\TKA-PC-Port\\test\\test.csproj",
+        "packagesPath": "C:\\Users\\porterke\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\porterke\\Source\\Repos\\TKA-PC-Port\\test\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\porte\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\porterke\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,8 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://www.myget.org/F/lithiumtoast/api/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
@@ -44,16 +39,6 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "dependencies": {
-            "MonoGame.Content.Builder.Task": {
-              "target": "Package",
-              "version": "[3.8.1.303, )"
-            },
-            "MonoGame.Framework.WindowsDX": {
-              "target": "Package",
-              "version": "[3.8.1.303, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -73,7 +58,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

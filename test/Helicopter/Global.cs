@@ -184,7 +184,7 @@ namespace Helicopter
 		public static void setPixel(GraphicsDevice graphicsDevice)
 		{
 			Color[] data = new Color[1] { Color.White };
-			Global.pixel = new Texture2D(graphicsDevice, 1, 1, mipmap: false, SurfaceFormat.Color);
+			Global.pixel = new Texture2D(graphicsDevice, 1, 1, mipMap: false, SurfaceFormat.Color);
 			Global.pixel.SetData<Color>(data);
 		}
 
