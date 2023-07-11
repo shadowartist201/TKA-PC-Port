@@ -3,7 +3,7 @@ using System.IO;
 using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-//using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.Storage;
 
 namespace Helicopter
 {
@@ -174,56 +174,56 @@ namespace Helicopter
 			}
 		}
 
-		//public static ScoreInfo LoadInfo()
-		//{
-			//ScoreInfo result;
-			//if (Global.DeviceManager.Device != null && Global.DeviceManager.Device.IsConnected)
-			//{
-				//IAsyncResult asyncResult = Global.DeviceManager.Device.BeginOpenContainer("Techno Kitten Adventure", (AsyncCallback)null, (object)null);
-				//asyncResult.AsyncWaitHandle.WaitOne();
-				//StorageContainer storageContainer = Global.DeviceManager.Device.EndOpenContainer(asyncResult);
-				//asyncResult.AsyncWaitHandle.Close();
-				//string text = "ScoreInfo";
-				//if (!storageContainer.FileExists(text))
-				//{
-				//	result = new ScoreInfo(0);
-				//	storageContainer.Dispose();
-				//}
-				//else
-				//{
-				//	Stream stream = storageContainer.OpenFile(text, FileMode.Open);
-				//	XmlSerializer xmlSerializer = new XmlSerializer(typeof(ScoreInfo));
-				//	result = (ScoreInfo)xmlSerializer.Deserialize(stream);
-				//	stream.Close();
-				//	storageContainer.Dispose();
-				//}
-			//}
-			//else
-			//{
-				//result = new ScoreInfo(0);
-			//}
-			//return result;
-		//}
-
-		public void SaveInfo()
+		public static ScoreInfo LoadInfo()
 		{
-			/*if (Global.DeviceManager.Device != null && Global.DeviceManager.Device.IsConnected)
+			ScoreInfo result;
+			if (Global.DeviceManager.Device != null && Global.DeviceManager.Device.IsConnected)
 			{
 				IAsyncResult asyncResult = Global.DeviceManager.Device.BeginOpenContainer("Techno Kitten Adventure", (AsyncCallback)null, (object)null);
 				asyncResult.AsyncWaitHandle.WaitOne();
-				//StorageContainer storageContainer = Global.DeviceManager.Device.EndOpenContainer(asyncResult);
+				StorageContainer storageContainer = Global.DeviceManager.Device.EndOpenContainer(asyncResult);
 				asyncResult.AsyncWaitHandle.Close();
 				string text = "ScoreInfo";
-				//if (storageContainer.FileExists(text))
-				//{
-				//	storageContainer.DeleteFile(text);
-				//}
-				//Stream stream = storageContainer.CreateFile(text);
-				//XmlSerializer xmlSerializer = new XmlSerializer(typeof(ScoreInfo));
-				//xmlSerializer.Serialize(stream, (object)this);
-				//stream.Close();
-				//storageContainer.Dispose();
-			}*/
+				if (!storageContainer.FileExists(text))
+				{
+					result = new ScoreInfo(0);
+					storageContainer.Dispose();
+				}
+				else
+				{
+					Stream stream = storageContainer.OpenFile(text, FileMode.Open);
+					XmlSerializer xmlSerializer = new XmlSerializer(typeof(ScoreInfo));
+					result = (ScoreInfo)xmlSerializer.Deserialize(stream);
+					stream.Close();
+					storageContainer.Dispose();
+				}
+			}
+			else
+			{
+				result = new ScoreInfo(0);
+			}
+			return result;
+		}
+
+		public void SaveInfo()
+		{
+			if (Global.DeviceManager.Device != null && Global.DeviceManager.Device.IsConnected)
+			{
+				IAsyncResult asyncResult = Global.DeviceManager.Device.BeginOpenContainer("Techno Kitten Adventure", (AsyncCallback)null, (object)null);
+				asyncResult.AsyncWaitHandle.WaitOne();
+				StorageContainer storageContainer = Global.DeviceManager.Device.EndOpenContainer(asyncResult);
+				asyncResult.AsyncWaitHandle.Close();
+				string text = "ScoreInfo";
+				if (storageContainer.FileExists(text))
+				{
+					storageContainer.DeleteFile(text);
+				}
+				Stream stream = storageContainer.CreateFile(text);
+				XmlSerializer xmlSerializer = new XmlSerializer(typeof(ScoreInfo));
+				xmlSerializer.Serialize(stream, (object)this);
+				stream.Close();
+				storageContainer.Dispose();
+			}
 		}
 
 		public void DrawAllScores(SpriteBatch spriteBatch)
