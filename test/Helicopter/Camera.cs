@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -99,7 +100,8 @@ namespace Helicopter
 		public static void Update(float dt)
 		{
 			Camera.timer += dt;
-			Camera.alpha += Camera.alphaRate * dt;
+            Debug.WriteLine(Camera.effectIndex);
+            Camera.alpha += Camera.alphaRate * dt;
 			if (Camera.alpha < Camera.alphaMin)
 			{
 				Camera.alpha = Camera.alphaMin;

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PO3uSxphOvAHskg7sz4ezAO0gNRwrWyJ35Eeifw5zes/TB8bPQVBYmV+lO0v7s233tsMs5hse0kEy8Bj0y1ndg==",
+  "dgSpecHash": "IXwNMi4ugqUSiwMP9FipdbsjzzDhaHrhkhx8vBinNbTAb9CH8OPDx5GOyN4qDtdcAD/gm7vD/6ZUDzRptaKVUQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\porterke\\Source\\Repos\\TKA-PC-Port\\test\\test.csproj",
+  "projectFilePath": "C:\\Users\\porterke\\source\\repos\\TKA-PC-Port\\test\\test.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

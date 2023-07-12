@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 //using Microsoft.Xna.Framework.GamerServices;
@@ -198,7 +199,7 @@ namespace Helicopter
 
 		protected override void Initialize()
 		{
-			//MediaPlayer.IsVisualizationEnabled = true;
+			MediaPlayer.IsVisualizationEnabled = true;
 			this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
 			Global.audioEngine = new AudioEngine("Content/Music//newXactProject.xgs");
 			Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music//Wave Bank.xwb");
@@ -235,6 +236,7 @@ namespace Helicopter
 		{
 			float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
+			Debug.WriteLine("Num: " + num + " | elapsed: " +  elapsedMilliseconds);
 			//Global.IsTrialMode = Guide.IsTrialMode;
 			this.currInput.Update();
 			if (this.currInput.IsButtonUp(Buttons.A))
@@ -430,7 +432,7 @@ namespace Helicopter
 				this.trialMenu.ResetStartTimer();
 			}*/
 			this.currInput.EndUpdate();
-			//Global.audioEngine.Update();
+			Global.audioEngine.Update();
 			Global.UpdateVibration(num);
 			base.Update(gameTime);
 		}
