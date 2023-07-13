@@ -1,9 +1,8 @@
 using System;
 
-namespace Helicopter
+namespace Helicopter;
+
+public class StorageDeviceEventArgs : EventArgs
 {
-	public class StorageDeviceEventArgs : EventArgs
-	{
-		public StorageDeviceSelectorEventResponse EventResponse { get; set; }
-	}
+	public StorageDeviceSelectorEventResponse EventResponse { get; set; }
 }

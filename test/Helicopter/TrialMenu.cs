@@ -3,92 +3,91 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Helicopter
+namespace Helicopter;
+
+internal class TrialMenu : Menu
 {
-	internal class TrialMenu : Menu
+	private float startTimer;
+
+	private bool canBuyGame;
+
+	public TrialMenu()
+		: base(horizontal: true)
 	{
-		private float startTimer;
+	}
 
-		private bool canBuyGame;
-
-		public TrialMenu()
-			: base(horizontal: true)
+	public void Update(float dt, InputState currInput,GameState gameState)
+	{
+				startTimer += dt;
+		if (!(startTimer > 1f))
 		{
+			return;
 		}
-
-		public void Update(float dt, InputState currInput, ref GameState gameState)
+		Update(dt, currInput);
+		if (!currInput.IsButtonPressed((Buttons)4096))
 		{
-			this.startTimer += dt;
-			if (!(this.startTimer > 1f))
-			{
-				return;
-			}
-			base.Update(dt, currInput);
-			if (!currInput.IsButtonPressed(Buttons.A))
-			{
-				return;
-			}
-			Global.PlayCatSound();
-			switch (base.index_)
-			{
-			case 0:
-				if (this.canBuyGame)
-				{
-					if (Global.IsTrialMode && Global.CanBuyGame())
-					{
-						//Guide.ShowMarketplace(Global.playerIndex.Value);
-					}
-				}
-				else
-				{
-					base.index_ = 0;
-					gameState = GameState.MAIN_MENU;
-				}
-				break;
-			case 1:
-				base.index_ = 0;
-				gameState = GameState.MAIN_MENU;
-				break;
-			}
+			return;
 		}
-
-		public new void Draw(SpriteBatch spriteBatch)
+		Global.PlayCatSound();
+		switch (index_)
 		{
-			if (Global.IsTrialMode)
+		case 0:
+			if (canBuyGame)
 			{
-				this.canBuyGame = Global.CanBuyGame();
+				if (Global.IsTrialMode && Global.CanBuyGame())
+				{
+					//Guide.ShowMarketplace(Global.playerIndex.Value);
+				}
 			}
 			else
 			{
-				this.canBuyGame = false;
+				index_ = 0;
+				gameState = GameState.MAIN_MENU;
 			}
-			if (this.canBuyGame && (base.menuItems_.Count == 1 || base.menuItems_.Count == 0))
-			{
-				base.menuItems_.Clear();
-				base.index_ = 0;
-				base.AddMenuItem(new MenuItem(Global.trialTex, new Rectangle(0, 558, 379, 106), new Vector2(438.5f, 557f)));
-				base.AddMenuItem(new MenuItem(Global.trialTex, new Rectangle(380, 558, 379, 106), new Vector2(841.5f, 557f)));
-				base.SetItemVertices();
-			}
-			if (!this.canBuyGame && (base.menuItems_.Count == 2 || base.menuItems_.Count == 0))
-			{
-				base.menuItems_.Clear();
-				base.index_ = 0;
-				base.AddMenuItem(new MenuItem(Global.trialTex, new Rectangle(380, 558, 379, 106), new Vector2(841.5f, 557f)));
-				base.SetItemVertices();
-			}
-			this.DrawBackground(spriteBatch);
-			base.Draw(spriteBatch);
+			break;
+		case 1:
+			index_ = 0;
+			gameState = GameState.MAIN_MENU;
+			break;
 		}
+	}
 
-		private void DrawBackground(SpriteBatch spriteBatch)
+	public new void Draw(SpriteBatch spriteBatch)
+	{
+														if (Global.IsTrialMode)
 		{
-			spriteBatch.Draw(Global.trialTex, new Vector2(222f, 82f), (Rectangle?)new Rectangle(0, 0, 836, 556), Color.White);
+			canBuyGame = Global.CanBuyGame();
 		}
+		else
+		{
+			canBuyGame = false;
+		}
+		if (canBuyGame && (menuItems_.Count == 1 || menuItems_.Count == 0))
+		{
+			menuItems_.Clear();
+			index_ = 0;
+			AddMenuItem(new MenuItem(Global.trialTex, new Rectangle(0, 558, 379, 106), new Vector2(438.5f, 557f)));
+			AddMenuItem(new MenuItem(Global.trialTex, new Rectangle(380, 558, 379, 106), new Vector2(841.5f, 557f)));
+			SetItemVertices();
+		}
+		if (!canBuyGame && (menuItems_.Count == 2 || menuItems_.Count == 0))
+		{
+			menuItems_.Clear();
+			index_ = 0;
+			AddMenuItem(new MenuItem(Global.trialTex, new Rectangle(380, 558, 379, 106), new Vector2(841.5f, 557f)));
+			SetItemVertices();
+		}
+		DrawBackground(spriteBatch);
+		base.Draw(spriteBatch);
+	}
 
-		public void ResetStartTimer()
-		{
-			this.startTimer = 0f;
-		}
+	private void DrawBackground(SpriteBatch spriteBatch)
+	{
+								spriteBatch.Draw(Global.trialTex, new Vector2(222f, 82f), (Rectangle?)new Rectangle(0, 0, 836, 556), Color.White);
+	}
+
+	public void ResetStartTimer()
+	{
+		startTimer = 0f;
 	}
 }

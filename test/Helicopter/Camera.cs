@@ -1,451 +1,450 @@
 using System;
-using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Helicopter
+namespace Helicopter;
+
+public static class Camera
 {
-	public static class Camera
+	private static int effectIndex = 0;
+
+	private static float alpha = 1f;
+
+	private static float alphaMin = 0f;
+
+	private static float alphaMax = 1f;
+
+	private static float alphaRate = 1f;
+
+	private static float timer;
+
+	private static float strength = 0.5f;
+
+	private static float theta;
+
+	private static float thetaRate;
+
+	private static Vector2 effectOffset;
+
+	private static Vector2 effectOffsetRate;
+
+	private static Vector2 effectOffsetMax;
+
+	public static Effect[] effects = (Effect[])(object)new Effect[5];
+
+	private static bool flipping_;
+
+	private static float flipDuration_;
+
+	private static float flipTimer_;
+
+	private static int numShakes;
+
+	private static float timeBetweenShakes;
+
+	private static float timeBetweenTimer;
+
+	private static bool shaking;
+
+	private static float shakeMagnitude;
+
+	private static float shakeDuration;
+
+	private static float shakeTimer;
+
+	private static Vector2 shakeOffset;
+
+	private static bool moving_ = false;
+
+	private static Vector2 movingVelocity_ = new Vector2(0f, 0f);
+
+	private static float movingBound_ = 10f;
+
+	private static bool rotating_ = false;
+
+	private static float rotationRate_ = 0f;
+
+	private static float rotationMin_ = -(float)Math.PI / 60f;
+
+	private static float rotationMax_ = (float)Math.PI / 60f;
+
+	private static bool scaling_ = false;
+
+	private static float scaleRate_ = 0f;
+
+	private static float scaleMin_ = 1.1f;
+
+	private static float scaleMax_ = 1.2f;
+
+	private static bool coloring_ = false;
+
+	private static float colorHue_ = 0f;
+
+	private static float colorRate_ = 0f;
+
+	private static float colorMin_ = 0f;
+
+	private static float colorMax_ = 360f;
+
+	private static Vector2 position_ = new Vector2(640f, 360f);
+
+	private static float rotation_ = 0f;
+
+	private static float scale_ = 1.1f;
+
+	private static Color color_ = Color.White;
+
+	private static SpriteEffects spriteEffect_;
+
+	public static void Update(float dt)
 	{
-		private static int effectIndex = 0;
-
-		private static float alpha = 1f;
-
-		private static float alphaMin = 0f;
-
-		private static float alphaMax = 1f;
-
-		private static float alphaRate = 1f;
-
-		private static float timer;
-
-		private static float strength = 0.5f;
-
-		private static float theta;
-
-		private static float thetaRate;
-
-		private static Vector2 effectOffset;
-
-		private static Vector2 effectOffsetRate;
-
-		private static Vector2 effectOffsetMax;
-
-		public static Effect[] effects = new Effect[5];
-
-		private static bool flipping_;
-
-		private static float flipDuration_;
-
-		private static float flipTimer_;
-
-		private static int numShakes;
-
-		private static float timeBetweenShakes;
-
-		private static float timeBetweenTimer;
-
-		private static bool shaking;
-
-		private static float shakeMagnitude;
-
-		private static float shakeDuration;
-
-		private static float shakeTimer;
-
-		private static Vector2 shakeOffset;
-
-		private static bool moving_ = false;
-
-		private static Vector2 movingVelocity_ = new Vector2(0f, 0f);
-
-		private static float movingBound_ = 10f;
-
-		private static bool rotating_ = false;
-
-		private static float rotationRate_ = 0f;
-
-		private static float rotationMin_ = -(float)Math.PI / 60f;
-
-		private static float rotationMax_ = (float)Math.PI / 60f;
-
-		private static bool scaling_ = false;
-
-		private static float scaleRate_ = 0f;
-
-		private static float scaleMin_ = 1.1f;
-
-		private static float scaleMax_ = 1.2f;
-
-		private static bool coloring_ = false;
-
-		private static float colorHue_ = 0f;
-
-		private static float colorRate_ = 0f;
-
-		private static float colorMin_ = 0f;
-
-		private static float colorMax_ = 360f;
-
-		private static Vector2 position_ = new Vector2(640f, 360f);
-
-		private static float rotation_ = 0f;
-
-		private static float scale_ = 1.1f;
-
-		private static Color color_ = Color.White;
-
-		private static SpriteEffects spriteEffect_;
-
-		public static void Update(float dt)
+																																																										timer += dt;
+		alpha += alphaRate * dt;
+		if (alpha < alphaMin)
 		{
-			Camera.timer += dt;
-            Debug.WriteLine(Camera.effectIndex);
-            Camera.alpha += Camera.alphaRate * dt;
-			if (Camera.alpha < Camera.alphaMin)
+			alpha = alphaMin;
+			alphaRate = 0f - alphaRate;
+		}
+		if (alpha > alphaMax)
+		{
+			alpha = alphaMax;
+			alphaRate = 0f - alphaRate;
+		}
+		theta += thetaRate * dt;
+		theta %= (float)Math.PI * 2f;
+		effectOffset += effectOffsetRate * dt;
+		effectOffset.X %= effectOffsetMax.X;
+		effectOffset.Y %= effectOffsetMax.Y;
+		if (numShakes > 0)
+		{
+			timeBetweenTimer += dt;
+			if (timeBetweenTimer > timeBetweenShakes)
 			{
-				Camera.alpha = Camera.alphaMin;
-				Camera.alphaRate = 0f - Camera.alphaRate;
-			}
-			if (Camera.alpha > Camera.alphaMax)
-			{
-				Camera.alpha = Camera.alphaMax;
-				Camera.alphaRate = 0f - Camera.alphaRate;
-			}
-			Camera.theta += Camera.thetaRate * dt;
-			Camera.theta %= (float)Math.PI * 2f;
-			Camera.effectOffset += Camera.effectOffsetRate * dt;
-			Camera.effectOffset.X %= Camera.effectOffsetMax.X;
-			Camera.effectOffset.Y %= Camera.effectOffsetMax.Y;
-			if (Camera.numShakes > 0)
-			{
-				Camera.timeBetweenTimer += dt;
-				if (Camera.timeBetweenTimer > Camera.timeBetweenShakes)
-				{
-					Camera.timeBetweenTimer -= Camera.timeBetweenShakes;
-					Camera.DoShake(Camera.shakeMagnitude, Camera.shakeDuration);
-					Camera.numShakes--;
-				}
-			}
-			if (Camera.shaking)
-			{
-				Camera.shakeTimer += dt;
-				if (Camera.shakeTimer >= Camera.shakeDuration)
-				{
-					Camera.shaking = false;
-					Camera.shakeTimer = Camera.shakeDuration;
-					Camera.position_ = new Vector2(640f, 360f);
-				}
-				float num = Camera.shakeTimer / Camera.shakeDuration;
-				float num2 = Camera.shakeMagnitude * (1f - num * num);
-				Camera.shakeOffset = new Vector2(Global.RandomBetween(-1f, 1f), Global.RandomBetween(-1f, 1f)) * num2;
-				Camera.position_ += Camera.shakeOffset;
-				if (!Camera.scaling_)
-				{
-					Camera.scale_ = 1f + num * 0.1f;
-				}
-			}
-			if (Camera.moving_)
-			{
-				Camera.position_ += Camera.movingVelocity_ * dt;
-				if (Camera.position_.X > 640f + Camera.movingBound_)
-				{
-					Camera.position_.X = 640f + Camera.movingBound_;
-					Camera.movingVelocity_.X = 0f - Camera.movingVelocity_.X;
-				}
-				if (Camera.position_.X < 640f - Camera.movingBound_)
-				{
-					Camera.position_.X = 640f - Camera.movingBound_;
-					Camera.movingVelocity_.X = 0f - Camera.movingVelocity_.X;
-				}
-			}
-			if (Camera.rotating_)
-			{
-				Camera.rotation_ += Camera.rotationRate_ * dt;
-				if (Camera.rotation_ > Camera.rotationMax_)
-				{
-					Camera.rotation_ = Camera.rotationMax_;
-					Camera.rotationRate_ = 0f - Camera.rotationRate_;
-				}
-				if (Camera.rotation_ < Camera.rotationMin_)
-				{
-					Camera.rotation_ = Camera.rotationMin_;
-					Camera.rotationRate_ = 0f - Camera.rotationRate_;
-				}
-			}
-			if (Camera.scaling_)
-			{
-				Camera.scale_ += Camera.scaleRate_ * dt;
-				if (Camera.scale_ > Camera.scaleMax_)
-				{
-					Camera.scale_ = Camera.scaleMax_;
-					Camera.scaleRate_ = 0f - Camera.scaleRate_;
-				}
-				if (Camera.scale_ < Camera.scaleMin_)
-				{
-					Camera.scale_ = Camera.scaleMin_;
-					Camera.scaleRate_ = 0f - Camera.scaleRate_;
-				}
-			}
-			if (Camera.coloring_)
-			{
-				Camera.colorHue_ += Camera.colorRate_ * dt;
-				if (Camera.colorHue_ < Camera.colorMin_)
-				{
-					Camera.colorHue_ = Camera.colorMin_;
-					Camera.colorRate_ = 0f - Camera.colorRate_;
-				}
-				if (Camera.colorHue_ > Camera.colorMax_)
-				{
-					Camera.colorHue_ = Camera.colorMax_;
-					Camera.colorRate_ = 0f - Camera.colorRate_;
-				}
-				Camera.color_ = Camera.GetColor(Camera.colorHue_);
-			}
-			if (!Camera.flipping_)
-			{
-				return;
-			}
-			Camera.flipTimer_ += dt;
-			if (Camera.flipTimer_ > Camera.flipDuration_)
-			{
-				Camera.flipTimer_ -= Camera.flipDuration_;
-				switch (Camera.spriteEffect_)
-				{
-				case SpriteEffects.None:
-					Camera.spriteEffect_ = SpriteEffects.FlipHorizontally;
-					break;
-				case SpriteEffects.FlipHorizontally:
-					Camera.spriteEffect_ = SpriteEffects.None;
-					break;
-				case SpriteEffects.FlipVertically:
-					Camera.spriteEffect_ = SpriteEffects.None;
-					break;
-				}
+				timeBetweenTimer -= timeBetweenShakes;
+				DoShake(shakeMagnitude, shakeDuration);
+				numShakes--;
 			}
 		}
-
-		public static void Draw(SpriteBatch spriteBatch, RenderTarget2D renderTarget, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
+		if (shaking)
 		{
-			switch (Camera.effectIndex)
+			shakeTimer += dt;
+			if (shakeTimer >= shakeDuration)
+			{
+				shaking = false;
+				shakeTimer = shakeDuration;
+				position_ = new Vector2(640f, 360f);
+			}
+			float num = shakeTimer / shakeDuration;
+			float num2 = shakeMagnitude * (1f - num * num);
+			shakeOffset = new Vector2(Global.RandomBetween(-1f, 1f), Global.RandomBetween(-1f, 1f)) * num2;
+			position_ += shakeOffset;
+			if (!scaling_)
+			{
+				scale_ = 1f + num * 0.1f;
+			}
+		}
+		if (moving_)
+		{
+			position_ += movingVelocity_ * dt;
+			if (position_.X > 640f + movingBound_)
+			{
+				position_.X = 640f + movingBound_;
+				movingVelocity_.X = 0f - movingVelocity_.X;
+			}
+			if (position_.X < 640f - movingBound_)
+			{
+				position_.X = 640f - movingBound_;
+				movingVelocity_.X = 0f - movingVelocity_.X;
+			}
+		}
+		if (rotating_)
+		{
+			rotation_ += rotationRate_ * dt;
+			if (rotation_ > rotationMax_)
+			{
+				rotation_ = rotationMax_;
+				rotationRate_ = 0f - rotationRate_;
+			}
+			if (rotation_ < rotationMin_)
+			{
+				rotation_ = rotationMin_;
+				rotationRate_ = 0f - rotationRate_;
+			}
+		}
+		if (scaling_)
+		{
+			scale_ += scaleRate_ * dt;
+			if (scale_ > scaleMax_)
+			{
+				scale_ = scaleMax_;
+				scaleRate_ = 0f - scaleRate_;
+			}
+			if (scale_ < scaleMin_)
+			{
+				scale_ = scaleMin_;
+				scaleRate_ = 0f - scaleRate_;
+			}
+		}
+		if (coloring_)
+		{
+			colorHue_ += colorRate_ * dt;
+			if (colorHue_ < colorMin_)
+			{
+				colorHue_ = colorMin_;
+				colorRate_ = 0f - colorRate_;
+			}
+			if (colorHue_ > colorMax_)
+			{
+				colorHue_ = colorMax_;
+				colorRate_ = 0f - colorRate_;
+			}
+			color_ = GetColor(colorHue_);
+		}
+		if (!flipping_)
+		{
+			return;
+		}
+		flipTimer_ += dt;
+		if (flipTimer_ > flipDuration_)
+		{
+			flipTimer_ -= flipDuration_;
+			SpriteEffects val = spriteEffect_;
+			switch ((int)val)
 			{
 			case 0:
-				//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
-				break;
-			case 2:
-				//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
-				break;
-			case 3:
-				//Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
-				//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-				break;
-			case 4:
-				//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-				//Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
-				break;
-			}
-			graphicsDevice.SetRenderTarget(null);
-			graphicsDevice.Clear(Color.White);
-			if (Camera.effectIndex == -1)
-			{
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
-				spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
-				spriteBatch.End();
-			}
-			else
-			{
-				spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, Camera.effects[Camera.effectIndex]);
-				spriteBatch.Draw(renderTarget, Vector2.Zero, Color.White * Camera.alpha);
-				spriteBatch.End();
-			}
-		}
-
-		public static void Reset()
-		{
-			Camera.alpha = 1f;
-			Camera.timer = 0f;
-			Camera.strength = 0.5f;
-			Camera.theta = 0f;
-			Camera.effectOffset = Vector2.Zero;
-			Camera.effectIndex = -1;
-			Camera.shaking = false;
-			Camera.numShakes = 0;
-			Camera.moving_ = false;
-			Camera.rotating_ = false;
-			Camera.scaling_ = false;
-			Camera.coloring_ = false;
-			Camera.flipping_ = false;
-			Camera.position_ = new Vector2(640f, 360f);
-			Camera.rotation_ = 0f;
-			Camera.scale_ = 1.1f;
-			Camera.color_ = Color.White;
-			Camera.spriteEffect_ = SpriteEffects.None;
-		}
-
-		public static void SetEffect(int newEffectIndex)
-		{
-			Camera.scale_ = 1f;
-			switch (newEffectIndex)
-			{
-			case -1:
-				Camera.effectIndex = -1;
-				break;
-			case 0:
-				Camera.alpha = 0f;
-				Camera.alphaMin = 0f;
-				Camera.alphaMax = 0.15f;
-				Camera.alphaRate = 1.65517235f;
-				Camera.thetaRate = 0f;
-				Camera.effectIndex = 0;
+				spriteEffect_ = (SpriteEffects)1;
 				break;
 			case 1:
-				Camera.effectIndex = 1;
+				spriteEffect_ = (SpriteEffects)0;
 				break;
 			case 2:
-				Camera.effectIndex = 4;
-				Camera.strength = 0.01f;
-				Camera.alpha = 1f;
-				Camera.alphaMin = 1f;
-				Camera.alphaMax = 1f;
-				Camera.alphaRate = 0f;
-				break;
-			case 3:
-				Camera.alpha = 0.6f;
-				Camera.alphaMin = 0.6f;
-				Camera.alphaMax = 0.6f;
-				Camera.alphaRate = 0f;
-				Camera.thetaRate = 18.2212372f;
-				Camera.effectIndex = 0;
-				break;
-			case 4:
-				Camera.effectIndex = 3;
-				Camera.alpha = 0.5f;
-				Camera.alphaMin = 0.5f;
-				Camera.alphaMax = 0.5f;
-				Camera.alphaRate = 0f;
-				break;
-			case 5:
-				Camera.effectIndex = 2;
-				Camera.effectOffset = Vector2.Zero;
-				Camera.effectOffsetMax = Vector2.One;
-				Camera.effectOffsetRate = new Vector2(0.3f, 0f);
+				spriteEffect_ = (SpriteEffects)0;
 				break;
 			}
 		}
+	}
 
-		public static void GoCrazy(float duration)
+	public static void Draw(SpriteBatch spriteBatch, RenderTarget2D renderTarget, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
+	{
+																						switch (effectIndex)
 		{
-			Camera.DoRotating(duration);
-			Camera.DoScaling(duration);
-			Camera.DoColoring(duration);
-			Camera.DoFlipping(duration);
+		case 0:
+			//effects[effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(theta), (float)Math.Sin(theta)));
+			break;
+		case 2:
+			//effects[effectIndex].Parameters["Offset"].SetValue(effectOffset.X);
+			break;
+		case 3:
+			//effects[effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
+			//effects[effectIndex].Parameters["Timer"].SetValue(timer);
+			break;
+		case 4:
+			//effects[effectIndex].Parameters["Timer"].SetValue(timer);
+			//effects[effectIndex].Parameters["Strength"].SetValue(strength);
+			break;
 		}
+		graphicsDevice.SetRenderTarget((RenderTarget2D)null);
+		graphicsDevice.Clear(Color.White);
+		if (effectIndex == -1)
+		{
+			spriteBatch.Begin((SpriteSortMode)1, BlendState.NonPremultiplied);
+			spriteBatch.Draw((Texture2D)(object)renderTarget, position_, (Rectangle?)null, color_, rotation_, new Vector2(640f, 360f), scale_, spriteEffect_, 0f);
+			spriteBatch.End();
+		}
+		else
+		{
+			spriteBatch.Begin((SpriteSortMode)0, (BlendState)null, (SamplerState)null, (DepthStencilState)null, (RasterizerState)null, effects[effectIndex]);
+			spriteBatch.Draw((Texture2D)(object)renderTarget, Vector2.Zero, Color.White * alpha);
+			spriteBatch.End();
+		}
+	}
 
-		public static void DoShake(float magnitude, float duration)
-		{
-			Camera.shaking = true;
-			Camera.shakeMagnitude = magnitude;
-			Camera.shakeDuration = duration;
-			Camera.shakeTimer = 0f;
-		}
+	public static void Reset()
+	{
+																alpha = 1f;
+		timer = 0f;
+		strength = 0.5f;
+		theta = 0f;
+		effectOffset = Vector2.Zero;
+		effectIndex = -1;
+		shaking = false;
+		numShakes = 0;
+		moving_ = false;
+		rotating_ = false;
+		scaling_ = false;
+		coloring_ = false;
+		flipping_ = false;
+		position_ = new Vector2(640f, 360f);
+		rotation_ = 0f;
+		scale_ = 1.1f;
+		color_ = Color.White;
+		spriteEffect_ = (SpriteEffects)0;
+	}
 
-		public static void DoShakes(int num, float timeBetween, float magnitude, float duration)
+	public static void SetEffect(int newEffectIndex)
+	{
+														scale_ = 1f;
+		switch (newEffectIndex)
 		{
-			Camera.numShakes = num;
-			Camera.timeBetweenShakes = timeBetween;
-			Camera.timeBetweenTimer = 0f;
-			Camera.DoShake(magnitude, duration);
-			Camera.numShakes--;
+		case -1:
+			effectIndex = -1;
+			break;
+		case 0:
+			alpha = 0f;
+			alphaMin = 0f;
+			alphaMax = 0.15f;
+			alphaRate = 1.6551723f;
+			thetaRate = 0f;
+			effectIndex = 0;
+			break;
+		case 1:
+			effectIndex = 1;
+			break;
+		case 2:
+			effectIndex = 4;
+			strength = 0.01f;
+			alpha = 1f;
+			alphaMin = 1f;
+			alphaMax = 1f;
+			alphaRate = 0f;
+			break;
+		case 3:
+			alpha = 0.6f;
+			alphaMin = 0.6f;
+			alphaMax = 0.6f;
+			alphaRate = 0f;
+			thetaRate = 18.221237f;
+			effectIndex = 0;
+			break;
+		case 4:
+			effectIndex = 3;
+			alpha = 0.5f;
+			alphaMin = 0.5f;
+			alphaMax = 0.5f;
+			alphaRate = 0f;
+			break;
+		case 5:
+			effectIndex = 2;
+			effectOffset = Vector2.Zero;
+			effectOffsetMax = Vector2.One;
+			effectOffsetRate = new Vector2(0.3f, 0f);
+			break;
 		}
+	}
 
-		public static void DoScaling(float duration)
-		{
-			Camera.scaling_ = true;
-			Camera.scaleRate_ = 2f * (Camera.scaleMax_ - Camera.scaleMin_) / duration;
-		}
+	public static void GoCrazy(float duration)
+	{
+		DoRotating(duration);
+		DoScaling(duration);
+		DoColoring(duration);
+		DoFlipping(duration);
+	}
 
-		public static void StopScaling()
-		{
-			Camera.scaling_ = false;
-			Camera.scale_ = 1.1f;
-		}
+	public static void DoShake(float magnitude, float duration)
+	{
+		shaking = true;
+		shakeMagnitude = magnitude;
+		shakeDuration = duration;
+		shakeTimer = 0f;
+	}
 
-		public static void DoRotating(float duration)
-		{
-			Camera.rotating_ = true;
-			Camera.rotationRate_ = 2f * (Camera.rotationMax_ - Camera.rotationMin_) / duration;
-			Camera.scale_ = 1.1f;
-		}
+	public static void DoShakes(int num, float timeBetween, float magnitude, float duration)
+	{
+		numShakes = num;
+		timeBetweenShakes = timeBetween;
+		timeBetweenTimer = 0f;
+		DoShake(magnitude, duration);
+		numShakes--;
+	}
 
-		public static void StopRotating()
-		{
-			Camera.rotating_ = false;
-			Camera.rotation_ = 0f;
-		}
+	public static void DoScaling(float duration)
+	{
+		scaling_ = true;
+		scaleRate_ = 2f * (scaleMax_ - scaleMin_) / duration;
+	}
 
-		public static void DoColoring(float duration)
-		{
-			Camera.coloring_ = true;
-			Camera.colorRate_ = 360f / duration;
-		}
+	public static void StopScaling()
+	{
+		scaling_ = false;
+		scale_ = 1.1f;
+	}
 
-		public static void DoFlipping(float duration)
-		{
-			Camera.flipping_ = true;
-			Camera.flipDuration_ = duration * 8f;
-			Camera.flipTimer_ = 0f;
-		}
+	public static void DoRotating(float duration)
+	{
+		rotating_ = true;
+		rotationRate_ = 2f * (rotationMax_ - rotationMin_) / duration;
+		scale_ = 1.1f;
+	}
 
-		public static void StopFlipping()
-		{
-			Camera.flipping_ = false;
-			Camera.spriteEffect_ = SpriteEffects.None;
-		}
+	public static void StopRotating()
+	{
+		rotating_ = false;
+		rotation_ = 0f;
+	}
 
-		private static Color GetColor(float hue)
+	public static void DoColoring(float duration)
+	{
+		coloring_ = true;
+		colorRate_ = 360f / duration;
+	}
+
+	public static void DoFlipping(float duration)
+	{
+		flipping_ = true;
+		flipDuration_ = duration * 8f;
+		flipTimer_ = 0f;
+	}
+
+	public static void StopFlipping()
+	{
+				flipping_ = false;
+		spriteEffect_ = (SpriteEffects)0;
+	}
+
+	private static Color GetColor(float hue)
+	{
+																										Vector3 one = Vector3.One;
+		if (hue < 0f)
 		{
-			Vector3 one = Vector3.One;
-			if (hue < 0f)
-			{
-				return new Color(new Vector4(Color.White.ToVector3(), 0f));
-			}
-			if (hue <= 60f)
-			{
-				one.X = 1f;
-				one.Y = hue / 60f;
-				one.Z = 0f;
-			}
-			else if (hue <= 120f)
-			{
-				one.Y = 1f;
-				one.X = 2f - hue / 60f;
-				one.Z = 0f;
-			}
-			else if (hue <= 180f)
-			{
-				one.Y = 1f;
-				one.Z = hue / 60f - 2f;
-				one.X = 0f;
-			}
-			else if (hue <= 240f)
-			{
-				one.Z = 1f;
-				one.Y = 4f - hue / 60f;
-				one.X = 0f;
-			}
-			else if (hue <= 300f)
-			{
-				one.Z = 1f;
-				one.X = hue / 60f - 4f;
-				one.Y = 0f;
-			}
-			else
-			{
-				one.X = 1f;
-				one.Z = 6f - hue / 60f;
-				one.Y = 0f;
-			}
-			return new Color(one);
+			Color white = Color.White;
+			return new Color(new Vector4(((Color)(white)).ToVector3(), 0f));
 		}
+		if (hue <= 60f)
+		{
+			one.X = 1f;
+			one.Y = hue / 60f;
+			one.Z = 0f;
+		}
+		else if (hue <= 120f)
+		{
+			one.Y = 1f;
+			one.X = 2f - hue / 60f;
+			one.Z = 0f;
+		}
+		else if (hue <= 180f)
+		{
+			one.Y = 1f;
+			one.Z = hue / 60f - 2f;
+			one.X = 0f;
+		}
+		else if (hue <= 240f)
+		{
+			one.Z = 1f;
+			one.Y = 4f - hue / 60f;
+			one.X = 0f;
+		}
+		else if (hue <= 300f)
+		{
+			one.Z = 1f;
+			one.X = hue / 60f - 4f;
+			one.Y = 0f;
+		}
+		else
+		{
+			one.X = 1f;
+			one.Z = 6f - hue / 60f;
+			one.Y = 0f;
+		}
+		return new Color(one);
 	}
 }

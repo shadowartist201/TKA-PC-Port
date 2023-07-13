@@ -1,11 +1,20 @@
-namespace Helicopter
+using System;
+using Microsoft.Xna.Framework;
+
+namespace Helicopter;
+
+internal static class Program
 {
-	internal static class Program
+	private static void Main(string[] args)
 	{
-		private static void Main(string[] args)
+		Game1 game = new Game1();
+		try
 		{
-			using Game1 game = new Game1();
-			game.Run();
+			((Game)game).Run();
+		}
+		finally
+		{
+			((IDisposable)game)?.Dispose();
 		}
 	}
 }

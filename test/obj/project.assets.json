@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\porterke\\Source\\Repos\\TKA-PC-Port\\test\\test.csproj",
+      "projectUniqueName": "C:\\Users\\porterke\\source\\repos\\TKA-PC-Port\\test\\test.csproj",
       "projectName": "test",
-      "projectPath": "C:\\Users\\porterke\\Source\\Repos\\TKA-PC-Port\\test\\test.csproj",
+      "projectPath": "C:\\Users\\porterke\\source\\repos\\TKA-PC-Port\\test\\test.csproj",
       "packagesPath": "C:\\Users\\porterke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\porterke\\Source\\Repos\\TKA-PC-Port\\test\\obj\\",
+      "outputPath": "C:\\Users\\porterke\\source\\repos\\TKA-PC-Port\\test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\porterke\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -2,74 +2,73 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Helicopter
+namespace Helicopter;
+
+public class Menu
 {
-	public class Menu
+	protected List<MenuItem> menuItems_;
+
+	protected int index_;
+
+	private bool horizontal_;
+
+	protected Menu(bool horizontal)
 	{
-		protected List<MenuItem> menuItems_;
+		horizontal_ = horizontal;
+		menuItems_ = new List<MenuItem>();
+	}
 
-		protected int index_;
+	protected void AddMenuItem(MenuItem menuItem)
+	{
+		menuItems_.Add(menuItem);
+	}
 
-		private bool horizontal_;
-
-		protected Menu(bool horizontal)
+	protected void Update(float dt, InputState currInput)
+	{
+		for (int i = 0; i < menuItems_.Count; i++)
 		{
-			this.horizontal_ = horizontal;
-			this.menuItems_ = new List<MenuItem>();
+			menuItems_[i].Update(dt, i == index_);
 		}
-
-		protected void AddMenuItem(MenuItem menuItem)
+		SetItemVertices();
+		Global.itemSelectedEffect.Update(dt);
+		if (horizontal_)
 		{
-			this.menuItems_.Add(menuItem);
-		}
-
-		protected void Update(float dt, InputState currInput)
-		{
-			for (int i = 0; i < this.menuItems_.Count; i++)
+			if (currInput.IsButtonPressed((Buttons)8) && index_ + 1 < menuItems_.Count)
 			{
-				this.menuItems_[i].Update(dt, i == this.index_);
+				index_++;
 			}
-			this.SetItemVertices();
-			Global.itemSelectedEffect.Update(dt);
-			if (this.horizontal_)
+			if (currInput.IsButtonPressed((Buttons)4) && index_ > 0)
 			{
-				if (currInput.IsButtonPressed(Buttons.DPadRight) && this.index_ + 1 < this.menuItems_.Count)
-				{
-					this.index_++;
-				}
-				if (currInput.IsButtonPressed(Buttons.DPadLeft) && this.index_ > 0)
-				{
-					this.index_--;
-				}
-			}
-			else
-			{
-				if (currInput.IsButtonPressed(Buttons.DPadDown) && this.index_ + 1 < this.menuItems_.Count)
-				{
-					this.index_++;
-				}
-				if (currInput.IsButtonPressed(Buttons.DPadUp) && this.index_ > 0)
-				{
-					this.index_--;
-				}
+				index_--;
 			}
 		}
-
-		protected void SetItemVertices()
+		else
 		{
-			if (this.index_ < this.menuItems_.Count)
+			if (currInput.IsButtonPressed((Buttons)2) && index_ + 1 < menuItems_.Count)
 			{
-				Global.itemSelectedEffect.SetItemVertices(this.menuItems_[this.index_].CollisionRect);
+				index_++;
+			}
+			if (currInput.IsButtonPressed((Buttons)1) && index_ > 0)
+			{
+				index_--;
 			}
 		}
+	}
 
-		protected void Draw(SpriteBatch spriteBatch)
+	protected void SetItemVertices()
+	{
+				if (index_ < menuItems_.Count)
 		{
-			for (int i = 0; i < this.menuItems_.Count; i++)
-			{
-				this.menuItems_[i].Draw(spriteBatch);
-			}
-			Global.itemSelectedEffect.Draw(spriteBatch);
+			Global.itemSelectedEffect.SetItemVertices(menuItems_[index_].CollisionRect);
 		}
+	}
+
+	protected void Draw(SpriteBatch spriteBatch)
+	{
+		for (int i = 0; i < menuItems_.Count; i++)
+		{
+			menuItems_[i].Draw(spriteBatch);
+		}
+		Global.itemSelectedEffect.Draw(spriteBatch);
 	}
 }
