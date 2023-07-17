@@ -1,0 +1,293 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0-android31.0": {
+      "MonoGame.Content.Builder.Task/3.8.1.303": {
+        "type": "package",
+        "build": {
+          "build/MonoGame.Content.Builder.Task.props": {},
+          "build/MonoGame.Content.Builder.Task.targets": {}
+        }
+      },
+      "MonoGame.Framework.Android/3.8.1.303": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "build": {
+          "build/MonoGame.Framework.Android.targets": {}
+        }
+      }
+    },
+    "net6.0-android31.0/android-arm": {
+      "MonoGame.Content.Builder.Task/3.8.1.303": {
+        "type": "package",
+        "build": {
+          "build/MonoGame.Content.Builder.Task.props": {},
+          "build/MonoGame.Content.Builder.Task.targets": {}
+        }
+      },
+      "MonoGame.Framework.Android/3.8.1.303": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "build": {
+          "build/MonoGame.Framework.Android.targets": {}
+        }
+      }
+    },
+    "net6.0-android31.0/android-arm64": {
+      "MonoGame.Content.Builder.Task/3.8.1.303": {
+        "type": "package",
+        "build": {
+          "build/MonoGame.Content.Builder.Task.props": {},
+          "build/MonoGame.Content.Builder.Task.targets": {}
+        }
+      },
+      "MonoGame.Framework.Android/3.8.1.303": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "build": {
+          "build/MonoGame.Framework.Android.targets": {}
+        }
+      }
+    },
+    "net6.0-android31.0/android-x64": {
+      "MonoGame.Content.Builder.Task/3.8.1.303": {
+        "type": "package",
+        "build": {
+          "build/MonoGame.Content.Builder.Task.props": {},
+          "build/MonoGame.Content.Builder.Task.targets": {}
+        }
+      },
+      "MonoGame.Framework.Android/3.8.1.303": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "build": {
+          "build/MonoGame.Framework.Android.targets": {}
+        }
+      }
+    },
+    "net6.0-android31.0/android-x86": {
+      "MonoGame.Content.Builder.Task/3.8.1.303": {
+        "type": "package",
+        "build": {
+          "build/MonoGame.Content.Builder.Task.props": {},
+          "build/MonoGame.Content.Builder.Task.targets": {}
+        }
+      },
+      "MonoGame.Framework.Android/3.8.1.303": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0-android31.0/MonoGame.Framework.dll": {
+            "related": ".aar;.xml"
+          }
+        },
+        "build": {
+          "build/MonoGame.Framework.Android.targets": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MonoGame.Content.Builder.Task/3.8.1.303": {
+      "sha512": "9Ilzzje62LhWElbPNEl7vh7XsRSbze+lvCJdZtTZUGu48FRgvYN6THURwIB9PN98EI33/Wnf6iuShNUtD7hL4Q==",
+      "type": "package",
+      "path": "monogame.content.builder.task/3.8.1.303",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "build/MonoGame.Content.Builder.Task.props",
+        "build/MonoGame.Content.Builder.Task.targets",
+        "monogame.content.builder.task.3.8.1.303.nupkg.sha512",
+        "monogame.content.builder.task.nuspec"
+      ]
+    },
+    "MonoGame.Framework.Android/3.8.1.303": {
+      "sha512": "ypQAXK3vKo7wiqvlfav0HSShUtUtH8qam3danRg1YkitgSTNwgAQgO7UDUHSKrWQAWgGJCJi7vZ5ngnBVxjBWw==",
+      "type": "package",
+      "path": "monogame.framework.android/3.8.1.303",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "build/MonoGame.Framework.Android.targets",
+        "lib/net6.0-android31.0/MonoGame.Framework.aar",
+        "lib/net6.0-android31.0/MonoGame.Framework.dll",
+        "lib/net6.0-android31.0/MonoGame.Framework.xml",
+        "monogame.framework.android.3.8.1.303.nupkg.sha512",
+        "monogame.framework.android.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0-android31.0": [
+      "MonoGame.Content.Builder.Task >= 3.8.1.303",
+      "MonoGame.Framework.Android >= 3.8.1.303"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\porte\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\Project1.csproj",
+      "projectName": "Project1",
+      "projectPath": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\Project1.csproj",
+      "packagesPath": "C:\\Users\\porte\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\porte\\source\\repos\\shadowartist201\\TKA-PC-Port\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\porte\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0-android"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0-android31.0": {
+          "targetAlias": "net6.0-android",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0-android31.0": {
+        "targetAlias": "net6.0-android",
+        "dependencies": {
+          "MonoGame.Content.Builder.Task": {
+            "target": "Package",
+            "version": "[3.8.1.303, )"
+          },
+          "MonoGame.Framework.Android": {
+            "target": "Package",
+            "version": "[3.8.1.303, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.Android.Ref.31",
+            "version": "[32.0.485, 32.0.485]"
+          },
+          {
+            "name": "Microsoft.Android.Runtime.31.android-arm",
+            "version": "[32.0.485, 32.0.485]"
+          },
+          {
+            "name": "Microsoft.Android.Runtime.31.android-arm64",
+            "version": "[32.0.485, 32.0.485]"
+          },
+          {
+            "name": "Microsoft.Android.Runtime.31.android-x64",
+            "version": "[32.0.485, 32.0.485]"
+          },
+          {
+            "name": "Microsoft.Android.Runtime.31.android-x86",
+            "version": "[32.0.485, 32.0.485]"
+          },
+          {
+            "name": "Microsoft.AspNetCore.App.Runtime.linux-arm",
+            "version": "[6.0.16, 6.0.16]"
+          },
+          {
+            "name": "Microsoft.AspNetCore.App.Runtime.linux-arm64",
+            "version": "[6.0.16, 6.0.16]"
+          },
+          {
+            "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
+            "version": "[6.0.16, 6.0.16]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.Android": {
+            "privateAssets": "all"
+          },
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "android-arm": {
+        "#import": []
+      },
+      "android-arm64": {
+        "#import": []
+      },
+      "android-x64": {
+        "#import": []
+      },
+      "android-x86": {
+        "#import": []
+      }
+    }
+  }
+}
