@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using Android.Content.Res;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-//using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -170,19 +169,15 @@ namespace Helicopter
         {
             Global.DeviceManager = new StorageDeviceManager(this);
             ((Collection<IGameComponent>)(object)base.Components).Add((IGameComponent)Global.DeviceManager);
-            //GamerServicesComponent item = new GamerServicesComponent(this);
-            //((Collection<IGameComponent>)(object)base.Components).Add((IGameComponent)item);
             Global.DeviceManager.DeviceSelectorCanceled += DeviceSelectorCanceled;
             Global.DeviceManager.DeviceDisconnected += DeviceDisconnected;
             Global.DeviceManager.PromptForDevice();
-            //base.add_Exiting((EventHandler<EventArgs>)OnExit);
             base.Exiting += (EventHandler<EventArgs>)OnExit;
             this.graphics = new GraphicsDeviceManager(this);
             base.Content.RootDirectory = "Content";
-            this.graphics.PreferredBackBufferWidth = 1280;
-            this.graphics.PreferredBackBufferHeight = 720;
-            this.graphics.IsFullScreen = true;
-            this.graphics.SynchronizeWithVerticalRetrace = false;
+            Resolution.Init(ref graphics);
+            Resolution.SetVirtualResolution(1280, 720);
+            Resolution.SetResolution(1280, 720, false);
             base.IsFixedTimeStep = false;
             this.graphics.ApplyChanges();
         }
@@ -448,15 +443,16 @@ namespace Helicopter
                 this.total = 0f;
             }
             this.fps += 1f;
+            Resolution.BeginDraw();
             if (this.gameState == GameState.CAT_SELECT || this.gameState == GameState.PLAY || this.gameState == GameState.PAUSE)
             {
                 base.GraphicsDevice.SetRenderTarget(this.renderTarget);
-                this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+                this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
                 this.DrawStage(num, gameTime);
                 this.spriteBatch.End();
                 Camera.Draw(this.spriteBatch, this.renderTarget, this.graphics, base.GraphicsDevice);
             }
-            this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+            this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
             this.DrawMenu();
             this.spriteBatch.End();
         }
