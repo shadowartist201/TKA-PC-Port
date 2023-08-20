@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/obj
+/TKA_Android.csproj.user
+/.vs/TKA_Android/FileContentIndex
