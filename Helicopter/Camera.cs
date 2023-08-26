@@ -246,13 +246,13 @@ namespace Helicopter
 			graphicsDevice.Clear(Color.White);
 			if (Camera.effectIndex == -1)
 			{
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
 				spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
 				spriteBatch.End();
 			}
 			else
 			{
-				spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, Camera.effects[Camera.effectIndex]);
+				spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
 				spriteBatch.Draw(renderTarget, Vector2.Zero, Color.White * Camera.alpha);
 				spriteBatch.End();
 			}

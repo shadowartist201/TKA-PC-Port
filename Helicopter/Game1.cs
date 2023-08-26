@@ -434,6 +434,7 @@ namespace Helicopter
 
         protected override void Draw(GameTime gameTime)
         {
+            Resolution.BeginDraw();
             float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
             this.total += num;
             if (this.total >= 1f)
@@ -447,7 +448,7 @@ namespace Helicopter
             if (this.gameState == GameState.CAT_SELECT || this.gameState == GameState.PLAY || this.gameState == GameState.PAUSE)
             {
                 base.GraphicsDevice.SetRenderTarget(this.renderTarget);
-                this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
+                this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null);
                 this.DrawStage(num, gameTime);
                 this.spriteBatch.End();
                 Camera.Draw(this.spriteBatch, this.renderTarget, this.graphics, base.GraphicsDevice);

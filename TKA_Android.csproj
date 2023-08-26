@@ -25,10 +25,7 @@
   <ItemGroup>
     <AndroidAsset Update="Assets\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Update="Resources\**">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
