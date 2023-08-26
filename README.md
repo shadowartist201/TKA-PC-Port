@@ -4,7 +4,7 @@ A Windows port of Techno Kitten Adventure, originally developed by 21st Street G
 This is a project to bring TKA to PC using the Xbox 360 version and the MonoGame Framework as a base.
 
 ### Current status 
-Game launches with minor font issues. Camera effects have problems in Popaganda Pack. Supports gamepad and keyboard input.
+Camera effects have problems in Popaganda Pack. Supports gamepad and keyboard input.
 
 Controls as of 1/20/23:
 - S (start)
