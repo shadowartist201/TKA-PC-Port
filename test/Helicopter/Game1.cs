@@ -879,7 +879,29 @@ namespace Helicopter
 
 		private void LoadEventInfoMyRainbow()
 		{
-
+			this.eventTimes[0] = 0f;
+			this.eventTimes[1] = 11268f;
+			this.eventTimes[2] = 22537f;
+			this.eventTimes[3] = 28059f;
+			this.eventTimes[4] = 33806f;
+			this.eventTimes[5] = 39440f;
+			this.eventTimes[6] = 45075f;
+			this.eventTimes[7] = 55104f;
+			this.eventTimes[8] = 56456f;
+			this.eventTimes[9] = 79107f;
+			this.eventTimes[10] = 88291f;
+			this.eventTimes[11] = 90376f;
+			this.eventTimes[12] = 98200f;
+			this.eventTimes[13] = 101644f;
+			this.eventTimes[14] = 112913f;
+			this.eventTimes[15] = 118435f;
+			this.eventTimes[16] = 124182f;
+			this.eventTimes[17] = 127112f;
+			this.eventTimes[18] = 138494f;
+			this.eventTimes[19] = 171061f;
+			this.eventTimes[20] = 183456f;
+			this.eventTimes[21] = 240139f;
+			this.eventTimes[22] = 250000f;
 		}
 
 		private void UpdateBackground(float dt)
@@ -1096,10 +1118,20 @@ namespace Helicopter
 
 		private void DisplayInstructions()
 		{
-			this.spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-			this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
-			this.spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-			this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
+			if (SongManager.IsNyanPack)
+			{
+				this.spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
+				this.spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
+			}
+			else
+			{
+				this.spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
+				this.spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
+			}
 		}
 
 		private static int IsOdd(int i)
@@ -2046,7 +2078,87 @@ namespace Helicopter
 
 		public void UpdateChoreographyNyan(float dt, float elapsedMilliseconds)
 		{
-
+			Camera.Update(dt);
+			if (elapsedMilliseconds > this.eventTimes[this.currEvent])
+			{
+				switch (this.currEvent)
+				{
+					case 0:
+						break;
+					case 1:
+                        //TurnOnClappers();
+                        break;
+					case 2:
+						this.tunnel.Set(TunnelEffect.Nyan);
+                        break;
+					case 3:
+						break;
+					case 4:
+						break;
+					case 5:
+						break;
+					case 6:
+                        //TurnOffClappers();
+                        break;
+					case 7:
+						break;
+					case 8:
+						//TurnOnLetters();
+						Camera.DoRotating(0.1764706f*4.0f);
+						break;
+					case 9:
+                        //TurnOnClappers();
+						//TurnOffLetters();
+						Camera.StopRotating();
+                        break;
+					case 10:
+                        //TurnOffClappers();
+                        break;
+					case 11:
+						break;
+					case 12:
+						break;
+					case 13:
+						this.tunnel.Set(TunnelEffect.Disappear);
+						Camera.DoColoring(0.1764706f*4.0f);
+                        break;
+					case 14:
+						break;
+					case 15:
+						break;
+					case 16:
+						this.tunnel.Set(TunnelEffect.Normal);
+						Camera.Reset();
+						break;
+					case 17:
+                        this.tunnel.Set(TunnelEffect.Nyan);
+                        Camera.DoFlipping(0.1764706f*4.0f);
+                        break;
+					case 18:
+						break;
+					case 19:
+                        this.tunnel.Set(TunnelEffect.Normal);
+                        Camera.StopFlipping();
+                        break;
+					case 20:
+                        this.tunnel.Set(TunnelEffect.Disappear);
+						Camera.GoCrazy(0.1764706f*4.0f);
+                        //TurnOnLetters();
+						break;
+					case 21:
+                        this.ResetChoreography(1, alternating: false, meat: false);
+                        break;
+					case 22:
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(this.songManager.CurrentSong);
+                        break;
+				}
+				this.currEvent++;
+				if (this.currEvent == 19)
+				{
+					this.currEvent = 0;
+				}
+			}
 		}
 
 		private void DoStationaryLights()

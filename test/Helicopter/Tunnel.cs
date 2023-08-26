@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -18,7 +19,10 @@ namespace Helicopter
 
 		public float velocity = 476f;
 
-		private Vector2[] vertices;
+		private float colorRate_ = 360.0f / (0.1764706f * 2);
+        private float colorHue_ = 0f;
+
+        private Vector2[] vertices;
 
 		private Vector2[] vertices2;
 
@@ -332,7 +336,7 @@ namespace Helicopter
 		{
 			this.t2 += dt;
 			this.animTimer += dt;
-			if (this.animTimer > this.animTime)
+            if (this.animTimer > this.animTime)
 			{
 				this.animTimer = 0f;
 				this.animOffset = (this.animOffset + 1) % 18;
@@ -421,7 +425,21 @@ namespace Helicopter
 					this.t2 = 0f;
 				}
 				break;
-			}
+			case TunnelEffect.Nyan:
+                colorHue_ += colorRate_ * dt;
+				if (colorHue_ < 0f)
+				{
+					colorHue_ = 0f;
+					colorRate_ = 0f - colorRate_;
+				}
+				else if (colorHue_ > 360f)
+				{
+					colorHue_ = 360f;
+					colorRate_ = 0f - colorRate_;
+				}
+                Global.tunnelColor = Camera.GetColor(colorHue_);
+				break;
+            }
 			this.tunnelEffects_.UpdateTunnel(dt, this.vertices, this.width, this.height, this.velocity);
 			this.tunnelEffects_.UpdateSymbols(dt, this.vertices2, this.symbolLineInfo[this.symbolIndexes[0]], this.symbolLineInfo[this.symbolIndexes[1]], this.symbolLineInfo[this.symbolIndexes[2]], this.velocity);
 		}

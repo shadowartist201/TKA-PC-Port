@@ -3,3 +3,6 @@
 ################################################################################
 
 /.vs/test
+/.vs
+/test/Content/obj/Windows
+/test/Content/bin/Windows

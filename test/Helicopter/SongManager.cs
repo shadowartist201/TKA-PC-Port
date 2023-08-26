@@ -12,6 +12,8 @@ namespace Helicopter
 
 		public Song CurrentSong => this.song;
 
+		public static bool IsNyanPack = false;
+
 		public SongManager(Game1 game)
 		{
 			this.Content = new ContentManager((IServiceProvider)game.Services, "Content\\Music");
@@ -26,30 +28,37 @@ namespace Helicopter
 			{
 			case -1:
 				this.song = this.Content.Load<Song>("MenuSong");
-				break;
+				IsNyanPack = false;
+                break;
 			case 0:
 				this.song = this.Content.Load<Song>("SeaOfLove");
-				Global.BPM = 15f / 44f;
+                IsNyanPack = false;
+                Global.BPM = 15f / 44f;
 				break;
 			case 1:
 				this.song = this.Content.Load<Song>("LikeARainbow");
-				Global.BPM = 12f / 35f;
+                IsNyanPack = false;
+                Global.BPM = 12f / 35f;
 				break;
 			case 2:
 				this.song = this.Content.Load<Song>("YoureShining");
-				Global.BPM = 0.3529412f;
+                IsNyanPack = false;
+                Global.BPM = 0.3529412f;
 				break;
 			case 3:
 				this.song = this.Content.Load<Song>("TasteOfHeaven");
-				Global.BPM = 0.333333343f;
+                IsNyanPack = false;
+                Global.BPM = 0.333333343f;
 				break;
 			case 4:
 				this.song = this.Content.Load<Song>("IntergalacticalHigh");
-				Global.BPM = 0.3448276f;
+                IsNyanPack = false;
+                Global.BPM = 0.3448276f;
 				break;
 			case 5:
 				this.song = this.Content.Load<Song>("MyRainbow");
-				Global.BPM = 0.3f;
+				IsNyanPack = true;
+				Global.BPM = 0.3529412f;
 				break;
 			}
 		}

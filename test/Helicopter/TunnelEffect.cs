@@ -8,6 +8,7 @@ namespace Helicopter
 		BW,
 		BWDouble,
 		BWQuad,
-		Disappear
+		Disappear,
+		Nyan
 	}
 }

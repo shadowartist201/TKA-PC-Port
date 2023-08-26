@@ -400,7 +400,7 @@ namespace Helicopter
 			Camera.spriteEffect_ = SpriteEffects.None;
 		}
 
-		private static Color GetColor(float hue)
+		public static Color GetColor(float hue)
 		{
 			Vector3 one = Vector3.One;
 			if (hue < 0f)
