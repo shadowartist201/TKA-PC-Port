@@ -225,7 +225,7 @@ namespace Helicopter
 
 		public static void Draw(SpriteBatch spriteBatch, RenderTarget2D renderTarget, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
 		{
-			switch (Camera.effectIndex)
+            switch (Camera.effectIndex)
 			{
 			case 0:
 				//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
@@ -242,21 +242,21 @@ namespace Helicopter
 				//Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
 				break;
 			}
-			graphicsDevice.SetRenderTarget(null);
-			graphicsDevice.Clear(Color.White);
-			if (Camera.effectIndex == -1)
+            graphicsDevice.SetRenderTarget(null);
+            graphicsDevice.Clear(Color.White);
+            if (Camera.effectIndex == -1)
 			{
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
 				spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
 				spriteBatch.End();
 			}
 			else
 			{
-				spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, Camera.effects[Camera.effectIndex]);
+				spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
 				spriteBatch.Draw(renderTarget, Vector2.Zero, Color.White * Camera.alpha);
 				spriteBatch.End();
 			}
-		}
+        }
 
 		public static void Reset()
 		{

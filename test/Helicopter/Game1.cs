@@ -178,12 +178,10 @@ namespace Helicopter
 			base.Exiting += (EventHandler<EventArgs>)OnExit;
 			this.graphics = new GraphicsDeviceManager(this);
 			base.Content.RootDirectory = "Content";
-			this.graphics.PreferredBackBufferWidth = 1280;
-			this.graphics.PreferredBackBufferHeight = 720;
-			this.graphics.IsFullScreen = false;
-			this.graphics.SynchronizeWithVerticalRetrace = false;
+            Resolution.Init(ref graphics);
+            Resolution.SetVirtualResolution(1280, 720); //internal resolution
+            Resolution.SetResolution(1280, 720, false); //outer resolution
 			base.IsFixedTimeStep = false;
-			this.graphics.ApplyChanges();
 		}
 
 		private void DeviceDisconnected(object sender, StorageDeviceEventArgs e)
@@ -437,6 +435,7 @@ namespace Helicopter
 
 		protected override void Draw(GameTime gameTime)
 		{
+			Resolution.BeginDraw();
 			float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			this.total += num;
 			if (this.total >= 1f)
@@ -449,12 +448,12 @@ namespace Helicopter
 			if (this.gameState == GameState.CAT_SELECT || this.gameState == GameState.PLAY || this.gameState == GameState.PAUSE)
 			{
 				base.GraphicsDevice.SetRenderTarget(this.renderTarget);
-				this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+				this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null);
 				this.DrawStage(num, gameTime);
 				this.spriteBatch.End();
 				Camera.Draw(this.spriteBatch, this.renderTarget, this.graphics, base.GraphicsDevice);
 			}
-			this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied);
+			this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
 			this.DrawMenu();
 			this.spriteBatch.End();
 		}
