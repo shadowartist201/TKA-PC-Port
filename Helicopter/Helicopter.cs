@@ -55,7 +55,8 @@ namespace Helicopter
 		public void HandleInput(InputState input, Tunnel tunnel, ScoreSystem scoreSystem, float dt)
 		{
 			this.acceleration.Y = 2250f;
-			if (input.IsButtonDown(Buttons.A) && !this.IsDead())
+			Rectangle gameScreen = new(0, 0, 1280, 720);
+			if ((input.IsButtonDown(Buttons.A) || (gameScreen.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference) && Game1.touchLocations[0].State == Microsoft.Xna.Framework.Input.Touch.TouchLocationState.Moved)) && !this.IsDead())
 			{
 				if (!tunnel.IsOn())
 				{

@@ -19,6 +19,8 @@ namespace Helicopter
 
 		public static PlayerIndex? playerIndex = null;
 
+		public static Texture2D pauseButton;
+
 		public static Texture2D pixel;
 
 		public static Texture2D tunnelStar;

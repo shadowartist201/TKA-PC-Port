@@ -73,7 +73,13 @@ namespace Helicopter
 
 		public void Update(float dt, InputState currInput, ref GameState gameState)
 		{
-			this.arrowOffsetX += this.arrowOffsetRateX * dt;
+			Rectangle arrow_left = new(70, 280, 73 ,106);
+			Rectangle arrow_right = new(1210 ,280 ,73 ,106);
+			Rectangle stage1 = new(138 ,117, 328, 327);
+			Rectangle stage2 = new(474 ,117, 328 ,327);
+			Rectangle stage3 = new(806, 117, 328, 327);
+			
+            this.arrowOffsetX += this.arrowOffsetRateX * dt;
 			if (this.arrowOffsetX > 5f)
 			{
 				this.arrowOffsetX = 5f;
@@ -84,24 +90,100 @@ namespace Helicopter
 				this.arrowOffsetX = -5f;
 				this.arrowOffsetRateX = 0f - this.arrowOffsetRateX;
 			}
-			if (currInput.IsButtonPressed(Buttons.DPadRight) && base.index_ == 2 && this.startingIndex + 2 < this.maxIndex)
+			if (arrow_right.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+				base.index_ = 2;
+                this.startingIndex++;
+                for (int i = 0; i < 3; i++)
+                {
+                    base.menuItems_[i] = new MenuItem(Global.selectStageTex, this.itemRects[i + this.startingIndex], this.itemPositions[i]);
+                }
+            }
+			/*if (currInput.IsButtonPressed(Buttons.DPadRight) && base.index_ == 2 && this.startingIndex + 2 < this.maxIndex)
 			{
 				this.startingIndex++;
 				for (int i = 0; i < 3; i++)
 				{
 					base.menuItems_[i] = new MenuItem(Global.selectStageTex, this.itemRects[i + this.startingIndex], this.itemPositions[i]);
 				}
-			}
-			if (currInput.IsButtonPressed(Buttons.DPadLeft) && base.index_ == 0 && this.startingIndex > 0)
+			}*/
+			if (arrow_left.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+				base.index_ = 0;
+                this.startingIndex--;
+                for (int i = 0; i < 3; i++)
+                {
+                    base.menuItems_[i] = new MenuItem(Global.selectStageTex, this.itemRects[i + this.startingIndex], this.itemPositions[i]);
+                }
+
+            }
+			/*if (currInput.IsButtonPressed(Buttons.DPadLeft) && base.index_ == 0 && this.startingIndex > 0)
 			{
 				this.startingIndex--;
 				for (int i = 0; i < 3; i++)
 				{
 					base.menuItems_[i] = new MenuItem(Global.selectStageTex, this.itemRects[i + this.startingIndex], this.itemPositions[i]);
 				}
-			}
+			}*/
+			if (stage1.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+				switch(this.startingIndex)
+				{
+					case 0: this.currentLevel = 1; break;
+					case 1: this.currentLevel = 2; break;
+					case 2: this.currentLevel = 3; break;
+                }
+                this.ResetMenu();
+                Global.PlayCatSound();
+                if (this.lastGameState == GameState.MAIN_MENU)
+                {
+                    gameState = GameState.CAT_SELECT;
+                }
+                else
+                {
+                    gameState = GameState.PLAY;
+                }
+            }
+			else if (stage2.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+                switch (this.startingIndex)
+                {
+                    case 0: this.currentLevel = 2; break;
+                    case 1: this.currentLevel = 3; break;
+                    case 2: this.currentLevel = 4; break;
+                }
+                this.ResetMenu();
+                Global.PlayCatSound();
+                if (this.lastGameState == GameState.MAIN_MENU)
+                {
+                    gameState = GameState.CAT_SELECT;
+                }
+                else
+                {
+                    gameState = GameState.PLAY;
+                }
+            }
+			else if (stage3.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+                switch (this.startingIndex)
+                {
+                    case 0: this.currentLevel = 3; break;
+                    case 1: this.currentLevel = 4; break;
+                    case 2: this.currentLevel = 5; break;
+                }
+                this.ResetMenu();
+                Global.PlayCatSound();
+                if (this.lastGameState == GameState.MAIN_MENU)
+                {
+                    gameState = GameState.CAT_SELECT;
+                }
+                else
+                {
+                    gameState = GameState.PLAY;
+                }
+            }
 			base.Update(dt, currInput);
-			if (currInput.IsButtonPressed(Buttons.A) && (!Global.IsTrialMode || this.ActualIndex == 0 || this.ActualIndex == 1))
+			/*if (currInput.IsButtonPressed(Buttons.A) && (!Global.IsTrialMode || this.ActualIndex == 0 || this.ActualIndex == 1))
 			{
 				this.currentLevel = this.ActualIndex;
 				switch (this.currentLevel)
@@ -138,7 +220,7 @@ namespace Helicopter
 				Global.PlayCatSound();
 				this.ResetMenu();
 				gameState = this.lastGameState;
-			}
+			}*/
 		}
 
 		private void ResetMenu()

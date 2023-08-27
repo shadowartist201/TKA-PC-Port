@@ -577,6 +577,18 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/noise.png
 
+#begin Graphics/pause.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Graphics/pause.png
+
 #begin Graphics/rainbow2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -870,12 +882,6 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Music/MenuSong.wma
-
-#begin Music/MyRainbow.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/MyRainbow.wma
 
 #begin Music/MyRainbow.wma
 /importer:WmaImporter

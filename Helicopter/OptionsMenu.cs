@@ -28,7 +28,40 @@ namespace Helicopter
 		public void Update(float dt, InputState currInput, ref GameState gameState)
 		{
 			base.Update(dt, currInput);
-			if (currInput.IsButtonPressed(Buttons.A))
+			Rectangle options_music = new(128, 171, 190, 41);
+			Rectangle options_sfx = new(128, 234, 125, 41);
+			Rectangle options_vibration = new(128, 298, 412, 41);
+			Rectangle options_credits = new(458, 463, 364, 54);
+			Rectangle options_back = new(522, 560, 236, 54);
+			if (options_music.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+                Global.PlayCatSound();
+				if (this.musicOn) this.musicOn = false; else this.musicOn = true;
+                this.ChangeSettings();
+            }
+			else if (options_sfx.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+                Global.PlayCatSound();
+				if (this.sfxOn) this.sfxOn = false; else this.sfxOn = true;
+                this.ChangeSettings();
+            }
+			else if (options_vibration.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+                Global.PlayCatSound();
+				if (this.vibrationOn) this.vibrationOn = false; else this.vibrationOn = true;
+                this.ChangeSettings();
+            }
+			else if (options_credits.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+                Global.PlayCatSound();
+                gameState = GameState.CREDITS;
+            }
+			else if (options_back.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+			{
+                Global.PlayCatSound();
+                gameState = this.lastGameState;
+            }
+			/*if (currInput.IsButtonPressed(Buttons.A))
 			{
 				Global.PlayCatSound();
 				switch (base.index_)
@@ -101,7 +134,7 @@ namespace Helicopter
 				Global.PlayCatSound();
 				base.index_ = 0;
 				gameState = this.lastGameState;
-			}
+			}*/
 		}
 
 		private void ChangeSettings()

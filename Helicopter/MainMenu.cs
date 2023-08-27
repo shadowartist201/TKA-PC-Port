@@ -147,7 +147,31 @@ namespace Helicopter
 		{
 			this.UpdateBackground(dt);
 			base.Update(dt, currInput);
-			if (!currInput.IsButtonPressed(Buttons.A))
+			Rectangle playButton = new(123, 579, 169, 42);
+			Rectangle optionsButton = new(363, 579, 284, 42);
+			Rectangle statsButton = new(719, 579, 211, 42);
+			Rectangle exitButton = new(1002, 579, 156, 42);
+            if (playButton.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+            {
+                Global.PlayCatSound();
+                gameState = GameState.STAGE_SELECT;
+            }
+            else if (optionsButton.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+            {
+                Global.PlayCatSound();
+                gameState = GameState.OPTIONS;
+            }
+            else if (statsButton.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+            {
+                Global.PlayCatSound();
+                gameState = GameState.LEADERBOARDS;
+            }
+            else if (exitButton.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
+            {
+                Global.PlayCatSound();
+                gameState = GameState.EXIT;
+            }
+            /*else if (!currInput.IsButtonPressed(Buttons.A))
 			{
 				return;
 			}
@@ -182,7 +206,7 @@ namespace Helicopter
 			case 4:
 				gameState = GameState.EXIT;
 				break;
-			}
+			}*/
 		}
 
 		public void UpdateBackground(float dt)

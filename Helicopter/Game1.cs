@@ -1,10 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
 using Android.Content.Res;
+using Android.Util;
+using Android.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 
 namespace Helicopter
@@ -12,6 +15,11 @@ namespace Helicopter
     public class Game1 : Game
     {
         private RenderTarget2D renderTarget;
+
+        private TouchLocation[] del = {new TouchLocation(0, TouchLocationState.Released, Vector2.Zero)};
+        public static TouchCollection touchLocations;
+
+        public static Vector2 resolutionDifference;
 
         private bool splashScreen = true;
 
@@ -179,6 +187,7 @@ namespace Helicopter
             Resolution.SetVirtualResolution(1280, 720);
             Resolution.SetResolution(1280, 720, false);
             base.IsFixedTimeStep = false;
+            touchLocations = new TouchCollection(del);
             this.graphics.ApplyChanges();
         }
 
@@ -197,9 +206,11 @@ namespace Helicopter
             //MediaPlayer.IsVisualizationEnabled = true;
             this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
             //Global.audioEngine = new AudioEngine("Content/Music//newXactProject.xgs");
-           // Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music//Wave Bank.xwb");
+            //Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music//Wave Bank.xwb");
             //Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music//Sound Bank.xsb");
             Global.itemSelectedEffect = new ItemSelectedEffect();
+            Matrix matrices = Resolution.getTransformationMatrix();
+            resolutionDifference = new Vector2(1280f/((float)TouchPanel.DisplayWidth), 720f/((float)TouchPanel.DisplayHeight));
             base.Initialize();
         }
 
@@ -230,6 +241,11 @@ namespace Helicopter
 
         protected override void Update(GameTime gameTime)
         {
+            touchLocations = TouchPanel.GetState();
+            if (touchLocations.Count == 0)
+                touchLocations = new TouchCollection(del);
+            Rectangle startButton = new(373,533,534,135);
+            Rectangle pauseButtonRec = new(50, 50, 64, 64);
             float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
             //Global.IsTrialMode = Guide.IsTrialMode;
@@ -264,7 +280,7 @@ namespace Helicopter
                         this.mainMenu.UpdateBackground(num);
                         for (PlayerIndex playerIndex = PlayerIndex.One; playerIndex <= PlayerIndex.Four; playerIndex++)
                         {
-                            if (GamePad.GetState(playerIndex).IsButtonDown(Buttons.Start))
+                            if (GamePad.GetState(playerIndex).IsButtonDown(Buttons.Start) || startButton.Contains(touchLocations[0].Position * resolutionDifference))
                             {
                                 Global.PlayCatSound();
                                 Global.playerIndex = playerIndex;
@@ -273,7 +289,7 @@ namespace Helicopter
                                 break;
                             }
                         }
-                        if (this.currInput.IsButtonDown(Buttons.Start))
+                        if (this.currInput.IsButtonDown(Buttons.Start) || startButton.Contains(touchLocations[0].Position *resolutionDifference))
                         {
                             Global.PlayCatSound();
                             if (!Global.playerIndex.HasValue)
@@ -357,7 +373,7 @@ namespace Helicopter
                     this.UpdateBackground(num);
                     this.UpdateHelicopter(num);
                     this.UpdateForeground(num);
-                    if (this.currInput.IsButtonPressed(Buttons.Start))
+                    if (this.currInput.IsButtonPressed(Buttons.Start) || pauseButtonRec.Contains(touchLocations[0].Position * resolutionDifference))
                     {
                         MediaPlayer.Pause();
                         Global.SetVibrationPause();
@@ -524,6 +540,7 @@ namespace Helicopter
             Global.cats = base.Content.Load<Texture2D>("Graphics/cats");
             Global.AButtonTexture = base.Content.Load<Texture2D>("Graphics/xboxControllerButtonA");
             Global.YButtonTexture = base.Content.Load<Texture2D>("Graphics/xboxControllerButtonY");
+            Global.pauseButton = base.Content.Load<Texture2D>("Graphics/pause");
             for (int i = 0; i < Camera.effects.Length; i++)
             {
                 //Camera.effects[i] = base.Content.Load<Effect>("Effects/effect" + i);
@@ -1036,6 +1053,7 @@ namespace Helicopter
             this.DrawHelicopter();
             this.DrawForeground();
             this.scoreSystem.Draw(this.spriteBatch);
+            spriteBatch.Draw(Global.pauseButton, new Rectangle(50, 50, 64, 64), Color.White);
         }
 
         private void DrawBackground(GameTime gameTime)

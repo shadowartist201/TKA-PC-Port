@@ -26,6 +26,7 @@ namespace Helicopter
 
 		public void Update(float dt, InputState currInput, ref GameState gameState)
 		{
+			Rectangle credits_back = new(910, 600 ,259 ,60);
 			this.scrollProgress_ += this.scrollRate_ * dt;
 			float num = this.scrollProgress_ * 1510f;
 			if (num > 720f)
@@ -56,7 +57,7 @@ namespace Helicopter
 				this.scrollPosition_ = new Vector2(this.scrollPosition_.X, 720f - num);
 			}
 			base.Update(dt, currInput);
-			if (currInput.IsButtonPressed(Buttons.A) || currInput.IsButtonPressed(Buttons.B))
+			if (currInput.IsButtonPressed(Buttons.A) || currInput.IsButtonPressed(Buttons.B) || credits_back.Contains(Game1.touchLocations[0].Position * Game1.resolutionDifference))
 			{
 				Global.PlayCatSound();
 				gameState = GameState.OPTIONS;
