@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 //using Microsoft.Xna.Framework.GamerServices;
@@ -14,6 +15,8 @@ namespace Helicopter
 		private RenderTarget2D renderTarget;
 
 		private bool splashScreen = true;
+
+		private bool clappersOn, lettersOn;
 
 		private int splashScreenIndex = 0;
 
@@ -46,6 +49,8 @@ namespace Helicopter
 		private SpriteBatch spriteBatch;
 
 		private InputState currInput = new InputState();
+
+		public static Texture2D overlay;
 
 		private Helicopter helicopter;
 
@@ -104,6 +109,8 @@ namespace Helicopter
 		private float[] eventTimes = new float[100];
 
 		private bool justStarted = false;
+
+		private bool rainbowOverlayEnabled = false;
 
 		private float frameTime;
 
@@ -525,10 +532,12 @@ namespace Helicopter
 			Global.cats = base.Content.Load<Texture2D>("Graphics//cats");
 			Global.AButtonTexture = base.Content.Load<Texture2D>("Graphics//xboxControllerButtonA");
 			Global.YButtonTexture = base.Content.Load<Texture2D>("Graphics//xboxControllerButtonY");
-			for (int i = 0; i < Camera.effects.Length; i++)
+			for (int i = 0; i < Camera.effects.Length-1; i++)
 			{
 				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);
 			}
+			Camera.effects[5] = base.Content.Load<Effect>("Negative");
+			overlay = base.Content.Load<Texture2D>("rainbowOverlay");
 			this.scoreSystem = new ScoreSystem();
 			this.songManager = new SongManager(this);
 		}
@@ -1113,6 +1122,7 @@ namespace Helicopter
 			this.hand.Draw(this.spriteBatch);
 			this.fireworks.Draw(this.spriteBatch);
 			this.flashManager.Draw(this.spriteBatch);
+			this.RainbowOverlay(this.spriteBatch);
 		}
 
 		private void DisplayInstructions()
@@ -1361,7 +1371,7 @@ namespace Helicopter
 				{
 				case 0:
 					this.tunnel.Set(TunnelEffect.Normal);
-					this.tunnel.SetColor(Color.Black, Color.Red, Color.Blue);
+					this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
 					break;
 				case 1:
 					this.hand.TurnOn(directedDownward_: false);
@@ -1381,7 +1391,7 @@ namespace Helicopter
 					break;
 				case 6:
 					this.tunnel.Set(TunnelEffect.Normal);
-					this.tunnel.SetColor(Color.Black, Color.Red, Color.Blue);
+					this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
 					this.scoreSystem.TurnOffBass();
 					this.butterflyEffect.TurnOn1();
 					break;
@@ -1434,7 +1444,7 @@ namespace Helicopter
 					break;
 				case 23:
 					this.tunnel.Set(TunnelEffect.Normal);
-					this.tunnel.SetColor(Color.Black, Color.Red, Color.Blue);
+					this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
 					break;
 				case 24:
 					this.hand.TurnOn(directedDownward_: false);
@@ -1521,7 +1531,7 @@ namespace Helicopter
 					break;
 				case 44:
 					this.tunnel.Set(TunnelEffect.Normal);
-					this.tunnel.SetColor(Color.Black, Color.Red, Color.Blue);
+					this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
 					this.flashManager.Reset();
 					break;
 				case 45:
@@ -2078,14 +2088,17 @@ namespace Helicopter
 		public void UpdateChoreographyNyan(float dt, float elapsedMilliseconds)
 		{
 			Camera.Update(dt);
+			Debug.WriteLine(MediaPlayer.PlayPosition);
 			if (elapsedMilliseconds > this.eventTimes[this.currEvent])
 			{
 				switch (this.currEvent)
 				{
 					case 0:
-						break;
+                        //MediaPlayer.Play(this.songManager.CurrentSong);
+                        break;
 					case 1:
-                        //TurnOnClappers();
+						//TurnOnClappers();
+						clappersOn = true;
                         break;
 					case 2:
 						this.tunnel.Set(TunnelEffect.Nyan);
@@ -2097,21 +2110,26 @@ namespace Helicopter
 					case 5:
 						break;
 					case 6:
-                        //TurnOffClappers();
+						//TurnOffClappers();
+						clappersOn = false;
                         break;
 					case 7:
 						break;
 					case 8:
 						//TurnOnLetters();
-						Camera.DoRotating(0.1764706f*4.0f);
+						lettersOn = true;
+						Camera.DoRotatingNyan(Global.BPM * 8f);
 						break;
 					case 9:
-                        //TurnOnClappers();
+						//TurnOnClappers();
+						clappersOn = true;
 						//TurnOffLetters();
+						lettersOn = false;
 						Camera.StopRotating();
                         break;
 					case 10:
-                        //TurnOffClappers();
+						//TurnOffClappers();
+						clappersOn = false;
                         break;
 					case 11:
 						break;
@@ -2119,7 +2137,8 @@ namespace Helicopter
 						break;
 					case 13:
 						this.tunnel.Set(TunnelEffect.Disappear);
-						Camera.DoColoring(0.1764706f*4.0f);
+						Camera.SetEffect(6);
+						rainbowOverlayEnabled = true;
                         break;
 					case 14:
 						break;
@@ -2127,11 +2146,12 @@ namespace Helicopter
 						break;
 					case 16:
 						this.tunnel.Set(TunnelEffect.Normal);
-						Camera.Reset();
+						Camera.SetEffect(-1);
+						rainbowOverlayEnabled = false;
 						break;
 					case 17:
                         this.tunnel.Set(TunnelEffect.Nyan);
-                        Camera.DoFlipping(0.1764706f*4.0f);
+                        Camera.DoFlippingNyan(Global.BPM * 8f);
                         break;
 					case 18:
 						break;
@@ -2141,11 +2161,20 @@ namespace Helicopter
                         break;
 					case 20:
                         this.tunnel.Set(TunnelEffect.Disappear);
-						Camera.GoCrazy(0.1764706f*4.0f);
-                        //TurnOnLetters();
+                        Camera.DoRotatingNyan(Global.BPM * 8f);
+                        Camera.DoFlippingNyan(Global.BPM * 8f);
+                        Camera.SetEffect(6);
+						rainbowOverlayEnabled = true;
+						//TurnOnLetters();
+						lettersOn = true;
 						break;
 					case 21:
+						lettersOn = false;
                         this.ResetChoreography(1, alternating: false, meat: false);
+						Camera.SetEffect(-1);
+						Camera.StopFlipping();
+						Camera.StopRotating();
+						rainbowOverlayEnabled = false;
                         break;
 					case 22:
                         MediaPlayer.Stop();
@@ -2157,6 +2186,22 @@ namespace Helicopter
 				{
 					this.currEvent = 0;
 				}
+			}
+		}
+
+		private void RainbowOverlay(SpriteBatch spriteBatch)
+		{
+			if (rainbowOverlayEnabled)
+			{
+                spriteBatch.Draw(overlay, new Rectangle(0, 0, 1280, 720), new Rectangle(0,0,1,768), new Color(255,255,255,0.5f), 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            }
+			if (clappersOn)
+			{
+				spriteBatch.DrawString(Global.spriteFont, "Clappers on", new Vector2(10, 70), Color.White);
+			}
+			if (lettersOn)
+			{
+				spriteBatch.DrawString(Global.spriteFont, "Letters on", new Vector2(10, 90), Color.White);
 			}
 		}
 

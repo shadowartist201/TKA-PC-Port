@@ -853,9 +853,21 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/xboxControllerButtonY.png
 
-#begin Music/MyRainbow.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/MyRainbow.wma
+#begin Negative.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Negative.fx
+
+#begin rainbowOverlay.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:rainbowOverlay.png
 

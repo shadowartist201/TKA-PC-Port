@@ -17,6 +17,8 @@ namespace Helicopter
 
 		public static PlayerIndex? playerIndex = null;
 
+		public static Effect negative;
+
 		public static Texture2D pixel;
 
 		public static Texture2D tunnelStar;
@@ -135,7 +137,7 @@ namespace Helicopter
 
 		public static SoundBank soundBank;
 
-		public static Color tunnelColor = Color.Black;
+		public static Color tunnelColor = Color.White;
 
 		public static Color[] rainbowColors = new Color[6]
 		{

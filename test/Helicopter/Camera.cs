@@ -1,6 +1,8 @@
 using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.DirectWrite;
 
 namespace Helicopter
 {
@@ -30,7 +32,7 @@ namespace Helicopter
 
 		private static Vector2 effectOffsetMax;
 
-		public static Effect[] effects = new Effect[5];
+		public static Effect[] effects = new Effect[6];
 
 		private static bool flipping_;
 
@@ -61,8 +63,9 @@ namespace Helicopter
 		private static float movingBound_ = 10f;
 
 		private static bool rotating_ = false;
+        private static bool rotatingNyan_ = false;
 
-		private static float rotationRate_ = 0f;
+        private static float rotationRate_ = 0f;
 
 		private static float rotationMin_ = -(float)Math.PI / 60f;
 
@@ -159,19 +162,42 @@ namespace Helicopter
 			}
 			if (Camera.rotating_)
 			{
-				Camera.rotation_ += Camera.rotationRate_ * dt;
-				if (Camera.rotation_ > Camera.rotationMax_)
-				{
-					Camera.rotation_ = Camera.rotationMax_;
-					Camera.rotationRate_ = 0f - Camera.rotationRate_;
-				}
-				if (Camera.rotation_ < Camera.rotationMin_)
-				{
-					Camera.rotation_ = Camera.rotationMin_;
-					Camera.rotationRate_ = 0f - Camera.rotationRate_;
-				}
+                Camera.rotation_ += Camera.rotationRate_ * dt;
+                if (Camera.rotation_ > Camera.rotationMax_)
+                {
+                    Camera.rotation_ = Camera.rotationMax_;
+                    Camera.rotationRate_ = 0f - Camera.rotationRate_;
+                }
+                if (Camera.rotation_ < Camera.rotationMin_)
+                {
+                    Camera.rotation_ = Camera.rotationMin_;
+                    Camera.rotationRate_ = 0f - Camera.rotationRate_;
+                }
 			}
-			if (Camera.scaling_)
+            if (Camera.rotatingNyan_)
+            {
+				Debug.WriteLine(timeBetweenTimer + "/" + timeBetweenShakes + ", " + Camera.rotation_);
+				if (Camera.timeBetweenTimer <= Camera.timeBetweenShakes)
+				{
+                    Camera.timeBetweenTimer += (timeBetweenShakes / 155.0f);
+                    if (Camera.rotation_ >= Camera.rotationMax_)
+					{
+						Debug.WriteLine("reset");
+					}
+					else
+					{
+						Camera.rotation_ += Camera.rotationRate_/2.0f;
+						if (Camera.rotation_ > Camera.rotationMax_)
+							Camera.rotation_ = rotationMax_;
+                    }
+				}
+				else
+				{
+					Camera.timeBetweenTimer = 0;
+					Camera.rotation_ = 0;
+				}
+            }
+            if (Camera.scaling_)
 			{
 				Camera.scale_ += Camera.scaleRate_ * dt;
 				if (Camera.scale_ > Camera.scaleMax_)
@@ -208,54 +234,70 @@ namespace Helicopter
 			if (Camera.flipTimer_ > Camera.flipDuration_)
 			{
 				Camera.flipTimer_ -= Camera.flipDuration_;
-				switch (Camera.spriteEffect_)
+				if (SongManager.IsNyanPack)
 				{
-				case SpriteEffects.None:
-					Camera.spriteEffect_ = SpriteEffects.FlipHorizontally;
-					break;
-				case SpriteEffects.FlipHorizontally:
-					Camera.spriteEffect_ = SpriteEffects.None;
-					break;
-				case SpriteEffects.FlipVertically:
-					Camera.spriteEffect_ = SpriteEffects.None;
-					break;
+					switch (spriteEffect_)
+					{
+						case SpriteEffects.None:
+							spriteEffect_ = SpriteEffects.FlipVertically;
+							break;
+						case SpriteEffects.FlipVertically:
+							spriteEffect_ = SpriteEffects.None;
+							break;
+					}
+				}
+				else
+				{
+					switch (Camera.spriteEffect_)
+					{
+						case SpriteEffects.None:
+							Camera.spriteEffect_ = SpriteEffects.FlipHorizontally;
+							break;
+						case SpriteEffects.FlipHorizontally:
+							Camera.spriteEffect_ = SpriteEffects.None;
+							break;
+						case SpriteEffects.FlipVertically:
+							Camera.spriteEffect_ = SpriteEffects.None;
+							break;
+					}
 				}
 			}
 		}
 
 		public static void Draw(SpriteBatch spriteBatch, RenderTarget2D renderTarget, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
 		{
-            switch (Camera.effectIndex)
+			switch (Camera.effectIndex)
 			{
-			case 0:
-				//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
-				break;
-			case 2:
-				//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
-				break;
-			case 3:
-				//Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
-				//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-				break;
-			case 4:
-				//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-				//Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
-				break;
+				case 0:
+					//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
+					break;
+				case 2:
+					//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
+					break;
+				case 3:
+					//Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
+					//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+					break;
+				case 4:
+					//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+					//Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
+					break;
 			}
             graphicsDevice.SetRenderTarget(null);
-            graphicsDevice.Clear(Color.White);
             if (Camera.effectIndex == -1)
 			{
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
+                graphicsDevice.Clear(Color.White);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
 				spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
 				spriteBatch.End();
 			}
-			else
+			else if (Camera.effectIndex == 5)
 			{
-				spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
-				spriteBatch.Draw(renderTarget, Vector2.Zero, Color.White * Camera.alpha);
-				spriteBatch.End();
-			}
+				graphicsDevice.Clear(Color.Black);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[5], Resolution.getTransformationMatrix());
+                spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
+                spriteBatch.End();
+            }
         }
 
 		public static void Reset()
@@ -285,49 +327,53 @@ namespace Helicopter
 			Camera.scale_ = 1f;
 			switch (newEffectIndex)
 			{
-			case -1:
-				Camera.effectIndex = -1;
-				break;
-			case 0:
-				Camera.alpha = 0f;
-				Camera.alphaMin = 0f;
-				Camera.alphaMax = 0.15f;
-				Camera.alphaRate = 1.65517235f;
-				Camera.thetaRate = 0f;
-				Camera.effectIndex = 0;
-				break;
-			case 1:
-				Camera.effectIndex = 1;
-				break;
-			case 2:
-				Camera.effectIndex = 4;
-				Camera.strength = 0.01f;
-				Camera.alpha = 1f;
-				Camera.alphaMin = 1f;
-				Camera.alphaMax = 1f;
-				Camera.alphaRate = 0f;
-				break;
-			case 3:
-				Camera.alpha = 0.6f;
-				Camera.alphaMin = 0.6f;
-				Camera.alphaMax = 0.6f;
-				Camera.alphaRate = 0f;
-				Camera.thetaRate = 18.2212372f;
-				Camera.effectIndex = 0;
-				break;
-			case 4:
-				Camera.effectIndex = 3;
-				Camera.alpha = 0.5f;
-				Camera.alphaMin = 0.5f;
-				Camera.alphaMax = 0.5f;
-				Camera.alphaRate = 0f;
-				break;
-			case 5:
-				Camera.effectIndex = 2;
-				Camera.effectOffset = Vector2.Zero;
-				Camera.effectOffsetMax = Vector2.One;
-				Camera.effectOffsetRate = new Vector2(0.3f, 0f);
-				break;
+				case -1:
+					Camera.effectIndex = -1;
+					break;
+				case 0:
+					Camera.alpha = 0f;
+					Camera.alphaMin = 0f;
+					Camera.alphaMax = 0.15f;
+					Camera.alphaRate = 1.65517235f;
+					Camera.thetaRate = 0f;
+					Camera.effectIndex = 0;
+					break;
+				case 1:
+					Camera.effectIndex = 1;
+					break;
+				case 2:
+					Camera.effectIndex = 4;
+					Camera.strength = 0.01f;
+					Camera.alpha = 1f;
+					Camera.alphaMin = 1f;
+					Camera.alphaMax = 1f;
+					Camera.alphaRate = 0f;
+					break;
+				case 3:
+					Camera.alpha = 0.6f;
+					Camera.alphaMin = 0.6f;
+					Camera.alphaMax = 0.6f;
+					Camera.alphaRate = 0f;
+					Camera.thetaRate = 18.2212372f;
+					Camera.effectIndex = 0;
+					break;
+				case 4:
+					Camera.effectIndex = 3;
+					Camera.alpha = 0.5f;
+					Camera.alphaMin = 0.5f;
+					Camera.alphaMax = 0.5f;
+					Camera.alphaRate = 0f;
+					break;
+				case 5:
+					Camera.effectIndex = 2;
+					Camera.effectOffset = Vector2.Zero;
+					Camera.effectOffsetMax = Vector2.One;
+					Camera.effectOffsetRate = new Vector2(0.3f, 0f);
+					break;
+				case 6:
+					Camera.alpha = 0.5f;
+                    Camera.effectIndex = 5;
+					break;
 			}
 		}
 
@@ -375,11 +421,25 @@ namespace Helicopter
 			Camera.scale_ = 1.1f;
 		}
 
-		public static void StopRotating()
+        public static void DoRotatingNyan(float duration)
+        {
+            Camera.rotatingNyan_ = true;
+			Camera.rotationRate_ = ((float)Math.PI * 2.0f) / 8.0f;
+            Camera.rotationMax_ = (float)Math.PI * 2.0f;
+			Camera.rotationMin_ = 0f;
+            Camera.scale_ = 1f;
+			Camera.timeBetweenShakes = duration;
+
+        }
+
+        public static void StopRotating()
 		{
 			Camera.rotating_ = false;
+			Camera.rotatingNyan_ = false;
 			Camera.rotation_ = 0f;
-		}
+            Camera.rotationMax_ = (float)Math.PI/60f;
+            Camera.rotationMin_ = -(float)Math.PI / 60f;
+        }
 
 		public static void DoColoring(float duration)
 		{
@@ -392,6 +452,14 @@ namespace Helicopter
 			Camera.flipping_ = true;
 			Camera.flipDuration_ = duration * 8f;
 			Camera.flipTimer_ = 0f;
+		}
+
+		public static void DoFlippingNyan(float duration)
+		{
+			Camera.flipping_ = true;
+			Camera.flipDuration_ = duration;
+			Camera.flipTimer_ = 0f;
+			Camera.spriteEffect_ = SpriteEffects.FlipVertically;
 		}
 
 		public static void StopFlipping()
