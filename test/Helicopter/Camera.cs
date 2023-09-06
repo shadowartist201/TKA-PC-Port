@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.DirectWrite;
+using Microsoft.Xna.Framework.Media;
 
 namespace Helicopter
 {
@@ -271,6 +271,11 @@ namespace Helicopter
 				case 0:
 					//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
 					break;
+				case 1:
+                    //Camera.effects[5].Parameters["s0"].SetValue((Texture2D)renderTarget);
+                    Camera.effects[5].Parameters["timeInSeconds"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
+                    //Camera.effects[5].Parameters["res"].SetValue(new Vector2(renderTarget.Width, renderTarget.Height));
+                    break;
 				case 2:
 					//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
 					break;
@@ -291,6 +296,13 @@ namespace Helicopter
 				spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
 				spriteBatch.End();
 			}
+			else if (Camera.effectIndex == 1)
+			{
+                graphicsDevice.Clear(Color.White);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[5], Resolution.getTransformationMatrix());
+                spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
+                spriteBatch.End();
+            }
 			else if (Camera.effectIndex == 5)
 			{
 				graphicsDevice.Clear(Color.Black);

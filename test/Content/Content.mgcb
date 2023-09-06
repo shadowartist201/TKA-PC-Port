@@ -871,3 +871,9 @@
 /processorParam:TextureFormat=Color
 /build:rainbowOverlay.png
 
+#begin shadertest.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:shadertest.fx
+
