@@ -536,7 +536,8 @@ namespace Helicopter
 			{
 				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);
 			}
-			Camera.effects[5] = base.Content.Load<Effect>("shadertest");
+            Camera.effects[5] = base.Content.Load<Effect>("circles");
+            //Camera.effects[5] = base.Content.Load<Effect>("outline");
             overlay = base.Content.Load<Texture2D>("rainbowOverlay");
 			this.scoreSystem = new ScoreSystem();
 			this.songManager = new SongManager(this);

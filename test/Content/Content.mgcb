@@ -13,6 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin circles.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:circles.fx
+
 #begin Graphics/Background/cloudBGXbox.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -859,6 +865,12 @@
 /processorParam:DebugMode=Auto
 /build:Negative.fx
 
+#begin outline.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:outline.fx
+
 #begin rainbowOverlay.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -871,9 +883,9 @@
 /processorParam:TextureFormat=Color
 /build:rainbowOverlay.png
 
-#begin shadertest.fx
+#begin wave.fx
 /importer:EffectImporter
 /processor:EffectProcessor
 /processorParam:DebugMode=Auto
-/build:shadertest.fx
+/build:wave.fx
 
