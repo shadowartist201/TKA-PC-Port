@@ -536,8 +536,9 @@ namespace Helicopter
 			{
 				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);
 			}
-            Camera.effects[5] = base.Content.Load<Effect>("circles");
-            //Camera.effects[5] = base.Content.Load<Effect>("outline");
+            Camera.effects[3] = base.Content.Load<Effect>("wave");
+            Camera.effects[2] = base.Content.Load<Effect>("circles");
+            Camera.effects[1] = base.Content.Load<Effect>("outline");
             overlay = base.Content.Load<Texture2D>("rainbowOverlay");
 			this.scoreSystem = new ScoreSystem();
 			this.songManager = new SongManager(this);
@@ -2015,11 +2016,11 @@ namespace Helicopter
 				{
 				case 0:
 					this.explosionManager.TurnOn();
-					Camera.SetEffect(1);
+					Camera.SetEffect(0);
 					break;
 				case 4:
 					this.explosionManager.TurnOff();
-					//Camera.SetEffect(-1);
+					Camera.SetEffect(-1);
 					this.dancerManager.TurnOn(0);
 					break;
 				case 5:

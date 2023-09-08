@@ -18,8 +18,7 @@ sampler SpriteTextureSampler = sampler_state
 float4 MainPS(float4 pos : SV_POSITION, float4 color0 : COLOR0, float2 texCoord : TEXCOORD0) : COLOR
 {
     float2 iResolution = float2(1280, 720);
-    float2 uv = texCoord;;
-    //float iTime = timeInSeconds / 1000.0;
+    float2 uv = texCoord;
 	
     uv.y += sin(uv.x * 8.0 + timeInSeconds * 15.0) / 30.0;
 	

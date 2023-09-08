@@ -17,27 +17,24 @@ sampler SpriteTextureSampler = sampler_state
 float4 MainPS(float4 pos : SV_POSITION, float4 color0 : COLOR0, float2 texCoord : TEXCOORD0) : COLOR
 {
     float2 iResolution = float2(1280, 720);
-    float2 uv = texCoord;
+    float2 fragCoord = texCoord * iResolution;
+    float2 d = iResolution.xy;
     
-    float3 TL = SpriteTexture.Sample(SpriteTextureSampler, uv + float2(-1, 1) / iResolution.xy).rgb;
-    float3 TM = SpriteTexture.Sample(SpriteTextureSampler, uv + float2(0, 1) / iResolution.xy).rgb;
-    float3 TR = SpriteTexture.Sample(SpriteTextureSampler, uv + float2(1, 1) / iResolution.xy).rgb;
+    float filterAmplification = 3.5;
     
-    float3 ML = SpriteTexture.Sample(SpriteTextureSampler, uv + float2(-1, 0) / iResolution.xy).rgb;
-    float3 MR = SpriteTexture.Sample(SpriteTextureSampler, uv + float2(1, 0) / iResolution.xy).rgb;
+    float2 uv = fragCoord / iResolution.xy;
+
+    float2 uv_e = floor(uv * d) / d;
+
+    float3 col0 = SpriteTexture.Sample(SpriteTextureSampler, uv).rgb;
     
-    float3 BL = SpriteTexture.Sample(SpriteTextureSampler, uv + float2(-1, -1) / iResolution.xy).rgb;
-    float3 BM = SpriteTexture.Sample(SpriteTextureSampler, uv + float2(0, -1) / iResolution.xy).rgb;
-    float3 BR = SpriteTexture.Sample(SpriteTextureSampler, uv + float2(1, -1) / iResolution.xy).rgb;
-                         
-    float3 GradX = -TL + TR - 2.0 * ML + 2.0 * MR - BL + BR;
-    float3 GradY = TL + 2.0 * TM + TR - BL - 2.0 * BM - BR;
+    float3 col1 = SpriteTexture.Sample(SpriteTextureSampler, uv_e).rgb;
+    float temp = max(0.0, 1.0 - length(col1 - col0) * filterAmplification);
+
+    float3 edge_outline = float3(temp,temp,temp);
     
-    float3 color4;
-    color4.r = length(float2(GradX.r, GradY.r));
-    color4.g = length(float2(GradX.g, GradY.g));
-    color4.b = length(float2(GradX.b, GradY.b));
-    return float4(color4, 1.0);
+    return float4(1.0 - edge_outline, 1.0) * SpriteTexture.Sample(SpriteTextureSampler, uv);
+    
 }
 
 technique SpriteDrawing

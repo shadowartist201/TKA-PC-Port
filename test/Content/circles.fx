@@ -44,7 +44,7 @@ float4 MainPS(float4 pos : SV_POSITION, float4 color0 : COLOR0, float2 texCoord 
 	
     st = movingTiles(st, 18.0, 3.5, iTime);
 	
-    float3 color = float3(circle(st, 0.45), circle(st, 0.45), circle(st, 0.45));
+    float3 color = float3(circle(st, 0.5), circle(st, 0.5), circle(st, 0.5));
     float4 color1 = SpriteTexture.Sample(SpriteTextureSampler, texCoord); //upside down box
     float4 color2 = 1.0 - color1; //white upside down box
     color2.a = color2.a + 1.0f;

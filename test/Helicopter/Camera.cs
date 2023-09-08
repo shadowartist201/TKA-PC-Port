@@ -273,40 +273,34 @@ namespace Helicopter
 					break;
 				case 1:
                     //Camera.effects[5].Parameters["s0"].SetValue((Texture2D)renderTarget);
-                    Camera.effects[5].Parameters["timeInSeconds"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
                     //Camera.effects[5].Parameters["res"].SetValue(new Vector2(renderTarget.Width, renderTarget.Height));
                     break;
 				case 2:
-					//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
-					break;
+                    //Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
+                    Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
+                    break;
 				case 3:
-					//Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
-					//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-					break;
+                    //Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
+                    //Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+                    Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
+                    break;
 				case 4:
-					//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-					//Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
-					break;
+                    //Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+                    //Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
+                    break;
 			}
             graphicsDevice.SetRenderTarget(null);
-            if (Camera.effectIndex == -1)
+			if (Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3)
 			{
-                graphicsDevice.Clear(Color.White);
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
-				spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
-				spriteBatch.End();
-			}
-			else if (Camera.effectIndex == 1)
-			{
-                graphicsDevice.Clear(Color.White);
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[5], Resolution.getTransformationMatrix());
+				graphicsDevice.Clear(Color.White);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
                 spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
                 spriteBatch.End();
             }
-			else if (Camera.effectIndex == 5)
+			else
 			{
-				graphicsDevice.Clear(Color.Black);
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[5], Resolution.getTransformationMatrix());
+                graphicsDevice.Clear(Color.White);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
                 spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
                 spriteBatch.End();
             }
