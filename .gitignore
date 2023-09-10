@@ -7,3 +7,5 @@ test/Content/obj/
 test/Content/bin/
 test/obj/
 test/bin/
+/test/Properties/PublishProfiles
+/test/test.csproj.user

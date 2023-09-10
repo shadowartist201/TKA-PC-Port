@@ -46,7 +46,7 @@ namespace Helicopter
 
 		private GraphicsDeviceManager graphics;
 
-		private SpriteBatch spriteBatch;
+		public static SpriteBatch spriteBatch;
 
 		private InputState currInput = new InputState();
 
@@ -185,9 +185,11 @@ namespace Helicopter
 			base.Exiting += (EventHandler<EventArgs>)OnExit;
 			this.graphics = new GraphicsDeviceManager(this);
 			base.Content.RootDirectory = "Content";
+            Global.fullscreenOn = false;
+            Global.resolution = new Vector2(1280, 720);
             Resolution.Init(ref graphics);
             Resolution.SetVirtualResolution(1280, 720); //internal resolution
-            Resolution.SetResolution(1280, 720, false); //outer resolution
+            Resolution.SetResolution((int)Global.resolution.X, (int)Global.resolution.Y, Global.fullscreenOn); //outer resolution
 			base.IsFixedTimeStep = false;
 		}
 
@@ -214,7 +216,7 @@ namespace Helicopter
 
 		protected override void LoadContent()
 		{
-			this.spriteBatch = new SpriteBatch(base.GraphicsDevice);
+			spriteBatch = new SpriteBatch(base.GraphicsDevice);
 			this.LoadAssets();
 			this.LoadMenus();
 			this.LoadBackground();
@@ -238,7 +240,7 @@ namespace Helicopter
 
 		protected override void Update(GameTime gameTime)
 		{
-			float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
 			//Global.IsTrialMode = Guide.IsTrialMode;
 			this.currInput.Update();
@@ -442,7 +444,7 @@ namespace Helicopter
 
 		protected override void Draw(GameTime gameTime)
 		{
-			Resolution.BeginDraw();
+            Resolution.BeginDraw();
 			float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			this.total += num;
 			if (this.total >= 1f)
@@ -455,14 +457,14 @@ namespace Helicopter
 			if (this.gameState == GameState.CAT_SELECT || this.gameState == GameState.PLAY || this.gameState == GameState.PAUSE)
 			{
 				base.GraphicsDevice.SetRenderTarget(this.renderTarget);
-				this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null);
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null);
 				this.DrawStage(num, gameTime);
-				this.spriteBatch.End();
-				Camera.Draw(this.spriteBatch, this.renderTarget, this.graphics, base.GraphicsDevice);
+				spriteBatch.End();
+				Camera.Draw(spriteBatch, this.renderTarget, this.graphics, base.GraphicsDevice);
 			}
-			this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
 			this.DrawMenu();
-			this.spriteBatch.End();
+			spriteBatch.End();
 		}
 
 		private void LoadAssets()
@@ -532,7 +534,14 @@ namespace Helicopter
 			Global.cats = base.Content.Load<Texture2D>("Graphics//cats");
 			Global.AButtonTexture = base.Content.Load<Texture2D>("Graphics//xboxControllerButtonA");
 			Global.YButtonTexture = base.Content.Load<Texture2D>("Graphics//xboxControllerButtonY");
-			for (int i = 0; i < Camera.effects.Length-1; i++)
+            Global.option_apply = base.Content.Load<Texture2D>("Graphics//Menu//Options//apply");
+            Global.option_display = base.Content.Load<Texture2D>("Graphics//Menu//Options//display");
+            Global.option_fullOn = base.Content.Load<Texture2D>("Graphics//Menu//Options//fullscreen_on");
+            Global.option_fullOff = base.Content.Load<Texture2D>("Graphics//Menu//Options//fullscreen_off");
+            Global.option_res1080 = base.Content.Load<Texture2D>("Graphics//Menu//Options//res_1080");
+            Global.option_res720 = base.Content.Load<Texture2D>("Graphics//Menu//Options//res_720");
+            Global.option_res480 = base.Content.Load<Texture2D>("Graphics//Menu//Options//res_480");
+            for (int i = 0; i < Camera.effects.Length-1; i++)
 			{
 				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);
 			}
@@ -1016,27 +1025,27 @@ namespace Helicopter
 				{
 					if (this.splashScreenIndex == 0)
 					{
-						this.spriteBatch.Draw(Global.splashTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
+						spriteBatch.Draw(Global.splashTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
 					}
 					else
 					{
-						this.spriteBatch.Draw(Global.splashTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 720, 1280, 720), Color.White);
+						spriteBatch.Draw(Global.splashTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 720, 1280, 720), Color.White);
 					}
 				}
 				else
 				{
-					this.mainMenu.DrawBackground(this.spriteBatch);
-					this.openingMenu.Draw(this.spriteBatch);
+					this.mainMenu.DrawBackground(spriteBatch);
+					this.openingMenu.Draw(spriteBatch);
 				}
 				break;
 			case GameState.MAIN_MENU:
-				this.mainMenu.Draw(this.spriteBatch);
+				this.mainMenu.Draw(spriteBatch);
 				break;
 			case GameState.STAGE_SELECT:
-				this.stageSelectMenu.Draw(this.spriteBatch);
+				this.stageSelectMenu.Draw(spriteBatch);
 				break;
 			case GameState.CAT_SELECT:
-				this.catSelectMenu.Draw(this.spriteBatch, this.stageSelectMenu.getCurrentLevel(), this.scoreSystem);
+				this.catSelectMenu.Draw(spriteBatch, this.stageSelectMenu.getCurrentLevel(), this.scoreSystem);
 				break;
 			case GameState.PLAY:
 				if (!this.tunnel.IsOn() && !this.helicopter.IsDead())
@@ -1045,19 +1054,19 @@ namespace Helicopter
 				}
 				break;
 			case GameState.PAUSE:
-				this.pauseMenu.Draw(this.spriteBatch);
+				this.pauseMenu.Draw(spriteBatch);
 				break;
 			case GameState.TRIAL_PAUSE:
-				this.trialMenu.Draw(this.spriteBatch);
+				this.trialMenu.Draw(spriteBatch);
 				break;
 			case GameState.OPTIONS:
-				this.optionsMenu.Draw(this.spriteBatch);
+				this.optionsMenu.Draw(spriteBatch);
 				break;
 			case GameState.LEADERBOARDS:
-				this.leaderboardsMenu.Draw(this.spriteBatch, this.scoreSystem);
+				this.leaderboardsMenu.Draw(spriteBatch, this.scoreSystem);
 				break;
 			case GameState.CREDITS:
-				this.creditsMenu.Draw(this.spriteBatch);
+				this.creditsMenu.Draw(spriteBatch);
 				break;
 			case GameState.EXIT:
 				break;
@@ -1069,79 +1078,79 @@ namespace Helicopter
 			this.DrawBackground(gameTime);
 			this.DrawHelicopter();
 			this.DrawForeground();
-			this.scoreSystem.Draw(this.spriteBatch);
+			this.scoreSystem.Draw(spriteBatch);
 		}
 
 		private void DrawBackground(GameTime gameTime)
 		{
-			this.background.DrawBackBack(this.spriteBatch);
-			this.bSpriteManager.DrawBack(this.spriteBatch);
-			this.background.DrawMiddleBack(this.spriteBatch);
-			this.bSpriteManager.DrawMiddleBack(this.spriteBatch);
-			this.background.DrawBack(this.spriteBatch);
-			this.bSpriteManager.DrawMiddle(this.spriteBatch);
-			this.background.DrawMiddle(this.spriteBatch);
-			this.bSpriteManager.DrawFore(this.spriteBatch);
-			this.tunnel.Draw(this.spriteBatch);
+			this.background.DrawBackBack(spriteBatch);
+			this.bSpriteManager.DrawBack(spriteBatch);
+			this.background.DrawMiddleBack(spriteBatch);
+			this.bSpriteManager.DrawMiddleBack(spriteBatch);
+			this.background.DrawBack(spriteBatch);
+			this.bSpriteManager.DrawMiddle(spriteBatch);
+			this.background.DrawMiddle(spriteBatch);
+			this.bSpriteManager.DrawFore(spriteBatch);
+			this.tunnel.Draw(spriteBatch);
 		}
 
 		private void DrawHelicopter()
 		{
-			this.helicopter.Draw(this.spriteBatch);
+			this.helicopter.Draw(spriteBatch);
 		}
 
 		private void DrawForeground()
 		{
-			this.meatToMouth.Draw(this.spriteBatch);
-			this.heartsManager.Draw(this.spriteBatch);
-			this.explosionManager.Draw(this.spriteBatch);
-			this.dancerManager.Draw(this.spriteBatch);
-			this.karaokeLyrics.Draw(this.spriteBatch);
-			this.equalizer.Draw(this.spriteBatch);
-			this.shineManager.Draw(this.spriteBatch);
-			this.fluctuationManager.Draw(this.spriteBatch);
-			this.butterflyEffect.Draw(this.spriteBatch);
+			this.meatToMouth.Draw(spriteBatch);
+			this.heartsManager.Draw(spriteBatch);
+			this.explosionManager.Draw(spriteBatch);
+			this.dancerManager.Draw(spriteBatch);
+			this.karaokeLyrics.Draw(spriteBatch);
+			this.equalizer.Draw(spriteBatch);
+			this.shineManager.Draw(spriteBatch);
+			this.fluctuationManager.Draw(spriteBatch);
+			this.butterflyEffect.Draw(spriteBatch);
 			ParticleEmitter[] array = this.shootingStars;
 			foreach (ParticleEmitter particleEmitter in array)
 			{
-				particleEmitter.Draw(this.spriteBatch);
+				particleEmitter.Draw(spriteBatch);
 			}
 			Light[] array2 = this.lights;
 			foreach (Light light in array2)
 			{
-				light.Draw(this.spriteBatch);
+				light.Draw(spriteBatch);
 			}
 			Laser[] array3 = this.lasers;
 			foreach (Laser laser in array3)
 			{
-				laser.Draw(this.spriteBatch);
+				laser.Draw(spriteBatch);
 			}
-			this.spreadLaser.Draw(this.spriteBatch);
-			this.lyricEffect.Draw(this.spriteBatch);
-			this.heart.Draw(this.spriteBatch);
-			this.rainbow.Draw(this.spriteBatch);
-			this.eyes.Draw(this.spriteBatch);
-			this.hand.Draw(this.spriteBatch);
-			this.fireworks.Draw(this.spriteBatch);
-			this.flashManager.Draw(this.spriteBatch);
-			this.RainbowOverlay(this.spriteBatch);
+			this.spreadLaser.Draw(spriteBatch);
+			this.lyricEffect.Draw(spriteBatch);
+			this.heart.Draw(spriteBatch);
+			this.rainbow.Draw(spriteBatch);
+			this.eyes.Draw(spriteBatch);
+			this.hand.Draw(spriteBatch);
+			this.fireworks.Draw(spriteBatch);
+			this.flashManager.Draw(spriteBatch);
+			this.RainbowOverlay(spriteBatch);
 		}
 
 		private void DisplayInstructions()
 		{
 			if (SongManager.IsNyanPack)
 			{
-				this.spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-				this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
-				this.spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-				this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
 			}
 			else
 			{
-				this.spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-				this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
-				this.spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-				this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
 			}
 		}
 

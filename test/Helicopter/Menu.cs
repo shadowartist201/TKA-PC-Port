@@ -10,6 +10,8 @@ namespace Helicopter
 
 		protected int index_;
 
+		protected int altIndex_;
+
 		private bool horizontal_;
 
 		protected Menu(bool horizontal)
@@ -31,28 +33,31 @@ namespace Helicopter
 			}
 			this.SetItemVertices();
 			Global.itemSelectedEffect.Update(dt);
-			if (this.horizontal_)
+			if (!OptionsMenu.displayMenu)
 			{
-				if (currInput.IsButtonPressed(Buttons.DPadRight) && this.index_ + 1 < this.menuItems_.Count)
-				{
-					this.index_++;
-				}
-				if (currInput.IsButtonPressed(Buttons.DPadLeft) && this.index_ > 0)
-				{
-					this.index_--;
-				}
-			}
-			else
-			{
-				if (currInput.IsButtonPressed(Buttons.DPadDown) && this.index_ + 1 < this.menuItems_.Count)
-				{
-					this.index_++;
-				}
-				if (currInput.IsButtonPressed(Buttons.DPadUp) && this.index_ > 0)
-				{
-					this.index_--;
-				}
-			}
+                if (this.horizontal_)
+                {
+                    if (currInput.IsButtonPressed(Buttons.DPadRight) && this.index_ + 1 < this.menuItems_.Count)
+                    {
+                        this.index_++;
+                    }
+                    if (currInput.IsButtonPressed(Buttons.DPadLeft) && this.index_ > 0)
+                    {
+                        this.index_--;
+                    }
+                }
+                else
+                {
+                    if (currInput.IsButtonPressed(Buttons.DPadDown) && this.index_ + 1 < this.menuItems_.Count)
+                    {
+                        this.index_++;
+                    }
+                    if (currInput.IsButtonPressed(Buttons.DPadUp) && this.index_ > 0)
+                    {
+                        this.index_--;
+                    }
+                }
+            }
 		}
 
 		protected void SetItemVertices()

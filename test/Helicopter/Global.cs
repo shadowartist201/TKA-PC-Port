@@ -129,6 +129,20 @@ namespace Helicopter
 
 		public static Texture2D mainPressStartTex;
 
+		public static Texture2D option_apply;
+
+		public static Texture2D option_display;
+
+		public static Texture2D option_fullOff;
+
+		public static Texture2D option_fullOn;
+
+		public static Texture2D option_res1080;
+
+		public static Texture2D option_res720;
+
+		public static Texture2D option_res480;
+
 		public static float mountainVelocity = 200f;
 
 		public static AudioEngine audioEngine;
@@ -180,6 +194,10 @@ namespace Helicopter
 		private static float vibrationTimer = 0f;
 
 		private static float vibrationTime = 0.1f;
+
+		public static bool fullscreenOn;
+
+		public static Vector2 resolution;
 
 		public static Random Random => Global.random;
 
@@ -353,5 +371,33 @@ namespace Helicopter
 				}
 			}
 		}
-	}
+
+        public static void SetFullscreenOn(bool on)
+        {
+            if (on)
+            {
+                Global.fullscreenOn = true;
+            }
+            else
+            {
+                Global.fullscreenOn = false;
+            }
+        }
+
+		public static void SetResolution(int index)
+		{
+			switch (index)
+			{
+				case 1:
+					Global.resolution = new Vector2(854, 480);
+					break;
+				case 2:
+					Global.resolution = new Vector2(1280, 720);
+					break;
+				case 3:
+					Global.resolution = new Vector2(1920, 1080);
+					break;
+			}
+		}
+    }
 }
