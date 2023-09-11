@@ -185,7 +185,7 @@ namespace Helicopter
             base.Content.RootDirectory = "Content";
             Resolution.Init(ref graphics);
             Resolution.SetVirtualResolution(1280, 720);
-            Resolution.SetResolution(1280, 720, false);
+            Resolution.SetResolution(1280,720, false);
             base.IsFixedTimeStep = false;
             touchLocations = new TouchCollection(del);
             this.graphics.ApplyChanges();
@@ -205,6 +205,7 @@ namespace Helicopter
         {
             //MediaPlayer.IsVisualizationEnabled = true;
             this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
+            Resolution.SetResolution(graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width, graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height, true);
             //Global.audioEngine = new AudioEngine("Content/Music//newXactProject.xgs");
             //Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music//Wave Bank.xwb");
             //Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music//Sound Bank.xsb");

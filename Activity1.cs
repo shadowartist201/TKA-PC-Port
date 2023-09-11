@@ -2,6 +2,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using AndroidX.Core.View;
 using Microsoft.Xna.Framework;
 
 namespace Helicopter
@@ -13,7 +14,7 @@ namespace Helicopter
         AlwaysRetainTaskState = true,
         LaunchMode = LaunchMode.SingleInstance,
         ScreenOrientation = ScreenOrientation.Landscape,
-        ConfigurationChanges = ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden | ConfigChanges.ScreenSize
+        ConfigurationChanges = ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden
     )]
     public class Activity1 : AndroidGameActivity
     {
@@ -28,6 +29,11 @@ namespace Helicopter
             _view = _game.Services.GetService(typeof(View)) as View;
 
             SetContentView(_view);
+
+            WindowInsetsControllerCompat windowInsetsController = WindowCompat.GetInsetsController(Window, Window.DecorView);
+            windowInsetsController.SystemBarsBehavior = WindowInsetsControllerCompat.BehaviorShowTransientBarsBySwipe;
+            windowInsetsController.Hide(WindowInsetsCompat.Type.SystemBars());
+
             _game.Run();
         }
     }
