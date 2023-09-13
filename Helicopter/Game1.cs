@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Android.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -241,9 +243,10 @@ namespace Helicopter
             //MediaPlayer.IsVisualizationEnabled = true;
             this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
             Resolution.SetResolution(graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width, graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height, true);
-            //Global.audioEngine = new AudioEngine("Content/Music//newXactProject.xgs");
-            //Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music//Wave Bank.xwb");
-            //Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music//Sound Bank.xsb");
+            Global.soundEffects = new List<SoundEffect>();
+            //Global.audioEngine = new AudioEngine("Content/Music/newXactProject.xgs");
+            //Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music/Wave Bank.xwb");
+            //Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music/Sound Bank.xsb");
             Global.itemSelectedEffect = new ItemSelectedEffect();
             Viewport test = ResetViewport();
             safeSpace = test.Bounds;
@@ -578,6 +581,10 @@ namespace Helicopter
             Global.AButtonTexture = base.Content.Load<Texture2D>("Graphics/xboxControllerButtonA");
             Global.YButtonTexture = base.Content.Load<Texture2D>("Graphics/xboxControllerButtonY");
             Global.pauseButton = base.Content.Load<Texture2D>("Graphics/pause");
+            Global.soundEffects.Add(Content.Load<SoundEffect>("Music/cat_01"));
+            Global.soundEffects.Add(Content.Load<SoundEffect>("Music/cat_02"));
+            Global.soundEffects.Add(Content.Load<SoundEffect>("Music/cat_03"));
+            Global.soundEffects.Add(Content.Load<SoundEffect>("Music/cat_04"));
             for (int i = 0; i < Camera.effects.Length; i++)
             {
                 //Camera.effects[i] = base.Content.Load<Effect>("Effects/effect" + i);

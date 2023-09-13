@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 //using Microsoft.Xna.Framework.GamerServices;
@@ -185,7 +186,10 @@ namespace Helicopter
 
 		private static float vibrationTime = 0.1f;
 
-		public static Random Random => Global.random;
+		public static List<SoundEffect> soundEffects;
+
+
+        public static Random Random => Global.random;
 
 		public static void setPixel(GraphicsDevice graphicsDevice)
 		{
@@ -224,17 +228,17 @@ namespace Helicopter
             switch (Global.Random.Next(0, 4))
 			{
 			case 0:
-				//Global.soundBank.PlayCue("cat_01");
-				break;
+                soundEffects[0].Play();
+                break;
 			case 1:
-				//Global.soundBank.PlayCue("cat_02");
-				break;
+                soundEffects[1].Play();
+                break;
 			case 2:
-				//Global.soundBank.PlayCue("cat_03");
-				break;
+                soundEffects[2].Play();
+                break;
 			case 3:
-				//Global.soundBank.PlayCue("cat_04");
-				break;
+                soundEffects[3].Play();
+                break;
 			}
 		}
 
