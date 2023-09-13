@@ -176,7 +176,6 @@ namespace Helicopter
             }
             if (Camera.rotatingNyan_)
             {
-                Debug.WriteLine(timeBetweenTimer + "/" + timeBetweenShakes + ", " + Camera.rotation_);
                 if (Camera.timeBetweenTimer <= Camera.timeBetweenShakes)
                 {
                     Camera.timeBetweenTimer += (timeBetweenShakes / 155.0f);
@@ -290,18 +289,22 @@ namespace Helicopter
                     break;
             }
             graphicsDevice.SetRenderTarget(null);
+            Resolution.ResetViewport();
+            graphicsDevice.Clear(Color.Black);
             if (Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3)
             {
-                graphicsDevice.Clear(Color.White);
+                //graphicsDevice.Clear(Color.White);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
+                spriteBatch.Draw(Global.pixel, new Rectangle(0, 0, 1280, 720), Color.White);
                 spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
                 spriteBatch.End();
             }
             else
             {
-                graphicsDevice.Clear(Color.White);
+                //graphicsDevice.Clear(Color.White);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
-                spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
+                spriteBatch.Draw(Global.pixel, new Rectangle(0, 0, 1280, 720), Color.White);
+                spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640,360), Camera.scale_, Camera.spriteEffect_, 0f);
                 spriteBatch.End();
             }
         }

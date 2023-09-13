@@ -9,15 +9,18 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AndroidPackageFormat>apk</AndroidPackageFormat>
-    <Optimize>True</Optimize>
+    <Optimize>False</Optimize>
     <DebugSymbols>True</DebugSymbols>
     <RunAOTCompilation>False</RunAOTCompilation>
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
     <PublishTrimmed>False</PublishTrimmed>
+    <Debugger>Xamarin</Debugger>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
-    <Optimize>True</Optimize>
+    <Optimize>False</Optimize>
+    <Debugger>Xamarin</Debugger>
+    <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />

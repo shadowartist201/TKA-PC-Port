@@ -588,6 +588,7 @@ namespace Helicopter
             overlay = base.Content.Load<Texture2D>("rainbowOverlay");
             this.scoreSystem = new ScoreSystem();
             this.songManager = new SongManager(this);
+            Global.setPixel(GraphicsDevice);
         }
 
         private void LoadMenus()
@@ -1116,7 +1117,15 @@ namespace Helicopter
             this.DrawHelicopter();
             this.DrawForeground();
             this.scoreSystem.Draw(this.spriteBatch);
-            spriteBatch.Draw(Global.pauseButton, new Rectangle(50, 50, 64, 64), Color.White);
+            if (SongManager.IsMeatPack)
+            {
+                spriteBatch.Draw(Global.pauseButton, new Rectangle(100, 75, 64, 64), Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(Global.pauseButton, new Rectangle(50, 50, 64, 64), Color.White);
+            }
+           
         }
 
         private void DrawBackground(GameTime gameTime)
@@ -2127,7 +2136,6 @@ namespace Helicopter
         public void UpdateChoreographyNyan(float dt, float elapsedMilliseconds)
         {
             Camera.Update(dt);
-            Debug.WriteLine(MediaPlayer.PlayPosition);
             if (elapsedMilliseconds > this.eventTimes[this.currEvent])
             {
                 switch (this.currEvent)

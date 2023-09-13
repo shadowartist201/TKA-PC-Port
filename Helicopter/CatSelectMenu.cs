@@ -35,26 +35,50 @@ namespace Helicopter
 		{
 			this.SetCats(currentLevel);
 			base.Update(dt, currInput);
-			Rectangle cat1 = new(8 ,121 ,240, 238);
-			Rectangle cat2 = new(264, 121, 240 ,238);
-			Rectangle cat3 = new(520, 121, 240 ,238);
-			Rectangle cat4 = new(776 ,121 ,240 ,238);
-			Rectangle cat5 = new(1032, 121, 240 ,238);
+			Rectangle cat1 = new(8, 121, 240, 238);
+			Rectangle cat2 = new(264, 121, 240, 238);
+			Rectangle cat3 = new(520, 121, 240, 238);
+			Rectangle cat4 = new(776, 121, 240, 238);
+			Rectangle cat5 = new(1032, 121, 240, 238);
 
 			if (cat1.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
+			{
 				base.index_ = 1;
+				Global.PlayCatSound();
+				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ -1;
+				gameState = GameState.PLAY;
+			}
+
 			else if (cat2.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
-                base.index_ = 2;
-            else if (cat3.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
-                base.index_ = 3;
-            else if (cat4.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
-                base.index_ = 4;
-            else if (cat5.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
-                base.index_ = 5;
-            Global.PlayCatSound();
-            this.currentCat = this.startCatIndex_[currentLevel] + base.index_;
+			{
+				base.index_ = 2;
+				Global.PlayCatSound();
+				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+				gameState = GameState.PLAY;
+			}
+			else if (cat3.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
+			{
+				base.index_ = 3;
+				Global.PlayCatSound();
+				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+				gameState = GameState.PLAY;
+			}
+			else if (cat4.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
+			{
+				base.index_ = 4;
+				Global.PlayCatSound();
+				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+				gameState = GameState.PLAY;
+			}
+			else if (cat5.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
+			{
+				base.index_ = 5;
+				Global.PlayCatSound();
+				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+				gameState = GameState.PLAY;
+			}
             base.index_ = 0;
-            gameState = GameState.PLAY;
+            //gameState = GameState.PLAY;
             /*if (currInput.IsButtonPressed(Buttons.A))
 			{
 				switch (base.index_)

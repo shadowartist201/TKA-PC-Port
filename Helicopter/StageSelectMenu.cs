@@ -73,8 +73,8 @@ namespace Helicopter
 
 		public void Update(float dt, InputState currInput, ref GameState gameState)
 		{
-			Rectangle arrow_left = new(70, 280, 73 ,106);
-			Rectangle arrow_right = new(1210 ,280 ,73 ,106);
+			Rectangle arrow_left = new(60, 230, 83 ,126);
+			Rectangle arrow_right = new(1200 ,230  ,83 ,126);
 			Rectangle stage1 = new(138 ,117, 328, 327);
 			Rectangle stage2 = new(474 ,117, 328 ,327);
 			Rectangle stage3 = new(806, 117, 328, 327);
