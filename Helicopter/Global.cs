@@ -23,7 +23,9 @@ namespace Helicopter
 
 		public static Texture2D pixel;
 
-		public static Texture2D tunnelStar;
+        public static Effect negative;
+
+        public static Texture2D tunnelStar;
 
 		public static SpriteFont spriteFont;
 

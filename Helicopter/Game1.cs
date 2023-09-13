@@ -1,16 +1,12 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Android.Content.Res;
-using Android.Util;
-using Android.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
-using static Android.Bluetooth.BluetoothClass;
 
 namespace Helicopter
 {
@@ -22,6 +18,12 @@ namespace Helicopter
         public static TouchCollection touchLocations;
 
         public static Vector2 resolutionDifference;
+
+        private bool clappersOn, lettersOn;
+
+        public static Texture2D overlay;
+
+        private bool rainbowOverlayEnabled = false;
 
         public static Rectangle safeSpace;
 
@@ -496,18 +498,17 @@ namespace Helicopter
                 this.total = 0f;
             }
             this.fps += 1f;
-            Resolution.BeginDraw();
             if (this.gameState == GameState.CAT_SELECT || this.gameState == GameState.PLAY || this.gameState == GameState.PAUSE)
             {
                 base.GraphicsDevice.SetRenderTarget(this.renderTarget);
-                this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null);
                 this.DrawStage(num, gameTime);
-                this.spriteBatch.End();
-                Camera.Draw(this.spriteBatch, this.renderTarget, this.graphics, base.GraphicsDevice);
+                spriteBatch.End();
+                Camera.Draw(spriteBatch, this.renderTarget, this.graphics, base.GraphicsDevice);
             }
-            this.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
             this.DrawMenu();
-            this.spriteBatch.End();
+            spriteBatch.End();
         }
 
         private void LoadAssets()
@@ -581,6 +582,10 @@ namespace Helicopter
             {
                 //Camera.effects[i] = base.Content.Load<Effect>("Effects/effect" + i);
             }
+            Camera.effects[3] = base.Content.Load<Effect>("wave");
+            Camera.effects[2] = base.Content.Load<Effect>("circles");
+            Camera.effects[1] = base.Content.Load<Effect>("outline");
+            overlay = base.Content.Load<Texture2D>("rainbowOverlay");
             this.scoreSystem = new ScoreSystem();
             this.songManager = new SongManager(this);
         }
@@ -930,7 +935,29 @@ namespace Helicopter
 
         private void LoadEventInfoMyRainbow()
         {
-
+            this.eventTimes[0] = 0f;
+            this.eventTimes[1] = 11268f;
+            this.eventTimes[2] = 22537f;
+            this.eventTimes[3] = 28059f;
+            this.eventTimes[4] = 33806f;
+            this.eventTimes[5] = 39440f;
+            this.eventTimes[6] = 45075f;
+            this.eventTimes[7] = 55104f;
+            this.eventTimes[8] = 56456f;
+            this.eventTimes[9] = 79107f;
+            this.eventTimes[10] = 88291f;
+            this.eventTimes[11] = 90376f;
+            this.eventTimes[12] = 98200f;
+            this.eventTimes[13] = 101644f;
+            this.eventTimes[14] = 112913f;
+            this.eventTimes[15] = 118435f;
+            this.eventTimes[16] = 124182f;
+            this.eventTimes[17] = 127112f;
+            this.eventTimes[18] = 138494f;
+            this.eventTimes[19] = 171061f;
+            this.eventTimes[20] = 183456f;
+            this.eventTimes[21] = 240139f;
+            this.eventTimes[22] = 250000f;
         }
 
         private void UpdateBackground(float dt)
@@ -1144,6 +1171,7 @@ namespace Helicopter
             this.hand.Draw(this.spriteBatch);
             this.fireworks.Draw(this.spriteBatch);
             this.flashManager.Draw(this.spriteBatch);
+            this.RainbowOverlay(spriteBatch);
         }
 
         private void DisplayInstructions()
@@ -2098,7 +2126,122 @@ namespace Helicopter
 
         public void UpdateChoreographyNyan(float dt, float elapsedMilliseconds)
         {
+            Camera.Update(dt);
+            Debug.WriteLine(MediaPlayer.PlayPosition);
+            if (elapsedMilliseconds > this.eventTimes[this.currEvent])
+            {
+                switch (this.currEvent)
+                {
+                    case 0:
+                        //MediaPlayer.Play(this.songManager.CurrentSong);
+                        break;
+                    case 1:
+                        //TurnOnClappers();
+                        clappersOn = true;
+                        break;
+                    case 2:
+                        this.tunnel.Set(TunnelEffect.Nyan);
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        //TurnOffClappers();
+                        clappersOn = false;
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        //TurnOnLetters();
+                        lettersOn = true;
+                        Camera.DoRotatingNyan(Global.BPM * 8f);
+                        break;
+                    case 9:
+                        //TurnOnClappers();
+                        clappersOn = true;
+                        //TurnOffLetters();
+                        lettersOn = false;
+                        Camera.StopRotating();
+                        break;
+                    case 10:
+                        //TurnOffClappers();
+                        clappersOn = false;
+                        break;
+                    case 11:
+                        break;
+                    case 12:
+                        break;
+                    case 13:
+                        this.tunnel.Set(TunnelEffect.Disappear);
+                        Camera.SetEffect(6);
+                        rainbowOverlayEnabled = true;
+                        break;
+                    case 14:
+                        break;
+                    case 15:
+                        break;
+                    case 16:
+                        this.tunnel.Set(TunnelEffect.Normal);
+                        Camera.SetEffect(-1);
+                        rainbowOverlayEnabled = false;
+                        break;
+                    case 17:
+                        this.tunnel.Set(TunnelEffect.Nyan);
+                        Camera.DoFlippingNyan(Global.BPM * 8f);
+                        break;
+                    case 18:
+                        break;
+                    case 19:
+                        this.tunnel.Set(TunnelEffect.Normal);
+                        Camera.StopFlipping();
+                        break;
+                    case 20:
+                        this.tunnel.Set(TunnelEffect.Disappear);
+                        Camera.DoRotatingNyan(Global.BPM * 8f);
+                        Camera.DoFlippingNyan(Global.BPM * 8f);
+                        Camera.SetEffect(6);
+                        rainbowOverlayEnabled = true;
+                        //TurnOnLetters();
+                        lettersOn = true;
+                        break;
+                    case 21:
+                        lettersOn = false;
+                        this.ResetChoreography(1, alternating: false, meat: false);
+                        Camera.SetEffect(-1);
+                        Camera.StopFlipping();
+                        Camera.StopRotating();
+                        rainbowOverlayEnabled = false;
+                        break;
+                    case 22:
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(this.songManager.CurrentSong);
+                        break;
+                }
+                this.currEvent++;
+                if (this.currEvent == 19)
+                {
+                    this.currEvent = 0;
+                }
+            }
+        }
 
+        private void RainbowOverlay(SpriteBatch spriteBatch)
+        {
+            if (rainbowOverlayEnabled)
+            {
+                spriteBatch.Draw(overlay, new Rectangle(0, 0, 1280, 720), new Rectangle(0, 0, 1, 768), new Color(255, 255, 255, 0.5f), 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            }
+            if (clappersOn)
+            {
+                spriteBatch.DrawString(Global.spriteFont, "Clappers on", new Vector2(10, 70), Color.White);
+            }
+            if (lettersOn)
+            {
+                spriteBatch.DrawString(Global.spriteFont, "Letters on", new Vector2(10, 90), Color.White);
+            }
         }
 
         private void DoStationaryLights()
