@@ -42,7 +42,7 @@ namespace Helicopter
         {
             this.visible_ = true;
             this.position_ = position;
-            base.currentFrame = state;
+            base.currentFrame = 0;
             this.color_ = color;
             this.spriteEffects_ = SpriteEffects.None;
         }

@@ -247,6 +247,7 @@ namespace Helicopter
             float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
 			//Debug.WriteLine(gameTime.ElapsedGameTime + " || " + gameTime.TotalGameTime + " || " + MediaPlayer.PlayPosition);
+			Debug.WriteLine("Event: " + this.currEvent);
 			//Global.IsTrialMode = Guide.IsTrialMode;
 			this.currInput.Update();
 			if (this.currInput.IsButtonUp(Buttons.A))
@@ -2148,7 +2149,7 @@ namespace Helicopter
 					case 9:
 						//TurnOnClappers();
 						//clappersOn = true;
-						clapperManager.TurnOn(0);
+						clapperManager.TurnOn(0); //this is out of sync
 						//TurnOffLetters();
 						//lettersOn = false;
 						letterManager.TurnOff();
@@ -2189,8 +2190,8 @@ namespace Helicopter
                         break;
 					case 20:
                         this.tunnel.Set(TunnelEffect.Disappear);
-                        Camera.DoRotatingNyan(Global.BPM * 8f);
-                        Camera.DoFlippingNyan(Global.BPM * 8f);
+                        Camera.DoRotatingNyan(Global.BPM * 8f); //out of
+                        Camera.DoFlippingNyan(Global.BPM * 8f); //sync
                         Camera.SetEffect(6);
 						rainbowOverlayEnabled = true;
 						//TurnOnLetters();
@@ -2199,7 +2200,6 @@ namespace Helicopter
 						break;
 					case 21:
 						//lettersOn = false;
-						letterManager.TurnOff();
                         this.ResetChoreography(1, alternating: false, meat: false);
 						Camera.SetEffect(-1);
 						Camera.StopFlipping();
@@ -2208,11 +2208,11 @@ namespace Helicopter
                         break;
 					case 22:
                         MediaPlayer.Stop();
-                        //MediaPlayer.Play(this.songManager.CurrentSong);
+                        MediaPlayer.Play(this.songManager.CurrentSong);
                         break;
 				}
 				this.currEvent++;
-				if (this.currEvent == 19)
+				if (this.currEvent == 23)
 				{
 					this.currEvent = 0;
 				}
@@ -2495,7 +2495,9 @@ namespace Helicopter
 			this.heartsManager.TurnOff();
 			this.letterManager.TurnOff();
 			this.clapperManager.TurnOff();
-			this.rainbowOverlayEnabled = false;
+            Camera.StopFlipping();
+            Camera.StopRotating();
+            this.rainbowOverlayEnabled = false;
 			Camera.Reset();
 			if (!meat)
 			{

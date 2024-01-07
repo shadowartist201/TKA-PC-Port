@@ -176,13 +176,13 @@ namespace Helicopter
 			}
             if (Camera.rotatingNyan_)
             {
-				Debug.WriteLine(timeBetweenTimer + "/" + timeBetweenShakes + ", " + Camera.rotation_);
+				//Debug.WriteLine(timeBetweenTimer + "/" + timeBetweenShakes + ", " + Camera.rotation_);
 				if (Camera.timeBetweenTimer <= Camera.timeBetweenShakes)
 				{
                     Camera.timeBetweenTimer += (timeBetweenShakes / 155.0f);
                     if (Camera.rotation_ >= Camera.rotationMax_)
 					{
-						Debug.WriteLine("reset");
+						//Debug.WriteLine("reset");
 					}
 					else
 					{
