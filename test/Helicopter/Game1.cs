@@ -100,6 +100,10 @@ namespace Helicopter
 
 		private HeartsManager heartsManager;
 
+		private ClapperManager clapperManager;
+
+		private LetterManager letterManager;
+
 		private SongManager songManager;
 
 		private ScoreSystem scoreSystem;
@@ -242,6 +246,7 @@ namespace Helicopter
 		{
             float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
+			//Debug.WriteLine(gameTime.ElapsedGameTime + " || " + gameTime.TotalGameTime + " || " + MediaPlayer.PlayPosition);
 			//Global.IsTrialMode = Guide.IsTrialMode;
 			this.currInput.Update();
 			if (this.currInput.IsButtonUp(Buttons.A))
@@ -608,6 +613,8 @@ namespace Helicopter
 			this.meatToMouth = new MeatToMouth();
 			this.explosionManager = new ExplosionManager();
 			this.dancerManager = new DancerManager();
+			this.letterManager = new LetterManager();
+			this.clapperManager = new ClapperManager();
 			this.heartsManager = new HeartsManager();
 		}
 
@@ -973,6 +980,8 @@ namespace Helicopter
 			this.explosionManager.Update(dt);
 			this.dancerManager.Update(dt);
 			this.heartsManager.Update(dt);
+			this.clapperManager.Update(dt);
+			this.letterManager.Update(dt);
 			this.scoreSystem.Update(dt);
 		}
 
@@ -1105,6 +1114,8 @@ namespace Helicopter
 			this.heartsManager.Draw(spriteBatch);
 			this.explosionManager.Draw(spriteBatch);
 			this.dancerManager.Draw(spriteBatch);
+			this.letterManager.Draw(spriteBatch);
+			this.clapperManager.Draw(spriteBatch);
 			this.karaokeLyrics.Draw(spriteBatch);
 			this.equalizer.Draw(spriteBatch);
 			this.shineManager.Draw(spriteBatch);
@@ -2099,7 +2110,7 @@ namespace Helicopter
 		public void UpdateChoreographyNyan(float dt, float elapsedMilliseconds)
 		{
 			Camera.Update(dt);
-			Debug.WriteLine(MediaPlayer.PlayPosition);
+			//Debug.WriteLine(MediaPlayer.PlayPosition);
 			if (elapsedMilliseconds > this.eventTimes[this.currEvent])
 			{
 				switch (this.currEvent)
@@ -2109,7 +2120,8 @@ namespace Helicopter
                         break;
 					case 1:
 						//TurnOnClappers();
-						clappersOn = true;
+						clapperManager.TurnOn(0);
+						//clappersOn = true;
                         break;
 					case 2:
 						this.tunnel.Set(TunnelEffect.Nyan);
@@ -2122,25 +2134,30 @@ namespace Helicopter
 						break;
 					case 6:
 						//TurnOffClappers();
-						clappersOn = false;
+						//clappersOn = false;
+						clapperManager.TurnOff();
                         break;
 					case 7:
 						break;
 					case 8:
 						//TurnOnLetters();
-						lettersOn = true;
+						//lettersOn = true;
+						letterManager.TurnOn(0);
 						Camera.DoRotatingNyan(Global.BPM * 8f);
 						break;
 					case 9:
 						//TurnOnClappers();
-						clappersOn = true;
+						//clappersOn = true;
+						clapperManager.TurnOn(0);
 						//TurnOffLetters();
-						lettersOn = false;
+						//lettersOn = false;
+						letterManager.TurnOff();
 						Camera.StopRotating();
                         break;
 					case 10:
 						//TurnOffClappers();
-						clappersOn = false;
+						//clappersOn = false;
+						clapperManager.TurnOff();
                         break;
 					case 11:
 						break;
@@ -2177,10 +2194,12 @@ namespace Helicopter
                         Camera.SetEffect(6);
 						rainbowOverlayEnabled = true;
 						//TurnOnLetters();
-						lettersOn = true;
+						letterManager.TurnOn(0);
+						//lettersOn = true;
 						break;
 					case 21:
-						lettersOn = false;
+						//lettersOn = false;
+						letterManager.TurnOff();
                         this.ResetChoreography(1, alternating: false, meat: false);
 						Camera.SetEffect(-1);
 						Camera.StopFlipping();
@@ -2189,7 +2208,7 @@ namespace Helicopter
                         break;
 					case 22:
                         MediaPlayer.Stop();
-                        MediaPlayer.Play(this.songManager.CurrentSong);
+                        //MediaPlayer.Play(this.songManager.CurrentSong);
                         break;
 				}
 				this.currEvent++;
@@ -2474,6 +2493,9 @@ namespace Helicopter
 			this.explosionManager.TurnOff();
 			this.dancerManager.TurnOff();
 			this.heartsManager.TurnOff();
+			this.letterManager.TurnOff();
+			this.clapperManager.TurnOff();
+			this.rainbowOverlayEnabled = false;
 			Camera.Reset();
 			if (!meat)
 			{
