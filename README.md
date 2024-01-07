@@ -22,4 +22,5 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 ## Extra Stuff
 - [Weird things about XNA](https://shadowartist201.blogspot.com/search/label/XNA)
 - [Notes on shaders, Nyan Cat, and the iOS decompilation](https://github.com/shadowartist201/TKA-PC-Port/wiki)
-- [Original TKA content you may not know about](https://shadowartist201.blogspot.com/search/label/TKA%20Archive)
+- [TKA content you may not know about](https://shadowartist201.blogspot.com/search/label/TKA%20Archive)
+- [iOS files, older X360 builds, and bonus content (featuring Super TKA)](https://drive.google.com/drive/folders/1_E_SOGg3zQZ-UZF7XdIhKeQGP2YJZyxn?usp=sharing)
