@@ -943,48 +943,6 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/xboxControllerButtonY.png
 
-#begin Music/IntergalacticalHigh.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/IntergalacticalHigh.wma
-
-#begin Music/LikeARainbow.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/LikeARainbow.wma
-
-#begin Music/MenuSong.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/MenuSong.wma
-
-#begin Music/MyRainbow.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/MyRainbow.wma
-
-#begin Music/SeaOfLove.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/SeaOfLove.wma
-
-#begin Music/TasteOfHeaven.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/TasteOfHeaven.wma
-
-#begin Music/YoureShining.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Music/YoureShining.wma
-
 #begin Negative.fx
 /importer:EffectImporter
 /processor:EffectProcessor
