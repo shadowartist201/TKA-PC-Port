@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace Helicopter
 {
@@ -166,10 +167,20 @@ namespace Helicopter
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(Global.scoreTexture, this.positionNormal, (Rectangle?)null, Global.tunnelColor, 0f, Vector2.Zero, this.scale, SpriteEffects.None, 0f);
-			this.DrawNumber(spriteBatch, this.currScore, this.positionNormal + new Vector2(204f * this.scale, 0f), Vector2.Zero);
-			spriteBatch.Draw(Global.highScoreTexture, this.positionHigh, (Rectangle?)null, Global.tunnelColor, 0f, Vector2.Zero, this.scale, SpriteEffects.None, 0f);
-			this.DrawNumber(spriteBatch, this.scoreInfo.HighScore, this.positionHigh + new Vector2(144f * this.scale, 0f), Vector2.Zero);
+			if (SongManager.IsNyanPack)
+			{
+				spriteBatch.Draw(Global.scoreTexture, this.positionNormal, (Rectangle?)null, Color.White, 0f, Vector2.Zero, this.scale, SpriteEffects.None, 0f);
+				this.DrawNumber(spriteBatch, this.currScore, this.positionNormal + new Vector2(204f * this.scale, 0f), Vector2.Zero);
+				spriteBatch.Draw(Global.highScoreTexture, this.positionHigh, (Rectangle?)null, Color.White, 0f, Vector2.Zero, this.scale, SpriteEffects.None, 0f);
+				this.DrawNumber(spriteBatch, this.scoreInfo.HighScore, this.positionHigh + new Vector2(144f * this.scale, 0f), Vector2.Zero);
+			}
+			else
+			{
+				spriteBatch.Draw(Global.scoreTexture, this.positionNormal, (Rectangle?)null, Global.tunnelColor, 0f, Vector2.Zero, this.scale, SpriteEffects.None, 0f);
+				this.DrawNumber(spriteBatch, this.currScore, this.positionNormal + new Vector2(204f * this.scale, 0f), Vector2.Zero);
+				spriteBatch.Draw(Global.highScoreTexture, this.positionHigh, (Rectangle?)null, Global.tunnelColor, 0f, Vector2.Zero, this.scale, SpriteEffects.None, 0f);
+				this.DrawNumber(spriteBatch, this.scoreInfo.HighScore, this.positionHigh + new Vector2(144f * this.scale, 0f), Vector2.Zero);
+			}
 		}
 
 		private void DrawNumber(SpriteBatch spriteBatch, int number, Vector2 startingPosition, Vector2 startingOrigin)
@@ -177,9 +188,18 @@ namespace Helicopter
 			string text = number.ToString();
 			for (int i = 0; i < text.Length; i++)
 			{
-				int num = (int)char.GetNumericValue(text[i]);
-				spriteBatch.Draw(Global.numbersTexture, startingPosition, (Rectangle?)new Rectangle(num * 36, 0, 36, 32), Global.tunnelColor, 0f, startingOrigin, this.scale, SpriteEffects.None, 0f);
-				startingPosition.X += 38f * this.scale;
+				if (SongManager.IsNyanPack)
+				{
+					int num = (int)char.GetNumericValue(text[i]);
+					spriteBatch.Draw(Global.numbersTexture, startingPosition, (Rectangle?)new Rectangle(num * 36, 0, 36, 32), Color.White, 0f, startingOrigin, this.scale, SpriteEffects.None, 0f);
+					startingPosition.X += 38f * this.scale;
+				}
+				else
+				{
+					int num = (int)char.GetNumericValue(text[i]);
+					spriteBatch.Draw(Global.numbersTexture, startingPosition, (Rectangle?)new Rectangle(num * 36, 0, 36, 32), Global.tunnelColor, 0f, startingOrigin, this.scale, SpriteEffects.None, 0f);
+					startingPosition.X += 38f * this.scale;
+				}
 			}
 		}
 

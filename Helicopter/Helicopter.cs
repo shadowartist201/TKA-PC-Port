@@ -219,12 +219,15 @@ namespace Helicopter
 				base.SetAnimation(new Rectangle(0, 816, 81, 70), 19, 0.05f); //mcdonalds kitten
 				break;
 			case 21:
+				RainbowTrail.nyancat = true;
 				base.SetAnimation(new Rectangle(8, 896, 85, 53), 6, 0.07f); //nyan cat
 				break;
 			case 22:
+                RainbowTrail.tacnyan = true;
 				base.SetAnimation(new Rectangle(6, 956, 84, 53), 12, 0.07f); //tac nyan
 				break;
 			case 23:
+                RainbowTrail.gameboy = true;
 				base.SetAnimation(new Rectangle(9, 1028, 84, 53), 12, 0.07f); //gameboy cat
 				break;
 			}
@@ -236,7 +239,7 @@ namespace Helicopter
 			{
 				this.particleEmitter.TurnOff();
 			}
-			if (newAnimation == 1)
+			if (newAnimation == 1 || newAnimation == 21 || newAnimation == 22 || newAnimation == 23)
 			{
 				this.rainbowTrail.TurnOn();
 			}

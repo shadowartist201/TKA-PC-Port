@@ -1,14 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using Android.Views;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Input.Touch;
 
 namespace Helicopter
 {
@@ -61,7 +59,7 @@ namespace Helicopter
 
         private GraphicsDeviceManager graphics;
 
-        private SpriteBatch spriteBatch;
+		public static SpriteBatch spriteBatch;
 
         private InputState currInput = new InputState();
 
@@ -112,6 +110,10 @@ namespace Helicopter
         private DancerManager dancerManager;
 
         private HeartsManager heartsManager;
+
+		private ClapperManager clapperManager;
+
+		private LetterManager letterManager;
 
         private SongManager songManager;
 
@@ -197,8 +199,6 @@ namespace Helicopter
             Resolution.SetVirtualResolution(1280, 720);
             Resolution.SetResolution(1280,720, false);
             base.IsFixedTimeStep = false;
-            touchLocations = new TouchCollection(del);
-            this.graphics.ApplyChanges();
         }
 
         private Viewport ResetViewport()
@@ -242,11 +242,9 @@ namespace Helicopter
         {
             //MediaPlayer.IsVisualizationEnabled = true;
             this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
-            Resolution.SetResolution(graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Width, graphics.GraphicsDevice.Adapter.CurrentDisplayMode.Height, true);
-            Global.soundEffects = new List<SoundEffect>();
-            //Global.audioEngine = new AudioEngine("Content/Music/newXactProject.xgs");
-            //Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music/Wave Bank.xwb");
-            //Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music/Sound Bank.xsb");
+			Global.audioEngine = new AudioEngine("Content/Music/newXactProject.xgs");
+			Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music/Wave Bank.xwb");
+			Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music/Sound Bank.xsb");
             Global.itemSelectedEffect = new ItemSelectedEffect();
             Viewport test = ResetViewport();
             safeSpace = test.Bounds;
@@ -258,7 +256,7 @@ namespace Helicopter
         protected override void LoadContent()
         {
             Global.pixel = new Texture2D(base.GraphicsDevice, 1, 1);
-            this.spriteBatch = new SpriteBatch(base.GraphicsDevice);
+            spriteBatch = new SpriteBatch(base.GraphicsDevice);
             this.LoadAssets();
             this.LoadMenus();
             this.LoadBackground();
@@ -653,6 +651,8 @@ namespace Helicopter
             this.meatToMouth = new MeatToMouth();
             this.explosionManager = new ExplosionManager();
             this.dancerManager = new DancerManager();
+			this.letterManager = new LetterManager();
+			this.clapperManager = new ClapperManager();
             this.heartsManager = new HeartsManager();
         }
 
@@ -1018,6 +1018,8 @@ namespace Helicopter
             this.explosionManager.Update(dt);
             this.dancerManager.Update(dt);
             this.heartsManager.Update(dt);
+			this.clapperManager.Update(dt);
+			this.letterManager.Update(dt);
             this.scoreSystem.Update(dt);
         }
 
@@ -1070,27 +1072,27 @@ namespace Helicopter
                     {
                         if (this.splashScreenIndex == 0)
                         {
-                            this.spriteBatch.Draw(Global.splashTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
+                            spriteBatch.Draw(Global.splashTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
                         }
                         else
                         {
-                            this.spriteBatch.Draw(Global.splashTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 720, 1280, 720), Color.White);
+						spriteBatch.Draw(Global.splashTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 720, 1280, 720), Color.White);
                         }
                     }
                     else
                     {
-                        this.mainMenu.DrawBackground(this.spriteBatch);
-                        this.openingMenu.Draw(this.spriteBatch);
+					this.mainMenu.DrawBackground(spriteBatch);
+					this.openingMenu.Draw(spriteBatch);
                     }
                     break;
                 case GameState.MAIN_MENU:
-                    this.mainMenu.Draw(this.spriteBatch);
+				this.mainMenu.Draw(spriteBatch);
                     break;
                 case GameState.STAGE_SELECT:
-                    this.stageSelectMenu.Draw(this.spriteBatch);
+				this.stageSelectMenu.Draw(spriteBatch);
                     break;
                 case GameState.CAT_SELECT:
-                    this.catSelectMenu.Draw(this.spriteBatch, this.stageSelectMenu.getCurrentLevel(), this.scoreSystem);
+				this.catSelectMenu.Draw(spriteBatch, this.stageSelectMenu.getCurrentLevel(), this.scoreSystem);
                     break;
                 case GameState.PLAY:
                     if (!this.tunnel.IsOn() && !this.helicopter.IsDead())
@@ -1099,19 +1101,19 @@ namespace Helicopter
                     }
                     break;
                 case GameState.PAUSE:
-                    this.pauseMenu.Draw(this.spriteBatch);
+				this.pauseMenu.Draw(spriteBatch);
                     break;
                 case GameState.TRIAL_PAUSE:
-                    this.trialMenu.Draw(this.spriteBatch);
+				this.trialMenu.Draw(spriteBatch);
                     break;
                 case GameState.OPTIONS:
-                    this.optionsMenu.Draw(this.spriteBatch);
+				this.optionsMenu.Draw(spriteBatch);
                     break;
                 case GameState.LEADERBOARDS:
-                    this.leaderboardsMenu.Draw(this.spriteBatch, this.scoreSystem);
+				this.leaderboardsMenu.Draw(spriteBatch, this.scoreSystem);
                     break;
                 case GameState.CREDITS:
-                    this.creditsMenu.Draw(this.spriteBatch);
+				this.creditsMenu.Draw(spriteBatch);
                     break;
                 case GameState.EXIT:
                     break;
@@ -1123,7 +1125,7 @@ namespace Helicopter
             this.DrawBackground(gameTime);
             this.DrawHelicopter();
             this.DrawForeground();
-            this.scoreSystem.Draw(this.spriteBatch);
+            this.scoreSystem.Draw(spriteBatch);
             if (SongManager.IsMeatPack)
             {
                 spriteBatch.Draw(Global.pauseButton, new Rectangle(100, 75, 64, 64), Color.White);
@@ -1137,66 +1139,78 @@ namespace Helicopter
 
         private void DrawBackground(GameTime gameTime)
         {
-            this.background.DrawBackBack(this.spriteBatch);
-            this.bSpriteManager.DrawBack(this.spriteBatch);
-            this.background.DrawMiddleBack(this.spriteBatch);
-            this.bSpriteManager.DrawMiddleBack(this.spriteBatch);
-            this.background.DrawBack(this.spriteBatch);
-            this.bSpriteManager.DrawMiddle(this.spriteBatch);
-            this.background.DrawMiddle(this.spriteBatch);
-            this.bSpriteManager.DrawFore(this.spriteBatch);
-            this.tunnel.Draw(this.spriteBatch);
+			this.background.DrawBackBack(spriteBatch);
+			this.bSpriteManager.DrawBack(spriteBatch);
+			this.background.DrawMiddleBack(spriteBatch);
+			this.bSpriteManager.DrawMiddleBack(spriteBatch);
+			this.background.DrawBack(spriteBatch);
+			this.bSpriteManager.DrawMiddle(spriteBatch);
+			this.background.DrawMiddle(spriteBatch);
+			this.bSpriteManager.DrawFore(spriteBatch);
+			this.tunnel.Draw(spriteBatch);
         }
 
         private void DrawHelicopter()
         {
-            this.helicopter.Draw(this.spriteBatch);
+			this.helicopter.Draw(spriteBatch);
         }
 
         private void DrawForeground()
         {
-            this.meatToMouth.Draw(this.spriteBatch);
-            this.heartsManager.Draw(this.spriteBatch);
-            this.explosionManager.Draw(this.spriteBatch);
-            this.dancerManager.Draw(this.spriteBatch);
-            this.karaokeLyrics.Draw(this.spriteBatch);
-            this.equalizer.Draw(this.spriteBatch);
-            this.shineManager.Draw(this.spriteBatch);
-            this.fluctuationManager.Draw(this.spriteBatch);
-            this.butterflyEffect.Draw(this.spriteBatch);
+			this.meatToMouth.Draw(spriteBatch);
+			this.heartsManager.Draw(spriteBatch);
+			this.explosionManager.Draw(spriteBatch);
+			this.dancerManager.Draw(spriteBatch);
+			this.letterManager.Draw(spriteBatch);
+			this.clapperManager.Draw(spriteBatch);
+			this.karaokeLyrics.Draw(spriteBatch);
+			this.equalizer.Draw(spriteBatch);
+			this.shineManager.Draw(spriteBatch);
+			this.fluctuationManager.Draw(spriteBatch);
+			this.butterflyEffect.Draw(spriteBatch);
             ParticleEmitter[] array = this.shootingStars;
             foreach (ParticleEmitter particleEmitter in array)
             {
-                particleEmitter.Draw(this.spriteBatch);
+				particleEmitter.Draw(spriteBatch);
             }
             Light[] array2 = this.lights;
             foreach (Light light in array2)
             {
-                light.Draw(this.spriteBatch);
+				light.Draw(spriteBatch);
             }
             Laser[] array3 = this.lasers;
             foreach (Laser laser in array3)
             {
-                laser.Draw(this.spriteBatch);
+				laser.Draw(spriteBatch);
             }
-            this.spreadLaser.Draw(this.spriteBatch);
-            this.lyricEffect.Draw(this.spriteBatch);
-            this.heart.Draw(this.spriteBatch);
-            this.rainbow.Draw(this.spriteBatch);
-            this.eyes.Draw(this.spriteBatch);
-            this.hand.Draw(this.spriteBatch);
-            this.fireworks.Draw(this.spriteBatch);
-            this.flashManager.Draw(this.spriteBatch);
+			this.spreadLaser.Draw(spriteBatch);
+			this.lyricEffect.Draw(spriteBatch);
+			this.heart.Draw(spriteBatch);
+			this.rainbow.Draw(spriteBatch);
+			this.eyes.Draw(spriteBatch);
+			this.hand.Draw(spriteBatch);
+			this.fireworks.Draw(spriteBatch);
+			this.flashManager.Draw(spriteBatch);
             this.RainbowOverlay(spriteBatch);
         }
 
         private void DisplayInstructions()
         {
-            this.spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-            this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
-            this.spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-            this.spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
+			if (SongManager.IsNyanPack)
+			{
+				spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
         }
+			else
+			{
+				spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
+			}
+		}
 
         private static int IsOdd(int i)
         {
@@ -1426,7 +1440,7 @@ namespace Helicopter
                 {
                     case 0:
                         this.tunnel.Set(TunnelEffect.Normal);
-                        this.tunnel.SetColor(Color.Black, Color.Red, Color.Blue);
+					this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
                         break;
                     case 1:
                         this.hand.TurnOn(directedDownward_: false);
@@ -1446,7 +1460,7 @@ namespace Helicopter
                         break;
                     case 6:
                         this.tunnel.Set(TunnelEffect.Normal);
-                        this.tunnel.SetColor(Color.Black, Color.Red, Color.Blue);
+					this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
                         this.scoreSystem.TurnOffBass();
                         this.butterflyEffect.TurnOn1();
                         break;
@@ -1499,7 +1513,7 @@ namespace Helicopter
                         break;
                     case 23:
                         this.tunnel.Set(TunnelEffect.Normal);
-                        this.tunnel.SetColor(Color.Black, Color.Red, Color.Blue);
+					this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
                         break;
                     case 24:
                         this.hand.TurnOn(directedDownward_: false);
@@ -1586,7 +1600,7 @@ namespace Helicopter
                         break;
                     case 44:
                         this.tunnel.Set(TunnelEffect.Normal);
-                        this.tunnel.SetColor(Color.Black, Color.Red, Color.Blue);
+					this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
                         this.flashManager.Reset();
                         break;
                     case 45:
@@ -2152,7 +2166,8 @@ namespace Helicopter
                         break;
                     case 1:
                         //TurnOnClappers();
-                        clappersOn = true;
+						clapperManager.TurnOn(0);
+						//clappersOn = true;
                         break;
                     case 2:
                         this.tunnel.Set(TunnelEffect.Nyan);
@@ -2165,25 +2180,30 @@ namespace Helicopter
                         break;
                     case 6:
                         //TurnOffClappers();
-                        clappersOn = false;
+						//clappersOn = false;
+						clapperManager.TurnOff();
                         break;
                     case 7:
                         break;
                     case 8:
                         //TurnOnLetters();
-                        lettersOn = true;
+						//lettersOn = true;
+						letterManager.TurnOn(0);
                         Camera.DoRotatingNyan(Global.BPM * 8f);
                         break;
                     case 9:
                         //TurnOnClappers();
-                        clappersOn = true;
+						//clappersOn = true;
+						clapperManager.TurnOn(0); //this is out of sync
                         //TurnOffLetters();
-                        lettersOn = false;
+						//lettersOn = false;
+						letterManager.TurnOff();
                         Camera.StopRotating();
                         break;
                     case 10:
                         //TurnOffClappers();
-                        clappersOn = false;
+						//clappersOn = false;
+						clapperManager.TurnOff();
                         break;
                     case 11:
                         break;
@@ -2215,15 +2235,16 @@ namespace Helicopter
                         break;
                     case 20:
                         this.tunnel.Set(TunnelEffect.Disappear);
-                        Camera.DoRotatingNyan(Global.BPM * 8f);
-                        Camera.DoFlippingNyan(Global.BPM * 8f);
+                        Camera.DoRotatingNyan(Global.BPM * 8f); //out of
+                        Camera.DoFlippingNyan(Global.BPM * 8f); //sync
                         Camera.SetEffect(6);
                         rainbowOverlayEnabled = true;
                         //TurnOnLetters();
-                        lettersOn = true;
+						letterManager.TurnOn(0);
+						//lettersOn = true;
                         break;
                     case 21:
-                        lettersOn = false;
+						//lettersOn = false;
                         this.ResetChoreography(1, alternating: false, meat: false);
                         Camera.SetEffect(-1);
                         Camera.StopFlipping();
@@ -2236,7 +2257,7 @@ namespace Helicopter
                         break;
                 }
                 this.currEvent++;
-                if (this.currEvent == 19)
+				if (this.currEvent == 23)
                 {
                     this.currEvent = 0;
                 }
@@ -2247,7 +2268,7 @@ namespace Helicopter
         {
             if (rainbowOverlayEnabled)
             {
-                spriteBatch.Draw(overlay, new Rectangle(0, 0, 1280, 720), new Rectangle(0, 0, 1, 768), new Color(255, 255, 255, 0.5f), 0f, Vector2.Zero, SpriteEffects.None, 0f);
+                spriteBatch.Draw(overlay, new Rectangle(0, 0, 1280, 720), new Rectangle(0,0,1,768), new Color(255,255,255,0.5f), 0f, Vector2.Zero, SpriteEffects.None, 0f);
             }
             if (clappersOn)
             {
@@ -2517,6 +2538,11 @@ namespace Helicopter
             this.explosionManager.TurnOff();
             this.dancerManager.TurnOff();
             this.heartsManager.TurnOff();
+			this.letterManager.TurnOff();
+			this.clapperManager.TurnOff();
+            Camera.StopFlipping();
+            Camera.StopRotating();
+            this.rainbowOverlayEnabled = false;
             Camera.Reset();
             if (!meat)
             {

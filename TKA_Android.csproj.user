@@ -3,7 +3,7 @@
   <PropertyGroup>
     <SelectedDevice>Samsung SM-F946U1</SelectedDevice>
     <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
-    <ActiveDebugProfile>Samsung SM-F946U1 (Android 13.0 - API 33)</ActiveDebugProfile>
+    <ActiveDebugProfile>Samsung SM-F946U1 (Android 14.0 - API 34)</ActiveDebugProfile>
     <DefaultDevice>pixel_5_-_api_31</DefaultDevice>
     <_LastSelectedProfileId>C:\Users\porte\Source\Repos\shadowartist201\TKA-PC-Port\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>

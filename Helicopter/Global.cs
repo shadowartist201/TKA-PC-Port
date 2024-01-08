@@ -142,7 +142,7 @@ namespace Helicopter
 
 		public static SoundBank soundBank;
 
-		public static Color tunnelColor = Color.Black;
+		public static Color tunnelColor = Color.White;
 
 		public static Color[] rainbowColors = new Color[6]
 		{
@@ -186,8 +186,10 @@ namespace Helicopter
 
 		private static float vibrationTime = 0.1f;
 
-		public static List<SoundEffect> soundEffects;
+		public static List<SoundEffect> soundEffects = new();
 
+		public static Vector2 resolution;
+        private static bool fullscreenOn;
 
         public static Random Random => Global.random;
 
@@ -228,16 +230,16 @@ namespace Helicopter
             switch (Global.Random.Next(0, 4))
 			{
 			case 0:
-                soundEffects[0].Play();
+				Global.soundBank.PlayCue("cat_01");
                 break;
 			case 1:
-                soundEffects[1].Play();
+				Global.soundBank.PlayCue("cat_02");
                 break;
 			case 2:
-                soundEffects[2].Play();
+				Global.soundBank.PlayCue("cat_03");
                 break;
 			case 3:
-                soundEffects[3].Play();
+				Global.soundBank.PlayCue("cat_04");
                 break;
 			}
 		}
@@ -359,6 +361,34 @@ namespace Helicopter
 				{
 					Global.SetVibrationTemp(on: false);
 				}
+			}
+		}
+
+        public static void SetFullscreenOn(bool on)
+        {
+            if (on)
+            {
+                Global.fullscreenOn = true;
+            }
+            else
+            {
+                Global.fullscreenOn = false;
+            }
+        }
+
+		public static void SetResolution(int index)
+		{
+			switch (index)
+			{
+				case 1:
+					Global.resolution = new Vector2(854, 480);
+					break;
+				case 2:
+					Global.resolution = new Vector2(1280, 720);
+					break;
+				case 3:
+					Global.resolution = new Vector2(1920, 1080);
+					break;
 			}
 		}
 	}
