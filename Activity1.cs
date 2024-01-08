@@ -34,6 +34,9 @@ namespace Helicopter
             windowInsetsController.SystemBarsBehavior = WindowInsetsControllerCompat.BehaviorShowTransientBarsBySwipe;
             windowInsetsController.Hide(WindowInsetsCompat.Type.SystemBars());
 
+            Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
+            Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+
             _game.Run();
         }
     }
