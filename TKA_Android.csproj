@@ -10,17 +10,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <Optimize>False</Optimize>
-    <DebugSymbols>True</DebugSymbols>
+    <DebugSymbols>False</DebugSymbols>
     <RunAOTCompilation>False</RunAOTCompilation>
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
-    <PublishTrimmed>False</PublishTrimmed>
+    <PublishTrimmed>True</PublishTrimmed>
     <Debugger>Xamarin</Debugger>
+    <AndroidKeyStore>False</AndroidKeyStore>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
     <Optimize>False</Optimize>
     <Debugger>Xamarin</Debugger>
-    <DebugSymbols>True</DebugSymbols>
+    <DebugSymbols>False</DebugSymbols>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <AndroidKeyStore>False</AndroidKeyStore>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\Content\wave.xnb" />

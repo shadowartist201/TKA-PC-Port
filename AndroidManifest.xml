@@ -3,5 +3,5 @@
 	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="31" />
 	<uses-feature android:glEsVersion="0x00020000" android:required="true" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<application android:label="TKA-Android"></application>
+	<application android:label="Techno Kitten Adventure" android:icon="@drawable/icon"></application>
 </manifest>
