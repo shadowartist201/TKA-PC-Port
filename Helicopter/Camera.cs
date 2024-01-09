@@ -265,6 +265,7 @@ namespace Helicopter
 
         public static void Draw(SpriteBatch spriteBatch, RenderTarget2D renderTarget, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
         {
+            float adjustedTime = 0;
             switch (Camera.effectIndex)
             {
                 case 0:
@@ -276,12 +277,28 @@ namespace Helicopter
                     break;
                 case 2:
                     //Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
-                    Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
+                    if ((float)MediaPlayer.PlayPosition.TotalSeconds > 110.0)
+                    {
+                        adjustedTime = (float)(MediaPlayer.PlayPosition.TotalSeconds % 110.0);
+                    }
+                    else
+                    {
+                        adjustedTime = (float)MediaPlayer.PlayPosition.TotalSeconds;
+                    }
+                    Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(adjustedTime);
                     break;
                 case 3:
                     //Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
                     //Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-                    Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
+                    if ((float)MediaPlayer.PlayPosition.TotalSeconds > 120.0)
+                    {
+                        adjustedTime = (float)(MediaPlayer.PlayPosition.TotalSeconds % 121.0);
+                    }
+                    else
+                    {
+                        adjustedTime = (float)MediaPlayer.PlayPosition.TotalSeconds;
+                    }
+                    Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(adjustedTime);
                     break;
                 case 4:
                     //Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);

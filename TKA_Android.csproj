@@ -23,12 +23,23 @@
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\Content\wave.xnb" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Framework.Android" Version="3.8.1.303" />
     <PackageReference Include="Xamarin.AndroidX.Core" Version="1.10.1.2" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Update="Assets\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Content\bin\Android\Content\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\wave.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidAsset>
   </ItemGroup>
