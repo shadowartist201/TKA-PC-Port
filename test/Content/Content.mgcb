@@ -1009,6 +1009,12 @@
 /processorParam:TextureFormat=Color
 /build:rainbowOverlay.png
 
+#begin shakeblur.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:shakeblur.fx
+
 #begin wave.fx
 /importer:EffectImporter
 /processor:EffectProcessor

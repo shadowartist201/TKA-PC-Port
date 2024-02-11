@@ -551,6 +551,7 @@ namespace Helicopter
 			{
 				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);
 			}
+			Camera.effects[0] = base.Content.Load<Effect>("shakeblur");
             Camera.effects[3] = base.Content.Load<Effect>("wave");
             Camera.effects[2] = base.Content.Load<Effect>("circles");
             Camera.effects[1] = base.Content.Load<Effect>("outline");
@@ -2074,7 +2075,8 @@ namespace Helicopter
 				case 13:
 					this.heartsManager.TurnOff();
 					this.tunnel.Set(TunnelEffect.Disappear);
-					Camera.SetEffect(3);
+				    //Camera.SetEffect(3);
+				    Camera.SetEffect(-1);
 					this.dancerManager.TurnOn(0);
 					break;
 				case 14:
