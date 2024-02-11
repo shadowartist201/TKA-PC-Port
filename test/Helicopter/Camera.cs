@@ -3,6 +3,8 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using static Helicopter.Camera;
 
 namespace Helicopter
 {
@@ -288,9 +290,12 @@ namespace Helicopter
                     Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
                     //Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
                     break;
+				case 5:
+                    Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
+                    break;
 			}
 			graphicsDevice.SetRenderTarget(null);
-			if (Camera.effectIndex == 0 || Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3 || Camera.effectIndex == 4)
+			if (Camera.effectIndex == 0 || Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3 || Camera.effectIndex == 4 || Camera.effectIndex == 5)
 			{
 				graphicsDevice.Clear(Color.White);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
@@ -361,7 +366,7 @@ namespace Helicopter
 					Camera.alphaMax = 0.6f;
 					Camera.alphaRate = 0f;
 					Camera.thetaRate = 18.2212372f;
-					Camera.effectIndex = 0;
+					Camera.effectIndex = 5;
 					break;
 				case 4:
 					Camera.effectIndex = 3;
@@ -519,5 +524,5 @@ namespace Helicopter
 			}
 			return new Color(one);
 		}
-	}
+    }
 }

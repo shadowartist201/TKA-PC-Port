@@ -246,9 +246,7 @@ namespace Helicopter
 		{
             float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
-			//Debug.WriteLine(gameTime.ElapsedGameTime + " || " + gameTime.TotalGameTime + " || " + MediaPlayer.PlayPosition);
-			Debug.WriteLine("Event: " + this.currEvent);
-			//Global.IsTrialMode = Guide.IsTrialMode;
+			//Debug.WriteLine("Event: " + this.currEvent);
 			this.currInput.Update();
 			if (this.currInput.IsButtonUp(Buttons.A))
 			{
@@ -551,6 +549,7 @@ namespace Helicopter
 			{
 				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);
 			}
+			Camera.effects[5] = base.Content.Load<Effect>("drunk");
 			Camera.effects[4] = base.Content.Load<Effect>("shakezigzag");
             Camera.effects[3] = base.Content.Load<Effect>("wave");
             Camera.effects[2] = base.Content.Load<Effect>("circles");
@@ -2076,14 +2075,13 @@ namespace Helicopter
 				case 13:
 					this.heartsManager.TurnOff();
 					this.tunnel.Set(TunnelEffect.Disappear);
-				    //Camera.SetEffect(3);
-				    Camera.SetEffect(-1);
+				    Camera.SetEffect(3);
 					this.dancerManager.TurnOn(0);
 					break;
 				case 14:
 					this.tunnel.Set(TunnelEffect.Normal);
 					this.explosionManager.TurnOn();
-					Camera.SetEffect(0);
+					Camera.SetEffect(0); //dancerManager gets borked when this is enabled here
 					break;
 				case 15:
 					Camera.SetEffect(2);
@@ -2114,13 +2112,11 @@ namespace Helicopter
 		public void UpdateChoreographyNyan(float dt, float elapsedMilliseconds)
 		{
 			Camera.Update(dt);
-			//Debug.WriteLine(MediaPlayer.PlayPosition);
 			if (elapsedMilliseconds > this.eventTimes[this.currEvent])
 			{
 				switch (this.currEvent)
 				{
 					case 0:
-                        //MediaPlayer.Play(this.songManager.CurrentSong);
                         break;
 					case 1:
 						//TurnOnClappers();

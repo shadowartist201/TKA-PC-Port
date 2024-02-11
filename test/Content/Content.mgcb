@@ -19,6 +19,12 @@
 /processorParam:DebugMode=Auto
 /build:circles.fx
 
+#begin drunk.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:drunk.fx
+
 #begin Graphics/Background/cloudBGXbox.png
 /importer:TextureImporter
 /processor:TextureProcessor
