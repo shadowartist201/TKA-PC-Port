@@ -270,10 +270,6 @@ namespace Helicopter
 			{
 				case 0:
 					Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
-					//Camera.effects[Camera.effectIndex].Parameters["iResolution"].SetValue(new Vector2(1280,720));
-					//Camera.effects[Camera.effectIndex].Parameters["World"].SetValue(Matrix.Identity);
-					//Camera.effects[Camera.effectIndex].Parameters["View"].SetValue(Matrix.Identity);
-					//Camera.effects[Camera.effectIndex].Parameters["Projection"].SetValue(Matrix.CreateOrthographicOffCenter(0, 1280, 720, 0, 0, 1));
 					break;
 				case 1:
 					//Camera.effects[5].Parameters["s0"].SetValue((Texture2D)renderTarget);
@@ -289,12 +285,12 @@ namespace Helicopter
 					Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
 					break;
 				case 4:
-					//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-					//Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
-					break;
+                    Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue((float)MediaPlayer.PlayPosition.TotalSeconds);
+                    //Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
+                    break;
 			}
 			graphicsDevice.SetRenderTarget(null);
-			if (Camera.effectIndex == 0 || Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3)
+			if (Camera.effectIndex == 0 || Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3 || Camera.effectIndex == 4)
 			{
 				graphicsDevice.Clear(Color.White);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
