@@ -16,38 +16,44 @@ sampler SpriteTextureSampler = sampler_state
 };
 
 float iTime;
+float shakeAmount;
+float shakeVelocity;
+
+cbuffer MyConstants
+{
+    float offset[20];
+}
+
 
 // Input/output structs 
 float4 MainPS(float4 pos : SV_POSITION, float4 color0 : COLOR0, float2 texCoord : TEXCOORD0) : COLOR
 {
     // Normalized pixel coordinates
-    float2 iResolution = float2(1280, 720);
-    float2 fragCoord = texCoord * iResolution;
-    float2 uv = fragCoord / iResolution.xy;
+    //float2 iResolution = float2(1280, 720);
+    //float2 fragCoord = texCoord * iResolution;
+    float2 uv = texCoord;
 
     // Time variable 
     float time = iTime;
 
     // Shake 
-    float shakeAmount = 0.01 * sin(time * 29.0);
-    float shakeVelocity = 0.1 * cos(time * 29.0);
     uv.x += shakeAmount;
 
     // Blur 
-    //const int numSamples = 5;
-    const float blurStrength = 0.05;
+    const int numSamples = 20;
+    const float blurStrength = 0.10;
 
     float3 color = float3(0.0,0.0,0.0);
 
     if (shakeVelocity <= 0.0)
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < numSamples; i++)
         {
-            float offset = (float(i) - float(5 - 1) / 2.0) * blurStrength * shakeVelocity;
-            color += SpriteTexture.Sample(SpriteTextureSampler, uv + float2(offset, 0.0)).rgb;
+            //float offset = (float(i) - float(numSamples - 1) / 2.0) * blurStrength * shakeVelocity;
+            color += SpriteTexture.Sample(SpriteTextureSampler, uv + float2(offset[i], 0.0)).rgb;
 
         }
-        color /= float(5);
+        color /= float(numSamples);
     }
     else
     {

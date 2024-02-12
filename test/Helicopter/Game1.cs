@@ -2039,7 +2039,7 @@ namespace Helicopter
 				case 0:
 					this.explosionManager.TurnOn();
 					Camera.SetEffect(0);
-					break;
+                    break;
 				case 4:
 					this.explosionManager.TurnOff();
 					Camera.SetEffect(-1);
