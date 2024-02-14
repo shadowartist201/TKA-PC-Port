@@ -8,9 +8,9 @@ namespace Helicopter
 	{
 		private bool visible_;
 
-        //private VisualizationData visualizationData_;
+        private VisualizationData visualizationData_;
         private float[] visualizationDataA_ = new float[826]
-    {
+         {
         9.201338f, 11.44847f, 7.39814472f, 7.03962374f, 9.142147f, 10.2057858f, 8.978097f, 9.114546f, 9.615604f, 9.77862549f,
         5.536645f, 4.94635963f, 8.619459f, 9.160499f, 9.685738f, 12.14972f, 11.2068262f, 9.940975f, 7.938308f, 8.257543f,
         6.916685f, 7.127015f, 7.709695f, 8.244675f, 8.012174f, 8.905652f, 8.725481f, 9.45215f, 5.2481575f, 3.34073544f,
@@ -215,7 +215,7 @@ namespace Helicopter
 			this.dWidth_ = Global.equalizerBar.Width + 2;
 			this.dHeight_ = Global.equalizerBar.Height + 2;
 			this.equalizerHeight_ = (int)(576f / this.dHeight_);
-			//this.visualizationData_ = new VisualizationData();
+			this.visualizationData_ = new VisualizationData();
 		}
 
 		public void Update(float dt)
@@ -224,7 +224,7 @@ namespace Helicopter
 			{
 				return;
 			}
-            /*MediaPlayer.GetVisualizationData(this.visualizationData_);
+            MediaPlayer.GetVisualizationData(this.visualizationData_);
 			for (int i = 0; i < 16; i++)
 			{
 				this.freqHeights_[i] = 0f;
@@ -236,7 +236,7 @@ namespace Helicopter
 				this.freqHeights_[i] *= this.equalizerHeight_;
 				this.freqHeights_[i] -= 10f;
 				this.freqHeights_[i] *= 1.15f;
-			}*/
+			}
             shiftTimer_ += dt;
             if (shiftTimer_ > 0.05f)
             {

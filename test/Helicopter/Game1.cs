@@ -209,7 +209,7 @@ namespace Helicopter
 
 		protected override void Initialize()
 		{
-			//MediaPlayer.IsVisualizationEnabled = true;
+			MediaPlayer.IsVisualizationEnabled = true;
 			this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
 			Global.audioEngine = new AudioEngine("Content/Music//newXactProject.xgs");
 			Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music//Wave Bank.xwb");
@@ -227,6 +227,7 @@ namespace Helicopter
 			this.LoadHelicopter();
 			this.LoadForeground();
 			this.LoadEventInfo(0);
+			MediaPlayer.Stop();
 			MediaPlayer.Play(this.songManager.CurrentSong);
 			MediaPlayer.IsRepeating = true;
 			MediaPlayer.Volume = 0.10f;
@@ -324,7 +325,8 @@ namespace Helicopter
 					this.background.LoadNewBackground(this.stageSelectMenu.getCurrentLevel());
 					this.bSpriteManager.LoadNewBackground(this.stageSelectMenu.getCurrentLevel());
 					this.ResetGame(this.stageSelectMenu.getCurrentLevel() == 3);
-					MediaPlayer.Play(this.songManager.CurrentSong);
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(this.songManager.CurrentSong);
 					this.catSelectMenu.SetLastGameState(GameState.STAGE_SELECT);
 					break;
 				case GameState.PLAY:
@@ -337,7 +339,8 @@ namespace Helicopter
 					{
 						Camera.SetEffect(-1);
 					}
-					MediaPlayer.Play(this.songManager.CurrentSong);
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(this.songManager.CurrentSong);
 					this.justStarted = true;
 					Global.ResetVibration();
 					break;
@@ -356,7 +359,8 @@ namespace Helicopter
 					Global.ResetVibration();
 					MediaPlayer.Stop();
 					this.songManager.LoadNewSong(-1);
-					MediaPlayer.Play(this.songManager.CurrentSong);
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(this.songManager.CurrentSong);
 					break;
 				}
 				if (this.catSelectMenu.LastGameState != GameState.PAUSE)
@@ -393,7 +397,8 @@ namespace Helicopter
 					Global.ResetVibration();
 					MediaPlayer.Stop();
 					this.songManager.LoadNewSong(-1);
-					MediaPlayer.Play(this.songManager.CurrentSong);
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(this.songManager.CurrentSong);
 					break;
 				case GameState.STAGE_SELECT:
 					this.stageSelectMenu.SetLastGameState(GameState.PAUSE);
