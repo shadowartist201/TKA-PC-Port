@@ -400,7 +400,7 @@ namespace Helicopter
                     Camera.alphaMax = 0.6f;
                     Camera.alphaRate = 0f;
                     Camera.thetaRate = 18.2212372f;
-                    Camera.effectIndex = 0;
+                    Camera.effectIndex = 5;
                     break;
                 case 4:
                     Camera.effectIndex = 3;
