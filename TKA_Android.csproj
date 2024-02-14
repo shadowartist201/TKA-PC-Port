@@ -10,7 +10,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <Optimize>False</Optimize>
-    <DebugSymbols>False</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <RunAOTCompilation>False</RunAOTCompilation>
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
     <PublishTrimmed>True</PublishTrimmed>
@@ -21,7 +21,7 @@
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
     <Optimize>False</Optimize>
     <Debugger>Xamarin</Debugger>
-    <DebugSymbols>False</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidKeyStore>False</AndroidKeyStore>
   </PropertyGroup>
@@ -45,6 +45,19 @@
     <AndroidAsset Update="Assets\Content\wave.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

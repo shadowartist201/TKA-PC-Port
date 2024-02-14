@@ -587,9 +587,12 @@ namespace Helicopter
             {
                 //Camera.effects[i] = base.Content.Load<Effect>("Effects/effect" + i);
             }
+            Camera.effects[5] = base.Content.Load<Effect>("drunk");
+			Camera.effects[4] = base.Content.Load<Effect>("shakezigzag");
             Camera.effects[3] = base.Content.Load<Effect>("wave");
             Camera.effects[2] = base.Content.Load<Effect>("circles");
             Camera.effects[1] = base.Content.Load<Effect>("outline");
+            Camera.effects[0] = base.Content.Load<Effect>("shakeblur");
             overlay = base.Content.Load<Texture2D>("rainbowOverlay");
             this.scoreSystem = new ScoreSystem();
             this.songManager = new SongManager(this);
@@ -2083,7 +2086,7 @@ namespace Helicopter
                 {
                     case 0:
                         this.explosionManager.TurnOn();
-                        Camera.SetEffect(0);
+                        Camera.SetEffect(0); //broken
                         break;
                     case 4:
                         this.explosionManager.TurnOff();
@@ -2095,11 +2098,11 @@ namespace Helicopter
                         break;
                     case 6:
                         this.dancerManager.TurnOff();
-                        Camera.SetEffect(1); //negative
+                        Camera.SetEffect(1); 
                         this.heartsManager.TurnOn();
                         break;
                     case 8:
-                        Camera.SetEffect(2);
+                        Camera.SetEffect(2); //broken
                         break;
                     case 9:
                         this.heartsManager.TurnOff();
@@ -2107,20 +2110,20 @@ namespace Helicopter
                         this.tunnel.Set(TunnelEffect.Disappear);
                         break;
                     case 10:
-                        Camera.SetEffect(5); //circles
+                        Camera.SetEffect(5); 
                         this.tunnel.Set(TunnelEffect.Normal);
                         break;
                     case 11:
                         Camera.SetEffect(4);
                         break;
                     case 12:
-                        Camera.SetEffect(1); //negative
+                        Camera.SetEffect(1); 
                         this.heartsManager.TurnOn();
                         break;
                     case 13:
                         this.heartsManager.TurnOff();
                         this.tunnel.Set(TunnelEffect.Disappear);
-                        Camera.SetEffect(3);
+                        Camera.SetEffect(3); //broken
                         this.dancerManager.TurnOn(0);
                         break;
                     case 14:
@@ -2129,7 +2132,7 @@ namespace Helicopter
                         Camera.SetEffect(0);
                         break;
                     case 15:
-                        Camera.SetEffect(2);
+                        Camera.SetEffect(2); //broken
                         this.dancerManager.TurnOn(1);
                         this.heartsManager.TurnOn();
                         break;

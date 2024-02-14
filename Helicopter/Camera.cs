@@ -266,10 +266,26 @@ namespace Helicopter
         public static void Draw(SpriteBatch spriteBatch, RenderTarget2D renderTarget, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
         {
             float adjustedTime = 0;
+			float time = (float)MediaPlayer.PlayPosition.TotalSeconds;
             switch (Camera.effectIndex)
             {
                 case 0:
-                    //Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
+					int numSamples = 20;
+					float blurStrength = 0.10f;
+                    float shakeAmount = 0.001f * MathF.Sin(time * 40.0f);
+                    float shakeVelocity = 0.007f * MathF.Cos(time * 40.0f);
+					float[] offset = new float[numSamples];
+					if (shakeVelocity <= 0.0)													 
+					{
+						for (int i = 0; i < numSamples; i++)
+						{
+							offset[i] = (i - numSamples - 1 / 2.0f) * blurStrength * shakeVelocity;
+						}
+					}
+                    //Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time); 
+                    Camera.effects[Camera.effectIndex].Parameters["shakeAmount"].SetValue(shakeAmount);
+                    Camera.effects[Camera.effectIndex].Parameters["shakeVelocity"].SetValue(shakeVelocity);
+                    Camera.effects[Camera.effectIndex].Parameters["offset"].SetValue(offset);
                     break;
                 case 1:
                     //Camera.effects[5].Parameters["s0"].SetValue((Texture2D)renderTarget);
@@ -301,8 +317,11 @@ namespace Helicopter
                     Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(adjustedTime);
                     break;
                 case 4:
-                    //Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+                    Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time);
                     //Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
+                    break;
+				case 5:
+                    Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time);
                     break;
             }
             graphicsDevice.SetRenderTarget(null);
