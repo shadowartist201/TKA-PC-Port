@@ -1,8 +1,9 @@
-namespace Helicopter;
-
-public enum StorageDeviceSelectorEventResponse
+namespace Helicopter
 {
-	None,
-	Prompt,
-	Force
+	public enum StorageDeviceSelectorEventResponse
+	{
+		None,
+		Prompt,
+		Force
+	}
 }

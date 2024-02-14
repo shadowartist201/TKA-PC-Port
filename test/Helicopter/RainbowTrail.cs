@@ -7,7 +7,11 @@ namespace Helicopter
 	{
 		private bool visible_;
 
-		private float progress_;
+		public static bool nyancat;
+		public static bool tacnyan;
+		public static bool gameboy;
+
+        private float progress_;
 
 		private float progressRate_ = 160f;
 
@@ -134,10 +138,17 @@ namespace Helicopter
 			{
 				for (int i = 0; i < this.positions_.Length; i++)
 				{
-					spriteBatch.Draw(Global.cats, this.positions_[i], (Rectangle?)new Rectangle(410, 596, 4, 16), Color.White);
+					if (nyancat)
+                        spriteBatch.Draw(Global.cats, new Vector2(this.positions_[i].X, this.positions_[i].Y-12), (Rectangle?)new Rectangle(533, 900, 4, 42), Color.White);
+                    else if (tacnyan)
+                        spriteBatch.Draw(Global.cats, new Vector2(this.positions_[i].X, this.positions_[i].Y - 12), (Rectangle?)new Rectangle(1042, 964, 4, 42), Color.White);
+                    else if (gameboy)
+                        spriteBatch.Draw(Global.cats, new Vector2(this.positions_[i].X, this.positions_[i].Y - 12), (Rectangle?)new Rectangle(1049, 1033, 4, 42), Color.White);
+                    else 
+						spriteBatch.Draw(Global.cats, this.positions_[i], (Rectangle?)new Rectangle(410, 596, 4, 16), Color.White);
 				}
 			}
-		}
+        }
 
 		public void TurnOn()
 		{

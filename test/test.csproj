@@ -20,6 +20,27 @@
     <None Update="Content\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Content\circles.fx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\drunk.fx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\Negative.fx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\outline.fx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\shakeblur.fx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\shakezigzag.fx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\wave.fx">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Update="FAudio.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -33,4 +54,25 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+	<ItemGroup>
+		<CompileShader Include="Content\circles.fx" />
+	</ItemGroup>
+	<ItemGroup>
+		<CompileShader Include="Content\drunk.fx" />
+	</ItemGroup>
+	<ItemGroup>
+		<CompileShader Include="Content\Negative.fx" />
+	</ItemGroup>
+	<ItemGroup>
+		<CompileShader Include="Content\outline.fx" />
+	</ItemGroup>
+	<ItemGroup>
+		<CompileShader Include="Content\shakeblur.fx" />
+	</ItemGroup>
+	<ItemGroup>
+		<CompileShader Include="Content\shakezigzag.fx" />
+	</ItemGroup>
+	<ItemGroup>
+		<CompileShader Include="Content\wave.fx" />
+	</ItemGroup>
 </Project>

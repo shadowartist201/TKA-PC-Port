@@ -1,8 +1,9 @@
 using System;
 
-namespace Helicopter;
-
-public class StorageDevicePromptEventArgs : EventArgs
+namespace Helicopter
 {
-	public bool PromptForDevice { get; set; }
+	public class StorageDevicePromptEventArgs : EventArgs
+	{
+		public bool PromptForDevice { get; set; }
+	}
 }

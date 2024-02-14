@@ -1,16 +1,17 @@
-namespace Helicopter;
-
-public enum GameState
+namespace Helicopter
 {
-	OPENING,
-	MAIN_MENU,
-	STAGE_SELECT,
-	CAT_SELECT,
-	PLAY,
-	PAUSE,
-	TRIAL_PAUSE,
-	OPTIONS,
-	CREDITS,
-	LEADERBOARDS,
-	EXIT
+	public enum GameState
+	{
+		OPENING,
+		MAIN_MENU,
+		STAGE_SELECT,
+		CAT_SELECT,
+		PLAY,
+		PAUSE,
+		TRIAL_PAUSE,
+		OPTIONS,
+		CREDITS,
+		LEADERBOARDS,
+		EXIT
+	}
 }

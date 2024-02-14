@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -18,7 +19,10 @@ namespace Helicopter
 
 		public float velocity = 476f;
 
-		private Vector2[] vertices;
+		private float colorRate_ = 1080f;
+        private float colorHue_ = 0f;
+
+        private Vector2[] vertices;
 
 		private Vector2[] vertices2;
 
@@ -86,7 +90,7 @@ namespace Helicopter
 			}
 			this.symbolLineInfo = new Vector2[10][]
 			{
-				new Vector2[16]
+				new Vector2[16] //heart
 				{
 					new Vector2(50f, 88f),
 					new Vector2(32f, 69f),
@@ -105,14 +109,14 @@ namespace Helicopter
 					new Vector2(87f, 57f),
 					new Vector2(68f, 69f)
 				},
-				new Vector2[4]
+				new Vector2[4] //square
 				{
 					new Vector2(14f, 14f),
 					new Vector2(86f, 14f),
 					new Vector2(86f, 86f),
 					new Vector2(14f, 86f)
 				},
-				new Vector2[10]
+				new Vector2[10] //star
 				{
 					new Vector2(2f, 37f),
 					new Vector2(33f, 32f),
@@ -125,7 +129,7 @@ namespace Helicopter
 					new Vector2(21f, 92f),
 					new Vector2(24f, 61f)
 				},
-				new Vector2[29]
+				new Vector2[29] //umbrella
 				{
 					new Vector2(9f, 52f),
 					new Vector2(10f, 41f),
@@ -157,7 +161,7 @@ namespace Helicopter
 					new Vector2(27f, 52f),
 					new Vector2(19f, 46f)
 				},
-				new Vector2[5]
+				new Vector2[5] //pentagon
 				{
 					new Vector2(75f, 90f),
 					new Vector2(25f, 90f),
@@ -165,13 +169,13 @@ namespace Helicopter
 					new Vector2(49f, 12f),
 					new Vector2(89f, 42f)
 				},
-				new Vector2[3]
+				new Vector2[3] //triangle
 				{
 					new Vector2(6f, 82f),
 					new Vector2(50f, 8f),
 					new Vector2(94f, 82f)
 				},
-				new Vector2[7]
+				new Vector2[7] //arrow
 				{
 					new Vector2(5f, 25f),
 					new Vector2(5f, 75f),
@@ -181,7 +185,7 @@ namespace Helicopter
 					new Vector2(50f, 5f),
 					new Vector2(50f, 25f)
 				},
-				new Vector2[12]
+				new Vector2[12] //circle
 				{
 					new Vector2(10f, 50f),
 					new Vector2(15f, 30f),
@@ -196,7 +200,7 @@ namespace Helicopter
 					new Vector2(30f, 85f),
 					new Vector2(15f, 70f)
 				},
-				new Vector2[6]
+				new Vector2[6] //hexagon
 				{
 					new Vector2(5f, 50f),
 					new Vector2(28f, 10f),
@@ -205,7 +209,7 @@ namespace Helicopter
 					new Vector2(74f, 90f),
 					new Vector2(28f, 90f)
 				},
-				new Vector2[16]
+				new Vector2[16] //moon
 				{
 					new Vector2(9f, 69f),
 					new Vector2(22f, 74f),
@@ -227,7 +231,7 @@ namespace Helicopter
 			};
 			this.symbolCollisionRects = new Rectangle[10][]
 			{
-				new Rectangle[8]
+				new Rectangle[8] //heart
 				{
 					new Rectangle(17, 12, 22, 7),
 					new Rectangle(10, 19, 34, 28),
@@ -238,11 +242,11 @@ namespace Helicopter
 					new Rectangle(56, 18, 34, 29),
 					new Rectangle(62, 12, 22, 6)
 				},
-				new Rectangle[1]
+				new Rectangle[1] //square
 				{
 					new Rectangle(14, 14, 72, 72)
 				},
-				new Rectangle[9]
+				new Rectangle[9] //star
 				{
 					new Rectangle(23, 82, 13, 8),
 					new Rectangle(63, 82, 14, 8),
@@ -254,7 +258,7 @@ namespace Helicopter
 					new Rectangle(45, 12, 10, 23),
 					new Rectangle(55, 25, 8, 10)
 				},
-				new Rectangle[7]
+				new Rectangle[7] //umbrella
 				{
 					new Rectangle(42, 11, 22, 4),
 					new Rectangle(37, 15, 38, 5),
@@ -264,7 +268,7 @@ namespace Helicopter
 					new Rectangle(44, 49, 12, 39),
 					new Rectangle(34, 83, 10, 11)
 				},
-				new Rectangle[5]
+				new Rectangle[5] //pentagon
 				{
 					new Rectangle(15, 39, 69, 19),
 					new Rectangle(19, 59, 61, 13),
@@ -272,7 +276,7 @@ namespace Helicopter
 					new Rectangle(29, 28, 40, 10),
 					new Rectangle(41, 19, 6, 8)
 				},
-				new Rectangle[8]
+				new Rectangle[8] //triangle
 				{
 					new Rectangle(15, 75, 71, 6),
 					new Rectangle(20, 64, 61, 11),
@@ -283,7 +287,7 @@ namespace Helicopter
 					new Rectangle(44, 17, 14, 9),
 					new Rectangle(48, 11, 6, 6)
 				},
-				new Rectangle[7]
+				new Rectangle[7] //arrow
 				{
 					new Rectangle(53, 85, 2, 6),
 					new Rectangle(52, 75, 9, 9),
@@ -293,7 +297,7 @@ namespace Helicopter
 					new Rectangle(6, 26, 66, 48),
 					new Rectangle(52, 16, 9, 9)
 				},
-				new Rectangle[7]
+				new Rectangle[7] //circle
 				{
 					new Rectangle(11, 45, 78, 12),
 					new Rectangle(14, 33, 72, 12),
@@ -303,7 +307,7 @@ namespace Helicopter
 					new Rectangle(21, 69, 58, 12),
 					new Rectangle(38, 81, 24, 10)
 				},
-				new Rectangle[7]
+				new Rectangle[7] //hexagon
 				{
 					new Rectangle(11, 42, 6, 15),
 					new Rectangle(17, 30, 6, 40),
@@ -313,7 +317,7 @@ namespace Helicopter
 					new Rectangle(80, 31, 6, 36),
 					new Rectangle(86, 44, 5, 12)
 				},
-				new Rectangle[9]
+				new Rectangle[9] //moon
 				{
 					new Rectangle(45, 8, 6, 7),
 					new Rectangle(51, 10, 9, 12),
@@ -332,7 +336,7 @@ namespace Helicopter
 		{
 			this.t2 += dt;
 			this.animTimer += dt;
-			if (this.animTimer > this.animTime)
+            if (this.animTimer > this.animTime)
 			{
 				this.animTimer = 0f;
 				this.animOffset = (this.animOffset + 1) % 18;
@@ -361,7 +365,7 @@ namespace Helicopter
 				Global.tunnelColor = this.normalColor;
 				break;
 			case TunnelEffect.BW:
-				if (this.t2 > Global.BPM)
+				if (this.t2 > Global.BPM) //swap between two colors according to bpm
 				{
 					if (Global.tunnelColor == this.WColor)
 					{
@@ -375,7 +379,7 @@ namespace Helicopter
 				}
 				break;
 			case TunnelEffect.BWDouble:
-				if (this.t2 > Global.BPM / 2f)
+				if (this.t2 > Global.BPM / 2f) //swap between two colors 2x faster
 				{
 					if (Global.tunnelColor == this.WColor)
 					{
@@ -389,7 +393,7 @@ namespace Helicopter
 				}
 				break;
 			case TunnelEffect.BWQuad:
-				if (this.t2 > Global.BPM / 4f)
+				if (this.t2 > Global.BPM / 4f) //swap between two colors 4x faster
 				{
 					if (Global.tunnelColor == this.WColor)
 					{
@@ -402,11 +406,11 @@ namespace Helicopter
 					this.t2 = 0f;
 				}
 				break;
-			case TunnelEffect.Rainbow:
+			case TunnelEffect.Rainbow: //rainbow
 				this.colorIndex = (this.colorIndex + 1) % 6;
 				Global.tunnelColor = Global.rainbowColors[this.colorIndex];
 				break;
-			case TunnelEffect.RainbowPunctuated:
+			case TunnelEffect.RainbowPunctuated: //rainbow according to bpm
 				if (this.t2 > Global.BPM)
 				{
 					this.colorIndex = (this.colorIndex + 3) % 8;
@@ -414,14 +418,28 @@ namespace Helicopter
 					this.t2 = 0f;
 				}
 				break;
-			case TunnelEffect.Disappear:
+			case TunnelEffect.Disappear: //flicker according to bpm
 				if (this.t2 > Global.BPM)
 				{
 					this.visible_ = !this.visible_;
 					this.t2 = 0f;
 				}
 				break;
-			}
+			case TunnelEffect.Nyan:
+					colorHue_ += colorRate_ * dt;
+					if (colorHue_ < 0f)
+					{
+						colorHue_ = 0f;
+						colorRate_ = 0f - colorRate_;
+					}
+					else if (colorHue_ > 360f)
+					{
+						colorHue_ = 360f;
+						colorRate_ = 0f - colorRate_;
+					}
+					Global.tunnelColor = Camera.GetColor(colorHue_ % 360f);
+				break;
+            }
 			this.tunnelEffects_.UpdateTunnel(dt, this.vertices, this.width, this.height, this.velocity);
 			this.tunnelEffects_.UpdateSymbols(dt, this.vertices2, this.symbolLineInfo[this.symbolIndexes[0]], this.symbolLineInfo[this.symbolIndexes[1]], this.symbolLineInfo[this.symbolIndexes[2]], this.velocity);
 		}
