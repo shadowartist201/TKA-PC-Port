@@ -58,7 +58,7 @@ namespace Helicopter
 			case 5:
 				this.song = this.Content.Load<Song>("MyRainbow");
 				IsNyanPack = true;
-				Global.BPM = 0.3529412f;
+				Global.BPM = 60f / 170f;
 				break;
 			}
 		}

@@ -909,7 +909,7 @@ namespace Helicopter
 		{
 			this.eventTimes[0] = 0f;
 			this.eventTimes[1] = 11268f;
-			this.eventTimes[2] = 22537f;
+            this.eventTimes[2] = 22537f;
 			this.eventTimes[3] = 28059f;
 			this.eventTimes[4] = 33806f;
 			this.eventTimes[5] = 39440f;
@@ -2112,16 +2112,14 @@ namespace Helicopter
 		public void UpdateChoreographyNyan(float dt, float elapsedMilliseconds)
 		{
 			Camera.Update(dt);
-			if (elapsedMilliseconds > this.eventTimes[this.currEvent])
+			if (elapsedMilliseconds > (this.eventTimes[this.currEvent] + (float)(2 * Global.BPM)))
 			{
 				switch (this.currEvent)
 				{
 					case 0:
                         break;
 					case 1:
-						//TurnOnClappers();
 						clapperManager.TurnOn(0);
-						//clappersOn = true;
                         break;
 					case 2:
 						this.tunnel.Set(TunnelEffect.Nyan);
@@ -2133,30 +2131,20 @@ namespace Helicopter
 					case 5:
 						break;
 					case 6:
-						//TurnOffClappers();
-						//clappersOn = false;
 						clapperManager.TurnOff();
                         break;
 					case 7:
 						break;
 					case 8:
-						//TurnOnLetters();
-						//lettersOn = true;
 						letterManager.TurnOn(0);
 						Camera.DoRotatingNyan(Global.BPM * 8f);
 						break;
 					case 9:
-						//TurnOnClappers();
-						//clappersOn = true;
-						clapperManager.TurnOn(0); //this is out of sync
-						//TurnOffLetters();
-						//lettersOn = false;
+						clapperManager.TurnOn(0); //this is out of sync, syncopated
 						letterManager.TurnOff();
 						Camera.StopRotating();
                         break;
 					case 10:
-						//TurnOffClappers();
-						//clappersOn = false;
 						clapperManager.TurnOff();
                         break;
 					case 11:
@@ -2165,7 +2153,7 @@ namespace Helicopter
 						break;
 					case 13:
 						this.tunnel.Set(TunnelEffect.Disappear);
-						Camera.SetEffect(6);
+						//Camera.SetEffect(something);
 						rainbowOverlayEnabled = true;
                         break;
 					case 14:
@@ -2189,16 +2177,13 @@ namespace Helicopter
                         break;
 					case 20:
                         this.tunnel.Set(TunnelEffect.Disappear);
-                        Camera.DoRotatingNyan(Global.BPM * 8f); //out of
-                        Camera.DoFlippingNyan(Global.BPM * 8f); //sync
-                        Camera.SetEffect(6);
+                        Camera.DoRotatingNyan(Global.BPM * 8f); //out of sync with flipping
+                        Camera.DoFlippingNyan(Global.BPM * 8f); //out of sync with rotating
+                        //Camera.SetEffect(something);
 						rainbowOverlayEnabled = true;
-						//TurnOnLetters();
 						letterManager.TurnOn(0);
-						//lettersOn = true;
 						break;
 					case 21:
-						//lettersOn = false;
                         this.ResetChoreography(1, alternating: false, meat: false);
 						Camera.SetEffect(-1);
 						Camera.StopFlipping();

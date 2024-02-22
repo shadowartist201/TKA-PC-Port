@@ -42,9 +42,10 @@ namespace Helicopter
         {
             this.visible_ = true;
             this.position_ = position;
-            base.currentFrame = 0;
+            base.currentFrame = state;
             this.color_ = color;
             this.spriteEffects_ = SpriteEffects.None;
+            base.ResetTimer();
         }
 
         public void TurnOff()

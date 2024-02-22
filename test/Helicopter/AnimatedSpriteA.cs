@@ -72,6 +72,11 @@ namespace Helicopter
             return false;
         }
 
+		public void ResetTimer()
+		{
+			this.frameTimer = 0f;
+		}
+
         public void Draw(SpriteBatch spriteBatch, Vector2 position, float rotation, float scale, Color color, SpriteEffects spriteEffects)
 		{
 			spriteBatch.Draw(this.texture, position, (Rectangle?)new Rectangle(this.frameInfo.X + this.currentFrame * this.frameInfo.Width, this.frameInfo.Y, this.frameInfo.Width, this.frameInfo.Height), color, rotation, new Vector2(this.frameInfo.Width / 2, this.frameInfo.Height / 2), scale, spriteEffects, 1f);

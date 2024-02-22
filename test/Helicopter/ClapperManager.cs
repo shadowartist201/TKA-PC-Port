@@ -44,12 +44,15 @@ namespace Helicopter
         public void TurnOn(int index)
         {
             this.on_ = true;
-            if (index == 0)
+            /*if (index == 0)
             {
                 this.clappers_[0].TurnOn(new Vector2(1280 * 0.3125f, 360f), 0, Color.White);
                 this.clappers_[1].TurnOn(new Vector2(1280 * 0.6875f, 360f), 0, Color.White);
                 return;
-            }
+            }*/
+            this.clappers_[0].TurnOn(new Vector2(1280 * 0.3125f, 360f), index, Color.White);
+            this.clappers_[1].TurnOn(new Vector2(1280 * 0.6875f, 360f), index, Color.White);
+            return;
         }
 
         public void TurnOff()
