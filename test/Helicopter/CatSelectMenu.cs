@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.DirectWrite;
 
 namespace Helicopter
 {
@@ -49,31 +50,31 @@ namespace Helicopter
 						}
 						break;
 					case 1:
-						if (!scoreSystem.cloudFortyUnlocked)
+						if (!scoreSystem.cloudFortyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 2:
-						if (!scoreSystem.lavaFortyUnlocked)
+						if (!scoreSystem.lavaFortyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 3:
-						if (!scoreSystem.meatFortyUnlocked)
+						if (!scoreSystem.meatFortyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 4:
-						if (!scoreSystem.ronFortyUnlocked)
+						if (!scoreSystem.ronFortyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 5:
-						if (!scoreSystem.nyanFortyUnlocked)
+						if (!scoreSystem.nyanFortyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
@@ -84,37 +85,37 @@ namespace Helicopter
 					switch (currentLevel)
 					{
 					case 0:
-						if (!scoreSystem.seaFortyUnlocked)
+						if (!scoreSystem.seaFortyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 1:
-						if (!scoreSystem.cloudSixtyUnlocked)
+						if (!scoreSystem.cloudSixtyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 2:
-						if (!scoreSystem.lavaSixtyUnlocked)
+						if (!scoreSystem.lavaSixtyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 3:
-						if (!scoreSystem.meatSixtyUnlocked)
+						if (!scoreSystem.meatSixtyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 4:
-						if (!scoreSystem.ronSixtyUnlocked)
+						if (!scoreSystem.ronSixtyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
                      case 5:
-                         if (!scoreSystem.nyanSixtyUnlocked)
+                         if (!scoreSystem.nyanSixtyUnlocked && !Global.debugCatUnlock)
                          {
                              return;
                          }
@@ -125,37 +126,37 @@ namespace Helicopter
 					switch (currentLevel)
 					{
 					case 0:
-						if (!scoreSystem.seaSixtyUnlocked)
+						if (!scoreSystem.seaSixtyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 1:
-						if (!scoreSystem.cloudEightyUnlocked)
+						if (!scoreSystem.cloudEightyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 2:
-						if (!scoreSystem.lavaEightyUnlocked)
+						if (!scoreSystem.lavaEightyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 3:
-						if (!scoreSystem.meatEightyUnlocked)
+						if (!scoreSystem.meatEightyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
 					case 4:
-						if (!scoreSystem.ronEightyUnlocked)
+						if (!scoreSystem.ronEightyUnlocked && !Global.debugCatUnlock)
 						{
 							return;
 						}
 						break;
                     case 5:
-                        if (!scoreSystem.nyanEightyUnlocked)
+                        if (!scoreSystem.nyanEightyUnlocked && !Global.debugCatUnlock)
                         {
                             return;
                         }
@@ -163,7 +164,7 @@ namespace Helicopter
                     }
                     break;
 				case 4:
-					if (!scoreSystem.seaEightyUnlocked)
+					if (!scoreSystem.seaEightyUnlocked && !Global.debugCatUnlock)
 					{
 						return;
 					}
@@ -299,7 +300,7 @@ namespace Helicopter
                         break;
                     }
                 }
-				if (flag)
+				if (flag && !Global.debugCatUnlock)
 				{
 					spriteBatch.Draw(Global.selectCatTex, new Vector2(((float)i + 0.5f) * (1280f / (float)this.numCats_[currentLevel]), 240f), (Rectangle?)new Rectangle(0, 1682, 240, 240), Color.White, 0f, new Vector2(120f, 120f), 1f, SpriteEffects.None, 0f);
 					if (i == 1 && this.numCats_[currentLevel] == 5)

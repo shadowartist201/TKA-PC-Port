@@ -248,6 +248,10 @@ namespace Helicopter
 			float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
 			//Debug.WriteLine("Event: " + this.currEvent);
 			this.currInput.Update();
+			if (this.currInput.IsButtonPressed(Buttons.BigButton))
+			{
+				Global.debugCatUnlock = true;
+			}
 			if (this.currInput.IsButtonUp(Buttons.A))
 			{
 				this.justStarted = false;

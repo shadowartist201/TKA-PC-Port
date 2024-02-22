@@ -151,6 +151,8 @@ namespace Helicopter
 
 		public static SoundBank soundBank;
 
+		public static bool debugCatUnlock = false;
+
 		public static Color tunnelColor = Color.White;
 
 		public static Color[] rainbowColors = new Color[6]

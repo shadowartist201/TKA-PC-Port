@@ -58,6 +58,9 @@ namespace Helicopter
 			case Buttons.Start:
 				flag2 = this.currKeyInput.IsKeyDown(Keys.S) && this.prevKeyInput.IsKeyUp(Keys.S);
 				break;
+			case Buttons.BigButton:
+				flag2 = this.currKeyInput.IsKeyDown(Keys.F1) && this.prevKeyInput.IsKeyUp(Keys.F1);
+				break;
 			}
 			return flag || flag2;
 		}
@@ -89,7 +92,10 @@ namespace Helicopter
 			case Buttons.Start:
 				flag2 = this.currKeyInput.IsKeyUp(Keys.S);
 				break;
-			}
+            case Buttons.BigButton:
+                flag2 = this.currKeyInput.IsKeyUp(Keys.F1);
+                break;
+            }
 			return flag || flag2;
 		}
 
@@ -120,7 +126,10 @@ namespace Helicopter
 			case Buttons.Start:
 				flag2 = this.currKeyInput.IsKeyDown(Keys.S);
 				break;
-			}
+            case Buttons.BigButton:
+                flag2 = this.currKeyInput.IsKeyDown(Keys.F1);
+                break;
+            }
 			return flag || flag2;
 		}
 	}

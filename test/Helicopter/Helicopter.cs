@@ -160,7 +160,10 @@ namespace Helicopter
 				base.SetAnimation(new Rectangle(162, 0, 84, 70), 4, 0.1f); //jetpack kitten
 				break;
 			case 1:
-				base.SetAnimation(new Rectangle(0, 596, 100, 54), 4, 0.05f); //byarf kitten
+                RainbowTrail.nyancat = false;
+                RainbowTrail.tacnyan = false;
+                RainbowTrail.gameboy = false;
+                base.SetAnimation(new Rectangle(0, 596, 100, 54), 4, 0.05f); //byarf kitten
 				break;
 			case 2:
 				base.SetAnimation(new Rectangle(498, 0, 84, 75), 4, 0.1f); //butterfly kitten
@@ -218,15 +221,21 @@ namespace Helicopter
 				break;
 			case 21:
 				RainbowTrail.nyancat = true;
+				RainbowTrail.tacnyan = false;
+				RainbowTrail.gameboy = false;
 				base.SetAnimation(new Rectangle(8, 896, 85, 53), 6, 0.07f); //nyan cat
 				break;
 			case 22:
+                RainbowTrail.nyancat = false;
                 RainbowTrail.tacnyan = true;
-                base.SetAnimation(new Rectangle(6, 956, 84, 53), 12, 0.07f); //tac nyan
+                RainbowTrail.gameboy = false;
+                base.SetAnimation(new Rectangle(5, 957, 85, 53), 12, 0.07f); //tac nyan
 				break;
 			case 23:
+                RainbowTrail.nyancat = false;
+                RainbowTrail.tacnyan = false;
                 RainbowTrail.gameboy = true;
-                base.SetAnimation(new Rectangle(9, 1028, 84, 53), 12, 0.07f); //gameboy cat
+                base.SetAnimation(new Rectangle(8, 1028, 85, 53), 12, 0.07f); //gameboy cat
 				break;
 			}
 			if (newAnimation == 3)
