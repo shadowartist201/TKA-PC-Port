@@ -363,6 +363,8 @@ namespace Helicopter
 			}
 		}
 
+		//dream pack
+
 		public void SetToUnicorn()
 		{
 			this.SetSpriteLinear(Vector2.Zero, 10f, 20f, 349f, 507f, 759f, 759f, new Rectangle(0, 300, 231, 158), 12, 0.05f);
@@ -403,7 +405,7 @@ namespace Helicopter
 			this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 30f, 270f, 500f, 600f, new Rectangle(1282, 460, 185, 152), 4, 0.15f);
 		}
 
-		public void SetToAngel()
+        public void SetToAngel()
 		{
 			this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(1908, 614, 204, 167), 4, 0.1f);
 		}
@@ -581,48 +583,47 @@ namespace Helicopter
 
 		public void SetToToaster()
 		{
-			//               acceleration, minTime, maxTime, minPosY, maxPosY, minVelX, maxVelX, frame, frameNum, frameX, frameY, frameTime, flipped
-            this.SetSpriteLinear(Vector2.Zero, 4f, 6f, 0f, 500f, 500f, 600f, new Rectangle(0, 0, 105, 75), 6, 1, 6, 0.05f, flipped_: false);
+            this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(0, 0, 111, 75), 6, 0.05f);
         }
 
 		public void SetToBee()
 		{
-            this.SetSpriteLinear(Vector2.Zero, 4f, 6f, 0f, 500f, 500f, 600f, new Rectangle(0, 78, 64, 55), 6, 1, 6, 0.05f, flipped_: false);
+            this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(0, 77, 64, 56), 6, 0.05f);
         }
 
 		public void SetToStar()
 		{
-            this.SetSpriteLinear(Vector2.Zero, 4f, 6f, 0f, 500f, 500f, 600f, new Rectangle(0, 135, 62, 58), 6, 1, 6, 0.05f, flipped_: false);
+            this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(0, 135, 62, 58), 6, 0.05f);
         }
 
 		public void SetToSatelite()
 		{
-            this.SetSpriteLinear(Vector2.Zero, 4f, 6f, 0f, 500f, 500f, 600f, new Rectangle(0, 219, 148, 84), 6, 1, 6, 0.05f, flipped_: false);
+            this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(0, 219, 148, 84), 6, 0.05f);
         }
 
 		public void SetToNyanHeart()
 		{
-            this.SetSpriteLinear(Vector2.Zero, 4f, 6f, 0f, 500f, 500f, 600f, new Rectangle(386, 77, 34, 32), 6, 1, 6, 0.05f, flipped_: false);
+            this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(386, 77, 34, 32), 6, 0.05f);
         }
 
 		public void SetToNyanUFO()
 		{
-            this.SetSpriteLinear(Vector2.Zero, 4f, 6f, 0f, 500f, 500f, 600f, new Rectangle(386, 173, 70, 44), 6, 1, 6, 0.05f, flipped_: false);
+            this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(386, 173, 70, 44), 6, 0.05f);
         }
 
 		public void SetToHead()
 		{
-            this.SetSpriteLinear(Vector2.Zero, 4f, 6f, 0f, 500f, 500f, 600f, new Rectangle(386, 111, 66, 61), 6, 1, 6, 0.05f, flipped_: false);
+            this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(386, 111, 66, 60), 6, 0.05f);
         }
 
 		public void SetToBurger()
 		{
-            this.SetSpriteLinear(Vector2.Zero, 4f, 6f, 0f, 500f, 500f, 600f, new Rectangle(667, 0, 64, 45), 6, 1, 6, 0.05f, flipped_: false);
+            this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(668, 0, 64, 44), 5, 0.05f);
         }
 
 		public void SetToPizza()
 		{
-            this.SetSpriteLinear(Vector2.Zero, 4f, 6f, 0f, 500f, 500f, 600f, new Rectangle(669, 46, 52, 49), 6, 1, 6, 0.05f, flipped_: false);
+            this.SetSpriteLinear(Vector2.Zero, 3f, 6f, 0f, 720f, 500f, 600f, new Rectangle(668, 46, 54, 52), 6, 0.05f);
         }
 
 		public void SetToMoon()
