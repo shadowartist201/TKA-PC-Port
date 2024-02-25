@@ -2,8 +2,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using System.Diagnostics;
-using System.Security.Policy;
 
 namespace Helicopter
 {
@@ -19,166 +17,126 @@ namespace Helicopter
 
 		private bool fullscreenOn = false;
 
-		private bool resIs1080 = false;
+		private int resIndex = 1;
 
-		private bool resIs480 = false;
+		private MenuItem[] resOptions = new MenuItem[3];
 
-		public static bool displayMenu = false;
-
-		private int startingResIndex = 1;
+		private int resValue = 1;
 
 		public OptionsMenu()
 			: base(horizontal: false)
 		{
-			base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 722, 190, 41), new Vector2(223f, 191.5f)));
-			base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 765, 125, 41), new Vector2(190.5f, 254.5f)));
-			base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 808, 412, 41), new Vector2(334f, 318.5f)));
-			base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 851, 364, 54), new Vector2(640f, 490f)));
-			base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 907, 236, 54), new Vector2(640f, 587f)));
+			base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 722, 190, 41), new Vector2(130f+190/2, 174f+41/2))); //musik
+			base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 765, 125, 41), new Vector2(130f+125/2, 237f+41/2))); //sfx
+			base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 808, 412, 41), new Vector2(130f+412/2, 300f+41/2))); //vibrayshun
+            base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(417, 808, 393, 40), new Vector2(130f+393/2, 363f+40/2))); //fullscreen
+            base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(417, 765, 413, 40), new Vector2(130f+413/2, 426f+40/2))); //resolushun
+            base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 851, 364, 54), new Vector2(456f+364/2, 514f+54/2))); //kredits
+			base.AddMenuItem(new MenuItem(Global.optionsTex, new Rectangle(0, 907, 236, 54), new Vector2(520f+236/2, 612f+54/2))); //bakc
+
+			resOptions[0] = new MenuItem(Global.optionsTex, new Rectangle(416, 850, 342, 40), new Vector2(854f+342/2, 425f+20)); //1080
+			resOptions[1] = new MenuItem(Global.optionsTex, new Rectangle(416, 892, 320, 40), new Vector2(854f+320/2, 425f+20)); //720
+			resOptions[2] = new MenuItem(Global.optionsTex, new Rectangle(837, 723, 298, 40), new Vector2(876f+298/2, 425f+20)); //480
         }
 
 		public void Update(float dt, InputState currInput, ref GameState gameState)
 		{
-			Debug.WriteLine(this.altIndex_);
-			if (displayMenu)
+			base.Update(dt, currInput);
+			if (currInput.IsButtonPressed(Buttons.A))
 			{
-				if (currInput.IsButtonPressed(Buttons.DPadDown) && this.altIndex_ < 2)
+				Global.PlayCatSound();
+				switch (base.index_)
 				{
-					this.altIndex_++;
+					case 0:
+						this.musicOn = !this.musicOn;
+						break;
+					case 1:
+						this.sfxOn = !this.sfxOn;
+						break;
+					case 2:
+						this.vibrationOn = !this.vibrationOn;
+						break;
+					case 3:
+						this.fullscreenOn = !this.fullscreenOn;
+						break;
+					case 4:
+						ResSubMenu(currInput);
+						break;
+					case 5:
+						base.index_ = 0;
+						gameState = GameState.CREDITS;
+						break;
+					case 6:
+						base.index_ = 0;
+						gameState = this.lastGameState;
+						break;
 				}
-				if (currInput.IsButtonPressed(Buttons.DPadUp) && this.altIndex_ > 0)
+				if (base.index_ < 5)
 				{
-					this.altIndex_--;
-				}
-				if (currInput.IsButtonPressed(Buttons.DPadLeft))
-				{
-					switch (base.altIndex_)
-					{
-						case 0:
-							this.fullscreenOn = !this.fullscreenOn;
-							break;
-						case 1:
-							this.startingResIndex--;
-							if (this.startingResIndex == -1)
-								this.startingResIndex = 2;
-							break;
-					}
-				}
-				if (currInput.IsButtonPressed(Buttons.DPadRight))
-				{
-					switch (base.altIndex_)
-					{
-						case 0:
-							this.fullscreenOn = !this.fullscreenOn;
-							break;
-						case 1:
-							this.startingResIndex++;
-							if (this.startingResIndex == 3)
-								this.startingResIndex = 0;
-							break;
-					}
-				}
-				if (currInput.IsButtonPressed(Buttons.A))
-				{
-					if (base.altIndex_ == 2)
-					{
-						this.ChangeSettings();
-						displayMenu = false;
-						altIndex_ = 0;
-					}
-				}
-				if (currInput.IsButtonPressed(Buttons.B) || currInput.IsButtonPressed(Buttons.Start))
-				{
-					displayMenu = false;
-					altIndex_ = 0;
-				}
-                base.Update(dt, currInput);
-            }
-			else
-			{
-				if (this.index_ == 3 || this.index_ == 4)
-				{
-					if (currInput.IsButtonPressed(Buttons.DPadLeft))
-					{
-						displayMenu = true;
-					}
-				}
-				base.Update(dt, currInput);
-				if (currInput.IsButtonPressed(Buttons.A))
-				{
-					Global.PlayCatSound();
-					switch (base.index_)
-					{
-						case 0:
-							this.musicOn = !this.musicOn;
-							break;
-						case 1:
-							this.sfxOn = !this.sfxOn;
-							break;
-						case 2:
-							this.vibrationOn = !this.vibrationOn;
-							break;
-						case 3:
-							base.index_ = 0;
-							gameState = GameState.CREDITS;
-							break;
-						case 4:
-							base.index_ = 0;
-							gameState = this.lastGameState;
-							break;
-					}
-					if (base.index_ < 3)
-					{
-						this.ChangeSettings();
-					}
-				}
-				if (currInput.IsButtonPressed(Buttons.DPadLeft))
-				{
-					Global.PlayCatSound();
-					switch (base.index_)
-					{
-						case 0:
-							this.musicOn = true;
-							break;
-						case 1:
-							this.sfxOn = true;
-							break;
-						case 2:
-							this.vibrationOn = true;
-							break;
-					}
-					if (base.index_ < 3)
-					{
-						this.ChangeSettings();
-					}
-				}
-				if (currInput.IsButtonPressed(Buttons.DPadRight))
-				{
-					Global.PlayCatSound();
-					switch (base.index_)
-					{
-						case 0:
-							this.musicOn = false;
-							break;
-						case 1:
-							this.sfxOn = false;
-							break;
-						case 2:
-							this.vibrationOn = false;
-							break;
-					}
-					if (base.index_ < 3)
-					{
-						this.ChangeSettings();
-					}
-				}
-				if (currInput.IsButtonPressed(Buttons.B))
-				{
-					Global.PlayCatSound();
-					base.index_ = 0;
-					gameState = this.lastGameState;
+					this.ChangeSettings();
 				}
 			}
+			if (currInput.IsButtonPressed(Buttons.DPadLeft))
+			{
+				if (base.index_ != 4)
+					Global.PlayCatSound();
+				switch (base.index_)
+				{
+					case 0:
+						this.musicOn = true;
+						break;
+					case 1:
+						this.sfxOn = true;
+						break;
+					case 2:
+						this.vibrationOn = true;
+						break;
+					case 3:
+						this.fullscreenOn = true;
+						break;
+					case 4:
+						ResSubMenu(currInput);
+						break;
+				}
+				if (base.index_ < 4)
+				{
+					this.ChangeSettings();
+				}
+			}
+			if (currInput.IsButtonPressed(Buttons.DPadRight))
+			{
+				if (base.index_ != 4)
+					Global.PlayCatSound();
+				switch (base.index_)
+				{
+					case 0:
+						this.musicOn = false;
+						break;
+					case 1:
+						this.sfxOn = false;
+						break;
+					case 2:
+						this.vibrationOn = false;
+						break;
+                    case 3:
+                        this.fullscreenOn = false;
+                        break;
+					case 4:
+						ResSubMenu(currInput);
+						break;
+                }
+                if (base.index_ < 4)
+                {
+                    this.ChangeSettings();
+                }
+            }
+			if (currInput.IsButtonPressed(Buttons.B))
+			{
+				Global.PlayCatSound();
+				base.index_ = 0;
+				gameState = this.lastGameState;
+			}
+			
 		}
 
 		private void ChangeSettings()
@@ -211,24 +169,44 @@ namespace Helicopter
 			{
 				Global.SetFullscreenOn(on: true);
 			}
-			else if (!this.fullscreenOn)
+			else
 			{
 				Global.SetFullscreenOn(on: false);
 			}
-			if (startingResIndex == 2)
+			switch(this.resValue)
 			{
-				Global.SetResolution(3);
+				case 0:
+					Global.SetResolution(3);
+					break;
+				case 1:
+					Global.SetResolution(2);
+					break;
+				case 2:
+					Global.SetResolution(1);
+					break;
 			}
-			else if (startingResIndex == 0)
-			{
-				Global.SetResolution(1);
-			}
-			else if (startingResIndex == 1)
-			{
-				Global.SetResolution(2);
-			}
-            Resolution.SetResolution((int)Global.resolution.X, (int)Global.resolution.Y, Global.fullscreenOn); //outer resolution
+            Resolution.SetResolution((int)Global.resolution.X, (int)Global.resolution.Y, Global.fullscreenOn);
         }
+
+		private void ResSubMenu(InputState currInput)
+		{
+            if (currInput.IsButtonPressed(Buttons.A))
+			{
+				this.resValue = this.resIndex;
+			}
+            if (currInput.IsButtonPressed(Buttons.DPadLeft))
+			{
+                this.resIndex--;
+                if (this.resIndex == -1)
+                    this.resIndex = 2;
+            }
+			if (currInput.IsButtonPressed(Buttons.DPadRight))
+			{
+				this.resIndex++;
+				if (this.resIndex == 3)
+					this.resIndex = 0;
+			}
+		}
 
 		public new void Draw(SpriteBatch spriteBatch)
 		{
@@ -239,82 +217,51 @@ namespace Helicopter
 		private void DrawBackground(SpriteBatch spriteBatch)
 		{
             spriteBatch.Draw(Global.optionsTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
-            if (this.fullscreenOn)
-            {
-                    if (this.altIndex_ == 0 && displayMenu)
-                        spriteBatch.Draw(Global.option_fullOn, new Vector2(21f, 524f), Color.Cyan);
-                    else
-                        spriteBatch.Draw(Global.option_fullOn, new Vector2(21f, 524f), Color.Black);
-            }
-            else
-            {
-                if (this.altIndex_ == 0 && displayMenu)
-                    spriteBatch.Draw(Global.option_fullOff, new Vector2(21f, 524f), Color.Cyan);
-                else
-                    spriteBatch.Draw(Global.option_fullOff, new Vector2(21f, 524f), Color.Black);
-            }
-            if (startingResIndex == 2)
-            {
-                if (this.altIndex_ == 1 && displayMenu)
-                    spriteBatch.Draw(Global.option_res1080, new Vector2(22f, 576f), Color.Cyan);
-                else
-                    spriteBatch.Draw(Global.option_res1080, new Vector2(22f, 576f), Color.Black);
-            }
-            else if (startingResIndex == 0)
-            {
-                if (this.altIndex_ == 1 && displayMenu)
-                    spriteBatch.Draw(Global.option_res480, new Vector2(22f, 576f), Color.Cyan);
-                else
-                    spriteBatch.Draw(Global.option_res480, new Vector2(22f, 576f), Color.Black);
-            }
-            else if (startingResIndex == 1)
-            {
-                if (this.altIndex_ == 1 && displayMenu)
-                    spriteBatch.Draw(Global.option_res720, new Vector2(22f, 577f), Color.Cyan);
-                else
-                    spriteBatch.Draw(Global.option_res720, new Vector2(22f, 577f), Color.Black);
-            }
-            if (altIndex_ == 2 && displayMenu)
-                spriteBatch.Draw(Global.option_apply, new Vector2(150f, 634f), Color.Cyan);
-            else
-                spriteBatch.Draw(Global.option_apply, new Vector2(150f, 634f), Color.Black);
-            spriteBatch.Draw(Global.option_display, new Vector2(59f, 465f), Color.Black);
+			this.resOptions[this.resIndex].Draw(spriteBatch);
 			if (this.musicOn)
 			{
-				this.DrawOnOff(spriteBatch, new Vector2(900f, 171f));
+				this.DrawOnOff(spriteBatch, new Vector2(901f, 175f));
 			}
 			else
 			{
-				this.DrawOffOn(spriteBatch, new Vector2(900f, 171f));
+				this.DrawOffOn(spriteBatch, new Vector2(901f, 175f));
 			}
 			if (this.sfxOn)
 			{
-				this.DrawOnOff(spriteBatch, new Vector2(900f, 234f));
+				this.DrawOnOff(spriteBatch, new Vector2(901f, 237f));
 			}
 			else
 			{
-				this.DrawOffOn(spriteBatch, new Vector2(900f, 234f));
+				this.DrawOffOn(spriteBatch, new Vector2(901f, 237f));
 			}
 			if (this.vibrationOn)
 			{
-				this.DrawOnOff(spriteBatch, new Vector2(900f, 298f));
+				this.DrawOnOff(spriteBatch, new Vector2(901f, 300f));
 			}
 			else
 			{
-				this.DrawOffOn(spriteBatch, new Vector2(900f, 298f));
+				this.DrawOffOn(spriteBatch, new Vector2(901f, 300f));
 			}
-		}
+            if (this.fullscreenOn)
+            {
+                this.DrawOnOff(spriteBatch, new Vector2(901f, 363f));
+            }
+            else
+            {
+                this.DrawOffOn(spriteBatch, new Vector2(901f, 363f));
+            }
+        }
 
 		private void DrawOnOff(SpriteBatch spriteBatch, Vector2 position)
 		{
-			spriteBatch.Draw(Global.optionsTex, position, (Rectangle?)new Rectangle(747, 722, 89, 41), Color.White);
-			spriteBatch.Draw(Global.optionsTex, position + new Vector2(160f, 0f), (Rectangle?)new Rectangle(414, 722, 119, 41), Color.White);
+			spriteBatch.Draw(Global.optionsTex, position, (Rectangle?)new Rectangle(747, 722, 89, 41), Color.White); //blue on
+			spriteBatch.Draw(Global.optionsTex, position + new Vector2(160f, 0f), (Rectangle?)new Rectangle(414, 722, 119, 41), Color.White); //white off
 		}
 
 		private void DrawOffOn(SpriteBatch spriteBatch, Vector2 position)
 		{
-			spriteBatch.Draw(Global.optionsTex, position, (Rectangle?)new Rectangle(653, 722, 92, 41), Color.White);
-			spriteBatch.Draw(Global.optionsTex, position + new Vector2(160f, 0f), (Rectangle?)new Rectangle(535, 722, 116, 41), Color.White);
+			spriteBatch.Draw(Global.optionsTex, position, (Rectangle?)new Rectangle(653, 722, 92, 41), Color.White); //white on
+			spriteBatch.Draw(Global.optionsTex, position + new Vector2(160f, 0f), (Rectangle?)new Rectangle(535, 722, 116, 41), Color.White); //blue off
 		}
 
 		public void SetLastGameState(GameState gameState)
