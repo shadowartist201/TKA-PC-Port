@@ -4,12 +4,13 @@ A Windows port of Techno Kitten Adventure, originally developed by 21st Street G
 This is a project to bring TKA to PC (and hopefully other platforms) using the Xbox 360 version and Monogame as a base.
 
 ## Current status 
-Popaganda Pack is done. Nyan Pack has minor bugs. Supports gamepad and keyboard input.
+Popaganda Pack is done. Nyan Pack has minor bugs. Supports gamepad and keyboard input. Also supports multiple resolutions and fullscreen.
 
-Controls as of 2/11/24:
+Controls as of current commit:
 - S (Start)
 - Spacebar (A)
 - B (B)
+- F1 (Unlock all cats, for debug purposes)
 
 Not a programmer or looking to try out the current release? Pre-compiled builds are available [here.](https://github.com/shadowartist201/TKA-PC-Port/releases)
 
