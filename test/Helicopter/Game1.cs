@@ -229,7 +229,7 @@ namespace Helicopter
 			this.LoadEventInfo(0);
 			MediaPlayer.Play(this.songManager.CurrentSong);
 			MediaPlayer.IsRepeating = true;
-			MediaPlayer.Volume = 0.10f;
+			MediaPlayer.Volume = 1f;
 			base.LoadContent();
 		}
 
@@ -549,6 +549,7 @@ namespace Helicopter
             Global.option_res1080 = base.Content.Load<Texture2D>("Graphics//Menu//Options//res_1080");
             Global.option_res720 = base.Content.Load<Texture2D>("Graphics//Menu//Options//res_720");
             Global.option_res480 = base.Content.Load<Texture2D>("Graphics//Menu//Options//res_480");
+			Global.sound_levels = base.Content.Load<Texture2D>("Graphics//Menu//Options//sound_levels");
             for (int i = 0; i < Camera.effects.Length-1; i++)
 			{
 				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);

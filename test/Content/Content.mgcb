@@ -613,6 +613,18 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/Menu/Options/res_720.png
 
+#begin Graphics/Menu/Options/sound_levels.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Graphics/Menu/Options/sound_levels.png
+
 #begin Graphics/Menu/Pause/pause_bgMenu.png
 /importer:TextureImporter
 /processor:TextureProcessor

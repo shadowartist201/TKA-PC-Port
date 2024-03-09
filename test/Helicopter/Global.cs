@@ -143,6 +143,8 @@ namespace Helicopter
 
 		public static Texture2D option_res480;
 
+		public static Texture2D sound_levels;
+
 		public static float mountainVelocity = 200f;
 
 		public static AudioEngine audioEngine;
