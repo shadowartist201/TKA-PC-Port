@@ -2059,7 +2059,7 @@ namespace Helicopter
 					this.heartsManager.TurnOn();
 					break;
 				case 8:
-					Camera.SetEffect(2); //broken
+					Camera.SetEffect(2);
 					break;
 				case 9:
 					this.heartsManager.TurnOff();
@@ -2080,7 +2080,7 @@ namespace Helicopter
 				case 13:
 					this.heartsManager.TurnOff();
 					this.tunnel.Set(TunnelEffect.Disappear);
-				    Camera.SetEffect(3); //broken
+				    Camera.SetEffect(3);
 					this.dancerManager.TurnOn(0);
 					break;
 				case 14:
@@ -2089,7 +2089,7 @@ namespace Helicopter
 					Camera.SetEffect(0); 
 					break;
 				case 15:
-					Camera.SetEffect(2); //broken
+					Camera.SetEffect(2);
 					this.dancerManager.TurnOn(1);
 					this.heartsManager.TurnOn();
 					break;
