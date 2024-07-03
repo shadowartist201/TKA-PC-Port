@@ -1,5 +1,4 @@
-## TKA-Android
-A straight port of the Xbox 360 version to Android.
+## TKA Android Port - OpenGL
 
 ### Current Status
 App opens and works as intended. Some camera effects suffer.
