@@ -1,10 +1,10 @@
 #if OPENGL
-	#define SV_POSITION POSITION
-	#define VS_SHADERMODEL vs_3_0
-	#define PS_SHADERMODEL ps_3_0
+#define SV_POSITION POSITION
+#define VS_SHADERMODEL vs_3_0
+#define PS_SHADERMODEL ps_3_0
 #else
-	#define VS_SHADERMODEL vs_4_0_level_9_1
-	#define PS_SHADERMODEL ps_4_0_level_9_1
+#define VS_SHADERMODEL vs_4_0_level_9_1
+#define PS_SHADERMODEL ps_4_0_level_9_1
 #endif
 
 // Define a texture sampler
@@ -43,7 +43,7 @@ float4 MainPS(float4 pos : SV_POSITION, float4 color0 : COLOR0, float2 texCoord 
     const int numSamples = 20;
     const float blurStrength = 0.10;
 
-    float3 color = float3(0.0,0.0,0.0);
+    float3 color = float3(0.0, 0.0, 0.0);
 
     if (shakeVelocity <= 0.0)
     {
@@ -60,7 +60,7 @@ float4 MainPS(float4 pos : SV_POSITION, float4 color0 : COLOR0, float2 texCoord 
         color = SpriteTexture.Sample(SpriteTextureSampler, uv).rgb;
     }
 
-    return float4(color,1.0);
+    return float4(color, 1.0);
 }
 
 technique Technique1

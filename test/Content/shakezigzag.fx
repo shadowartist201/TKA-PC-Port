@@ -17,13 +17,13 @@ sampler SpriteTextureSampler = sampler_state
 float iTime;
 
 // Constants  
-const float startAngle = 3.14159 / 2.0;
-const float endAngle = 3.0 * 3.14159 / 2.0;
-const float mirrorAngle = 3.14159;
-const float radius = 0.01;
-const float speed = 10.0;
-const float loopDuration = 3.0;
-const float forwardDuration = 0.7;
+float startAngle = 3.14159 / 2.0;
+float endAngle = 3.0 * 3.14159 / 2.0;
+float mirrorAngle = 3.14159;
+float radius = 0.01;
+float speed = 10.0;
+float loopDuration = 3.0;
+float forwardDuration = 0.7;
 
 // Main shader function (must be named 'PS' for pixel shaders in SM3)
 float4 PS(float4 pos : SV_POSITION, float4 color0 : COLOR0, float2 texCoord : TEXCOORD0) : COLOR
