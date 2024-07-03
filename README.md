@@ -14,7 +14,13 @@ Controls as of current commit:
 
 Not a programmer or looking to try out the current release? Pre-compiled builds are available [here.](https://github.com/shadowartist201/TKA-PC-Port/releases)
 
-## Platforms
+## Branches
+- main (DirectX/Monogame Windows)
+- Android (OpenGL/Monogame Android)
+- XNA (DirectX/XNA Windows)
+- OpenGL (OpenGL/Monogame All Platforms)
+
+## Working Platforms
 - Windows x64, x86 (should work from Vista to Windows 11, confirmed on W11)
 - Android (confirmed working on Android 13)
 - Linux x64 (confirmed working on Ubuntu 23.04)
