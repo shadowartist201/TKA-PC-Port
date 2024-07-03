@@ -1,4 +1,4 @@
-## TKA FNA
+## TKA PC Port - FNA Version
 A port of Techno Kitten Adventure, built using FNA instead of MonoGame as a base. Supports more features natively (such as fonts and visualizers), but only works on Windows.
 
 ### Current Status
