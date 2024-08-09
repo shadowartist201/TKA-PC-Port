@@ -14,6 +14,18 @@ Controls as of current commit:
 
 Not a programmer or looking to try out the current release? Pre-compiled builds are available [here.](https://github.com/shadowartist201/TKA-PC-Port/releases)
 
+## To-do List
+- Add a save/load system
+- Fix Nyan Pack bg element positions
+- Fix Nyan Pack letters screen wrap
+- Fix Nyan Pack spin animation
+- Fix Nyan Pack rainbow camera effect
+- Add new Nyan Pack flip animation
+- Make button icons change based on input method (controller/keyboard/etc)
+- Add Spanish Language option
+- Add Japanese Language option
+- Make a new layout for the options menu to allow for more features
+
 ## Branches
 - main (DirectX/Monogame Windows)
 - Android (OpenGL/Monogame Android)
