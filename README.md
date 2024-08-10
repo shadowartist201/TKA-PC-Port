@@ -15,7 +15,7 @@ Controls as of current commit:
 Not a programmer or looking to try out the current release? Pre-compiled builds are available [here.](https://github.com/shadowartist201/TKA-PC-Port/releases)
 
 ## To-do List
-- Add a save/load system
+- ~~Add a save/load system~~  *Added in [63c2ec4c](https://github.com/shadowartist201/TKA-PC-Port/commit/63c2ec4c33aa6a5f5ce0c7d0e02392b6ede00c38)*
 - Fix Nyan Pack bg element positions
 - Fix Nyan Pack letters screen wrap
 - Fix Nyan Pack spin animation
