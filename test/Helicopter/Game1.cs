@@ -193,7 +193,7 @@ namespace Helicopter
             Global.resolution = new Vector2(1280, 720);
             Resolution.Init(ref graphics);
             Resolution.SetVirtualResolution(1280, 720); //internal resolution
-            Resolution.SetResolution((int)Global.resolution.X, (int)Global.resolution.Y, Global.fullscreenOn); //outer resolution
+            //Resolution.SetResolution((int)Global.resolution.X, (int)Global.resolution.Y, Global.fullscreenOn); //outer resolution
 			base.IsFixedTimeStep = false;
 		}
 
@@ -209,8 +209,12 @@ namespace Helicopter
 
 		protected override void Initialize()
 		{
-			//MediaPlayer.IsVisualizationEnabled = true;
-			this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
+            //MediaPlayer.IsVisualizationEnabled = true;
+            Storage.LoadOptionInfo();
+			Global.SetResolution(-Storage.resValue_ + 3);
+			Global.SetFullscreenOn(Storage.fullScreenOn_);
+            Resolution.SetResolution((int)Global.resolution.X, (int)Global.resolution.Y, Global.fullscreenOn); //outer resolution
+            this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
 			Global.audioEngine = new AudioEngine("Content/Music//newXactProject.xgs");
 			Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music//Wave Bank.xwb");
 			Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music//Sound Bank.xsb");
@@ -229,8 +233,9 @@ namespace Helicopter
 			this.LoadEventInfo(0);
 			MediaPlayer.Play(this.songManager.CurrentSong);
 			MediaPlayer.IsRepeating = true;
-			MediaPlayer.Volume = 1f;
-			base.LoadContent();
+            MediaPlayer.Volume = Storage.musicValue_ * 0.142857f;
+            Global.audioEngine.GetCategory("Default").SetVolume(Storage.FXValue_ * 0.142857f);
+            base.LoadContent();
 		}
 
 		protected override void UnloadContent()
@@ -239,8 +244,9 @@ namespace Helicopter
 
 		private void OnExit(object o, EventArgs e)
 		{
-			this.scoreSystem.SaveInfo();
-		}
+			this.optionsMenu.SaveInfo();
+            this.scoreSystem.SaveInfo();
+        }
 
 		protected override void Update(GameTime gameTime)
 		{
@@ -445,8 +451,8 @@ namespace Helicopter
 				this.trialMenu.ResetStartTimer();
 			}*/
 			this.currInput.EndUpdate();
-			//Global.audioEngine.Update();
-			Global.UpdateVibration(num);
+            //Global.audioEngine.Update();
+            Global.UpdateVibration(num);
 			base.Update(gameTime);
 		}
 

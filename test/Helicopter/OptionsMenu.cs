@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System;
 
 namespace Helicopter
 {
@@ -13,23 +14,23 @@ namespace Helicopter
 
 		private bool sfxOn = true;
 
-		private bool vibrationOn = true;
+		private bool vibrationOn = Storage.vibrationOn_;
 
-		private bool fullscreenOn = false;
+		private bool fullscreenOn = Storage.fullScreenOn_;
 
-		private int resIndex = 1;
+		private int resIndex = Storage.resValue_;
 
-		private int musicIndex = 7;
+		private int musicIndex = Storage.musicValue_;
 
-		private int musicValue = 7;
+		private int musicValue = Storage.musicValue_;
 
-		private int FXIndex = 7;
+		private int FXIndex = Storage.FXValue_;
 
-		private int FXValue = 7;
+		private int FXValue = Storage.FXValue_;
 
 		private MenuItem[] resOptions = new MenuItem[3];
 
-		private int resValue = 1;
+		private int resValue = Storage.resValue_;
 
 		private Rectangle[] sound_levels_ = new Rectangle[8];
 
@@ -60,7 +61,7 @@ namespace Helicopter
 
 		public void Update(float dt, InputState currInput, ref GameState gameState)
 		{
-			base.Update(dt, currInput);
+            base.Update(dt, currInput);
 			if (currInput.IsButtonPressed(Buttons.A))
 			{
 				Global.PlayCatSound();
@@ -340,6 +341,12 @@ namespace Helicopter
 		public void SetLastGameState(GameState gameState)
 		{
 			this.lastGameState = gameState;
+		}
+
+		public void SaveInfo()
+		{
+			int[] settings = { Convert.ToInt32(vibrationOn), Convert.ToInt32(fullscreenOn), resValue, musicValue, FXValue };
+			Storage.SaveOptionInfo(settings);
 		}
 	}
 }
