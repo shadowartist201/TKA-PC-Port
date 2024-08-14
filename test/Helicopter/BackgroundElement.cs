@@ -13,7 +13,7 @@ namespace Helicopter
 
 		private Vector2 texDimensions_;
 
-		private Vector2 texPosition_;
+		public Vector2 texPosition_;
 
 		private Vector2 texVelocity_;
 

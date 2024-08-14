@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -35,7 +36,8 @@ namespace Helicopter
 			{
 				this.backParts_[i].Update(dt);
 			}
-			this.midPart_.Update(dt);
+			Debug.WriteLine(this.backParts_[1].texPosition_);
+            this.midPart_.Update(dt);
 		}
 
 		public void DrawBackBack(SpriteBatch spriteBatch)
@@ -161,10 +163,10 @@ namespace Helicopter
 			case 5:
 				this.backPartStaticLayer_ = 2;
 				Global.BGTexture = this.Content.Load<Texture2D>("nyanBGios");
-				this.backParts_[0].Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(2047f, 567f), new Vector2(0f, 0f), TexDirection.RIGHT, 50f);
-                this.backParts_[1].Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(2047f, 567f), new Vector2(0f, 0f), TexDirection.RIGHT, 50f);
-                this.backParts_[2].Reset(Global.BGTexture, new Vector2(0f, 568f), new Vector2(2047f, 213f), new Vector2(0f, 475f), TexDirection.RIGHT, 100f);
-                this.backParts_[3].Reset(Global.BGTexture, new Vector2(0f, 782f), new Vector2(2047f, 168f), new Vector2(0f, 575f), TexDirection.RIGHT, 150f);
+				this.backParts_[0].Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(2259f, 627f), new Vector2(0f, 0f), TexDirection.RIGHT, 50f); //bg
+                this.backParts_[1].Reset(Global.BGTexture, new Vector2(0f, 627f), new Vector2(2259f, 237f), new Vector2(0f, 379f), TexDirection.RIGHT, 150f); //hills
+                this.backParts_[2].Reset(Global.BGTexture, new Vector2(0f, 864f), new Vector2(2259f, 184f), new Vector2(0f, 536f), TexDirection.RIGHT, 200f); //grass
+                this.backParts_[3].Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(0f, 0f), new Vector2(0f, 0f), TexDirection.RIGHT, 0f);
                 this.backPartStatic_.Reset(Global.BGTexture, new Rectangle(0, 0, 0, 0), new Vector2(0f, 0f));
 				this.midPart_.Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(0f, 0f), new Vector2(0f, 0f), TexDirection.RIGHT, 300f);
                 break;
