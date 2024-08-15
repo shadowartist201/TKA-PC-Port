@@ -17,7 +17,7 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 ## To-do List
 - ~~Add a save/load system~~  *Added in [63c2ec4c](https://github.com/shadowartist201/TKA-PC-Port/commit/63c2ec4c33aa6a5f5ce0c7d0e02392b6ede00c38)*
 - ~~Fix Nyan Pack bg element positions~~  *Added in [594a7b2](https://github.com/shadowartist201/TKA-PC-Port/commit/594a7b2f0771be42af771e901974474d1b43d394)*
-- Fix Nyan Pack letters screen wrap
+- ~~Fix Nyan Pack letters screen wrap~~  *Added in [8fd7f58](https://github.com/shadowartist201/TKA-PC-Port/commit/8fd7f5890bfac25b4ebaa351c0e46626a9d18d01)*
 - Fix Nyan Pack spin animation
 - Fix Nyan Pack rainbow camera effect
 - ~~Add new Nyan Pack flip animation~~  *Added in [00ad300](https://github.com/shadowartist201/TKA-PC-Port/commit/00ad300fe22641533019230b08bc2f65642a99ce)*
