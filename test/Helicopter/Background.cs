@@ -36,7 +36,6 @@ namespace Helicopter
 			{
 				this.backParts_[i].Update(dt);
 			}
-			Debug.WriteLine(this.backParts_[1].texPosition_);
             this.midPart_.Update(dt);
 		}
 

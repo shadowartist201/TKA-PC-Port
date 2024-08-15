@@ -3,8 +3,6 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
-using static Helicopter.Camera;
 
 namespace Helicopter
 {
@@ -34,7 +32,7 @@ namespace Helicopter
 
 		private static Vector2 effectOffsetMax;
 
-		public static Effect[] effects = new Effect[6];
+		public static Effect[] effects = new Effect[7];
 
 		private static bool flipping_;
 
@@ -66,6 +64,8 @@ namespace Helicopter
 
 		private static bool rotating_ = false;
 		private static bool rotatingNyan_ = false;
+
+		public static bool repeatFlipNyan_ = true;
 
 		private static float rotationRate_ = 0f;
 
@@ -100,6 +100,8 @@ namespace Helicopter
 		private static Color color_ = Color.White;
 
 		private static SpriteEffects spriteEffect_;
+
+		public static bool paused = true;
 
 		public static void Update(float dt)
 		{
@@ -178,7 +180,6 @@ namespace Helicopter
 			}
 			if (Camera.rotatingNyan_)
 			{
-				//Debug.WriteLine(timeBetweenTimer + "/" + timeBetweenShakes + ", " + Camera.rotation_);
 				if (Camera.timeBetweenTimer <= Camera.timeBetweenShakes)
 				{
 					Camera.timeBetweenTimer += (timeBetweenShakes / 155.0f);
@@ -238,16 +239,8 @@ namespace Helicopter
 				Camera.flipTimer_ -= Camera.flipDuration_;
 				if (SongManager.IsNyanPack)
 				{
-					switch (spriteEffect_)
-					{
-						case SpriteEffects.None:
-							spriteEffect_ = SpriteEffects.FlipVertically;
-							break;
-						case SpriteEffects.FlipVertically:
-							spriteEffect_ = SpriteEffects.None;
-							break;
-					}
-				}
+					Camera.paused = !Camera.paused;
+                }
 				else
 				{
 					switch (Camera.spriteEffect_)
@@ -290,28 +283,28 @@ namespace Helicopter
                     Camera.effects[Camera.effectIndex].Parameters["offset"].SetValue(offset);
                     break;
 				case 1:
-					//Camera.effects[5].Parameters["s0"].SetValue((Texture2D)renderTarget);
-					//Camera.effects[5].Parameters["res"].SetValue(new Vector2(renderTarget.Width, renderTarget.Height));
 					break;
 				case 2:
-					//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
 					Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(time);
 					break;
 				case 3:
-					//Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
-					//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
 					Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(time);
 					break;
 				case 4:
                     Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time);
-                    //Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
                     break;
 				case 5:
                     Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time);
                     break;
+				case 6:
+                    float rSpeed = 8.0f;
+                    Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(Game1.specialTime);
+					Camera.effects[Camera.effectIndex].Parameters["rSpeed"].SetValue(rSpeed);
+					Camera.effects[Camera.effectIndex].Parameters["repeat"].SetValue(repeatFlipNyan_);
+					break;
 			}
 			graphicsDevice.SetRenderTarget(null);
-			if (Camera.effectIndex == 0 || Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3 || Camera.effectIndex == 4 || Camera.effectIndex == 5)
+			if (Camera.effectIndex == 0 || Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3 || Camera.effectIndex == 4 || Camera.effectIndex == 5 || Camera.effectIndex == 6)
 			{
 				graphicsDevice.Clear(Color.White);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
@@ -401,6 +394,9 @@ namespace Helicopter
 					Camera.alpha = 0.5f;
                     Camera.effectIndex = 5;
 					break;
+				case 7:
+					Camera.effectIndex = 6;
+					break;
 			}
 		}
 
@@ -486,7 +482,8 @@ namespace Helicopter
 			Camera.flipping_ = true;
 			Camera.flipDuration_ = duration;
 			Camera.flipTimer_ = 0f;
-			Camera.spriteEffect_ = SpriteEffects.FlipVertically;
+			Camera.SetEffect(7);
+			//Camera.spriteEffect_ = SpriteEffects.FlipVertically;
 		}
 
 		public static void StopFlipping()

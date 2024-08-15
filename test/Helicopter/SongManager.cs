@@ -33,32 +33,32 @@ namespace Helicopter
 			case 0:
 				this.song = this.Content.Load<Song>("SeaOfLove");
                 IsNyanPack = false;
-                Global.BPM = 15f / 44f;
+                Global.BPM = 15f / 44f; //176
 				break;
 			case 1:
 				this.song = this.Content.Load<Song>("LikeARainbow");
                 IsNyanPack = false;
-                Global.BPM = 12f / 35f;
+                Global.BPM = 12f / 35f; //175
 				break;
 			case 2:
 				this.song = this.Content.Load<Song>("YoureShining");
                 IsNyanPack = false;
-                Global.BPM = 0.3529412f;
+                Global.BPM = 0.3529412f; //170
 				break;
 			case 3:
 				this.song = this.Content.Load<Song>("TasteOfHeaven");
                 IsNyanPack = false;
-                Global.BPM = 0.333333343f;
+                Global.BPM = 0.333333343f; //180
 				break;
 			case 4:
 				this.song = this.Content.Load<Song>("IntergalacticalHigh");
                 IsNyanPack = false;
-                Global.BPM = 0.3448276f;
+                Global.BPM = 0.3448276f; //174
 				break;
 			case 5:
 				this.song = this.Content.Load<Song>("MyRainbow");
 				IsNyanPack = true;
-				Global.BPM = 60f / 170f;
+				Global.BPM = 60f / 170f; //170
 				break;
 			}
 		}

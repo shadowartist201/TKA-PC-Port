@@ -108,6 +108,12 @@ namespace Helicopter
 
 		private ScoreSystem scoreSystem;
 
+		private bool pastHalf = false;
+
+		private bool pastFull = false;
+
+		public static float specialTime = 0f;
+
 		private int currEvent;
 
 		private float[] eventTimes = new float[100];
@@ -180,20 +186,16 @@ namespace Helicopter
 		{
 			Global.DeviceManager = new StorageDeviceManager(this);
 			((Collection<IGameComponent>)(object)base.Components).Add((IGameComponent)Global.DeviceManager);
-			//GamerServicesComponent item = new GamerServicesComponent(this);
-			//((Collection<IGameComponent>)(object)base.Components).Add((IGameComponent)item);
 			Global.DeviceManager.DeviceSelectorCanceled += DeviceSelectorCanceled;
 			Global.DeviceManager.DeviceDisconnected += DeviceDisconnected;
 			Global.DeviceManager.PromptForDevice();
-			//base.add_Exiting((EventHandler<EventArgs>)OnExit);
 			base.Exiting += (EventHandler<EventArgs>)OnExit;
 			this.graphics = new GraphicsDeviceManager(this);
 			base.Content.RootDirectory = "Content";
             Global.fullscreenOn = false;
-            Global.resolution = new Vector2(1280, 720);
+            Global.resolution = new Vector2(1280, 720); //external resolution
             Resolution.Init(ref graphics);
             Resolution.SetVirtualResolution(1280, 720); //internal resolution
-            //Resolution.SetResolution((int)Global.resolution.X, (int)Global.resolution.Y, Global.fullscreenOn); //outer resolution
 			base.IsFixedTimeStep = false;
 		}
 
@@ -252,9 +254,9 @@ namespace Helicopter
 		{
             float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
-			//Debug.WriteLine("Event: " + this.currEvent);
 			this.currInput.Update();
-			if (this.currInput.IsButtonPressed(Buttons.BigButton))
+			this.DoTheFlip(num);
+            if (this.currInput.IsButtonPressed(Buttons.BigButton))
 			{
 				Global.debugCatUnlock = true;
 			}
@@ -560,6 +562,7 @@ namespace Helicopter
 			{
 				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);
 			}
+			Camera.effects[6] = base.Content.Load<Effect>("flip");
 			Camera.effects[5] = base.Content.Load<Effect>("drunk");
 			Camera.effects[4] = base.Content.Load<Effect>("shakezigzag");
             Camera.effects[3] = base.Content.Load<Effect>("wave");
@@ -2128,6 +2131,7 @@ namespace Helicopter
 				switch (this.currEvent)
 				{
 					case 0:
+						Camera.SetEffect(-1);
                         break;
 					case 1:
 						clapperManager.TurnOn(0);
@@ -2522,5 +2526,37 @@ namespace Helicopter
 		{
 			this.heart.Reset(index, alternating);
 		}
-	}
+
+        public void DoTheFlip(float num)
+        {
+            if (!Camera.paused) //if not paused
+            {
+                specialTime += num;
+                if (specialTime > Math.PI / 4 && !Camera.paused && pastHalf) //if reach b1, pause
+                {
+                    Camera.paused = true;
+                    if (pastHalf)
+                    {
+                        specialTime = (float)(Math.PI / 4);
+                        pastHalf = false;
+                        pastFull = true;
+                    }
+                    if (pastFull)
+                    {
+                        specialTime = 0;
+                        pastHalf = false;
+                        pastFull = false;
+                    }
+                }
+                else if (specialTime >= Math.PI / 8 && !Camera.paused && !pastHalf) //if reach b2, pause
+                {
+                    Camera.paused = true; //pause
+                    specialTime = (float)(Math.PI / 8);
+                    pastHalf = true;
+                    pastFull = false;
+                }
+            }
+        }
+    }
+
 }

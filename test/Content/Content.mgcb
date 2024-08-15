@@ -1045,3 +1045,8 @@
 /processorParam:DebugMode=Auto
 /build:wave.fx
 
+#begin flip.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:flip.fx
