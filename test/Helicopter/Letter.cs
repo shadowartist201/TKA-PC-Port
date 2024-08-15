@@ -33,17 +33,21 @@ namespace Helicopter
                 if (Math.Sign(this.velocity_.X) == 1 && this.position_.X > (float)(1280 + frameInfo.Width / 2)) //when too far right
                 {
                     this.position_.X -= 1280 + frameInfo.Width;
+                    this.position_.Y = Global.RandomBetween(0f, 720f);
                 }
                 if (Math.Sign(this.velocity_.X) == -1 && this.position_.X < (float)(-frameInfo.Width / 2)) //when too far left
                 {
                     this.position_.X += 1280 + frameInfo.Width;
+                    this.position_.Y = Global.RandomBetween(0f, 720f);
                 }
                 if (Math.Sign(this.velocity_.Y) == -1 && this.position_.Y > (float)(720 + frameInfo.Height / 2)) //when too far up
                 {
+                    this.position_.X = Global.RandomBetween(0f, 1080f);
                     this.position_.Y -= 720 + frameInfo.Height;
                 } 
                 if (Math.Sign(this.velocity_.Y) == -1 && this.position_.Y < (float)(-frameInfo.Height / 2)) //when too far down
                 {
+                    this.position_.X = Global.RandomBetween(0f, 1080f);
                     this.position_.Y += 720 + frameInfo.Height;
                 }
             }

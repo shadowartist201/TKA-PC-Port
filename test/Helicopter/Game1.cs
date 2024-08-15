@@ -938,12 +938,13 @@ namespace Helicopter
 			this.eventTimes[14] = 112913f;
 			this.eventTimes[15] = 118435f;
 			this.eventTimes[16] = 124182f;
-			this.eventTimes[17] = 127112f;
-			this.eventTimes[18] = 138494f;
-			this.eventTimes[19] = 171061f;
-			this.eventTimes[20] = 183456f;
-			this.eventTimes[21] = 240139f;
-			this.eventTimes[22] = 250000f;
+			this.eventTimes[17] = 124288;
+			this.eventTimes[18] = 127112f;//
+			this.eventTimes[19] = 138494f;
+			this.eventTimes[20] = 171061f;
+			this.eventTimes[21] = 183456f;
+			this.eventTimes[22] = 240139f;
+			this.eventTimes[23] = 250000f;
 		}
 
 		private void UpdateBackground(float dt)
@@ -2152,12 +2153,12 @@ namespace Helicopter
 						break;
 					case 8:
 						letterManager.TurnOn(0);
-						Camera.DoRotatingNyan(Global.BPM * 8f);
+						//Camera.DoRotatingNyan(Global.BPM * 8f);
 						break;
 					case 9:
-						clapperManager.TurnOn(0); //this is out of sync, syncopated
+						clapperManager.TurnOn(0); 
 						letterManager.TurnOff();
-						Camera.StopRotating();
+						//Camera.StopRotating();
                         break;
 					case 10:
 						clapperManager.TurnOff();
@@ -2181,37 +2182,41 @@ namespace Helicopter
 						rainbowOverlayEnabled = false;
 						break;
 					case 17:
-                        this.tunnel.Set(TunnelEffect.Nyan);
-                        Camera.DoFlippingNyan(Global.BPM * 8f);
-                        break;
-					case 18:
+						Camera.DoFlippingNyan(Global.BPM * 8f);
 						break;
+					case 18:
+                        this.tunnel.Set(TunnelEffect.Nyan);
+                        //Camera.DoFlippingNyan(Global.BPM * 8f);
+                        break;
 					case 19:
+						break;
+					case 20:
                         this.tunnel.Set(TunnelEffect.Normal);
                         Camera.StopFlipping();
+						Camera.SetEffect(-1);
                         break;
-					case 20:
+					case 21:
                         this.tunnel.Set(TunnelEffect.Disappear);
-                        Camera.DoRotatingNyan(Global.BPM * 8f); //out of sync with flipping
+                        //Camera.DoRotatingNyan(Global.BPM * 8f); //out of sync with flipping
                         Camera.DoFlippingNyan(Global.BPM * 8f); //out of sync with rotating
                         //Camera.SetEffect(something);
 						rainbowOverlayEnabled = true;
 						letterManager.TurnOn(0);
 						break;
-					case 21:
+					case 22:
                         this.ResetChoreography(1, alternating: false, meat: false);
 						Camera.SetEffect(-1);
 						Camera.StopFlipping();
-						Camera.StopRotating();
+						//Camera.StopRotating();
 						rainbowOverlayEnabled = false;
                         break;
-					case 22:
+					case 23:
                         MediaPlayer.Stop();
                         MediaPlayer.Play(this.songManager.CurrentSong);
                         break;
 				}
 				this.currEvent++;
-				if (this.currEvent == 23)
+				if (this.currEvent == 24)
 				{
 					this.currEvent = 0;
 				}
