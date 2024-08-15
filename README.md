@@ -20,7 +20,7 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 - Fix Nyan Pack letters screen wrap
 - Fix Nyan Pack spin animation
 - Fix Nyan Pack rainbow camera effect
-- Add new Nyan Pack flip animation
+- ~~Add new Nyan Pack flip animation~~  *Added in [00ad300](https://github.com/shadowartist201/TKA-PC-Port/commit/00ad300fe22641533019230b08bc2f65642a99ce)*
 - Make button icons change based on input method (controller/keyboard/etc)
 - Add Spanish Language option
 - Add Japanese Language option
