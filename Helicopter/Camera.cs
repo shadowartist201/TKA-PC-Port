@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
@@ -302,7 +303,15 @@ namespace Helicopter
                     Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(adjustedTime);
                     break;
                 case 4:
-                    Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+                    if ((float)MediaPlayer.PlayPosition.TotalSeconds > 198.0)
+                    {
+                        adjustedTime = (float)(MediaPlayer.PlayPosition.TotalSeconds % 198.0);
+                    }
+                    if ((float)MediaPlayer.PlayPosition.TotalSeconds > 77.0)
+                    {
+                        adjustedTime = (float)(MediaPlayer.PlayPosition.TotalSeconds % 77.0);
+                    }
+                    Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(adjustedTime);
                     Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
                     break;
 				case 5:
