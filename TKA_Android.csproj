@@ -26,6 +26,11 @@
     <AndroidKeyStore>False</AndroidKeyStore>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\Content\Effects\effect0.xnb" />
+    <None Remove="Assets\Content\Effects\effect1.xnb" />
+    <None Remove="Assets\Content\Effects\effect2.xnb" />
+    <None Remove="Assets\Content\Effects\effect3.xnb" />
+    <None Remove="Assets\Content\Effects\effect4.xnb" />
     <None Remove="Assets\Content\wave.xnb" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +63,31 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\Effects\effect0.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\Effects\effect1.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\Effects\effect2.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\Effects\effect3.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\Effects\effect4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

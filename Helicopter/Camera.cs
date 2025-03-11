@@ -270,22 +270,7 @@ namespace Helicopter
             switch (Camera.effectIndex)
             {
                 case 0:
-					int numSamples = 20;
-					float blurStrength = 0.10f;
-                    float shakeAmount = 0.001f * MathF.Sin(time * 40.0f);
-                    float shakeVelocity = 0.007f * MathF.Cos(time * 40.0f);
-					float[] offset = new float[numSamples];
-					if (shakeVelocity <= 0.0)													 
-					{
-						for (int i = 0; i < numSamples; i++)
-						{
-							offset[i] = (i - numSamples - 1 / 2.0f) * blurStrength * shakeVelocity;
-						}
-					}
-                    //Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time); 
-                    Camera.effects[Camera.effectIndex].Parameters["shakeAmount"].SetValue(shakeAmount);
-                    Camera.effects[Camera.effectIndex].Parameters["shakeVelocity"].SetValue(shakeVelocity);
-                    Camera.effects[Camera.effectIndex].Parameters["offset"].SetValue(offset);
+                    Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
                     break;
                 case 1:
                     //Camera.effects[5].Parameters["s0"].SetValue((Texture2D)renderTarget);
@@ -317,8 +302,8 @@ namespace Helicopter
                     Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(adjustedTime);
                     break;
                 case 4:
-                    Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time);
-                    //Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
+                    Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+                    Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
                     break;
 				case 5:
                     Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time);
@@ -327,7 +312,14 @@ namespace Helicopter
             graphicsDevice.SetRenderTarget(null);
             Resolution.ResetViewport();
             graphicsDevice.Clear(Color.Black);
-            if (Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3)
+            if (Camera.effectIndex == 0 || Camera.effectIndex == 4)
+            {
+                spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
+                //spriteBatch.Draw(Global.pixel, new Rectangle(0, 0, 1280, 720), Color.White);
+                spriteBatch.Draw(renderTarget, Vector2.Zero, Color.White * Camera.alpha);
+                spriteBatch.End();
+            }
+            else if (Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3)
             {
                 //graphicsDevice.Clear(Color.White);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
@@ -375,7 +367,7 @@ namespace Helicopter
                 case -1:
                     Camera.effectIndex = -1;
                     break;
-                case 0:
+                case 0: //set to blurdirectional
                     Camera.alpha = 0f;
                     Camera.alphaMin = 0f;
                     Camera.alphaMax = 0.15f;
@@ -394,13 +386,13 @@ namespace Helicopter
                     Camera.alphaMax = 1f;
                     Camera.alphaRate = 0f;
                     break;
-                case 3:
+                case 3: //set to blurdirectional
                     Camera.alpha = 0.6f;
                     Camera.alphaMin = 0.6f;
                     Camera.alphaMax = 0.6f;
                     Camera.alphaRate = 0f;
                     Camera.thetaRate = 18.2212372f;
-                    Camera.effectIndex = 5;
+                    Camera.effectIndex = 0;
                     break;
                 case 4:
                     Camera.effectIndex = 3;

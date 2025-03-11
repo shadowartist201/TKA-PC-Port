@@ -588,11 +588,13 @@ namespace Helicopter
                 //Camera.effects[i] = base.Content.Load<Effect>("Effects/effect" + i);
             }
             Camera.effects[5] = base.Content.Load<Effect>("drunk");
-			Camera.effects[4] = base.Content.Load<Effect>("shakezigzag");
+            //Camera.effects[4] = base.Content.Load<Effect>("shakezigzag");
+            Camera.effects[4] = base.Content.Load<Effect>("Effects/effect4");
             Camera.effects[3] = base.Content.Load<Effect>("wave");
             Camera.effects[2] = base.Content.Load<Effect>("circles");
             Camera.effects[1] = base.Content.Load<Effect>("outline");
-            Camera.effects[0] = base.Content.Load<Effect>("shakeblur");
+            //Camera.effects[0] = base.Content.Load<Effect>("shakeblur");
+            Camera.effects[0] = base.Content.Load<Effect>("Effects/effect0");
             overlay = base.Content.Load<Texture2D>("rainbowOverlay");
             this.scoreSystem = new ScoreSystem();
             this.songManager = new SongManager(this);
@@ -2086,7 +2088,7 @@ namespace Helicopter
                 {
                     case 0:
                         this.explosionManager.TurnOn();
-                        Camera.SetEffect(0); //broken
+                        Camera.SetEffect(0); //broken (index0,shakeblur,aka blurdirectional)
                         break;
                     case 4:
                         this.explosionManager.TurnOff();
@@ -2102,7 +2104,7 @@ namespace Helicopter
                         this.heartsManager.TurnOn();
                         break;
                     case 8:
-                        Camera.SetEffect(2); //broken
+                        Camera.SetEffect(2); //broken (index4,shakezigzag,aka drunk)
                         break;
                     case 9:
                         this.heartsManager.TurnOff();
@@ -2123,7 +2125,7 @@ namespace Helicopter
                     case 13:
                         this.heartsManager.TurnOff();
                         this.tunnel.Set(TunnelEffect.Disappear);
-                        Camera.SetEffect(3); //broken
+                        Camera.SetEffect(3); //broken (index5,drunk,aka blurdirectional)
                         this.dancerManager.TurnOn(0);
                         break;
                     case 14:
@@ -2132,7 +2134,7 @@ namespace Helicopter
                         Camera.SetEffect(0);
                         break;
                     case 15:
-                        Camera.SetEffect(2); //broken
+                        Camera.SetEffect(2); //broken (index4, shakezigzag aka drunk)
                         this.dancerManager.TurnOn(1);
                         this.heartsManager.TurnOn();
                         break;
