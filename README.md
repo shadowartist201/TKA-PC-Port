@@ -39,6 +39,7 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 - macOS x64 (should work on 10.15 Catalina, not confirmed)
 
 ## Extra Stuff
+- [Like what you see? Donate here](https://buymeacoffee.com/shadowartist201)
 - [Weird things about XNA](https://shadowartist201.blogspot.com/search/label/XNA)
 - [Notes on shaders, Nyan Cat, and the iOS decompilation](https://github.com/shadowartist201/TKA-PC-Port/wiki)
 - [TKA content you may not know about](https://shadowartist201.blogspot.com/search/label/TKA%20Archive)
