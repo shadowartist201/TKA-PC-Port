@@ -550,20 +550,23 @@ namespace Helicopter
             Global.option_res720 = base.Content.Load<Texture2D>("Graphics//Menu//Options//res_720");
             Global.option_res480 = base.Content.Load<Texture2D>("Graphics//Menu//Options//res_480");
 			Global.sound_levels = base.Content.Load<Texture2D>("Graphics//Menu//Options//sound_levels");
-            for (int i = 0; i < Camera.effects.Length-1; i++)
-			{
-				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);
-			}
-			Camera.effects[5] = base.Content.Load<Effect>("drunk");
-			Camera.effects[4] = base.Content.Load<Effect>("shakezigzag");
+            for (int i = 0; i < Camera.effects.Length; i++)
+            {
+                //Camera.effects[i] = base.Content.Load<Effect>("Effects/effect" + i);
+            }
+            Camera.effects[5] = base.Content.Load<Effect>("drunk");
+            //Camera.effects[4] = base.Content.Load<Effect>("shakezigzag");
+            Camera.effects[4] = base.Content.Load<Effect>("Effects/effect4");
             Camera.effects[3] = base.Content.Load<Effect>("wave");
             Camera.effects[2] = base.Content.Load<Effect>("circles");
             Camera.effects[1] = base.Content.Load<Effect>("outline");
-            Camera.effects[0] = base.Content.Load<Effect>("shakeblur");
+            //Camera.effects[0] = base.Content.Load<Effect>("shakeblur");
+            Camera.effects[0] = base.Content.Load<Effect>("Effects/effect0");
             overlay = base.Content.Load<Texture2D>("rainbowOverlay");
-			this.scoreSystem = new ScoreSystem();
-			this.songManager = new SongManager(this);
-		}
+            this.scoreSystem = new ScoreSystem();
+            this.songManager = new SongManager(this);
+            Global.setPixel(GraphicsDevice);
+        }
 
 		private void LoadMenus()
 		{

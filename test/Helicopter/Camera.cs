@@ -265,69 +265,89 @@ namespace Helicopter
 			}
 		}
 
-		public static void Draw(SpriteBatch spriteBatch, RenderTarget2D renderTarget, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
-		{
-			float time = (float)MediaPlayer.PlayPosition.TotalSeconds;
-			switch (Camera.effectIndex)
+        public static void Draw(SpriteBatch spriteBatch, RenderTarget2D renderTarget, GraphicsDeviceManager graphics, GraphicsDevice graphicsDevice)
+        {
+            float adjustedTime = 0;
+            float time = (float)MediaPlayer.PlayPosition.TotalSeconds;
+            switch (Camera.effectIndex)
             {
                 case 0:
-                    int numSamples = 20;
-                    float blurStrength = 0.10f;
-                    float shakeAmount = 0.001f * MathF.Sin(time * 40.0f);
-                    float shakeVelocity = 0.007f * MathF.Cos(time * 40.0f);
-                    float[] offset = new float[numSamples];
-                    if (shakeVelocity <= 0.0)
-                    {
-                        for (int i = 0; i < numSamples; i++)
-                        {
-                            offset[i] = (i - numSamples - 1 / 2.0f) * blurStrength * shakeVelocity;
-                        }
-                    }
-                    //Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time); 
-                    Camera.effects[Camera.effectIndex].Parameters["shakeAmount"].SetValue(shakeAmount);
-                    Camera.effects[Camera.effectIndex].Parameters["shakeVelocity"].SetValue(shakeVelocity);
-                    Camera.effects[Camera.effectIndex].Parameters["offset"].SetValue(offset);
-					Debug.WriteLine(shakeVelocity);
+                    Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(new Vector2((float)Math.Cos(Camera.theta), (float)Math.Sin(Camera.theta)));
                     break;
                 case 1:
-					//Camera.effects[5].Parameters["s0"].SetValue((Texture2D)renderTarget);
-					//Camera.effects[5].Parameters["res"].SetValue(new Vector2(renderTarget.Width, renderTarget.Height));
-					break;
-				case 2:
-					//Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
-					Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(time);
-					break;
-				case 3:
-					//Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
-					//Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
-					Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(time);
-					break;
-				case 4:
-                    Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time);
-                    //Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
+                    //Camera.effects[5].Parameters["s0"].SetValue((Texture2D)renderTarget);
+                    //Camera.effects[5].Parameters["res"].SetValue(new Vector2(renderTarget.Width, renderTarget.Height));
                     break;
-				case 5:
+                case 2:
+                    //Camera.effects[Camera.effectIndex].Parameters["Offset"].SetValue(Camera.effectOffset.X);
+                    if ((float)MediaPlayer.PlayPosition.TotalSeconds > 110.0)
+                    {
+                        adjustedTime = (float)(MediaPlayer.PlayPosition.TotalSeconds % 110.0);
+                    }
+                    else
+                    {
+                        adjustedTime = (float)MediaPlayer.PlayPosition.TotalSeconds;
+                    }
+                    Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(adjustedTime);
+                    break;
+                case 3:
+                    //Camera.effects[Camera.effectIndex].Parameters["WaveDimensions"].SetValue(new Vector2(10f, 0.03f));
+                    //Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(Camera.timer);
+                    if ((float)MediaPlayer.PlayPosition.TotalSeconds > 120.0)
+                    {
+                        adjustedTime = (float)(MediaPlayer.PlayPosition.TotalSeconds % 121.0);
+                    }
+                    else
+                    {
+                        adjustedTime = (float)MediaPlayer.PlayPosition.TotalSeconds;
+                    }
+                    Camera.effects[Camera.effectIndex].Parameters["timeInSeconds"].SetValue(adjustedTime);
+                    break;
+                case 4:
+                    if ((float)MediaPlayer.PlayPosition.TotalSeconds > 198.0)
+                    {
+                        adjustedTime = (float)(MediaPlayer.PlayPosition.TotalSeconds % 198.0);
+                    }
+                    if ((float)MediaPlayer.PlayPosition.TotalSeconds > 77.0)
+                    {
+                        adjustedTime = (float)(MediaPlayer.PlayPosition.TotalSeconds % 77.0);
+                    }
+                    Camera.effects[Camera.effectIndex].Parameters["Timer"].SetValue(adjustedTime);
+                    Camera.effects[Camera.effectIndex].Parameters["Strength"].SetValue(Camera.strength);
+                    break;
+                case 5:
                     Camera.effects[Camera.effectIndex].Parameters["iTime"].SetValue(time);
                     break;
-			}
-			graphicsDevice.SetRenderTarget(null);
-			if (Camera.effectIndex == 0 || Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3 || Camera.effectIndex == 4 || Camera.effectIndex == 5)
-			{
-				graphicsDevice.Clear(Color.White);
+            }
+            graphicsDevice.SetRenderTarget(null);
+            Resolution.ResetViewport();
+            graphicsDevice.Clear(Color.Black);
+            if (Camera.effectIndex == 0 || Camera.effectIndex == 4)
+            {
+                spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
+                //spriteBatch.Draw(Global.pixel, new Rectangle(0, 0, 1280, 720), Color.White);
+                spriteBatch.Draw(renderTarget, Vector2.Zero, Color.White * Camera.alpha);
+                spriteBatch.End();
+            }
+            else if (Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3)
+            {
+                //graphicsDevice.Clear(Color.White);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
+                spriteBatch.Draw(Global.pixel, new Rectangle(0, 0, 1280, 720), Color.White);
                 spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
                 spriteBatch.End();
             }
-			else
-			{
-                graphicsDevice.Clear(Color.White);
+            else
+            {
+                //graphicsDevice.Clear(Color.White);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
-                spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
+                spriteBatch.Draw(Global.pixel, new Rectangle(0, 0, 1280, 720), Color.White);
+                spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640, 360), Camera.scale_, Camera.spriteEffect_, 0f);
                 spriteBatch.End();
             }
         }
 
-		public static void Reset()
+        public static void Reset()
 		{
 			Camera.alpha = 1f;
 			Camera.timer = 0f;
@@ -362,8 +382,8 @@ namespace Helicopter
 					Camera.alphaMin = 0f;
 					Camera.alphaMax = 0.15f;
 					Camera.alphaRate = 1.65517235f;
-					Camera.thetaRate = 0f;
-					Camera.effectIndex = 0;
+                    Camera.thetaRate = 0f;
+                    Camera.effectIndex = 0;
 					break;
 				case 1:
 					Camera.effectIndex = 1;

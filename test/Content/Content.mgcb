@@ -25,6 +25,36 @@
 /processorParam:DebugMode=Auto
 /build:drunk.fx
 
+#begin Effects/effect0.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/effect0.fx
+
+#begin Effects/effect1.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/effect1.fx
+
+#begin Effects/effect2.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/effect2.fx
+
+#begin Effects/effect3.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/effect3.fx
+
+#begin Effects/effect4.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/effect4.fx
+
 #begin Graphics/Background/cloudBGXbox.png
 /importer:TextureImporter
 /processor:TextureProcessor
