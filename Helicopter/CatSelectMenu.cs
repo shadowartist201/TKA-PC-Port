@@ -40,6 +40,7 @@ namespace Helicopter
 			Rectangle cat3 = new(520, 121, 240, 238);
 			Rectangle cat4 = new(776, 121, 240, 238);
 			Rectangle cat5 = new(1032, 121, 240, 238);
+			Rectangle back = new(168, 608, 136, 32);
 
 			if (cat1.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
 			{
@@ -77,6 +78,12 @@ namespace Helicopter
 				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
 				gameState = GameState.PLAY;
 			}
+            if (back.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
+            {
+                Global.PlayCatSound();
+                base.index_ = 0;
+                gameState = this.lastGameState;
+            }
             base.index_ = 0;
             //gameState = GameState.PLAY;
             /*if (currInput.IsButtonPressed(Buttons.A))

@@ -78,6 +78,7 @@ namespace Helicopter
 			Rectangle stage1 = new(138 ,117, 328, 327);
 			Rectangle stage2 = new(474 ,117, 328 ,327);
 			Rectangle stage3 = new(806, 117, 328, 327);
+			Rectangle back = new(155, 607, 153, 36);
 			
             this.arrowOffsetX += this.arrowOffsetRateX * dt;
 			if (this.arrowOffsetX > 5f)
@@ -185,7 +186,13 @@ namespace Helicopter
                     gameState = GameState.PLAY;
                 }
             }
-			base.Update(dt, currInput);
+            if (back.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
+            {
+                Global.PlayCatSound();
+                this.ResetMenu();
+                gameState = this.lastGameState;
+            }
+            base.Update(dt, currInput);
 			/*if (currInput.IsButtonPressed(Buttons.A) && (!Global.IsTrialMode || this.ActualIndex == 0 || this.ActualIndex == 1))
 			{
 				this.currentLevel = this.ActualIndex;

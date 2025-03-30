@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Android.OS;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 //using Microsoft.Xna.Framework.GamerServices;
@@ -10,7 +11,7 @@ namespace Helicopter
 {
 	public static class Global
 	{
-		public static float scale = 1.5f;
+        public static float scale = 1.5f;
 
 		public static ItemSelectedEffect itemSelectedEffect;
 
@@ -261,6 +262,7 @@ namespace Helicopter
 		public static void SetVibrationPause()
 		{
 			Global.vibratingPaused = true;
+			Activity1.vibrator.Cancel();
 			GamePad.SetVibration(Global.playerIndex.Value, 0f, 0f);
 		}
 
@@ -271,17 +273,21 @@ namespace Helicopter
 			{
 				if (Global.vibratingEndless)
 				{
+					Activity1.vibrator.Vibrate(VibrationEffect.CreateOneShot(300000, 255));
 					GamePad.SetVibration(Global.playerIndex.Value, 0.3f, 0.3f);
+
 				}
 				if (Global.vibratingTemp)
 				{
-					GamePad.SetVibration(Global.playerIndex.Value, 1f, 1f);
+                    Activity1.vibrator.Vibrate(VibrationEffect.CreateOneShot(300000, 255));
+                    GamePad.SetVibration(Global.playerIndex.Value, 1f, 1f);
 				}
 			}
 		}
 
 		public static void ResetVibration()
 		{
+			Activity1.vibrator.Cancel();
 			GamePad.SetVibration(Global.playerIndex.Value, 0f, 0f);
 			Global.vibratingTemp = false;
 			Global.vibratingEndless = false;
@@ -311,17 +317,20 @@ namespace Helicopter
 			}
 			if (on)
 			{
-				GamePad.SetVibration(Global.playerIndex.Value, 1f, 1f);
+                Activity1.vibrator.Vibrate(VibrationEffect.CreateOneShot(300000, 255));
+                GamePad.SetVibration(Global.playerIndex.Value, 1f, 1f);
 				Global.vibratingTemp = true;
 				Global.vibrationTimer = 0f;
 				return;
 			}
 			if (Global.vibratingEndless)
 			{
-				GamePad.SetVibration(Global.playerIndex.Value, 0.3f, 0.3f);
+                Activity1.vibrator.Vibrate(VibrationEffect.CreateOneShot(300000, 255));
+                GamePad.SetVibration(Global.playerIndex.Value, 0.3f, 0.3f);
 			}
 			else
 			{
+				Activity1.vibrator.Cancel();
 				GamePad.SetVibration(Global.playerIndex.Value, 0f, 0f);
 			}
 			Global.vibratingTemp = false;
@@ -338,7 +347,8 @@ namespace Helicopter
 			{
 				if (!Global.vibratingTemp)
 				{
-					GamePad.SetVibration(Global.playerIndex.Value, 0.3f, 0.3f);
+                    Activity1.vibrator.Vibrate(VibrationEffect.CreateOneShot(300000, 255));
+                    GamePad.SetVibration(Global.playerIndex.Value, 0.3f, 0.3f);
 				}
 				Global.vibratingEndless = true;
 			}
@@ -346,6 +356,7 @@ namespace Helicopter
 			{
 				if (!Global.vibratingTemp)
 				{
+					Activity1.vibrator.Cancel();
 					GamePad.SetVibration(Global.playerIndex.Value, 0f, 0f);
 				}
 				Global.vibratingEndless = false;

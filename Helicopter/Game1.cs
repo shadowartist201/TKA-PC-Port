@@ -1100,6 +1100,7 @@ namespace Helicopter
 				this.catSelectMenu.Draw(spriteBatch, this.stageSelectMenu.getCurrentLevel(), this.scoreSystem);
                     break;
                 case GameState.PLAY:
+                    this.DisplayPauseButton();
                     if (!this.tunnel.IsOn() && !this.helicopter.IsDead())
                     {
                         this.DisplayInstructions();
@@ -1125,21 +1126,16 @@ namespace Helicopter
             }
         }
 
+        private void DisplayPauseButton()
+        {
+            spriteBatch.Draw(Global.pauseButton, new Rectangle(50, 50, 64, 64), Color.White);
+        }
         private void DrawGame(float elapsed, GameTime gameTime)
         {
             this.DrawBackground(gameTime);
             this.DrawHelicopter();
             this.DrawForeground();
             this.scoreSystem.Draw(spriteBatch);
-            if (SongManager.IsMeatPack)
-            {
-                spriteBatch.Draw(Global.pauseButton, new Rectangle(100, 75, 64, 64), Color.White);
-            }
-            else
-            {
-                spriteBatch.Draw(Global.pauseButton, new Rectangle(50, 50, 64, 64), Color.White);
-            }
-           
         }
 
         private void DrawBackground(GameTime gameTime)
@@ -1203,17 +1199,17 @@ namespace Helicopter
         {
 			if (SongManager.IsNyanPack)
 			{
-				spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
-				spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Touch To Start", new Vector2(545f, 190f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				//spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Hold to go up\nRelease to go down", new Vector2(543f, 269f), Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				//spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
         }
 			else
 			{
-				spriteBatch.DrawString(Global.spriteFont, "Press       To Start", new Vector2(545f, 190f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
-				spriteBatch.DrawString(Global.spriteFont, "Hold       to go up\nRelease to go down", new Vector2(543f, 269f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
-				spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Touch To Start", new Vector2(545f, 190f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				//spriteBatch.Draw(Global.AButtonTexture, new Rectangle(612, 192, 30, 30), Color.White);
+				spriteBatch.DrawString(Global.spriteFont, "Hold to go up\nRelease to go down", new Vector2(543f, 269f), Global.tunnelColor, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+				//spriteBatch.Draw(Global.AButtonTexture, new Rectangle(597, 272, 30, 30), Color.White);
 			}
 		}
 

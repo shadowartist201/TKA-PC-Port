@@ -1,4 +1,5 @@
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
@@ -20,6 +21,7 @@ namespace Helicopter
     {
         private Game1 _game;
         private View _view;
+        public static Vibrator vibrator;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -36,6 +38,8 @@ namespace Helicopter
 
             Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
             Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+
+            vibrator = (Vibrator)GetSystemService(Context.VibratorService);
 
             _game.Run();
         }
