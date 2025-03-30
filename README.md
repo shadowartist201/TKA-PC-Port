@@ -3,6 +3,10 @@ A Windows port of Techno Kitten Adventure, originally developed by 21st Street G
 
 This is a project to bring TKA to PC (and hopefully other platforms) using the Xbox 360 version and Monogame as a base.
 
+[Like what you see? Donate here](https://buymeacoffee.com/shadowartist201)
+
+Disclaimer: In this project, AI was used for upscaling Nyan Pack assets to HD.
+
 ## Current status 
 Popaganda Pack is done. Nyan Pack has minor bugs. Supports gamepad and keyboard input. Also supports multiple resolutions and fullscreen.
 
