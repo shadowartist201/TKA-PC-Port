@@ -31,6 +31,9 @@
     <None Remove="Assets\Content\Effects\effect2.xnb" />
     <None Remove="Assets\Content\Effects\effect3.xnb" />
     <None Remove="Assets\Content\Effects\effect4.xnb" />
+    <None Remove="Assets\Content\Graphics\Menu\KittenSelect\selectCat_bgMenu.xnb" />
+    <None Remove="Assets\Content\Graphics\Menu\Pause\pause_bgMenu.xnb" />
+    <None Remove="Assets\Content\Graphics\Menu\StageSelect\selectStage_bgMenu.xnb" />
     <None Remove="Assets\Content\wave.xnb" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +89,21 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Update="Assets\Content\Effects\effect4.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\Graphics\Menu\KittenSelect\selectCat_bgMenu.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\Graphics\Menu\Pause\pause_bgMenu.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\Graphics\Menu\StageSelect\selectStage_bgMenu.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidAsset>
   </ItemGroup>
