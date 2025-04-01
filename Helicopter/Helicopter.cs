@@ -156,121 +156,130 @@ namespace Helicopter
 
 		public void ChangeAnimation(int newAnimation)
 		{
-			switch (newAnimation)
-			{
-			case 0:
-				base.SetAnimation(new Rectangle(162, 0, 84, 70), 4, 0.1f); //jetpack kitten
-				break;
-			case 1:
-				base.SetAnimation(new Rectangle(0, 596, 100, 54), 4, 0.05f); //byarf kitten
-				break;
-			case 2:
-				base.SetAnimation(new Rectangle(498, 0, 84, 75), 4, 0.1f); //butterfly kitten
-				break;
-			case 3:
-				base.SetAnimation(new Rectangle(0, 0, 81, 70), 2, 0.3f);  //kitten with hat
-				break;
-			case 4:
-				base.SetAnimation(new Rectangle(920, 0, 87, 67), 4, 0.05f); //mermaid kitten
-				break;
-			case 5:
-				base.SetAnimation(new Rectangle(506, 300, 76, 76), 5, 0.1f); //purple kitten
-				break;
-			case 6:
-				base.SetAnimation(new Rectangle(0, 300, 84, 84), 6, 0.1f); //cupid kitten
-				break;
-			case 7:
-				base.SetAnimation(new Rectangle(0, 384, 75, 75), 6, 0.1f); //angel kitten
-				break;
-			case 8:
-				base.SetAnimation(new Rectangle(920, 70, 111, 84), 4, 0.07f); //reaper kitten
-				break;
-			case 9:
-				base.SetAnimation(new Rectangle(0, 75, 80, 90), 11, 0.025f); //bat kitten
-				break;
-			case 10:
-				base.SetAnimation(new Rectangle(0, 165, 81, 63), 11, 0.025f); //fire kitten
-				break;
-			case 11:
-				base.SetAnimation(new Rectangle(0, 228, 74, 72), 11, 0.025f); //lava kitten
-				break;
-			case 12:
-				base.SetAnimation(new Rectangle(920, 156, 134, 88), 4, 0.07f); //dragon kitten
-				break;
-			case 13:
-				base.SetAnimation(new Rectangle(556, 376, 76, 76), 4, 0.05f); //steak kitten
-				break;
-			case 14:
-				base.SetAnimation(new Rectangle(0, 512, 84, 84), 4, 0.05f); //bacon kitten
-				break;
-			case 15:
-				base.SetAnimation(new Rectangle(338, 512, 84, 84), 6, 0.05f); //sausage kitten
-				break;
-			case 16:
-				base.SetAnimation(new Rectangle(920, 246, 83, 71), 4, 0.05f); //burger kitten
-				break;
-			case 17:
-				base.SetAnimation(new Rectangle(0, 652, 91, 80), 17, 0.05f); //alien kitten
-				break;
-			case 18:
-				base.SetAnimation(new Rectangle(0, 734, 92, 80), 15, 0.05f); //smile kitten
-				break;
-			case 19:
-				base.SetAnimation(new Rectangle(0, 816, 81, 70), 19, 0.05f); //mcdonalds kitten
-				break;
-			case 21:
-				RainbowTrail.nyancat = true;
-				base.SetAnimation(new Rectangle(8, 896, 85, 53), 6, 0.07f); //nyan cat
-				break;
-			case 22:
-                RainbowTrail.tacnyan = true;
-				base.SetAnimation(new Rectangle(6, 956, 84, 53), 12, 0.07f); //tac nyan
-				break;
-			case 23:
-                RainbowTrail.gameboy = true;
-				base.SetAnimation(new Rectangle(9, 1028, 84, 53), 12, 0.07f); //gameboy cat
-				break;
-			}
-			if (newAnimation == 3)
-			{
-				this.particleEmitter.TurnOn();
-			}
-			else
-			{
-				this.particleEmitter.TurnOff();
-			}
-			if (newAnimation == 1 || newAnimation == 21 || newAnimation == 22 || newAnimation == 23)
-			{
-				this.rainbowTrail.TurnOn();
-			}
-			else
-			{
-				this.rainbowTrail.TurnOff();
-			}
-			if (newAnimation == 0 || newAnimation == 10 || newAnimation == 7)
-			{
-				this.minRotation = 0f;
-				this.maxRotation = 0.25f;
-				this.rotation = this.maxRotation;
-			}
-			else if (newAnimation == 1 || newAnimation == 19)
-			{
-				this.minRotation = -0.3f;
-				this.maxRotation = 0.05f;
-				this.rotation = this.maxRotation;
-			}
-			else if (newAnimation == 4 || newAnimation == 8 || newAnimation == 16)
-			{
-				this.minRotation = -0.099064894f;
-				this.maxRotation = 0.150936067f;
-				this.rotation = this.maxRotation;
-			}
-			else if (newAnimation == 12)
-			{
-				this.minRotation = -0.203784645f;
-				this.maxRotation = 0.0462163165f;
-				this.rotation = this.maxRotation;
-			}
+            switch (newAnimation)
+            {
+                case 0:
+                    base.SetAnimation(new Rectangle(162, 0, 84, 70), 4, 0.1f); //jetpack kitten
+                    break;
+                case 1:
+                    RainbowTrail.nyancat = false;
+                    RainbowTrail.tacnyan = false;
+                    RainbowTrail.gameboy = false;
+                    base.SetAnimation(new Rectangle(0, 596, 100, 54), 4, 0.05f); //byarf kitten
+                    break;
+                case 2:
+                    base.SetAnimation(new Rectangle(498, 0, 84, 75), 4, 0.1f); //butterfly kitten
+                    break;
+                case 3:
+                    base.SetAnimation(new Rectangle(0, 0, 81, 70), 2, 0.3f);  //kitten with hat
+                    break;
+                case 4:
+                    base.SetAnimation(new Rectangle(920, 0, 87, 67), 4, 0.05f); //mermaid kitten
+                    break;
+                case 5:
+                    base.SetAnimation(new Rectangle(506, 300, 76, 76), 5, 0.1f); //purple kitten
+                    break;
+                case 6:
+                    base.SetAnimation(new Rectangle(0, 300, 84, 84), 6, 0.1f); //cupid kitten
+                    break;
+                case 7:
+                    base.SetAnimation(new Rectangle(0, 384, 75, 75), 6, 0.1f); //angel kitten
+                    break;
+                case 8:
+                    base.SetAnimation(new Rectangle(920, 70, 111, 84), 4, 0.07f); //reaper kitten
+                    break;
+                case 9:
+                    base.SetAnimation(new Rectangle(0, 75, 80, 90), 11, 0.025f); //bat kitten
+                    break;
+                case 10:
+                    base.SetAnimation(new Rectangle(0, 165, 81, 63), 11, 0.025f); //fire kitten
+                    break;
+                case 11:
+                    base.SetAnimation(new Rectangle(0, 228, 74, 72), 11, 0.025f); //lava kitten
+                    break;
+                case 12:
+                    base.SetAnimation(new Rectangle(920, 156, 134, 88), 4, 0.07f); //dragon kitten
+                    break;
+                case 13:
+                    base.SetAnimation(new Rectangle(556, 376, 76, 76), 4, 0.05f); //steak kitten
+                    break;
+                case 14:
+                    base.SetAnimation(new Rectangle(0, 512, 84, 84), 4, 0.05f); //bacon kitten
+                    break;
+                case 15:
+                    base.SetAnimation(new Rectangle(338, 512, 84, 84), 6, 0.05f); //sausage kitten
+                    break;
+                case 16:
+                    base.SetAnimation(new Rectangle(920, 246, 83, 71), 4, 0.05f); //burger kitten
+                    break;
+                case 17:
+                    base.SetAnimation(new Rectangle(0, 652, 91, 80), 17, 0.05f); //alien kitten
+                    break;
+                case 18:
+                    base.SetAnimation(new Rectangle(0, 734, 92, 80), 15, 0.05f); //smile kitten
+                    break;
+                case 19:
+                    base.SetAnimation(new Rectangle(0, 816, 81, 70), 19, 0.05f); //mcdonalds kitten
+                    break;
+                case 21:
+                    RainbowTrail.nyancat = true;
+                    RainbowTrail.tacnyan = false;
+                    RainbowTrail.gameboy = false;
+                    base.SetAnimation(new Rectangle(8, 896, 85, 53), 6, 0.07f); //nyan cat
+                    break;
+                case 22:
+                    RainbowTrail.nyancat = false;
+                    RainbowTrail.tacnyan = true;
+                    RainbowTrail.gameboy = false;
+                    base.SetAnimation(new Rectangle(5, 957, 85, 53), 12, 0.07f); //tac nyan
+                    break;
+                case 23:
+                    RainbowTrail.nyancat = false;
+                    RainbowTrail.tacnyan = false;
+                    RainbowTrail.gameboy = true;
+                    base.SetAnimation(new Rectangle(8, 1028, 85, 53), 12, 0.07f); //gameboy cat
+                    break;
+            }
+            if (newAnimation == 3)
+            {
+                this.particleEmitter.TurnOn();
+            }
+            else
+            {
+                this.particleEmitter.TurnOff();
+            }
+            if (newAnimation == 1 || newAnimation == 21 || newAnimation == 22 || newAnimation == 23)
+            {
+                this.rainbowTrail.TurnOn();
+            }
+            else
+            {
+                this.rainbowTrail.TurnOff();
+            }
+            if (newAnimation == 0 || newAnimation == 10 || newAnimation == 7)
+            {
+                this.minRotation = 0f;
+                this.maxRotation = 0.25f;
+                this.rotation = this.maxRotation;
+            }
+            else if (newAnimation == 1 || newAnimation == 19)
+            {
+                this.minRotation = -0.3f;
+                this.maxRotation = 0.05f;
+                this.rotation = this.maxRotation;
+            }
+            else if (newAnimation == 4 || newAnimation == 8 || newAnimation == 16)
+            {
+                this.minRotation = -0.099064894f;
+                this.maxRotation = 0.150936067f;
+                this.rotation = this.maxRotation;
+            }
+            else if (newAnimation == 12)
+            {
+                this.minRotation = -0.203784645f;
+                this.maxRotation = 0.0462163165f;
+                this.rotation = this.maxRotation;
+            }
             else if (newAnimation == 21 || newAnimation == 22 || newAnimation == 23)
             {
                 this.minRotation = 0f;
@@ -278,11 +287,11 @@ namespace Helicopter
                 this.rotation = this.maxRotation;
             }
             else
-			{
-				this.minRotation = 0.25f;
-				this.maxRotation = 0.5f;
-				this.rotation = this.maxRotation;
-			}
-		}
-	}
+            {
+                this.minRotation = 0.25f;
+                this.maxRotation = 0.5f;
+                this.rotation = this.maxRotation;
+            }
+        }
+    }
 }

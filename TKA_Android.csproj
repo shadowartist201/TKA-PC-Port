@@ -1,34 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0-android34.0</TargetFramework>
-    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>31.0</SupportedOSPlatformVersion>
     <OutputType>Exe</OutputType>
     <ApplicationId>com.companyname.Project1</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidPackageFormat>aab</AndroidPackageFormat>
     <Optimize>False</Optimize>
-    <DebugSymbols>False</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <RunAOTCompilation>False</RunAOTCompilation>
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
-    <PublishTrimmed>True</PublishTrimmed>
+    <PublishTrimmed>False</PublishTrimmed>
     <Debugger>Xamarin</Debugger>
     <AndroidKeyStore>False</AndroidKeyStore>
     <AndroidUseAapt2>True</AndroidUseAapt2>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
     <Optimize>False</Optimize>
     <Debugger>Xamarin</Debugger>
-    <DebugSymbols>False</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidKeyStore>False</AndroidKeyStore>
     <AndroidUseAapt2>True</AndroidUseAapt2>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidPackageFormat>aab</AndroidPackageFormat>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\Content\Effects\effect0.xnb" />
@@ -36,6 +38,7 @@
     <None Remove="Assets\Content\Effects\effect2.xnb" />
     <None Remove="Assets\Content\Effects\effect3.xnb" />
     <None Remove="Assets\Content\Effects\effect4.xnb" />
+    <None Remove="Assets\Content\Graphics\cats.xnb" />
     <None Remove="Assets\Content\Graphics\Menu\KittenSelect\selectCat_bgMenu.xnb" />
     <None Remove="Assets\Content\Graphics\Menu\Pause\pause_bgMenu.xnb" />
     <None Remove="Assets\Content\Graphics\Menu\StageSelect\selectStage_bgMenu.xnb" />
@@ -50,9 +53,6 @@
     <AndroidAsset Update="Assets\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidAsset>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Content\bin\Android\Content\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Update="Assets\Content\wave.xnb">
@@ -109,6 +109,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Update="Assets\Content\Graphics\Menu\StageSelect\selectStage_bgMenu.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Update="Assets\Content\Graphics\cats.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidAsset>
   </ItemGroup>

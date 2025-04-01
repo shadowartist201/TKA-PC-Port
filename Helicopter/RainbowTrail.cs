@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace Helicopter
 {
@@ -132,25 +133,25 @@ namespace Helicopter
 			}
 		}
 
-		public void Draw(SpriteBatch spriteBatch)
-		{
-			if (this.visible_)
-			{
-				for (int i = 0; i < this.positions_.Length; i++)
-				{
-					if (nyancat)
-                        spriteBatch.Draw(Global.cats, new Vector2(this.positions_[i].X, this.positions_[i].Y-12), (Rectangle?)new Rectangle(533, 900, 4, 42), Color.White);
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if (this.visible_)
+            {
+                for (int i = 0; i < this.positions_.Length; i++)
+                {
+                    if (nyancat)
+                        spriteBatch.Draw(Global.cats, new Vector2(this.positions_[i].X, this.positions_[i].Y - 12), (Rectangle?)new Rectangle(533, 900, 4, 42), Color.White);
                     else if (tacnyan)
                         spriteBatch.Draw(Global.cats, new Vector2(this.positions_[i].X, this.positions_[i].Y - 12), (Rectangle?)new Rectangle(1042, 964, 4, 42), Color.White);
                     else if (gameboy)
                         spriteBatch.Draw(Global.cats, new Vector2(this.positions_[i].X, this.positions_[i].Y - 12), (Rectangle?)new Rectangle(1049, 1033, 4, 42), Color.White);
-                    else 
-						spriteBatch.Draw(Global.cats, this.positions_[i], (Rectangle?)new Rectangle(410, 596, 4, 16), Color.White);
-				}
-			}
+                    else
+                        spriteBatch.Draw(Global.cats, this.positions_[i], (Rectangle?)new Rectangle(410, 596, 4, 16), Color.White);
+                }
+            }
         }
 
-		public void TurnOn()
+        public void TurnOn()
 		{
 			this.visible_ = true;
 		}

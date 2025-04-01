@@ -1,6 +1,8 @@
+using Kotlin.Ranges;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.ComponentModel.Design;
 
 namespace Helicopter
 {
@@ -10,20 +12,33 @@ namespace Helicopter
 
 		private int currentCat;
 
-		private int[] numCats_ = new int[6] { 5, 4, 4, 4, 3, 3 };
+		private Rectangle[] fiveCatBox = [new Rectangle(8, 121, 240, 238), new Rectangle(264, 121, 240, 238), new Rectangle(520, 121, 240, 238), new Rectangle(776, 121, 240, 238), new Rectangle(1032, 121, 240, 238)];
+
+		private Rectangle[] fourCatBox = [new Rectangle(40, 121, 240, 238), new Rectangle(360, 121, 240, 238), new Rectangle(680, 121, 240, 238), new Rectangle(1000, 121, 240, 238)];
+
+		private Rectangle[] threeCatBox = [new Rectangle(93, 121, 240, 238), new Rectangle(520, 121, 240, 238), new Rectangle(946, 121, 240, 238)];
+
+		private Rectangle back = new (168, 608, 136, 32);
+
+        private int[] numCats_ = new int[6] { 5, 4, 4, 4, 3, 3 };
 
 		private int[] startCatIndex_ = new int[6] { 0, 5, 9, 13, 17, 21 };
 
 		private string[] catNames_ = new string[24]
 		{
-			"JetPack Kitteh", "Byarf Kitteh", "Butterfly Kitteh", "Dream Kitteh", "Mermaid Kitteh", "Baby Kitteh", "Love Kitteh", "Angel Kitteh", "Death Kitteh", "Bat Kitteh",
-			"Fire Kitteh", "Rock Kitteh", "Dragon Kitteh", "Steak Kitteh", "Bacon Kitteh", "HotDog Kitteh", "Burger Kitteh", "Alien Kitteh", "Grin Kitteh", "MC Kitteh",
+			"JetPack Kitteh", "Byarf Kitteh", "Butterfly Kitteh", "Dream Kitteh", "Mermaid Kitteh", 
+			"Baby Kitteh", "Love Kitteh", "Angel Kitteh", "Death Kitteh", 
+			"Bat Kitteh", "Fire Kitteh", "Rock Kitteh", "Dragon Kitteh", 
+			"Steak Kitteh", "Bacon Kitteh", "HotDog Kitteh", "Burger Kitteh", 
+			"Alien Kitteh", "Grin Kitteh", "MC Kitteh",
 			"", "Nyan Cat", "Tac Nyan", "Gameboy Cat"
 		};
 
 		private string[] lockedNames_ = new string[4] { "Unlocked in\n Full Mode", "Unlocked at\n  40,000 P", "Unlocked at\n  60,000 P", "Unlocked at\n  80,000 P" };
 
 		public GameState LastGameState => this.lastGameState;
+
+		private Vector2 touch;
 
 		public CatSelectMenu()
 			: base(horizontal: true)
@@ -35,202 +50,54 @@ namespace Helicopter
 		{
 			this.SetCats(currentLevel);
 			base.Update(dt, currInput);
-			Rectangle cat1 = new(8, 121, 240, 238);
-			Rectangle cat2 = new(264, 121, 240, 238);
-			Rectangle cat3 = new(520, 121, 240, 238);
-			Rectangle cat4 = new(776, 121, 240, 238);
-			Rectangle cat5 = new(1032, 121, 240, 238);
-			Rectangle back = new(168, 608, 136, 32);
+			touch = (Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference;
 
-			if (cat1.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
+			if (currentLevel == 0)
 			{
-				base.index_ = 1;
-				Global.PlayCatSound();
-				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ -1;
-				gameState = GameState.PLAY;
-			}
-
-			else if (cat2.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
-			{
-				base.index_ = 2;
-				Global.PlayCatSound();
-				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
-				gameState = GameState.PLAY;
-			}
-			else if (cat3.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
-			{
-				base.index_ = 3;
-				Global.PlayCatSound();
-				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
-				gameState = GameState.PLAY;
-			}
-			else if (cat4.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
-			{
-				base.index_ = 4;
-				Global.PlayCatSound();
-				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
-				gameState = GameState.PLAY;
-			}
-			else if (cat5.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
-			{
-				base.index_ = 5;
-				Global.PlayCatSound();
-				this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
-				gameState = GameState.PLAY;
-			}
-            if (back.Contains((Game1.touchLocations[0].Position - Game1.touchOffset) * Game1.resolutionDifference) && currInput.IsThingTouched())
-            {
-                Global.PlayCatSound();
-                base.index_ = 0;
-                gameState = this.lastGameState;
-            }
-            base.index_ = 0;
-            //gameState = GameState.PLAY;
-            /*if (currInput.IsButtonPressed(Buttons.A))
-			{
-				switch (base.index_)
+				for (int i = 0; i < fiveCatBox.Length; i++)
 				{
-				case 1:
-					switch (currentLevel)
+					if (fiveCatBox[i].Contains(touch) && currInput.IsThingTouched())
 					{
-					case 0:
-						if (Global.IsTrialMode)
-						{
-							return;
-						}
-						break;
-					case 1:
-						if (!scoreSystem.cloudFortyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 2:
-						if (!scoreSystem.lavaFortyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 3:
-						if (!scoreSystem.meatFortyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 4:
-						if (!scoreSystem.ronFortyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 5:
-						if (!scoreSystem.nyanFortyUnlocked)
-						{
-							return;
-						}
-						break;
+						base.index_ = i + 1;
+						Global.PlayCatSound();
+						this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+						gameState = GameState.PLAY;
 					}
-					break;
-				case 2:
-					switch (currentLevel)
-					{
-					case 0:
-						if (!scoreSystem.seaFortyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 1:
-						if (!scoreSystem.cloudSixtyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 2:
-						if (!scoreSystem.lavaSixtyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 3:
-						if (!scoreSystem.meatSixtyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 4:
-						if (!scoreSystem.ronSixtyUnlocked)
-						{
-							return;
-						}
-						break;
-                     case 5:
-                         if (!scoreSystem.nyanSixtyUnlocked)
-                         {
-                             return;
-                         }
-						break;
-                    }
-					break;
-				case 3:
-					switch (currentLevel)
-					{
-					case 0:
-						if (!scoreSystem.seaSixtyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 1:
-						if (!scoreSystem.cloudEightyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 2:
-						if (!scoreSystem.lavaEightyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 3:
-						if (!scoreSystem.meatEightyUnlocked)
-						{
-							return;
-						}
-						break;
-					case 4:
-						if (!scoreSystem.ronEightyUnlocked)
-						{
-							return;
-						}
-						break;
-                    case 5:
-                        if (!scoreSystem.nyanEightyUnlocked)
-                        {
-                            return;
-                        }
-                        break;
-                    }
-                    break;
-				case 4:
-					if (!scoreSystem.seaEightyUnlocked)
-					{
-						return;
-					}
-					break;
 				}
-				Global.PlayCatSound();
-				this.currentCat = this.startCatIndex_[currentLevel] + base.index_;
-				base.index_ = 0;
-				gameState = GameState.PLAY;
 			}
-			if (currInput.IsButtonPressed(Buttons.B))
+			else if (currentLevel == 1 || currentLevel == 2 || currentLevel == 3)
+			{
+				for (int i = 0; i < fourCatBox.Length; i++)
+				{
+					if (fourCatBox[i].Contains(touch) && currInput.IsThingTouched())
+					{
+						base.index_ = i + 1;
+						Global.PlayCatSound();
+						this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+						gameState = GameState.PLAY;
+					}
+				}
+			}
+			else if (currentLevel == 4 || currentLevel == 5)
+			{
+				for (int i = 0; i < threeCatBox.Length; i++)
+				{
+					if (threeCatBox[i].Contains(touch) && currInput.IsThingTouched())
+					{
+						base.index_ = i + 1;
+						Global.PlayCatSound();
+						this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+						gameState = GameState.PLAY;
+					}
+				}
+			}
+			if (back.Contains(touch) && currInput.IsThingTouched())
 			{
 				Global.PlayCatSound();
 				base.index_ = 0;
 				gameState = this.lastGameState;
-			}*/
+			}
+			base.index_ = 0;
 		}
 
 		private void SetCats(int currentLevel)
