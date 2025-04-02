@@ -192,7 +192,7 @@ namespace Helicopter
             Global.DeviceManager.DeviceSelectorCanceled += DeviceSelectorCanceled;
             Global.DeviceManager.DeviceDisconnected += DeviceDisconnected;
             Global.DeviceManager.PromptForDevice();
-            base.Exiting += (EventHandler<EventArgs>)OnExit;
+            base.Exiting += OnExit;
             this.graphics = new GraphicsDeviceManager(this);
             base.Content.RootDirectory = "Content";
             Resolution.Init(ref graphics);

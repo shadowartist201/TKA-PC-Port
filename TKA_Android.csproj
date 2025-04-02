@@ -43,11 +43,13 @@
     <None Remove="Assets\Content\Graphics\Menu\Pause\pause_bgMenu.xnb" />
     <None Remove="Assets\Content\Graphics\Menu\StageSelect\selectStage_bgMenu.xnb" />
     <None Remove="Assets\Content\wave.xnb" />
+    <None Remove="Resources\Values\games-ids.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
-    <PackageReference Include="MonoGame.Framework.Android" Version="3.8.1.303" />
-    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.10.1.2" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.2.1105" />
+    <PackageReference Include="MonoGame.Framework.Android" Version="3.8.2.1105" />
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.15.0.2" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Games.V2" Version="120.1.2.4" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Update="Assets\**">

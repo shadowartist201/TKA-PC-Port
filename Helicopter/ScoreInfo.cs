@@ -159,6 +159,7 @@ namespace Helicopter
 					if (i == 0)
 					{
 						this.highScore_ = score;
+						Achievements.CheckHighScore(score);
 					}
 					for (int num = 8; num >= i; num--)
 					{
