@@ -5,6 +5,8 @@ This is a project to bring TKA to PC (and hopefully other platforms) using the X
 
 [Like what you see? Donate here](https://buymeacoffee.com/shadowartist201)
 
+[Now available on Google Play](https://play.google.com/store/apps/details?id=com.shadow.TKA_Android)
+
 Disclaimer: In this project, AI was used for upscaling Nyan Pack assets to HD.
 
 ## Current status 
