@@ -41,7 +41,6 @@
     <None Remove="Assets\Content\Graphics\cats.xnb" />
     <None Remove="Assets\Content\Graphics\Menu\KittenSelect\selectCat_bgMenu.xnb" />
     <None Remove="Assets\Content\Graphics\Menu\Pause\pause_bgMenu.xnb" />
-    <None Remove="Assets\Content\Graphics\Menu\StageSelect\selectStage_bgMenu.xnb" />
     <None Remove="Assets\Content\wave.xnb" />
     <None Remove="Resources\Values\games-ids.xml" />
   </ItemGroup>
@@ -110,14 +109,12 @@
     </AndroidAsset>
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Update="Assets\Content\Graphics\Menu\StageSelect\selectStage_bgMenu.xnb">
+    <AndroidAsset Update="Assets\Content\Graphics\cats.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidAsset>
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Update="Assets\Content\Graphics\cats.xnb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AndroidAsset>
+    <Folder Include="Assets\Content\bin\Android\" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

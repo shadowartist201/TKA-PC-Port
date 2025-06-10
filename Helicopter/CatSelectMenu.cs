@@ -58,10 +58,50 @@ namespace Helicopter
 				{
 					if (fiveCatBox[i].Contains(touch) && currInput.IsThingTouched())
 					{
-						base.index_ = i + 1;
-						Global.PlayCatSound();
-						this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
-						gameState = GameState.PLAY;
+						switch (i)
+						{
+							case 0:
+                                base.index_ = i + 1;
+                                Global.PlayCatSound();
+                                this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                gameState = GameState.PLAY;
+								break;
+							case 1:
+                                base.index_ = i + 1;
+                                Global.PlayCatSound();
+                                this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                gameState = GameState.PLAY;
+                                break;
+                            case 2:
+								if (scoreSystem.seaFortyUnlocked)
+								{
+                                    base.index_ = i + 1;
+                                    Global.PlayCatSound();
+                                    this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                    gameState = GameState.PLAY;
+                                }
+								break;
+							case 3:
+								if (scoreSystem.seaSixtyUnlocked)
+								{
+                                    base.index_ = i + 1;
+                                    Global.PlayCatSound();
+                                    this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                    gameState = GameState.PLAY;
+                                }
+								break;
+							case 4:
+								if (scoreSystem.seaEightyUnlocked)
+								{
+                                    base.index_ = i + 1;
+                                    Global.PlayCatSound();
+                                    this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                    gameState = GameState.PLAY;
+                                }
+								break;
+							default:
+								break;
+                        }
 					}
 				}
 			}
@@ -71,10 +111,44 @@ namespace Helicopter
 				{
 					if (fourCatBox[i].Contains(touch) && currInput.IsThingTouched())
 					{
-						base.index_ = i + 1;
-						Global.PlayCatSound();
-						this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
-						gameState = GameState.PLAY;
+						switch(i)
+						{
+							case 0:
+                                base.index_ = i + 1;
+                                Global.PlayCatSound();
+                                this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                gameState = GameState.PLAY;
+                                break;
+							case 1:
+								if ((scoreSystem.cloudFortyUnlocked && currentLevel == 1) || (scoreSystem.lavaFortyUnlocked && currentLevel == 2) || (scoreSystem.meatFortyUnlocked && currentLevel == 3))
+                                {
+                                    base.index_ = i + 1;
+                                    Global.PlayCatSound();
+                                    this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                    gameState = GameState.PLAY;
+                                }
+                                break;
+							case 2:
+								if ((scoreSystem.cloudSixtyUnlocked && currentLevel == 1) || (scoreSystem.lavaSixtyUnlocked && currentLevel == 2) || (scoreSystem.meatSixtyUnlocked && currentLevel == 3))
+                                {
+                                    base.index_ = i + 1;
+                                    Global.PlayCatSound();
+                                    this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                    gameState = GameState.PLAY;
+                                }
+                                break;
+							case 3:
+								if ((scoreSystem.cloudEightyUnlocked && currentLevel == 1) || (scoreSystem.lavaEightyUnlocked && currentLevel == 2) || (scoreSystem.meatEightyUnlocked && currentLevel == 3))
+                                {
+                                    base.index_ = i + 1;
+                                    Global.PlayCatSound();
+                                    this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                    gameState = GameState.PLAY;
+                                }
+                                break;
+							default:
+								break;
+						}
 					}
 				}
 			}
@@ -84,10 +158,35 @@ namespace Helicopter
 				{
 					if (threeCatBox[i].Contains(touch) && currInput.IsThingTouched())
 					{
-						base.index_ = i + 1;
-						Global.PlayCatSound();
-						this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
-						gameState = GameState.PLAY;
+						switch (i)
+						{
+							case 0:
+                                base.index_ = i + 1;
+                                Global.PlayCatSound();
+                                this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                gameState = GameState.PLAY;
+                                break;
+							case 1:
+								if ((scoreSystem.ronFortyUnlocked && currentLevel == 4) || (scoreSystem.nyanFortyUnlocked && currentLevel == 5))
+                                {
+                                    base.index_ = i + 1;
+                                    Global.PlayCatSound();
+                                    this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                    gameState = GameState.PLAY;
+                                }
+                                break;
+							case 2:
+                                if ((scoreSystem.ronSixtyUnlocked && currentLevel == 4) || (scoreSystem.nyanSixtyUnlocked && currentLevel == 5))
+                                {
+                                    base.index_ = i + 1;
+                                    Global.PlayCatSound();
+                                    this.currentCat = this.startCatIndex_[currentLevel] + base.index_ - 1;
+                                    gameState = GameState.PLAY;
+                                }
+                                break;
+                            default:
+								break;
+                        }
 					}
 				}
 			}

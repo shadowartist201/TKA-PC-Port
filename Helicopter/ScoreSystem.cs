@@ -6,7 +6,7 @@ namespace Helicopter
 {
 	public class ScoreSystem
 	{
-		private ScoreInfo scoreInfo;
+		public ScoreInfo scoreInfo;
 
 		private int currScore;
 

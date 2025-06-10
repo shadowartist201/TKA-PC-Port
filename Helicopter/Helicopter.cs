@@ -85,13 +85,16 @@ namespace Helicopter
 			this.particleEmitter.Update(dt);
 			if (this.dead)
 			{
-				this.position = new Vector2(400f, 360f);
+                this.position = new Vector2(400f, 360f);
 				this.deadTimer += dt;
 				if (this.deadTimer > this.deadTime)
 				{
 					this.Reset();
 					scoreSystem.SetZero();
-				}
+                    Achievements.deathCount++;
+                    Achievements.songStartCheckpoint = false;
+                    Achievements.songEndCheckpoint = false;
+                }
 			}
 			if (tunnel.IsOn())
 			{

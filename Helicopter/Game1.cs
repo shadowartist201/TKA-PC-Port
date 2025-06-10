@@ -241,6 +241,7 @@ namespace Helicopter
         {
             //MediaPlayer.IsVisualizationEnabled = true;
             Storage.LoadOptionInfo();
+            Storage.LoadAchievementInfo();
             this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
 			Global.audioEngine = new AudioEngine("Content/Music/newXactProject.xgs");
 			Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music/Wave Bank.xwb");
@@ -277,12 +278,18 @@ namespace Helicopter
         {
             this.optionsMenu.SaveInfo();
             this.scoreSystem.SaveInfo();
+            Storage.SaveAchievementInfo();
         }
 
         protected override void Update(GameTime gameTime)
         {
             Global.playerIndex = PlayerIndex.One; //haha one
-            optionsMenu.ChangeSettings();
+            if (!optionsMenu.initialChange)
+            {
+                optionsMenu.ChangeSettings();
+                optionsMenu.initialChange = true;
+            }
+            Achievements.CheckAchievements(scoreSystem.scoreInfo, scoreSystem.scoreInfo.highScore_);
             touchLocations = TouchPanel.GetState();
             if (touchLocations.Count == 0)
                 touchLocations = new TouchCollection(del);
@@ -296,6 +303,12 @@ namespace Helicopter
             {
                 this.justStarted = false;
             }
+            if (Achievements.gameBeingPlayed && !Achievements.playCounterIncremented)
+            {
+                Achievements.playCount++;
+                Achievements.playCounterIncremented = true;
+            }
+            //Debug.WriteLine("PlayCount: " + Achievements.playCount + " | DeathCount: " + Achievements.deathCount + " | firstPause: " + Achievements.firstPause + " | WholeSongPlayed: " + Achievements.wholeSongFinished);
             Global.mountainVelocity = this.background.GetVelocity();
             switch (this.gameState)
             {
@@ -382,6 +395,7 @@ namespace Helicopter
                                 Camera.SetEffect(-1);
                             }
                             MediaPlayer.Play(this.songManager.CurrentSong);
+                            Achievements.gameBeingPlayed = true;
                             this.justStarted = true;
                             Global.ResetVibration();
                             break;
@@ -392,6 +406,7 @@ namespace Helicopter
                     switch (this.gameState)
                     {
                         case GameState.PLAY:
+                            Achievements.gameBeingPlayed = true;
                             this.helicopter.ChangeAnimation(this.catSelectMenu.getCurrentCat());
                             Global.SetVibrationResume();
                             MediaPlayer.Resume();
@@ -411,6 +426,7 @@ namespace Helicopter
                     }
                     break;
                 case GameState.PLAY:
+                    Achievements.gameBeingPlayed = true;
                     this.UpdateChoreography(num, elapsedMilliseconds, this.stageSelectMenu.getCurrentLevel());
                     this.UpdateBackground(num);
                     this.UpdateHelicopter(num);
@@ -424,9 +440,11 @@ namespace Helicopter
                     break;
                 case GameState.PAUSE:
                     this.pauseMenu.Update(num, this.currInput, ref this.gameState);
+                    Achievements.firstPause = true;
                     switch (this.gameState)
                     {
                         case GameState.PLAY:
+                            Achievements.gameBeingPlayed = true;
                             Global.SetVibrationResume();
                             MediaPlayer.Resume();
                             break;
@@ -1258,6 +1276,8 @@ namespace Helicopter
                 switch (this.currEvent)
                 {
                     case 0:
+                        Achievements.songStartCheckpoint = false;
+                        Achievements.songStartCheckpoint = true;
                         this.DoOpeningStars();
                         break;
                     case 1:
@@ -1427,6 +1447,9 @@ namespace Helicopter
                     case 41:
                         MediaPlayer.Stop();
                         MediaPlayer.Play(this.songManager.CurrentSong);
+                        Achievements.songEndCheckpoint = true;
+                        Achievements.wholeSongFinished = Achievements.songStartCheckpoint && Achievements.songEndCheckpoint;
+                        Achievements.songEndCheckpoint = false;
                         break;
                 }
                 this.currEvent++;
@@ -1444,8 +1467,10 @@ namespace Helicopter
                 switch (this.currEvent)
                 {
                     case 0:
+                        Achievements.songStartCheckpoint = false;
+                        Achievements.songStartCheckpoint = true;
                         this.tunnel.Set(TunnelEffect.Normal);
-					this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
+					    this.tunnel.SetColor(Color.White, Color.Red, Color.Blue);
                         break;
                     case 1:
                         this.hand.TurnOn(directedDownward_: false);
@@ -1643,6 +1668,9 @@ namespace Helicopter
                         Global.SetVibrationEndless(on: false);
                         MediaPlayer.Stop();
                         MediaPlayer.Play(this.songManager.CurrentSong);
+                        Achievements.songEndCheckpoint = true;
+                        Achievements.wholeSongFinished = Achievements.songStartCheckpoint && Achievements.songEndCheckpoint;
+                        Achievements.songEndCheckpoint = false;
                         break;
                 }
                 this.currEvent++;
@@ -1660,6 +1688,8 @@ namespace Helicopter
                 switch (this.currEvent)
                 {
                     case 0:
+                        Achievements.songStartCheckpoint = false;
+                        Achievements.songStartCheckpoint = true;
                         this.flashManager.DoFade(2.9f);
                         this.shineManager.SetCircle(333f);
                         break;
@@ -1975,6 +2005,9 @@ namespace Helicopter
                         Global.SetVibrationEndless(on: false);
                         MediaPlayer.Stop();
                         MediaPlayer.Play(this.songManager.CurrentSong);
+                        Achievements.songEndCheckpoint = true;
+                        Achievements.wholeSongFinished = Achievements.songStartCheckpoint && Achievements.songEndCheckpoint;
+                        Achievements.songEndCheckpoint = false;
                         break;
                 }
                 this.currEvent++;
@@ -1994,6 +2027,8 @@ namespace Helicopter
                 switch (this.currEvent)
                 {
                     case 0:
+                        Achievements.songStartCheckpoint = false;
+                        Achievements.songStartCheckpoint = true;
                         this.karaokeLyrics.TurnOn();
                         break;
                     case 1:
@@ -2069,6 +2104,9 @@ namespace Helicopter
                         Global.SetVibrationEndless(on: false);
                         MediaPlayer.Stop();
                         MediaPlayer.Play(this.songManager.CurrentSong);
+                        Achievements.songEndCheckpoint = true;
+                        Achievements.wholeSongFinished = Achievements.songStartCheckpoint && Achievements.songEndCheckpoint;
+                        Achievements.songEndCheckpoint = false;
                         break;
                 }
                 this.currEvent++;
@@ -2087,6 +2125,8 @@ namespace Helicopter
                 switch (this.currEvent)
                 {
                     case 0:
+                        Achievements.songStartCheckpoint = false;
+                        Achievements.songStartCheckpoint = true;
                         this.explosionManager.TurnOn();
                         Camera.SetEffect(0); //broken (index0,shakeblur,aka blurdirectional)
                         break;
@@ -2149,6 +2189,9 @@ namespace Helicopter
                         Global.SetVibrationEndless(on: false);
                         MediaPlayer.Stop();
                         MediaPlayer.Play(this.songManager.CurrentSong);
+                        Achievements.songEndCheckpoint = true;
+                        Achievements.wholeSongFinished = Achievements.songStartCheckpoint && Achievements.songEndCheckpoint;
+                        Achievements.songEndCheckpoint = false;
                         break;
                 }
                 this.currEvent++;
@@ -2167,6 +2210,8 @@ namespace Helicopter
                 switch (this.currEvent)
                 {
                     case 0:
+                        Achievements.songStartCheckpoint = false;
+                        Achievements.songStartCheckpoint = true;
                         //MediaPlayer.Play(this.songManager.CurrentSong);
                         break;
                     case 1:
@@ -2259,6 +2304,9 @@ namespace Helicopter
                     case 22:
                         MediaPlayer.Stop();
                         MediaPlayer.Play(this.songManager.CurrentSong);
+                        Achievements.songEndCheckpoint = true;
+                        Achievements.wholeSongFinished = Achievements.songStartCheckpoint && Achievements.songEndCheckpoint;
+                        Achievements.songEndCheckpoint = false;
                         break;
                 }
                 this.currEvent++;

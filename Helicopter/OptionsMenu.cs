@@ -16,6 +16,8 @@ namespace Helicopter
 
 		private bool vibrationOn = Storage.vibrationOn_;
 
+		public bool initialChange = false;
+
 		public OptionsMenu()
 			: base(horizontal: false)
 		{

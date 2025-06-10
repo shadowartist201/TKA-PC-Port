@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using static Android.Renderscripts.ScriptGroup;
 using static System.Environment;
 
 namespace Helicopter
@@ -76,13 +77,6 @@ namespace Helicopter
         {
             ScoreInfo result = new ScoreInfo(0);
             string fullPath = Path.Combine(filePath, "savedata");
-            /*if (!File.Exists(fullPath))
-            {
-                File.Create(fullPath);
-            }*/
-            //reader = new StreamReader(fullPath);
-            //Debug.WriteLine("Next line is -" + reader.ReadLine() + "-");
-            //Debug.WriteLine("And the next line is -" + reader.ReadLine() + "-");
             if (reader.Peek() == 'S')
             {
                 reader.ReadLine(); //Read Score
@@ -116,7 +110,6 @@ namespace Helicopter
 
         public static void SaveScoreInfo(ScoreInfo input)
         {
-            //writer = new StreamWriter(Path.Combine(filePath, "TKA/savedata.txt"));
             try
             {
                 writer.WriteLine("Score");
@@ -138,6 +131,45 @@ namespace Helicopter
                 Console.WriteLine(e.Message);
             }
             //writer.Close();
+        }
+
+        public static void LoadAchievementInfo()
+        {
+            if (reader.Peek() == 'A')
+            {
+                reader.ReadLine(); //Read Achievements
+                try
+                {
+                    Achievements.deathCount = Convert.ToInt32(reader.ReadLine());
+                    Achievements.playCount = Convert.ToInt32(reader.ReadLine());
+                }
+                catch (FormatException f)
+                {
+                    Console.WriteLine("Failed to process score data:");
+                    Console.WriteLine(f.Message);
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine("Failed to read score data:");
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        public static void SaveAchievementInfo()
+        {
+            try
+            {
+                writer.WriteLine("Achievements");
+                writer.WriteLine(Achievements.deathCount);
+                writer.WriteLine(Achievements.playCount);
+                writer.Flush();
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("Failed to write score data:");
+                Console.WriteLine(e.Message);
+            }
         }
 
         private static int[] ReadArray()

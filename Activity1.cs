@@ -20,7 +20,7 @@ namespace Helicopter
         Icon = "@drawable/icon",
         AlwaysRetainTaskState = true,
         LaunchMode = LaunchMode.SingleInstance,
-        ScreenOrientation = ScreenOrientation.Landscape,
+        ScreenOrientation = ScreenOrientation.SensorLandscape,
         ConfigurationChanges = ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden
     )]
     public class Activity1 : AndroidGameActivity
