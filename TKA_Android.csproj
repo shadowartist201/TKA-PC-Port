@@ -10,7 +10,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AndroidPackageFormat>aab</AndroidPackageFormat>
     <Optimize>False</Optimize>
-    <DebugSymbols>True</DebugSymbols>
+    <DebugSymbols>False</DebugSymbols>
     <RunAOTCompilation>False</RunAOTCompilation>
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
     <PublishTrimmed>False</PublishTrimmed>
@@ -24,7 +24,7 @@
     <AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
     <Optimize>False</Optimize>
     <Debugger>Xamarin</Debugger>
-    <DebugSymbols>True</DebugSymbols>
+    <DebugSymbols>False</DebugSymbols>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidKeyStore>False</AndroidKeyStore>
     <AndroidUseAapt2>True</AndroidUseAapt2>
