@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System;
 
 namespace Helicopter
 {
@@ -9,11 +10,11 @@ namespace Helicopter
 	{
 		private GameState lastGameState;
 
-		private bool musicOn = true;
+		private bool musicOn = Storage.musicOn_;
 
-		private bool sfxOn = true;
+		private bool sfxOn = Storage.FXOn_;
 
-		private bool vibrationOn = true;
+		private bool vibrationOn = Storage.vibrationOn_;
 
 		public OptionsMenu()
 			: base(horizontal: false)
@@ -137,7 +138,7 @@ namespace Helicopter
 			}*/
 		}
 
-		private void ChangeSettings()
+		public void ChangeSettings()
 		{
 			if (this.musicOn)
 			{
@@ -216,5 +217,11 @@ namespace Helicopter
 		{
 			this.lastGameState = gameState;
 		}
-	}
+
+        public void SaveInfo()
+        {
+            int[] settings = { Convert.ToInt32(vibrationOn), Convert.ToInt32(musicOn), Convert.ToInt32(sfxOn) };
+            Storage.SaveOptionInfo(settings);
+        }
+    }
 }

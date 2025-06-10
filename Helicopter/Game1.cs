@@ -192,7 +192,6 @@ namespace Helicopter
             Global.DeviceManager.DeviceSelectorCanceled += DeviceSelectorCanceled;
             Global.DeviceManager.DeviceDisconnected += DeviceDisconnected;
             Global.DeviceManager.PromptForDevice();
-            base.Exiting += OnExit;
             this.graphics = new GraphicsDeviceManager(this);
             base.Content.RootDirectory = "Content";
             Resolution.Init(ref graphics);
@@ -241,6 +240,7 @@ namespace Helicopter
         protected override void Initialize()
         {
             //MediaPlayer.IsVisualizationEnabled = true;
+            Storage.LoadOptionInfo();
             this.renderTarget = new RenderTarget2D(base.GraphicsDevice, 1280, 720, mipMap: false, SurfaceFormat.Color, DepthFormat.None);
 			Global.audioEngine = new AudioEngine("Content/Music/newXactProject.xgs");
 			Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music/Wave Bank.xwb");
@@ -273,13 +273,16 @@ namespace Helicopter
         {
         }
 
-        private void OnExit(object o, EventArgs e)
+        public void saveData()
         {
+            this.optionsMenu.SaveInfo();
             this.scoreSystem.SaveInfo();
         }
 
         protected override void Update(GameTime gameTime)
         {
+            Global.playerIndex = PlayerIndex.One; //haha one
+            optionsMenu.ChangeSettings();
             touchLocations = TouchPanel.GetState();
             if (touchLocations.Count == 0)
                 touchLocations = new TouchCollection(del);
@@ -321,21 +324,21 @@ namespace Helicopter
                         {
                             if (GamePad.GetState(playerIndex).IsButtonDown(Buttons.Start) || (startButton.Contains((touchLocations[0].Position-touchOffset) * resolutionDifference) && currInput.IsThingTouched()))
                             {
-                                Global.PlayCatSound();
                                 Global.playerIndex = playerIndex;
-                                this.scoreSystem.LoadInfo();
+                                Global.PlayCatSound();
+                                ScoreInfo.LoadInfo();
                                 this.gameState = GameState.MAIN_MENU;
                                 break;
                             }
                         }
                         if (this.currInput.IsButtonDown(Buttons.Start) || (startButton.Contains((touchLocations[0].Position - touchOffset) * resolutionDifference) && currInput.IsThingTouched()))
                         {
-                            Global.PlayCatSound();
                             if (!Global.playerIndex.HasValue)
                             {
                                 Global.playerIndex = PlayerIndex.One;
                             }
-                            this.scoreSystem.LoadInfo();
+                            Global.PlayCatSound();
+                            ScoreInfo.LoadInfo();
                             this.gameState = GameState.MAIN_MENU;
                         }
                         break;
@@ -597,6 +600,7 @@ namespace Helicopter
             Camera.effects[0] = base.Content.Load<Effect>("Effects/effect0");
             overlay = base.Content.Load<Texture2D>("rainbowOverlay");
             this.scoreSystem = new ScoreSystem();
+            this.scoreSystem.LoadInfo();
             this.songManager = new SongManager(this);
             Global.setPixel(GraphicsDevice);
         }

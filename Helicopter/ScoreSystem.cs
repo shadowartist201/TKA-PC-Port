@@ -83,8 +83,8 @@ namespace Helicopter
 
 		public void LoadInfo()
 		{
-			//this.scoreInfo = ScoreInfo.LoadInfo();
-		}
+            this.scoreInfo = ScoreInfo.LoadInfo();
+        }
 
 		public void SaveInfo()
 		{

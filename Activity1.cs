@@ -2,13 +2,14 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Gms.Games;
+using Android.Gms.Games.Snapshot;
 using Android.Gms.Tasks;
 using Android.OS;
 using Android.Views;
 using AndroidX.Core.View;
-using Java.Lang;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
+using System.IO;
 
 
 namespace Helicopter
@@ -30,6 +31,7 @@ namespace Helicopter
         public static Vibrator vibrator;
         private static IAchievementsClient _achievementsClient;
         public static IGamesSignInClient gamesSignInClient;
+        private static ISnapshotContents _snapshotContents;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -59,6 +61,18 @@ namespace Helicopter
             _game.Run();
         }
 
+        protected override void OnStop()
+        {
+            base.OnStop();
+            _game.saveData();
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            _game.saveData();
+        }
+
         public void PlayAuthSuccess()
         {
             Achievements();
@@ -68,7 +82,6 @@ namespace Helicopter
         protected void Achievements()
         {
             _achievementsClient = PlayGames.GetAchievementsClient(this);
-            //PlayGames.GetAchievementsClient(this).Unlock("achievement_id");
         }
 
         protected void Leaderboards() 
@@ -101,18 +114,10 @@ namespace Helicopter
             if (isAuthenticated)
             {
                 activity1.PlayAuthSuccess();
-                // Continue with Play Games Services
-                //PlayGames.getPlayersClient(activity).getCurrentPlayer().addOnCompleteListener(mTask-> {
-                    // Get PlayerID with mTask.getResult().getPlayerId()
-                //});
             }
             else
             {
-                // Disable your integration with Play Games Services or show a
-                // login button to ask  players to sign-in. Clicking it should
-                // call GamesSignInClient.signIn().
-                //Activity1.gamesSignInClient.SignIn();
-                //Activity1.gamesSignInClient.IsAuthenticated().AddOnCompleteListener(new TaskCompleteListener());
+
             }
         }
     }
