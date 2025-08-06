@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.MediaFoundation;
 
 namespace Helicopter
 {
@@ -17,22 +18,22 @@ namespace Helicopter
 
 		private Color WColor;
 
-		public float velocity = 476f;
+		public float velocity = 476f; //speed of the tunnel
 
 		private float colorRate_ = 1080f;
         private float colorHue_ = 0f;
 
-        private Vector2[] vertices;
+        private Vector2[] vertices; //tunnel points for top line, 40 at once
 
-		private Vector2[] vertices2;
+		private Vector2[] vertices2; //symbol positions, 3 symbols at once
 
-		private int[] animFrames;
+        private int[] animFrames;
 
 		private int animOffset;
 
 		private float animTimer = 0f;
 
-		private float animTime = 0.04166666f;
+		private float animTime = 0.04166666f; //1/24
 
 		private int[] symbolIndexes;
 
@@ -44,25 +45,25 @@ namespace Helicopter
 
 		private int lastIndex;
 
-		private int width;
+		private int width; //width between tunnel points, usually 32
 
-		private int width2;
+        private int width2; //width between symbol points, usually 100
 
 		private int lineWidth = 3;
 
-		private int height = 500;
+		private int height = 500; //tunnel thickness
 
-		private int minHeight = 350;
+		private int minHeight = 350; //min tunnel thickness
 
-		private float a;
+		private float a; //amplitude of sine wave
 
-		private float b;
+        private float b; //frequency of sine wave
 
-		private float c;
+        private float c; //period of sine wave
 
-		private float d;
+        private float d; //vertical shift of sine wave
 
-		private float x;
+        private float x;
 
 		private float maxSlope = 2f;
 
@@ -336,10 +337,10 @@ namespace Helicopter
 		{
 			this.t2 += dt;
 			this.animTimer += dt;
-            if (this.animTimer > this.animTime)
+            if (this.animTimer > this.animTime) //if animTimer > 1/24
 			{
 				this.animTimer = 0f;
-				this.animOffset = (this.animOffset + 1) % 18;
+				this.animOffset = (this.animOffset + 1) % 18; //increment by 1, clamp to under 18
 			}
 			if (!this.IsOn() && !helicopter.IsDead())
 			{
@@ -351,9 +352,9 @@ namespace Helicopter
 				this.t += dt;
 				if (this.t > 0.5f)
 				{
-					if (this.height > this.minHeight)
+					if (this.height > this.minHeight) //if height > 350
 					{
-						this.height--;
+						this.height--; //shrink the tunnel
 					}
 					this.t = 0f;
 				}
@@ -448,45 +449,46 @@ namespace Helicopter
 		{
 			for (int i = 0; i < this.vertices.Length; i++)
 			{
-				this.vertices[i].X -= this.velocity * dt;
+				this.vertices[i].X -= this.velocity * dt; //move all vertices left over time
 			}
 			for (int j = 0; j < this.vertices2.Length; j++)
 			{
-				this.vertices2[j].X -= this.velocity * dt;
-				if (this.vertices2[j].X < (float)(-this.width2))
+				this.vertices2[j].X -= this.velocity * dt; //move all symbols left over time
+				if (this.vertices2[j].X < (float)(-this.width2)) //if symbol is off screen to the left
 				{
-					this.vertices2[j].X = Math.Max(this.vertices2[(j + 1) % 3].X, this.vertices2[(j + 2) % 3].X) + 500f;
-					this.symbolIndexes[j] = Global.Random.Next(10);
-					this.vertices2[j].Y = this.GenerateBlock(this.vertices[this.lastIndex].Y);
+					this.vertices2[j].X = Math.Max(this.vertices2[(j + 1) % 3].X, this.vertices2[(j + 2) % 3].X) + 500f; //grab furthest symbol?
+					this.symbolIndexes[j] = Global.Random.Next(10); //choose random symbol shape
+					this.vertices2[j].Y = this.GenerateBlock(this.vertices[this.lastIndex].Y); //generate symbol height?
 				}
 			}
-			if (this.vertices[this.firstIndex].X < (float)(-this.width))
+			if (this.vertices[this.firstIndex].X < (float)(-this.width)) //if first vertice is off screen to the left
 			{
-				this.vertices[this.firstIndex].X = this.vertices[this.lastIndex].X + (float)this.width;
-				this.vertices[this.firstIndex].Y = this.GenerateHeight(this.vertices[this.lastIndex].Y, (float)(648 - this.height) - this.vertices[this.lastIndex].Y);
-				this.lastIndex = this.firstIndex;
-				this.firstIndex = (this.firstIndex + 1) % this.vertices.Length;
-			}
+				this.vertices[this.firstIndex].X = this.vertices[this.lastIndex].X + (float)this.width; //wrap around
+				this.vertices[this.firstIndex].Y = this.GenerateHeight(this.vertices[this.lastIndex].Y, (float)(648 - this.height) - this.vertices[this.lastIndex].Y); //generate height of vertice
+				this.lastIndex = this.firstIndex; //lastIndex is the index of the last vertex, which is the first vertex that was shifted off screen
+                this.firstIndex = (this.firstIndex + 1) % this.vertices.Length; //increment firstIndex, wrap around if needed
+            }
 		}
 
-		private float GenerateHeight(float dH1, float dH2)
+		private float GenerateHeight(float dH1, float dH2) //dH2 is usually smaller than dH1
 		{
 			this.x += this.width;
 			if (this.x > this.c)
 			{
 				this.x = 0f;
-				this.d = dH1;
-				this.c = Global.Random.Next(3, 640 / this.width) * this.width;
-				this.b = (float)Math.PI / this.c;
-				float num = 0f - dH1 + 72f;
-				this.a = Global.RandomBetween((num > (0f - this.maxSlope) / this.b) ? num : ((0f - this.maxSlope) / this.b), (dH2 < this.maxSlope / this.b) ? dH2 : (this.maxSlope / this.b));
-			}
-			return this.d + this.a * ((float)Math.Cos((double)(this.b * this.x) + Math.PI) + 1f) / 2f;
-		}
+				this.d = dH1; //where d is vertical shift
+				this.c = Global.Random.Next(3, 640 / this.width) * this.width; //width usually 32, random(3,20)*32 = 96~640
+                this.b = (float)Math.PI / this.c; //Assuming 96~640, then 0.004908~0.032724
+                float num = 0f - dH1 + 72f; //usually negative
+				this.a = Global.RandomBetween((num > (0f - this.maxSlope) / this.b) ? num : ((0f - this.maxSlope) / this.b), (dH2 < this.maxSlope / this.b) ? dH2 : (this.maxSlope / this.b)); // randomize amplitude of sine wave
+				//if (num > -2) then num else -2/b, if (dH2 < 2/b) then dH2 else 2/b
+            }
+            return this.d + this.a * ((float)Math.Cos((double)(this.b * this.x) + Math.PI) + 1f) / 2f; // sine wave formula
+        }
 
-		private float GenerateBlock(float dH1)
+		private float GenerateBlock(float dH1) //dH1 defaults to 72 but can go higher up to like 300
 		{
-			return dH1 + Global.RandomBetween(0f, this.height - 100);
+			return dH1 + Global.RandomBetween(0f, this.height - 100); //if 72, turns out to be 322~472
 		}
 
 		public void Draw(SpriteBatch spriteBatch)
@@ -505,26 +507,26 @@ namespace Helicopter
 			spriteBatch.Draw(Global.pixel, new Rectangle((int)position_.X + rect_.X + rect_.Width, (int)position_.Y + rect_.Y, this.lineWidth, rect_.Height), Global.tunnelColor);
 		}
 
-		public void Reset(int _num, int _num2)
+		public void Reset(int _num, int _num2) //initial reset to 40,3
 		{
 			this.t = 0f;
 			this.height = 500;
-			this.width = 1280 / _num;
+			this.width = 1280 / _num; //width = 32
 			this.width2 = 100;
-			this.vertices = new Vector2[_num + 1];
+			this.vertices = new Vector2[_num + 1]; //41 vertices
 			for (int i = 0; i <= _num; i++)
 			{
 				ref Vector2 reference = ref this.vertices[i];
-				reference = new Vector2(i * this.width, 72f);
+				reference = new Vector2(i * this.width, 72f); //i*32,72
 			}
 			this.firstIndex = 0;
-			this.lastIndex = _num;
-			this.vertices2 = new Vector2[_num2];
+			this.lastIndex = _num; //40
+			this.vertices2 = new Vector2[_num2]; //3 vertices, maximum shapes on screen at once?
 			for (int j = 0; j < _num2; j++)
 			{
 				ref Vector2 reference2 = ref this.vertices2[j];
-				reference2 = new Vector2(1280 + j * 500, this.GenerateBlock(72f));
-			}
+				reference2 = new Vector2(1280 + j * 500, this.GenerateBlock(72f)); //1280+(0/500/1000), 72~472
+            }
 			this.velocity = 0f;
 			this.a = 0f;
 			this.b = 0f;
