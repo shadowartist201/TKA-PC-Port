@@ -32,7 +32,7 @@ namespace Helicopter
 
 		private static Vector2 effectOffsetMax;
 
-		public static Effect[] effects = new Effect[7];
+		public static Effect[] effects = new Effect[8];
 
 		private static bool flipping_;
 
@@ -64,8 +64,11 @@ namespace Helicopter
 
 		private static bool rotating_ = false;
 		private static bool rotatingNyan_ = false;
+		public static bool invertCrazy_ = false;
 
-		public static bool repeatFlipNyan_ = true;
+		public static Color filterSpriteColor_;
+
+        public static bool repeatFlipNyan_ = true;
 
 		private static float rotationRate_ = 0f;
 
@@ -302,9 +305,18 @@ namespace Helicopter
 					Camera.effects[Camera.effectIndex].Parameters["rSpeed"].SetValue(rSpeed);
 					Camera.effects[Camera.effectIndex].Parameters["repeat"].SetValue(repeatFlipNyan_);
 					break;
+				case 7:
+					break;
 			}
 			graphicsDevice.SetRenderTarget(null);
 			if (Camera.effectIndex == 0 || Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3 || Camera.effectIndex == 4 || Camera.effectIndex == 5 || Camera.effectIndex == 6)
+			{
+				graphicsDevice.Clear(Color.White);
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
+                spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
+                spriteBatch.End();
+            }
+			if (Camera.effectIndex == 7)
 			{
 				graphicsDevice.Clear(Color.White);
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
@@ -397,6 +409,9 @@ namespace Helicopter
 				case 7:
 					Camera.effectIndex = 6;
 					break;
+				case 8:
+					Camera.effectIndex = 7;
+					break;
 			}
 		}
 
@@ -447,9 +462,9 @@ namespace Helicopter
         public static void DoRotatingNyan(float duration)
         {
             Camera.rotatingNyan_ = true;
-			Camera.rotationRate_ = ((float)Math.PI * 2.0f) / 8.0f;
-            Camera.rotationMax_ = (float)Math.PI * 2.0f;
-			Camera.rotationMin_ = 0f;
+			Camera.rotationRate_ = 2.0f * (3.0f - -3.0f / (0.3529411765f * 8.0f));
+            Camera.rotationMax_ = 3.0f;
+			Camera.rotationMin_ = -3.0f;
             Camera.scale_ = 1f;
 			Camera.timeBetweenShakes = duration;
 

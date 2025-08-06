@@ -52,6 +52,8 @@ namespace Helicopter
 
 		public static Texture2D overlay;
 
+		public static Texture2D filterSprite;
+
 		private Helicopter helicopter;
 
 		private Background background;
@@ -562,6 +564,7 @@ namespace Helicopter
 			{
 				//Camera.effects[i] = base.Content.Load<Effect>("Effects//effect" + i);
 			}
+			Camera.effects[7] = base.Content.Load<Effect>("negative");
 			Camera.effects[6] = base.Content.Load<Effect>("flip");
 			Camera.effects[5] = base.Content.Load<Effect>("drunk");
 			Camera.effects[4] = base.Content.Load<Effect>("shakezigzag");
@@ -570,7 +573,8 @@ namespace Helicopter
             Camera.effects[1] = base.Content.Load<Effect>("outline");
             Camera.effects[0] = base.Content.Load<Effect>("shakeblur");
             overlay = base.Content.Load<Texture2D>("rainbowOverlay");
-			this.scoreSystem = new ScoreSystem();
+			filterSprite = base.Content.Load<Texture2D>("rainbowOverlay");
+            this.scoreSystem = new ScoreSystem();
 			this.songManager = new SongManager(this);
 		}
 
@@ -2133,6 +2137,8 @@ namespace Helicopter
 				{
 					case 0:
 						Camera.SetEffect(-1);
+						//Camera.SetEffect(8);
+                        //rainbowOverlayEnabled = true;
                         break;
 					case 1:
 						clapperManager.TurnOn(0);
@@ -2169,8 +2175,9 @@ namespace Helicopter
 						break;
 					case 13:
 						this.tunnel.Set(TunnelEffect.Disappear);
-						//Camera.SetEffect(something);
-						rainbowOverlayEnabled = true;
+                        //Camera.SetEffect(something);
+                        Camera.SetEffect(8);
+                        rainbowOverlayEnabled = true;
                         break;
 					case 14:
 						break;
@@ -2199,8 +2206,9 @@ namespace Helicopter
                         this.tunnel.Set(TunnelEffect.Disappear);
                         //Camera.DoRotatingNyan(Global.BPM * 8f); //out of sync with flipping
                         Camera.DoFlippingNyan(Global.BPM * 8f); //out of sync with rotating
-                        //Camera.SetEffect(something);
-						rainbowOverlayEnabled = true;
+                                                                //Camera.SetEffect(something);
+                        Camera.SetEffect(8);
+                        rainbowOverlayEnabled = true;
 						letterManager.TurnOn(0);
 						break;
 					case 22:
@@ -2227,7 +2235,10 @@ namespace Helicopter
 		{
 			if (rainbowOverlayEnabled)
 			{
-                spriteBatch.Draw(overlay, new Rectangle(0, 0, 1280, 720), new Rectangle(0,0,1,768), new Color(255,255,255,0.5f), 0f, Vector2.Zero, SpriteEffects.None, 0f);
+				Color overlayColor = new Color(Global.Random.Next(128, 255), Global.Random.Next(128, 255), Global.Random.Next(128, 255));
+				spriteBatch.End();
+				spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive);
+                spriteBatch.Draw(filterSprite, new Rectangle(0, 0, 1280, 720), new Rectangle(0,2,1,768), overlayColor, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             }
 			if (clappersOn)
 			{
