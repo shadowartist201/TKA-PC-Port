@@ -3,6 +3,12 @@ A Windows port of Techno Kitten Adventure, originally developed by 21st Street G
 
 This is a project to bring TKA to PC (and hopefully other platforms) using the Xbox 360 version and Monogame as a base.
 
+[Like what you see? Donate here](https://buymeacoffee.com/shadowartist201)
+
+[Now available on Google Play](https://play.google.com/store/apps/details?id=com.shadow.TKA_Android)
+
+Disclaimer: In this project, AI was used for upscaling Nyan Pack assets to HD.
+
 ## Current status 
 Popaganda Pack is done. Nyan Pack has minor bugs. Supports gamepad and keyboard input. Also supports multiple resolutions and fullscreen.
 
@@ -39,6 +45,7 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 - macOS x64 (should work on 10.15 Catalina, not confirmed)
 
 ## Extra Stuff
+- [Like what you see? Donate here](https://buymeacoffee.com/shadowartist201)
 - [Weird things about XNA](https://shadowartist201.blogspot.com/search/label/XNA)
 - [Notes on shaders, Nyan Cat, and the iOS decompilation](https://github.com/shadowartist201/TKA-PC-Port/wiki)
 - [TKA content you may not know about](https://shadowartist201.blogspot.com/search/label/TKA%20Archive)
