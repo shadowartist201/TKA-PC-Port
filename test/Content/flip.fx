@@ -11,6 +11,7 @@ Texture2D SpriteTexture;
 float iTime;
 float rSpeed;
 bool repeat;
+bool negative;
 
 sampler SpriteTextureSampler = sampler_state
 {
@@ -50,7 +51,15 @@ float4 MainPS(float4 pos : SV_POSITION, float4 color0 : COLOR0, float2 texCoord 
         color = float4(0.0, 0.0, 0.0, 1.0);
     }
     
-    return color;
+    if (negative)
+    {
+        return float4(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, color.a);
+    }
+    else
+    {
+        return color;
+    }
+   
 }
 
 technique SpriteDrawing

@@ -203,6 +203,10 @@ namespace Helicopter
 
 		public static Vector2 resolution;
 
+		public static bool isNyanPack = false;
+
+		public static bool isNyanNegative = false;
+
 		public static Random Random => Global.random;
 
 		public static void setPixel(GraphicsDevice graphicsDevice)

@@ -123,17 +123,60 @@ namespace Helicopter
 			}
 		}
 
-		public void Draw(SpriteBatch spriteBatch)
+		public void Draw(SpriteBatch spriteBatch, Tunnel tunnel)
 		{
 			TunnelParticle[] array = this.particles_;
 			foreach (TunnelParticle tunnelParticle in array)
 			{
-				tunnelParticle.Draw(spriteBatch);
+				if (tunnel.isNyanRainbow)
+				{
+                    tunnelParticle.color_ = ColorFromHSV(((tunnelParticle.position_.X + tunnel.rainbowOffset) % 1280) * tunnel.rainbowFactor, 1, 1);
+                    tunnelParticle.DrawOverride(spriteBatch);
+                }
+				else
+				{
+                    tunnelParticle.color_ = Global.tunnelColor;
+                    tunnelParticle.Draw(spriteBatch);
+                }
 			}
 			for (int j = 0; j < this.activeParticles2_; j++)
 			{
-				this.particles2_[j].Draw(spriteBatch);
+				if (tunnel.isNyanRainbow)
+				{
+                    this.particles2_[j].color_ = ColorFromHSV(((particles2_[j].position_.X + tunnel.rainbowOffset) % 1280) * tunnel.rainbowFactor, 1, 1);
+					this.particles2_[j].DrawOverride(spriteBatch);
+                }
+				else
+				{
+					this.particles2_[j].color_ = Global.tunnelColor;
+                    this.particles2_[j].Draw(spriteBatch);
+                }
 			}
 		}
-	}
+
+        public static Color ColorFromHSV(double hue, double saturation, double value)
+        {
+            int hi = Convert.ToInt32(Math.Floor(hue / 60)) % 6;
+            double f = hue / 60 - Math.Floor(hue / 60);
+
+            value = value * 255;
+            int v = Convert.ToInt32(value);
+            int p = Convert.ToInt32(value * (1 - saturation));
+            int q = Convert.ToInt32(value * (1 - f * saturation));
+            int t = Convert.ToInt32(value * (1 - (1 - f) * saturation));
+
+            if (hi == 0)
+                return new Color(v, t, p, 255);
+            else if (hi == 1)
+                return new Color(q, v, p, 255);
+            else if (hi == 2)
+                return new Color(p, v, t, 255);
+            else if (hi == 3)
+                return new Color( p, q, v, 255);
+            else if (hi == 4)
+                return new Color(t, p, v, 255);
+            else
+                return new Color(v, p, q, 255);
+        }
+    }
 }

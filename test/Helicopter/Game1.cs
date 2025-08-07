@@ -254,6 +254,14 @@ namespace Helicopter
 
 		protected override void Update(GameTime gameTime)
 		{
+			if (this.stageSelectMenu.getCurrentLevel() == 5)
+			{
+				Global.isNyanPack = true;
+			}
+			else
+			{
+				Global.isNyanPack = false;
+            }
             float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
 			float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
 			this.currInput.Update();
@@ -942,8 +950,8 @@ namespace Helicopter
 			this.eventTimes[14] = 112913f;
 			this.eventTimes[15] = 118435f;
 			this.eventTimes[16] = 124182f;
-			this.eventTimes[17] = 124288;
-			this.eventTimes[18] = 127112f;//
+			this.eventTimes[17] = 124288f;
+			this.eventTimes[18] = 127112f;
 			this.eventTimes[19] = 138494f;
 			this.eventTimes[20] = 171061f;
 			this.eventTimes[21] = 183456f;
@@ -2136,9 +2144,9 @@ namespace Helicopter
 				switch (this.currEvent)
 				{
 					case 0:
-						Camera.SetEffect(-1);
-						//Camera.SetEffect(8);
-                        //rainbowOverlayEnabled = true;
+                        Camera.SetEffect(-1);
+                        //Camera.DoRotatingNyan(Global.BPM * 8f);
+                        //Camera.DoFlippingNyan(Global.BPM * 8f);
                         break;
 					case 1:
 						clapperManager.TurnOn(0);
@@ -2159,12 +2167,12 @@ namespace Helicopter
 						break;
 					case 8:
 						letterManager.TurnOn(0);
-						//Camera.DoRotatingNyan(Global.BPM * 8f);
+						Camera.DoRotatingNyan(Global.BPM * 8f);
 						break;
 					case 9:
 						clapperManager.TurnOn(0); 
 						letterManager.TurnOff();
-						//Camera.StopRotating();
+						Camera.StopRotating();
                         break;
 					case 10:
 						clapperManager.TurnOff();
@@ -2175,8 +2183,8 @@ namespace Helicopter
 						break;
 					case 13:
 						this.tunnel.Set(TunnelEffect.Disappear);
-                        //Camera.SetEffect(something);
-                        Camera.SetEffect(8);
+						//Camera.SetEffect(something);
+						Camera.SetEffect(8);
                         rainbowOverlayEnabled = true;
                         break;
 					case 14:
@@ -2189,11 +2197,11 @@ namespace Helicopter
 						rainbowOverlayEnabled = false;
 						break;
 					case 17:
-						Camera.DoFlippingNyan(Global.BPM * 8f);
+						//Camera.DoFlippingNyan(Global.BPM * 8f);
 						break;
 					case 18:
                         this.tunnel.Set(TunnelEffect.Nyan);
-                        //Camera.DoFlippingNyan(Global.BPM * 8f);
+                        Camera.DoFlippingNyan(Global.BPM * 8f);
                         break;
 					case 19:
 						break;
@@ -2204,10 +2212,9 @@ namespace Helicopter
                         break;
 					case 21:
                         this.tunnel.Set(TunnelEffect.Disappear);
-                        //Camera.DoRotatingNyan(Global.BPM * 8f); //out of sync with flipping
-                        Camera.DoFlippingNyan(Global.BPM * 8f); //out of sync with rotating
-                                                                //Camera.SetEffect(something);
-                        Camera.SetEffect(8);
+                        Camera.DoRotatingNyan(Global.BPM * 8f);
+                        Camera.DoFlippingNyan(Global.BPM * 8f); 
+						Camera.SetEffect(8);
                         rainbowOverlayEnabled = true;
 						letterManager.TurnOn(0);
 						break;
@@ -2215,7 +2222,7 @@ namespace Helicopter
                         this.ResetChoreography(1, alternating: false, meat: false);
 						Camera.SetEffect(-1);
 						Camera.StopFlipping();
-						//Camera.StopRotating();
+						Camera.StopRotating();
 						rainbowOverlayEnabled = false;
                         break;
 					case 23:

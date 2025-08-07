@@ -75,6 +75,12 @@ namespace Helicopter
 
 		private float t;
 
+		public float rainbowFactor = 360f / 1280f;
+
+		public float rainbowOffset = 0f;
+
+		public bool isNyanRainbow = false;
+
 		public Tunnel(int _num, int _num2)
 		{
 			this.tunnelEffects_ = new TunnelEffects();
@@ -335,6 +341,11 @@ namespace Helicopter
 
 		public void Update(float dt, Helicopter helicopter, ScoreSystem scoreSystem, int stageIndex, int catIndex)
 		{
+			this.rainbowOffset += 1280 * 2 * dt;
+			if (this.rainbowOffset > 1280)
+			{
+				this.rainbowOffset -= 1280;
+            }
 			this.t2 += dt;
 			this.animTimer += dt;
             if (this.animTimer > this.animTime) //if animTimer > 1/24
@@ -364,8 +375,10 @@ namespace Helicopter
 			{
 			case TunnelEffect.Normal:
 				Global.tunnelColor = this.normalColor;
+				this.isNyanRainbow = false;
 				break;
 			case TunnelEffect.BW:
+				this.isNyanRainbow = false;
 				if (this.t2 > Global.BPM) //swap between two colors according to bpm
 				{
 					if (Global.tunnelColor == this.WColor)
@@ -380,7 +393,8 @@ namespace Helicopter
 				}
 				break;
 			case TunnelEffect.BWDouble:
-				if (this.t2 > Global.BPM / 2f) //swap between two colors 2x faster
+                this.isNyanRainbow = false;
+                if (this.t2 > Global.BPM / 2f) //swap between two colors 2x faster
 				{
 					if (Global.tunnelColor == this.WColor)
 					{
@@ -394,6 +408,7 @@ namespace Helicopter
 				}
 				break;
 			case TunnelEffect.BWQuad:
+				this.isNyanRainbow = false;
 				if (this.t2 > Global.BPM / 4f) //swap between two colors 4x faster
 				{
 					if (Global.tunnelColor == this.WColor)
@@ -409,10 +424,12 @@ namespace Helicopter
 				break;
 			case TunnelEffect.Rainbow: //rainbow
 				this.colorIndex = (this.colorIndex + 1) % 6;
-				Global.tunnelColor = Global.rainbowColors[this.colorIndex];
+                this.isNyanRainbow = false;
+                Global.tunnelColor = Global.rainbowColors[this.colorIndex];
 				break;
 			case TunnelEffect.RainbowPunctuated: //rainbow according to bpm
-				if (this.t2 > Global.BPM)
+                this.isNyanRainbow = false;
+                if (this.t2 > Global.BPM)
 				{
 					this.colorIndex = (this.colorIndex + 3) % 8;
 					Global.tunnelColor = Global.rainbowColors8[this.colorIndex];
@@ -427,7 +444,7 @@ namespace Helicopter
 				}
 				break;
 			case TunnelEffect.Nyan:
-					colorHue_ += colorRate_ * dt;
+					/*colorHue_ += colorRate_ * dt;
 					if (colorHue_ < 0f)
 					{
 						colorHue_ = 0f;
@@ -438,8 +455,9 @@ namespace Helicopter
 						colorHue_ = 360f;
 						colorRate_ = 0f - colorRate_;
 					}
-					Global.tunnelColor = Camera.GetColor(colorHue_ % 360f);
-				break;
+					Global.tunnelColor = Camera.GetColor(colorHue_ % 360f);*/
+					this.isNyanRainbow = true;
+                break;
             }
 			this.tunnelEffects_.UpdateTunnel(dt, this.vertices, this.width, this.height, this.velocity);
 			this.tunnelEffects_.UpdateSymbols(dt, this.vertices2, this.symbolLineInfo[this.symbolIndexes[0]], this.symbolLineInfo[this.symbolIndexes[1]], this.symbolLineInfo[this.symbolIndexes[2]], this.velocity);
@@ -495,7 +513,7 @@ namespace Helicopter
 		{
 			if (this.visible_)
 			{
-				this.tunnelEffects_.Draw(spriteBatch);
+				this.tunnelEffects_.Draw(spriteBatch, this);
 			}
 		}
 

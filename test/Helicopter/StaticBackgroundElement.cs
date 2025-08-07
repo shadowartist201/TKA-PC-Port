@@ -13,7 +13,7 @@ namespace Helicopter
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(this.texture_, this.position_, (Rectangle?)this.texRect_, Color.White);
+            spriteBatch.Draw(this.texture_, this.position_, (Rectangle?)this.texRect_, Color.White);
 		}
 
 		public void Reset(Texture2D texture, Rectangle texRect, Vector2 position)

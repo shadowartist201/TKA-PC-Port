@@ -160,14 +160,14 @@ namespace Helicopter
 				this.midPart_.Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(0f, 0f), new Vector2(0f, 0f), TexDirection.RIGHT, 300f); //null
 				break;
 			case 5:
-				this.backPartStaticLayer_ = 2;
+				this.backPartStaticLayer_ = 0;
 				Global.BGTexture = this.Content.Load<Texture2D>("nyanBGios");
 				this.backParts_[0].Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(2259f, 627f), new Vector2(0f, 0f), TexDirection.RIGHT, 50f); //sky
                 this.backParts_[1].Reset(Global.BGTexture, new Vector2(0f, 627f), new Vector2(2259f, 237f), new Vector2(0f, 379f), TexDirection.RIGHT, 150f); //hills row 1
                 this.backParts_[2].Reset(Global.BGTexture, new Vector2(0f, 864f), new Vector2(2259f, 184f), new Vector2(0f, 536f), TexDirection.RIGHT, 200f); //grass row 2
                 this.backParts_[3].Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(0f, 0f), new Vector2(0f, 0f), TexDirection.RIGHT, 0f); //null
                 this.backPartStatic_.Reset(Global.BGTexture, new Rectangle(0, 0, 0, 0), new Vector2(0f, 0f)); //null
-				this.midPart_.Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(0f, 0f), new Vector2(0f, 0f), TexDirection.RIGHT, 300f); //null
+                this.midPart_.Reset(Global.BGTexture, new Vector2(0f, 0f), new Vector2(0f, 0f), new Vector2(0f, 0f), TexDirection.RIGHT, 300f); //null
                 break;
 			}
 		}
