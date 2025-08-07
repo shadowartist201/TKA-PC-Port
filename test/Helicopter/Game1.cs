@@ -2145,8 +2145,6 @@ namespace Helicopter
 				{
 					case 0:
                         Camera.SetEffect(-1);
-                        //Camera.DoRotatingNyan(Global.BPM * 8f);
-                        //Camera.DoFlippingNyan(Global.BPM * 8f);
                         break;
 					case 1:
 						clapperManager.TurnOn(0);
@@ -2183,7 +2181,6 @@ namespace Helicopter
 						break;
 					case 13:
 						this.tunnel.Set(TunnelEffect.Disappear);
-						//Camera.SetEffect(something);
 						Camera.SetEffect(8);
                         rainbowOverlayEnabled = true;
                         break;
@@ -2197,7 +2194,6 @@ namespace Helicopter
 						rainbowOverlayEnabled = false;
 						break;
 					case 17:
-						//Camera.DoFlippingNyan(Global.BPM * 8f);
 						break;
 					case 18:
                         this.tunnel.Set(TunnelEffect.Nyan);

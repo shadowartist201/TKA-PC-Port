@@ -502,10 +502,6 @@ namespace Helicopter
         public static void DoRotatingNyan(float duration)
         {
             Camera.rotatingNyan_ = true;
-            /*Camera.rotationRate_ = ((float)Math.PI * 2.0f) / 8.0f;
-            Camera.rotationMax_ = (float)Math.PI * 2.0f;
-            Camera.rotationMin_ = 0f;*/
-            //Camera.scale_ = 1f;
 			Camera.timeBetweenShakes = duration;
 			Camera.timeBetweenTimer = 0f;
 
@@ -538,9 +534,7 @@ namespace Helicopter
 			Camera.flippingNyan_ = true;
 			Camera.timeBetweenShakes = duration;
 			Camera.flipTimer_ = 0f;
-			//Camera.SetEffect(7);
             Camera.flippingNyanDirection_ = 1;
-            //Camera.spriteEffect_ = SpriteEffects.FlipVertically;
         }
 
 		public static void StopFlipping()

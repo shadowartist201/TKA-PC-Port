@@ -134,11 +134,9 @@ namespace Helicopter
 				switch (base.index_)
 				{
 					case 0:
-						//this.musicOn = false;
 						MusicSubMenu(currInput);
 						break;
 					case 1:
-						//this.sfxOn = false;
 						FXSubMenu(currInput);
 						break;
 					case 2:
@@ -167,22 +165,6 @@ namespace Helicopter
 
 		private void ChangeSettings()
 		{
-            /*if (this.musicOn)
-			{
-				MediaPlayer.Volume = 0.1f;
-			}
-			else
-			{
-				MediaPlayer.Volume = 0f;
-			}
-			if (this.sfxOn)
-			{
-				Global.audioEngine.GetCategory("Default").SetVolume(1f);
-			}
-			else
-			{
-				Global.audioEngine.GetCategory("Default").SetVolume(0f);
-			}*/
 			if (this.vibrationOn)
 			{
 				Global.SetVibrationOn(on: true);
@@ -292,22 +274,6 @@ namespace Helicopter
 			spriteBatch.Draw(Global.sound_levels, new Vector2(1072f,214f-42f), (Rectangle?)sound_levels_[musicValue], Color.White);
 			spriteBatch.Draw(Global.sound_levels, new Vector2(1072f,277f-42f), (Rectangle?)sound_levels_[FXValue], Color.White);
 			this.resOptions[this.resIndex].Draw(spriteBatch);
-			/*if (this.musicOn)
-			{
-				this.DrawOnOff(spriteBatch, new Vector2(901f, 175f));
-			}
-			else
-			{
-				this.DrawOffOn(spriteBatch, new Vector2(901f, 175f));
-			}
-			if (this.sfxOn)
-			{
-				this.DrawOnOff(spriteBatch, new Vector2(901f, 237f));
-			}
-			else
-			{
-				this.DrawOffOn(spriteBatch, new Vector2(901f, 237f));
-			}*/
 			if (this.vibrationOn)
 			{
 				this.DrawOnOff(spriteBatch, new Vector2(901f, 300f));
