@@ -466,12 +466,12 @@ namespace Helicopter
 			if (this.gameState == GameState.CAT_SELECT || this.gameState == GameState.PLAY || this.gameState == GameState.PAUSE)
 			{
 				base.GraphicsDevice.SetRenderTarget(this.renderTarget);
-				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null);
+				spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null);
 				this.DrawStage(num, gameTime);
 				spriteBatch.End();
 				Camera.Draw(spriteBatch, this.renderTarget, this.graphics, base.GraphicsDevice);
 			}
-			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, null, Resolution.getTransformationMatrix());
 			this.DrawMenu();
 			spriteBatch.End();
 		}
