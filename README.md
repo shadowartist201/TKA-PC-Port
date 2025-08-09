@@ -31,7 +31,6 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 - Add Spanish Language option
 - Add Japanese Language option
 - Make a new layout for the options menu to allow for more features
-- Fix the clouds
 - Add Popaganda and Nyan to credits
 
 ## Branches
