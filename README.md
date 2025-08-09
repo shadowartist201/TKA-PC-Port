@@ -10,7 +10,7 @@ This is a project to bring TKA to PC (and hopefully other platforms) using the X
 Disclaimer: In this project, AI was used for upscaling Nyan Pack assets to HD.
 
 ## Current status 
-Popaganda Pack is done. Nyan Pack has minor bugs. Supports gamepad and keyboard input. Also supports multiple resolutions and fullscreen.
+Popaganda Pack and Nyan Pack are done. There may be some small graphical/performance bugs. Supports gamepad and keyboard input. Also supports multiple resolutions and fullscreen.
 
 Controls as of current commit:
 - S (Start)
@@ -24,13 +24,15 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 - ~~Add a save/load system~~  *Added in [63c2ec4c](https://github.com/shadowartist201/TKA-PC-Port/commit/63c2ec4c33aa6a5f5ce0c7d0e02392b6ede00c38)*
 - ~~Fix Nyan Pack bg element positions~~  *Added in [594a7b2](https://github.com/shadowartist201/TKA-PC-Port/commit/594a7b2f0771be42af771e901974474d1b43d394)*
 - ~~Fix Nyan Pack letters screen wrap~~  *Added in [8fd7f58](https://github.com/shadowartist201/TKA-PC-Port/commit/8fd7f5890bfac25b4ebaa351c0e46626a9d18d01)*
-- Fix Nyan Pack spin animation
-- Fix Nyan Pack rainbow camera effect
+- ~~Fix Nyan Pack spin animation~~ *Added in [96624eb](https://github.com/shadowartist201/TKA-PC-Port/commit/96624eb50a035073cc9c33cb3a5a0b5f10e6be9e)*
+- ~~Fix Nyan Pack rainbow camera effect~~ *Added in [96624eb](https://github.com/shadowartist201/TKA-PC-Port/commit/96624eb50a035073cc9c33cb3a5a0b5f10e6be9e)*
 - ~~Add new Nyan Pack flip animation~~  *Added in [00ad300](https://github.com/shadowartist201/TKA-PC-Port/commit/00ad300fe22641533019230b08bc2f65642a99ce)*
 - Make button icons change based on input method (controller/keyboard/etc)
 - Add Spanish Language option
 - Add Japanese Language option
 - Make a new layout for the options menu to allow for more features
+- Fix the clouds
+- Add Popaganda and Nyan to credits
 
 ## Branches
 - main (DirectX/Monogame Windows)
