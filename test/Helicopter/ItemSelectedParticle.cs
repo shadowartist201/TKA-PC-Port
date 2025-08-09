@@ -61,7 +61,7 @@ namespace Helicopter
 			if (this.visible_)
 			{
 				this.colorIndex_ = (this.colorIndex_ + 1) % 6;
-				spriteBatch.Draw(Global.tunnelStar, this.position_, (Rectangle?)null, new Color(new Vector4(this.color_.ToVector3(), 0.9f)), this.rotation_, this.origin_, this.scale_, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.tunnelStar, this.position_, (Rectangle?)null, Color.FromNonPremultiplied(new Vector4(this.color_.ToVector3(), 0.9f)), this.rotation_, this.origin_, this.scale_, SpriteEffects.None, 0f);
 			}
 		}
 

@@ -48,7 +48,7 @@ namespace Helicopter
 		{
 			if (this.active)
 			{
-				spriteBatch.Draw(Global.searchingEyes, this.position, (Rectangle?)new Rectangle(281 * this.currFrame, 0, 281, 79), new Color(new Vector4(Color.White.ToVector3(), this.alpha)));
+				spriteBatch.Draw(Global.searchingEyes, this.position, (Rectangle?)new Rectangle(281 * this.currFrame, 0, 281, 79), Color.FromNonPremultiplied(new Vector4(Color.White.ToVector3(), this.alpha)));
 			}
 		}
 

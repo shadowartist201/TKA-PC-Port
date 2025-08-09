@@ -118,7 +118,7 @@ namespace Helicopter
 				{
 					float num = particle.TimeSinceStart / particle.Lifetime;
 					float w = 4f * num * (1f - num);
-					Color color = new Color(new Vector4(1f, 1f, 1f, w));
+					Color color = Color.FromNonPremultiplied(new Vector4(1f, 1f, 1f, w));
 					float num2 = particle.Scale * (0.75f + 0.25f * num);
 					spriteBatch.Draw(Global.stars[particle.texIndex], particle.Position, (Rectangle?)null, color, particle.Rotation, this.origin, num2, SpriteEffects.None, 0f);
 				}

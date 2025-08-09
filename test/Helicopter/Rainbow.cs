@@ -28,7 +28,7 @@ namespace Helicopter
 		{
 			if (this.active)
 			{
-				spriteBatch.Draw(Global.rainbow, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, (int)(this.progress * 1280f), 639), new Color(new Vector4(Color.White.ToVector3(), 1.2f - this.progress)));
+				spriteBatch.Draw(Global.rainbow, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, (int)(this.progress * 1280f), 639), Color.FromNonPremultiplied(new Vector4(Color.White.ToVector3(), 1.2f - this.progress)));
 			}
 		}
 

@@ -45,7 +45,7 @@ namespace Helicopter
 		{
 			if (this.visible_)
 			{
-				spriteBatch.Draw(Global.shineShapes[this.textureIndex_], this.position_, (Rectangle?)null, new Color(new Vector4(this.color_.ToVector3(), this.alpha_)), 0f, this.origin_, this.scale_, SpriteEffects.None, 0f);
+				spriteBatch.Draw(Global.shineShapes[this.textureIndex_], this.position_, (Rectangle?)null, Color.FromNonPremultiplied(new Vector4(this.color_.ToVector3(), this.alpha_)), 0f, this.origin_, this.scale_, SpriteEffects.None, 0f);
 			}
 		}
 

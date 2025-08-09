@@ -56,7 +56,7 @@ namespace Helicopter
 		{
 			if (this.flashAlpha > 0f)
 			{
-				spriteBatch.Draw(Global.pixel, new Rectangle(0, 0, 1280, 720), new Color(new Vector4(this.currColor.ToVector3(), this.flashAlpha)));
+				spriteBatch.Draw(Global.pixel, new Rectangle(0, 0, 1280, 720), Color.FromNonPremultiplied(new Vector4(this.currColor.ToVector3(), this.flashAlpha)));
 			}
 		}
 

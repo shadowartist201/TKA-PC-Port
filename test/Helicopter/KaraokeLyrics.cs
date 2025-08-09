@@ -15,7 +15,7 @@ namespace Helicopter
 
 		private Color highlightedColor_ = Color.White;
 
-		private Color nonHighlightedColor_ = new Color(new Vector4(0f, 0f, 0f, 0.7f));
+		private Color nonHighlightedColor_ = Color.FromNonPremultiplied(new Vector4(0f, 0f, 0f, 0.7f));
 
 		private int currentLineIndex_ = -1;
 

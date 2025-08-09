@@ -549,7 +549,7 @@ namespace Helicopter
 			Vector3 one = Vector3.One;
 			if (hue < 0f)
 			{
-				return new Color(new Vector4(Color.White.ToVector3(), 0f));
+				return Color.FromNonPremultiplied((new Vector4(Color.White.ToVector3(), 0f)));
 			}
 			if (hue <= 60f)
 			{

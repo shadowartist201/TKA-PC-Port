@@ -46,12 +46,12 @@ namespace Helicopter
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-            spriteBatch.Draw(Global.tunnelStar, this.position_, (Rectangle?)null, new Color(new Vector4(Global.tunnelColor.ToVector3(), 0.75f)), 0f, this.origin_, this.scale_, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Global.tunnelStar, this.position_, (Rectangle?)null, Color.FromNonPremultiplied(new Vector4(Global.tunnelColor.ToVector3(), 0.75f)), 0f, this.origin_, this.scale_, SpriteEffects.None, 0f);
 		}
 
 		public void DrawOverride(SpriteBatch spriteBatch)
 		{
-            spriteBatch.Draw(Global.tunnelStar, this.position_, (Rectangle?)null, new Color(new Vector4(this.color_.ToVector3(), 0.75f)), 0f, this.origin_, this.scale_, SpriteEffects.None, 0f);
+            spriteBatch.Draw(Global.tunnelStar, this.position_, (Rectangle?)null, Color.FromNonPremultiplied(new Vector4(this.color_.ToVector3(), 0.75f)), 0f, this.origin_, this.scale_, SpriteEffects.None, 0f);
         }
 
 		public void Reset(Vector2 position, Vector2 velocity, Vector2 acceleration, float startScale, float scaleRate, float lifetime)
