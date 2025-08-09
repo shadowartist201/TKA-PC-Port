@@ -353,14 +353,14 @@ namespace Helicopter
             if (Camera.effectIndex == 0 || Camera.effectIndex == 1 || Camera.effectIndex == 2 || Camera.effectIndex == 3 || Camera.effectIndex == 4 || Camera.effectIndex == 5 || Camera.effectIndex == 6 || Camera.effectIndex == 7)
 			{
                 graphicsDevice.Clear(Color.Black);
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, Camera.effects[Camera.effectIndex], Resolution.getTransformationMatrix());
                 spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
                 spriteBatch.End();
             }
 			else
 			{
                 graphicsDevice.Clear(Color.Black);
-                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, null, null, null, null, Resolution.getTransformationMatrix());
+                spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, null, null, null, null, Resolution.getTransformationMatrix());
                 spriteBatch.Draw((Texture2D)renderTarget, Camera.position_, (Rectangle?)null, Camera.color_, Camera.rotation_, new Vector2(640f, 360f), Camera.scale_, Camera.spriteEffect_, 0f);
                 spriteBatch.End();
             }
