@@ -36,17 +36,10 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 - Re-add Android-exclusive textures for pause, back button, and WIP Nyan Pack
 - Fix achievements and save data for Android (possibly Windows too)
 
-## Dev Platforms (main branch)
-- Windows (DirectX) - Tested and working
-- Android (OpenGL) - Tested and working
-- Windows/Mac/Linux (OpenGL) - Somewhat implemented, but untested
-- iOS (OpenGL) - Not implemented
+## Want to help?
+This project uses Visual Studio 2022 and .NET 8.0 along with Monogame Framework 3.8.4. Currently looking for iOS and Android coding assistance, along with playtesters for all platforms (but especially Mac and Linux).
 
-## Released Platforms (releases)
-- Windows x64, x86 (should work from Vista to Windows 11, confirmed on W11)
-- Android (confirmed working on Android 13)
-- Linux x64 (confirmed working on Ubuntu 23.04)
-- macOS x64 (should work on 10.15 Catalina, not confirmed)
+We now have a Discord: https://discord.gg/8TkEH9jqdW
 
 ## Extra Stuff
 - [Like what you see? Donate here](https://buymeacoffee.com/shadowartist201)
