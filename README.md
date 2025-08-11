@@ -10,7 +10,7 @@ This is a project to bring TKA to PC (and hopefully other platforms) using the X
 Disclaimer: In this project, AI was used for upscaling Nyan Pack assets to HD.
 
 ## Current status 
-Popaganda Pack and Nyan Pack are done. There may be some small graphical/performance bugs. Supports gamepad and keyboard input. Also supports multiple resolutions and fullscreen.
+Popaganda Pack and Nyan Pack are done. There may be some small graphical/performance bugs. Supports gamepad and keyboard input along with multiple resolutions and fullscreen.
 
 Controls as of current commit:
 - S (Start)
@@ -42,7 +42,6 @@ This project uses Visual Studio 2022 and .NET 8.0 along with Monogame Framework 
 We now have a Discord: https://discord.gg/8TkEH9jqdW
 
 ## Extra Stuff
-- [Like what you see? Donate here](https://buymeacoffee.com/shadowartist201)
 - [Weird things about XNA](https://shadowartist201.blogspot.com/search/label/XNA)
 - [Notes on shaders, Nyan Cat, and the iOS decompilation](https://github.com/shadowartist201/TKA-PC-Port/wiki)
 - [TKA content you may not know about](https://shadowartist201.blogspot.com/search/label/TKA%20Archive)
