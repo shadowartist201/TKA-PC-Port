@@ -1,5 +1,5 @@
 ## TKA PC Port
-A Windows port of Techno Kitten Adventure, originally developed by 21st Street Games and released on Xbox 360, iOS, Android, and Windows Phone. As of 2023, all versions have been taken down from their respective stores.
+A Windows port of Techno Kitten Adventure, originally developed by 21st Street Games and released on Xbox 360, iOS, Android, and Windows Phone. As of 2025, all versions have been taken down from their respective stores.
 
 This is a project to bring TKA to PC (and hopefully other platforms) using the Xbox 360 version and Monogame as a base.
 
@@ -32,14 +32,17 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 - Add Japanese Language option
 - Make a new layout for the options menu to allow for more features
 - Add Popaganda and Nyan to credits
+### Temporary issues
+- Re-add Android-exclusive textures for pause, back button, and WIP Nyan Pack
+- Fix achievements and save data for Android (possibly Windows too)
 
-## Branches
-- main (DirectX/Monogame Windows)
-- Android (OpenGL/Monogame Android)
-- XNA (DirectX/XNA Windows)
-- OpenGL (OpenGL/Monogame All Platforms)
+## Dev Platforms (main branch)
+- Windows (DirectX) - Tested and working
+- Android (OpenGL) - Tested and working
+- Windows/Mac/Linux (OpenGL) - Somewhat implemented, but untested
+- iOS (OpenGL) - Not implemented
 
-## Working Platforms
+## Released Platforms (releases)
 - Windows x64, x86 (should work from Vista to Windows 11, confirmed on W11)
 - Android (confirmed working on Android 13)
 - Linux x64 (confirmed working on Ubuntu 23.04)

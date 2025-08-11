@@ -3,9 +3,20 @@
 ################################################################################
 
 .vs/
-test/Content/obj/
-test/Content/bin/
-test/obj/
-test/bin/
-/test/Properties/PublishProfiles
-/test/test.csproj.user
+Helicopter.Android/.vscode/
+Helicopter.Android/bin/
+Helicopter.Android/obj/
+Helicopter.Android/Helicopter.Android.csproj.user
+Helicopter.Core/bin/
+Helicopter.Core/obj/
+Helicopter.Core/Content/bin/
+Helicopter.Core/Content/obj/
+Helicopter.DesktopGL/.vscode/
+Helicopter.DesktopGL/bin/
+Helicopter.DesktopGL/obj/
+Helicopter.iOS/.vscode/
+Helicopter.iOS/bin/
+Helicopter.iOS/obj/
+Helicopter.WindowsDX/.vscode/
+Helicopter.WindowsDX/bin/
+Helicopter.WindowsDX/obj/
