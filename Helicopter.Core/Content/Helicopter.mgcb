@@ -458,6 +458,18 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/Menu/Credits/credits_bgMenu.png;Graphics/Menu/Credits/credits_bgMenu
 
+#begin Graphics/Menu/KittenSelect/selectCat_bgMenu_android.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Graphics/Menu/KittenSelect/selectCat_bgMenu_android.png
+
 #begin Graphics/Menu/KittenSelect/selectCat_bgMenu.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -554,54 +566,6 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/Menu/Main/main_title.png;Graphics/Menu/Main/main_title
 
-#begin Graphics/Menu/Options/apply.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Graphics/Menu/Options/apply.png;Graphics/Menu/Options/apply
-
-#begin Graphics/Menu/Options/display.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Graphics/Menu/Options/display.png;Graphics/Menu/Options/display
-
-#begin Graphics/Menu/Options/fullscreen_off.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Graphics/Menu/Options/fullscreen_off.png;Graphics/Menu/Options/fullscreen_off
-
-#begin Graphics/Menu/Options/fullscreen_on.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Graphics/Menu/Options/fullscreen_on.png;Graphics/Menu/Options/fullscreen_on
-
 #begin Graphics/Menu/Options/options_bgMenu_old.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -626,42 +590,6 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/Menu/Options/options_bgMenu.png;Graphics/Menu/Options/options_bgMenu
 
-#begin Graphics/Menu/Options/res_1080.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Graphics/Menu/Options/res_1080.png;Graphics/Menu/Options/res_1080
-
-#begin Graphics/Menu/Options/res_480.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Graphics/Menu/Options/res_480.png;Graphics/Menu/Options/res_480
-
-#begin Graphics/Menu/Options/res_720.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Graphics/Menu/Options/res_720.png;Graphics/Menu/Options/res_720
-
 #begin Graphics/Menu/Options/sound_levels.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -673,6 +601,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Graphics/Menu/Options/sound_levels.png;Graphics/Menu/Options/sound_levels
+
+#begin Graphics/Menu/Pause/pause_bgMenu_android.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Graphics/Menu/Pause/pause_bgMenu_android.png
 
 #begin Graphics/Menu/Pause/pause_bgMenu.png
 /importer:TextureImporter
@@ -697,6 +637,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Graphics/Menu/Splash/splash_bgMenu.png;Graphics/Menu/Splash/splash_bgMenu
+
+#begin Graphics/Menu/StageSelect/selectStage_bgMenu_android.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Graphics/Menu/StageSelect/selectStage_bgMenu_android.png
 
 #begin Graphics/Menu/StageSelect/selectStage_bgMenu.png
 /importer:TextureImporter

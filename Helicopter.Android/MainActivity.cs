@@ -22,10 +22,9 @@ namespace Helicopter.Android
     /// with the MonoGame framework.
     /// </remarks>
     [Activity(
-        Label = "TKA",
+        Label = "@string/app_name",
         MainLauncher = true,
         Icon = "@drawable/icon",
-        Theme = "@style/Theme.Splash",
         AlwaysRetainTaskState = true,
         LaunchMode = LaunchMode.SingleInstance,
         ScreenOrientation = ScreenOrientation.SensorLandscape,

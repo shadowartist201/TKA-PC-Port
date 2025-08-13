@@ -32,9 +32,6 @@ Not a programmer or looking to try out the current release? Pre-compiled builds 
 - Add Japanese Language option
 - Make a new layout for the options menu to allow for more features
 - Add Popaganda and Nyan to credits
-### Temporary issues
-- Re-add Android-exclusive textures for pause, back button, and WIP Nyan Pack
-- Fix achievements and save data for Android (possibly Windows too)
 
 ## Dev Platforms (main branch)
 - Windows (DirectX) - Tested and working

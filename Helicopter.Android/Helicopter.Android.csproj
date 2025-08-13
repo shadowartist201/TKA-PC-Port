@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-android</TargetFramework>
@@ -6,8 +6,32 @@
     <ApplicationId>com.shadow.TKA_Android</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-    <AssemblyName>Helicopter</AssemblyName>
   </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<AndroidPackageFormat>aab</AndroidPackageFormat>
+		<Optimize>False</Optimize>
+		<DebugSymbols>False</DebugSymbols>
+		<RunAOTCompilation>False</RunAOTCompilation>
+		<AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
+		<PublishTrimmed>False</PublishTrimmed>
+		<Debugger>Xamarin</Debugger>
+		<AndroidKeyStore>False</AndroidKeyStore>
+		<AndroidUseAapt2>True</AndroidUseAapt2>
+		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+		<AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
+		<Optimize>False</Optimize>
+		<Debugger>Xamarin</Debugger>
+		<DebugSymbols>False</DebugSymbols>
+		<EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+		<AndroidKeyStore>False</AndroidKeyStore>
+		<AndroidUseAapt2>True</AndroidUseAapt2>
+		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+		<AndroidPackageFormat>aab</AndroidPackageFormat>
+		<AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+	</PropertyGroup>
   <ItemGroup>
     <MonoGameContentReference Include="..\Helicopter.Core\Content\Helicopter.mgcb">
       <Link>Content\Helicopter.mgcb</Link>

@@ -256,7 +256,14 @@ namespace Helicopter.Core
 
 		private void DrawBackground(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(Global.selectStageTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
+			if (Game1.IsMobile)
+			{
+                spriteBatch.Draw(Global.selectStageTexAndroid, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
+            }
+			else if (Game1.IsDesktop)
+			{
+                spriteBatch.Draw(Global.selectStageTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
+            }
 			if (this.startingIndex < this.maxIndex - 2)
 			{
 				spriteBatch.Draw(Global.selectStageTex, new Vector2(1210f + this.arrowOffsetX, 280f), (Rectangle?)new Rectangle(1282, 0, 73, 106), Color.White, 0f, new Vector2(36.5f, 53f), 1f, SpriteEffects.None, 0f);

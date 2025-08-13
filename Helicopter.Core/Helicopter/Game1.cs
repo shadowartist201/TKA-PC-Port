@@ -157,7 +157,7 @@ namespace Helicopter.Core
 
 		public Game1()
 		{
-			//base.Exiting += (EventHandler<EventArgs>)OnExit;
+			base.Exiting += OnExit;
 			this.graphics = new GraphicsDeviceManager(this);
 			base.Content.RootDirectory = "Content";
 
@@ -210,7 +210,7 @@ namespace Helicopter.Core
 		protected override void Initialize()
 		{
             Storage.LoadOptionInfo();
-            Storage.LoadAchievementInfo();
+            Storage.LoadAchievementInfo(); //new
 
             if (Game1.IsDesktop)
 			{
@@ -276,21 +276,21 @@ namespace Helicopter.Core
 		{
 		}
 
-        public void saveData()
+        private void OnExit(object o, EventArgs e)
+		{
+			this.optionsMenu.SaveInfo();
+            this.scoreSystem.SaveInfo();
+            Storage.SaveAchievementInfo(); //new
+        }
+
+        public void saveData() //only used for mobile
         {
             this.optionsMenu.SaveInfo();
             this.scoreSystem.SaveInfo();
             Storage.SaveAchievementInfo();
         }
 
-        private void OnExit(object o, EventArgs e)
-		{
-			this.optionsMenu.SaveInfo();
-            this.scoreSystem.SaveInfo();
-            Storage.SaveAchievementInfo();
-        }
-
-		protected override void Update(GameTime gameTime)
+        protected override void Update(GameTime gameTime)
 		{
 			if (this.stageSelectMenu.getCurrentLevel() == 5)
 			{
@@ -378,9 +378,11 @@ namespace Helicopter.Core
                     if (!Global.playerIndex.HasValue)
                     {
                         Global.playerIndex = PlayerIndex.One;
+                        Global.PlayCatSound();
+                        this.scoreSystem.LoadInfo();
                     }
-                    Global.PlayCatSound();
-                    this.scoreSystem.LoadInfo();
+                    //Global.PlayCatSound();
+                    //this.scoreSystem.LoadInfo();
                     this.gameState = GameState.MAIN_MENU;
                 }
 				break;
@@ -564,9 +566,12 @@ namespace Helicopter.Core
 			Global.creditsTex = base.Content.Load<Texture2D>("Graphics/Menu/Credits/credits_bgMenu");
 			Global.splashTex = base.Content.Load<Texture2D>("Graphics/Menu/Splash/splash_bgMenu");
 			Global.selectCatTex = base.Content.Load<Texture2D>("Graphics/Menu/KittenSelect/selectCat_bgMenu");
-			Global.selectStageTex = base.Content.Load<Texture2D>("Graphics/Menu/StageSelect/selectStage_bgMenu");
-			Global.pauseTex = base.Content.Load<Texture2D>("Graphics/Menu/Pause/pause_bgMenu");
-			Global.optionsTex = base.Content.Load<Texture2D>("Graphics/Menu/Options/options_bgMenu");
+			Global.selectCatTexAndroid = base.Content.Load<Texture2D>("Graphics/Menu/KittenSelect/selectCat_bgMenu_android");
+            Global.selectStageTex = base.Content.Load<Texture2D>("Graphics/Menu/StageSelect/selectStage_bgMenu");
+			Global.selectStageTexAndroid = base.Content.Load<Texture2D>("Graphics/Menu/StageSelect/selectStage_bgMenu_android");
+            Global.pauseTex = base.Content.Load<Texture2D>("Graphics/Menu/Pause/pause_bgMenu");
+			Global.pauseTexAndroid = base.Content.Load<Texture2D>("Graphics/Menu/Pause/pause_bgMenu_android");
+            Global.optionsTex = base.Content.Load<Texture2D>("Graphics/Menu/Options/options_bgMenu");
 			Global.leaderboardTex = base.Content.Load<Texture2D>("Graphics/Menu/Leaderboards/leaderboards_bgMenu");
 			Global.trialTex = base.Content.Load<Texture2D>("Graphics/Menu/Trial/trial_bgMenu");
 			Global.mainTex = base.Content.Load<Texture2D>("Graphics/Menu/Main/main_bgMenu");
@@ -620,13 +625,6 @@ namespace Helicopter.Core
 			Global.AButtonTexture = base.Content.Load<Texture2D>("Graphics/xboxControllerButtonA");
 			Global.YButtonTexture = base.Content.Load<Texture2D>("Graphics/xboxControllerButtonY");
             Global.pauseButton = base.Content.Load<Texture2D>("Graphics/pause");
-            Global.option_apply = base.Content.Load<Texture2D>("Graphics/Menu/Options/apply");
-            Global.option_display = base.Content.Load<Texture2D>("Graphics/Menu/Options/display");
-            Global.option_fullOn = base.Content.Load<Texture2D>("Graphics/Menu/Options/fullscreen_on");
-            Global.option_fullOff = base.Content.Load<Texture2D>("Graphics/Menu/Options/fullscreen_off");
-            Global.option_res1080 = base.Content.Load<Texture2D>("Graphics/Menu/Options/res_1080");
-            Global.option_res720 = base.Content.Load<Texture2D>("Graphics/Menu/Options/res_720");
-            Global.option_res480 = base.Content.Load<Texture2D>("Graphics/Menu/Options/res_480");
 			Global.sound_levels = base.Content.Load<Texture2D>("Graphics/Menu/Options/sound_levels");
             Global.soundEffects.Add(Content.Load<SoundEffect>("Music/cat_01"));
             Global.soundEffects.Add(Content.Load<SoundEffect>("Music/cat_02"));
@@ -656,7 +654,6 @@ namespace Helicopter.Core
 			filterSprite = base.Content.Load<Texture2D>("rainbowOverlay");
             this.scoreSystem = new ScoreSystem();
 			this.songManager = new SongManager(this);
-            this.scoreSystem.LoadInfo();
             Global.setPixel(GraphicsDevice);
 		}
 

@@ -125,7 +125,7 @@ namespace Helicopter.Core
             ScoreInfo result = new ScoreInfo(0);
             if (Game1.IsMobile)
             {
-                string fullPath = Path.Combine(filePath, "savedata");
+                string fullPsath = Path.Combine(filePath, "savedata");
             }
             else if (Game1.IsDesktop)
             {
@@ -163,7 +163,10 @@ namespace Helicopter.Core
                     Console.WriteLine(e.Message);
                 }
             }
-            //reader.Close();
+            if (Game1.IsDesktop)
+            {
+                reader.Close();
+            }
             return result;
         }
 
@@ -190,49 +193,54 @@ namespace Helicopter.Core
                 Console.WriteLine("Failed to write score data:");
                 Console.WriteLine(e.Message);
             }
-            //writer.Close();
+            if (Game1.IsDesktop)
+            {
+                writer.Close();
+            }
         }
 
         public static void LoadAchievementInfo()
         {
-            if (reader.Peek() == 'A')
+            if (Game1.IsMobile)
             {
-                reader.ReadLine(); //Read Achievements
-                try
+                if (reader.Peek() == 'A')
                 {
-
-                    //Achievements.deathCount = Convert.ToInt32(reader.ReadLine());
-                    //Achievements.playCount = Convert.ToInt32(reader.ReadLine());
-
-                }
-                catch (FormatException f)
-                {
-                    Console.WriteLine("Failed to process score data:");
-                    Console.WriteLine(f.Message);
-                }
-                catch (IOException e)
-                {
-                    Console.WriteLine("Failed to read score data:");
-                    Console.WriteLine(e.Message);
+                    reader.ReadLine(); //Read Achievements
+                    try
+                    {
+                        Achievements.deathCount = Convert.ToInt32(reader.ReadLine());
+                        Achievements.playCount = Convert.ToInt32(reader.ReadLine());
+                    }
+                    catch (FormatException f)
+                    {
+                        Console.WriteLine("Failed to process score data:");
+                        Console.WriteLine(f.Message);
+                    }
+                    catch (IOException e)
+                    {
+                        Console.WriteLine("Failed to read score data:");
+                        Console.WriteLine(e.Message);
+                    }
                 }
             }
         }
 
         public static void SaveAchievementInfo()
         {
-            try
+            if (Game1.IsMobile)
             {
-                writer.WriteLine("Achievements");
-
-                //writer.WriteLine(Achievements.deathCount);
-                //writer.WriteLine(Achievements.playCount);
-
-                writer.Flush();
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine("Failed to write score data:");
-                Console.WriteLine(e.Message);
+                try
+                {
+                    writer.WriteLine("Achievements");
+                    writer.WriteLine(Achievements.deathCount);
+                    writer.WriteLine(Achievements.playCount);
+                    writer.Flush();
+                }
+                catch (IOException e)
+                {
+                    Console.WriteLine("Failed to write score data:");
+                    Console.WriteLine(e.Message);
+                }
             }
         }
 

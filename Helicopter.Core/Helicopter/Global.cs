@@ -72,8 +72,11 @@ namespace Helicopter.Core
 		public static Texture2D cats;
 		public static Texture2D creditsTex;
 		public static Texture2D selectCatTex;
+		public static Texture2D selectCatTexAndroid;
 		public static Texture2D selectStageTex;
-		public static Texture2D pauseTex;
+        public static Texture2D selectStageTexAndroid;
+        public static Texture2D pauseTex;
+		public static Texture2D pauseTexAndroid;
 		public static Texture2D optionsTex;
 		public static Texture2D leaderboardTex;
 		public static Texture2D trialTex;
@@ -84,14 +87,6 @@ namespace Helicopter.Core
 		public static Texture2D mainStarTex;
 		public static Texture2D mainTitleTex;
 		public static Texture2D mainPressStartTex;
-
-		public static Texture2D option_apply;
-		public static Texture2D option_display;
-		public static Texture2D option_fullOff;
-		public static Texture2D option_fullOn;
-		public static Texture2D option_res1080;
-		public static Texture2D option_res720;
-		public static Texture2D option_res480;
 
 		public static Texture2D sound_levels;
 
