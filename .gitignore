@@ -20,3 +20,5 @@ Helicopter.iOS/obj/
 Helicopter.WindowsDX/.vscode/
 Helicopter.WindowsDX/bin/
 Helicopter.WindowsDX/obj/
+/bin/Debug/net8.0-android34.0
+/obj
