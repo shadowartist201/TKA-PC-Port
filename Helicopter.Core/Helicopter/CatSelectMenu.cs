@@ -190,7 +190,7 @@ namespace Helicopter.Core
             }
             if (Game1.IsMobile)
             {
-                base.index_ = 0;
+                //base.index_ = 0;
             }
 
             if (currInput.IsButtonPressed(Buttons.A))
