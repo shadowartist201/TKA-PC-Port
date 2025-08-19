@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
 using Helicopter.Core.Localization;
+using System.Reflection;
 
 namespace Helicopter.Core
 {
@@ -15,7 +16,7 @@ namespace Helicopter.Core
 	{
         public readonly static bool IsMobile = OperatingSystem.IsAndroid() || OperatingSystem.IsIOS();
         public readonly static bool IsDesktop = OperatingSystem.IsMacOS() || OperatingSystem.IsLinux() || OperatingSystem.IsWindows();
-		public readonly static bool IsOpenGL = !OperatingSystem.IsWindows();
+		public static bool IsOpenGL = !OperatingSystem.IsWindows();
 
         private RenderTarget2D renderTarget;
 
@@ -180,6 +181,23 @@ namespace Helicopter.Core
             Services.AddService(typeof(GraphicsDeviceManager), graphics);
         }
 
+		private bool WinGLCheck()
+		{
+            var mgAssembly = Assembly.GetAssembly(typeof(Game));
+            var shaderType = mgAssembly.GetType("Microsoft.Xna.Framework.Graphics.Shader");
+            var profileProperty = shaderType.GetProperty("Profile");
+            var value = (int)profileProperty.GetValue(null);
+            var extension = value == 1 ? "dx11" : "ogl";
+			if (extension == "ogl")
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+        }
+
         private Viewport ResetViewport()
         {
             float targetAspectRatio = 1280f / 720f;
@@ -224,6 +242,10 @@ namespace Helicopter.Core
 			Global.waveBank = new WaveBank(Global.audioEngine, "Content/Music/Wave Bank.xwb");
 			Global.soundBank = new SoundBank(Global.audioEngine, "Content/Music/Sound Bank.xsb");
 			Global.itemSelectedEffect = new ItemSelectedEffect();
+			if (OperatingSystem.IsWindows())
+			{
+                IsOpenGL = WinGLCheck();
+            }
 
             if (Game1.IsMobile)
 			{

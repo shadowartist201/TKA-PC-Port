@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-android</TargetFramework>
-    <SupportedOSPlatformVersion>29</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>31</SupportedOSPlatformVersion>
     <ApplicationId>com.shadow.TKA_Android</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>

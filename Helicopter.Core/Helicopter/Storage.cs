@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using static System.Environment;
 
 namespace Helicopter.Core
 {
@@ -30,7 +31,7 @@ namespace Helicopter.Core
         {
             if (Game1.IsMobile)
             {
-                string fullPath = Path.Combine(filePath, "savedata");
+                string fullPath = Path.Combine(GetFolderPath(SpecialFolder.ApplicationData), "savedata");
                 if (!File.Exists(fullPath))
                 {
                     File.Create(fullPath).Close();
@@ -98,7 +99,7 @@ namespace Helicopter.Core
         {
             if (Game1.IsMobile)
             {
-                writer = new StreamWriter(Path.Combine(filePath, "savedata"));
+                writer = new StreamWriter(Path.Combine(GetFolderPath(SpecialFolder.ApplicationData), "savedata"));
             }
             else if (Game1.IsDesktop)
             {
@@ -125,7 +126,7 @@ namespace Helicopter.Core
             ScoreInfo result = new ScoreInfo(0);
             if (Game1.IsMobile)
             {
-                string fullPsath = Path.Combine(filePath, "savedata");
+                string fullPsath = Path.Combine(GetFolderPath(SpecialFolder.ApplicationData), "savedata");
             }
             else if (Game1.IsDesktop)
             {
