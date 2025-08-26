@@ -283,7 +283,7 @@ namespace Helicopter.Core
 			MediaPlayer.IsRepeating = true;
 			if (Game1.IsMobile)
 			{
-                Global.pixel = new Texture2D(base.GraphicsDevice, 1, 1);
+                //Global.pixel = new Texture2D(base.GraphicsDevice, 1, 1);
                 MediaPlayer.Volume = 0.10f;
             }
 			else if (Game1.IsDesktop)
