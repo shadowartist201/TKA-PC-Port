@@ -67,7 +67,10 @@ namespace Helicopter.Core
                     {
                         Directory.CreateDirectory(Path.Combine(filePath, "TKA"));
                     }
-                    File.Create(fullPath);
+                    using (FileStream temp = File.Create(fullPath))
+                    {
+                        temp.Close();
+                    }
                 }
                 reader = new StreamReader(fullPath);
                 if (reader.Peek() == 'O')
