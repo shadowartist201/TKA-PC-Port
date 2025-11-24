@@ -566,18 +566,6 @@
 /processorParam:TextureFormat=Color
 /build:Graphics/Menu/Main/main_title.png;Graphics/Menu/Main/main_title
 
-#begin Graphics/Menu/Options/options_bgMenu_old.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Graphics/Menu/Options/options_bgMenu_old.png;Graphics/Menu/Options/options_bgMenu_old
-
 #begin Graphics/Menu/Options/options_bgMenu.png
 /importer:TextureImporter
 /processor:TextureProcessor

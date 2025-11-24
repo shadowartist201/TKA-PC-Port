@@ -357,6 +357,7 @@ namespace Helicopter.Core
             if (Game1.IsMobile)
             {
                 spriteBatch.Draw(Global.optionsTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
+                spriteBatch.Draw(Global.optionsTex, new Vector2(412f, 43f), (Rectangle?)new Rectangle(799, 885, 456, 58), Color.White); //options title
                 if (this.musicOn)
                 {
                     this.DrawOnOff(spriteBatch, new Vector2(900f, 171f));
@@ -385,6 +386,7 @@ namespace Helicopter.Core
             else if (Game1.IsDesktop)
             {
                 spriteBatch.Draw(Global.optionsTex, Vector2.Zero, (Rectangle?)new Rectangle(0, 0, 1280, 720), Color.White);
+                spriteBatch.Draw(Global.optionsTex, new Vector2(412f, 43f), (Rectangle?)new Rectangle(799, 885, 456, 58), Color.White); //options title
                 spriteBatch.Draw(Global.sound_levels, new Vector2(1072f, 214f - 42f), (Rectangle?)sound_levels_[musicValue], Color.White);
                 spriteBatch.Draw(Global.sound_levels, new Vector2(1072f, 277f - 42f), (Rectangle?)sound_levels_[FXValue], Color.White);
                 this.resOptions[this.resIndex].Draw(spriteBatch);
