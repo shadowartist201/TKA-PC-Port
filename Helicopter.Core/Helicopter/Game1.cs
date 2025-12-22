@@ -342,7 +342,15 @@ namespace Helicopter.Core
             Achievements.CheckAchievements(scoreSystem.scoreInfo, scoreSystem.scoreInfo.highScore_);
 
             float num = (float)gameTime.ElapsedGameTime.TotalSeconds;
-			float elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
+			float elapsedMilliseconds;
+            if (IsDesktop && IsOpenGL)
+			{
+				elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds - 1000f;
+			}
+			else
+			{
+				elapsedMilliseconds = (float)MediaPlayer.PlayPosition.TotalMilliseconds;
+            }
             this.DoTheFlip(num);
             this.currInput.Update();
             if (this.currInput.IsButtonPressed(Buttons.BigButton))
