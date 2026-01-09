@@ -232,7 +232,7 @@ namespace Helicopter.Core
 
             if (Game1.IsDesktop)
 			{
-                Global.SetResolution(-Storage.resValue_ + 3);
+				Global.SetResolution(Storage.resValue_);
                 Global.SetFullscreenOn(Storage.fullScreenOn_);
                 Resolution.SetResolution((int)Global.resolution.X, (int)Global.resolution.Y, Global.fullscreenOn); //outer resolution
             }

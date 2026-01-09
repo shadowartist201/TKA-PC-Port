@@ -28,7 +28,7 @@ namespace Helicopter.Core
 
 		private int FXValue = Storage.FXValue_;
 
-		private MenuItem[] resOptions = new MenuItem[3];
+		private MenuItem[] resOptions = new MenuItem[5];
 
 		private int resValue = Storage.resValue_;
 
@@ -66,6 +66,8 @@ namespace Helicopter.Core
                 resOptions[0] = new MenuItem(Global.optionsTex, new Rectangle(416, 850, 342, 40), new Vector2(854f + 342 / 2, 425f + 20)); //1080
                 resOptions[1] = new MenuItem(Global.optionsTex, new Rectangle(416, 892, 320, 40), new Vector2(854f + 320 / 2, 425f + 20)); //720
                 resOptions[2] = new MenuItem(Global.optionsTex, new Rectangle(837, 723, 298, 40), new Vector2(876f + 298 / 2, 425f + 20)); //480
+                resOptions[3] = new MenuItem(Global.optionsTex, new Rectangle(837, 808, 362, 40), new Vector2(876f + 362 / 2 - 40, 425f + 20)); //2560
+                resOptions[4] = new MenuItem(Global.optionsTex, new Rectangle(837, 765, 362, 40), new Vector2(876f + 362 / 2 - 40, 425f + 20)); //1440
 
                 sound_levels_[0] = new Rectangle(0, 0, 109, 43);
                 sound_levels_[1] = new Rectangle(109, 0, 109, 43);
@@ -264,18 +266,7 @@ namespace Helicopter.Core
                 {
                     Global.SetFullscreenOn(on: false);
                 }
-                switch (this.resValue)
-                {
-                    case 0:
-                        Global.SetResolution(3);
-                        break;
-                    case 1:
-                        Global.SetResolution(2);
-                        break;
-                    case 2:
-                        Global.SetResolution(1);
-                        break;
-                }
+                Global.SetResolution(this.resValue);
                 Resolution.SetResolution((int)Global.resolution.X, (int)Global.resolution.Y, Global.fullscreenOn);
             }
         }
@@ -290,12 +281,12 @@ namespace Helicopter.Core
 			{
                 this.resIndex--;
                 if (this.resIndex == -1)
-                    this.resIndex = 2;
+                    this.resIndex = this.resOptions.Length - 1;
             }
 			if (currInput.IsButtonPressed(Buttons.DPadRight))
 			{
 				this.resIndex++;
-				if (this.resIndex == 3)
+				if (this.resIndex == this.resOptions.Length)
 					this.resIndex = 0;
 			}
 		}
