@@ -1009,7 +1009,19 @@ namespace Helicopter.Core
 			this.eventTimes[22] = 161327f;
 			this.eventTimes[23] = 165362f;
 			this.eventTimes[24] = 207988f;
-			this.eventTimes[25] = 210000f;
+
+			if (IsDesktop && IsOpenGL)
+			{
+                // On desktop & openGL, elapsedMilliseconds is calculated as the song player's milliseconds - 1000
+                // The Taste of Heaven song is 210790ms long, meaning the song player never goes above 209790 while the event was 210000.
+				// This means that this event was never triggered and the choreography never got reset.
+                this.eventTimes[25] = 208750f;
+			} 
+			else
+			{
+				// Original Timing
+				this.eventTimes[25] = 210000f;
+			}
 		}
 
 		private void LoadEventInfoIntergalacticalHigh()
