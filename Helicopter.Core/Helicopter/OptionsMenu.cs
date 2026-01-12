@@ -277,13 +277,13 @@ namespace Helicopter.Core
 			{
 				this.resValue = this.resIndex;
 			}
-            if (currInput.IsButtonPressed(Buttons.DPadLeft))
+            if (currInput.IsButtonPressed(Buttons.DPadRight))
 			{
                 this.resIndex--;
                 if (this.resIndex == -1)
                     this.resIndex = this.resOptions.Length - 1;
             }
-			if (currInput.IsButtonPressed(Buttons.DPadRight))
+			if (currInput.IsButtonPressed(Buttons.DPadLeft))
 			{
 				this.resIndex++;
 				if (this.resIndex == this.resOptions.Length)
