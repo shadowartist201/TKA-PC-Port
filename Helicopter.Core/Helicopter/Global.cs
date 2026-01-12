@@ -348,16 +348,22 @@ namespace Helicopter.Core
 
 		public static void SetResolution(int index)
 		{
-			switch (index)
+            switch (index)
 			{
-				case 1:
+				case 2:
 					Global.resolution = new Vector2(854, 480);
 					break;
-				case 2:
+				case 1:
 					Global.resolution = new Vector2(1280, 720);
 					break;
-				case 3:
+				case 0:
 					Global.resolution = new Vector2(1920, 1080);
+					break;
+				case 4:
+					Global.resolution = new Vector2(2560, 1440);
+					break;
+				case 3:
+					Global.resolution = new Vector2(3840, 2160);
 					break;
 			}
 		}
