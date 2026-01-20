@@ -1,0 +1,59 @@
+name: Build Game
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore TKA.sln
+
+      - name: Build DesktopGL (Release)
+        run: dotnet build Helicopter.DesktopGL/Helicopter.DesktopGL.csproj --configuration Release --no-restore
+
+      - name: Upload Windows build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Helicopter-Windows-Release
+          path: Helicopter.DesktopGL/bin/Release/net8.0/
+
+  build-android:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Setup Android workload
+        run: dotnet workload install android
+
+      - name: Restore dependencies
+        run: dotnet restore TKA.sln
+
+      - name: Build Android APK (Release)
+        run: dotnet build Helicopter.Android/Helicopter.Android.csproj --configuration Release --no-restore -p:AndroidPackageFormat=apk
+
+      - name: Upload Android APK artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Helicopter-Android-Release
+          path: Helicopter.Android/bin/Release/net8.0-android/*-Signed.apk
