@@ -20,7 +20,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
-        run: dotnet restore TKA.sln
+        run: dotnet restore Helicopter.DesktopGL/Helicopter.DesktopGL.csproj
 
       - name: Build DesktopGL (Release)
         run: dotnet build Helicopter.DesktopGL/Helicopter.DesktopGL.csproj --configuration Release --no-restore
@@ -47,7 +47,7 @@ jobs:
         run: dotnet workload install android
 
       - name: Restore dependencies
-        run: dotnet restore TKA.sln
+        run: dotnet restore Helicopter.Android/Helicopter.Android.csproj
 
       - name: Build Android APK (Release)
         run: dotnet build Helicopter.Android/Helicopter.Android.csproj --configuration Release --no-restore -p:AndroidPackageFormat=apk
