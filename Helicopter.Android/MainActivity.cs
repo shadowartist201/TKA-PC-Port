@@ -85,7 +85,7 @@ namespace Helicopter.Android
         protected override void OnPause()
         {
             base.OnPause();
-            _game.saveData();
+            //_game.saveData();
         }
 
         public void PlayAuthSuccess()

@@ -86,11 +86,7 @@
         {
             if (Game1.IsMobile)
             {
-                if (deathCount == 1)
-                {
-                    AchievementService.UnlockAchievement("CgkI0-u5kb8NEAIQAw");
-                }
-                else if (deathCount == 9)
+                if (deathCount == 9)
                 {
                     AchievementService.UnlockAchievement("CgkI0-u5kb8NEAIQBQ");
                 }
@@ -114,6 +110,8 @@
         {
             if (Game1.IsMobile)
             {
+                if (score > 0 && score < 700)
+                    AchievementService.UnlockAchievement("CgkI0-u5kb8NEAIQAw");
                 if (score >= 9001)
                     AchievementService.UnlockAchievement("CgkI0-u5kb8NEAIQCQ");
                 if (score >= 30000)
