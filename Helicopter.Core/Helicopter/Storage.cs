@@ -127,7 +127,7 @@ namespace Helicopter.Core
         public static ScoreInfo LoadScoreInfo()
         {
             ScoreInfo result = new ScoreInfo(0);
-            if (Game1.IsMobile)
+            /*if (Game1.IsMobile)
             {
                 string fullPsath = Path.Combine(GetFolderPath(SpecialFolder.ApplicationData), "savedata");
             }
@@ -138,7 +138,7 @@ namespace Helicopter.Core
                 {
                     File.Create(fullPath);
                 }
-            }
+            }*/
             
             if (reader.Peek() == 'S')
             {
@@ -226,6 +226,7 @@ namespace Helicopter.Core
                         Console.WriteLine(e.Message);
                     }
                 }
+                reader.Close();
             }
         }
 
@@ -245,6 +246,7 @@ namespace Helicopter.Core
                     Console.WriteLine("Failed to write score data:");
                     Console.WriteLine(e.Message);
                 }
+                writer.Close();
             }
         }
 

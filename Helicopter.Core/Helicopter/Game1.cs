@@ -228,7 +228,10 @@ namespace Helicopter.Core
 		protected override void Initialize()
 		{
             Storage.LoadOptionInfo();
-            Storage.LoadAchievementInfo(); //new
+			if (Game1.IsMobile)
+			{
+                Storage.LoadAchievementInfo(); //new
+            }
 
             if (Game1.IsDesktop)
 			{
@@ -279,7 +282,8 @@ namespace Helicopter.Core
 			this.LoadHelicopter();
 			this.LoadForeground();
 			this.LoadEventInfo(0);
-			MediaPlayer.Play(this.songManager.CurrentSong);
+            this.scoreSystem.scoreInfo = Storage.LoadScoreInfo();
+            MediaPlayer.Play(this.songManager.CurrentSong);
 			MediaPlayer.IsRepeating = true;
 			if (Game1.IsMobile)
 			{
@@ -300,9 +304,12 @@ namespace Helicopter.Core
 
         private void OnExit(object o, EventArgs e)
 		{
-			this.optionsMenu.SaveInfo();
-            this.scoreSystem.SaveInfo();
-            Storage.SaveAchievementInfo(); //new
+			if (Game1.IsDesktop)
+			{
+                this.optionsMenu.SaveInfo();
+                this.scoreSystem.SaveInfo();
+                //Storage.SaveAchievementInfo(); //new
+            }
         }
 
         public void saveData() //only used for mobile
@@ -398,7 +405,7 @@ namespace Helicopter.Core
                     {
                         Global.playerIndex = playerIndex;
                         Global.PlayCatSound();
-						this.scoreSystem.LoadInfo();
+						//this.scoreSystem.LoadInfo();
 						this.gameState = GameState.MAIN_MENU;
                         break;
                     }
@@ -409,7 +416,7 @@ namespace Helicopter.Core
                     {
                         Global.playerIndex = PlayerIndex.One;
                         Global.PlayCatSound();
-                        this.scoreSystem.LoadInfo();
+                        //this.scoreSystem.LoadInfo();
                     }
                     //Global.PlayCatSound();
                     //this.scoreSystem.LoadInfo();
