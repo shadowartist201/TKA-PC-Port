@@ -102,11 +102,11 @@ namespace Helicopter.Core
         {
             if (Game1.IsMobile)
             {
-                writer = new StreamWriter(Path.Combine(GetFolderPath(SpecialFolder.ApplicationData), "savedata"));
+                writer = new StreamWriter(Path.Combine(GetFolderPath(SpecialFolder.ApplicationData), "savedata"), false);
             }
             else if (Game1.IsDesktop)
             {
-                writer = new StreamWriter(Path.Combine(filePath, "TKA/savedata.txt"));
+                writer = new StreamWriter(Path.Combine(filePath, "TKA/savedata.txt"), false);
             }
             try
             {
@@ -166,6 +166,7 @@ namespace Helicopter.Core
                     Console.WriteLine("Failed to read score data:");
                     Console.WriteLine(e.Message);
                 }
+                reader.Close();
             }
             if (Game1.IsDesktop)
             {
@@ -226,7 +227,7 @@ namespace Helicopter.Core
                         Console.WriteLine(e.Message);
                     }
                 }
-                reader.Close();
+                //reader.Close();
             }
         }
 

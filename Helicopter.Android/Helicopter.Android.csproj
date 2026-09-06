@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0-android</TargetFramework>
-    <SupportedOSPlatformVersion>31</SupportedOSPlatformVersion>
+	  <TargetFramework>net9.0-android36.0</TargetFramework>
+	  <SupportedOSPlatformVersion>31</SupportedOSPlatformVersion>
     <ApplicationId>com.shadow.TKA_Android</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -10,7 +10,7 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<AndroidPackageFormat>aab</AndroidPackageFormat>
 		<Optimize>False</Optimize>
-		<DebugSymbols>True</DebugSymbols>
+		<DebugSymbols>False</DebugSymbols>
 		<RunAOTCompilation>False</RunAOTCompilation>
 		<AndroidEnableSGenConcurrent>False</AndroidEnableSGenConcurrent>
 		<PublishTrimmed>False</PublishTrimmed>
@@ -43,8 +43,8 @@
   <ItemGroup>
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*" />
     <PackageReference Include="MonoGame.Framework.Android" Version="3.8.*" />
-    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.16.0.2" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Games.V2" Version="121.0.0" />
+    <PackageReference Include="Xamarin.AndroidX.Core" Version="1.19.0.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Games.V2" Version="122.0.0" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="CollectPackageReferences">
     <Message Text="Restoring dotnet tools (this might take a while depending on your internet speed and should only happen upon building your project for the first time, or after upgrading MonoGame, or clearing your nuget cache)" Importance="High" />
